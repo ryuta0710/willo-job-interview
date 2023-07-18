@@ -48,16 +48,16 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                             <i class="fa fa-solid fa-eye me-3"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="/template/create">
                                             <i class="fa fa-solid fa-edit me-3"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="#">
                                             <i class="fa fa-solid fa-copy me-3"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="#">
                                             <i class="fa fa-solid fa-trash"></i>
                                         </a>
                                     </div>
@@ -77,10 +77,10 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <a href="">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                             <i class="fa fa-solid fa-eye me-3"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="#">
                                             <i class="fa fa-solid fa-copy me-3"></i>
                                         </a>
                                     </div>
@@ -100,10 +100,10 @@
                                 </td>
                                 <td>
                                     <div>
-                                        <a href="">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                             <i class="fa fa-solid fa-eye me-3"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="#">
                                             <i class="fa fa-solid fa-copy me-3"></i>
                                         </a>
                                     </div>
@@ -116,4 +116,36 @@
         </div>
     </div>
 </main>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    $(".fa-eye").parent().click(function(e){
+        let text = $(e.target).parent().parent().parent().prev().html();
+        $("#staticBackdrop .modal-body").html(text);
+    })
+    $(".fa-copy").parent().click(function(e){
+        let text = $(e.target).parent().parent().parent().prev().html();
+        navigator.clipboard.writeText(text);
+        $(".fa-copy").removeClass("text-primary")
+        $(e.target).addClass("text-primary")
+    })
+    $(".fa-trash").parent().click(function(e){
+        $(e.target).parent().parent().parent().remove();
+    })
+</script>
 @endsection

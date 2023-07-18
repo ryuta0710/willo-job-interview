@@ -23,19 +23,19 @@
                 <div class="mb-3">
                     <label for="companyName" class="form-label px-3">会社名 <span
                             class="text-danger ms-3">必要</span></label>
-                    <input type="email" class="form-control rounded-pill" id="companyName" placeholder="会社名を入力してください">
+                    <input type="text" class="form-control rounded-pill" id="companyName" placeholder="会社名を入力してください" required>
                 </div>
                 <div class="mb-3">
-                    <label for="companyName" class="form-label px-3">住所</label>
-                    <input type="email" class="form-control rounded-pill" id="companyName" placeholder="場所を入力してください">
+                    <label for="companyEmail" class="form-label px-3">メールアドレス</label>
+                    <input type="email" class="form-control rounded-pill" id="companyEmail" placeholder="場所を入力してください" required>
                 </div>
                 <div class="mb-3">
                     <div class="w-100 d-flex justify-content-between px-3">
-                        <label for="companyName" class="form-label">Webサイト</label>
+                        <label for="companySite" class="form-label">Webサイト</label>
                         {{-- <span>オプション</span> --}}
                     </div>
-                    <input type="email" class="form-control rounded-pill" id="companyName"
-                        placeholder="ウェブサイトを入力してください">
+                    <input type="text" class="form-control rounded-pill" id="companySite"
+                        placeholder="ウェブサイトを入力してください" required>
                 </div>
                 <div class="mb-3">
                     <div class="row">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center gap-4">
-                    <button type="reset" class="btn btn-light border text-active rounded-pill px-4">キャンセル</button>
+                    <a href="/home" type="reset" class="btn btn-light border text-active rounded-pill px-4">キャンセル</a>
                     <button type="submit" class="btn btn-primary border rounded-pill px-4">保存</button>
                 </div>
             </form>

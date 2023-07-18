@@ -13,15 +13,15 @@
                 </p>
                 <p class="mb-2">
                     <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    会社概要を設定し <a class="text-primary" href="">ましょう</a>
+                    会社概要を設定しましょう
                 </p>
                 <p class="mb-2">
                     <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    最初のインタビューを作成し <a class="text-primary" href="">ましょう</a>
+                    最初のインタビューを作成しましょう
                 </p>
                 <p class="mb-2">
                     <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    インタビューに人々を招待し <a class="text-primary" href="">ましょう</a>
+                    インタビューに人々を招待しましょう
                 </p>
             </div>
         </div>
@@ -42,6 +42,18 @@
                         0人(0.00%)
                     </div>
                 </div>
+                <div class="w-auto">
+
+                </div>
+                <select type="text" class="form-select rounded-5 w-auto pe-5 ps-3 fs-6" id="input1" placeholder="">
+                    <option value="1">今日</option>
+                    <option value="2">昨日</option>
+                    <option value="3">7日前</option>
+                    <option value="4">30日前</option>
+                    <option value="5">今月</option>
+                    <option value="6">先月</option>
+                    <option value="0">制限なし</option>
+                </select>
             </div>
             <div id="dashboard">
                 <canvas id="chart" style="width:100%; height: 100%;"></canvas>
@@ -83,9 +95,9 @@
                     <p class="mb-4">質問がありますか?</p>
                     <p class="fs-4"></p>
                     <p class="mt-4 pt-3"> </p>
-                    <button class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add">
+                    <a href="/contact" class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add">
                         <i class="fa-regular fa-plus"></i>&nbsp;&nbsp;&nbsp;作成
-                    </button>
+</a>
                 </div>
             </div>
         </div>
@@ -99,25 +111,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <script>
-    const xValues = ["6/1","6/2","6/3","6/4","6/5","6/6","6/7","6/8","6/9","6/10"];
-    
+    const xValues = ["6/1", "6/2", "6/3", "6/4", "6/5", "6/6", "6/7", "6/8", "6/9", "6/10"];
+
     new Chart("chart", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{ 
-          data: [0,1,1,3,4,3,5,2,2,4],
-          borderColor: "#FF33FF",
-          fill: false
-        }, { 
-          data: [0,1,2,2,3,2,2,4,3,3],
-          borderColor: "#15D1F8",
-          fill: false
-        }]
-      },
-      options: {
-        legend: {display: false}
-      }
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                data: [0, 1, 1, 3, 4, 3, 5, 2, 2, 4],
+                borderColor: "#FF33FF",
+                fill: false
+            }, {
+                data: [0, 1, 2, 2, 3, 2, 2, 4, 3, 3],
+                borderColor: "#15D1F8",
+                fill: false
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            }
+        }
     });
 </script>
 @endsection

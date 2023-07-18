@@ -107,4 +107,8 @@ $(document).ready(function () {
 		alert(text)
 		navigator.clipboard.writeText(text);
 	}
+
+	$(".fa-copy").click(function(e){
+		$(e.target).toggleClass("text-primary");
+	})
 })

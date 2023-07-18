@@ -45,43 +45,35 @@
         </div>
         <div class="row justify-content-between align-items-center mb-5">
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="" class="form-select rounded-pill select2">
+                <select name="" id="select1" class="form-select rounded-pill" data-no="1">
                     <option value="">会社</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="" class="form-select rounded-pill select2">
+                <select name="" id="select2" class="form-select rounded-pill" data-no="2">
                     <option value="">インタビュー</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="" class="form-select rounded-pill select2">
+                <select name="" id="select3" class="form-select rounded-pill" data-no="3">
                     <option value="">オーナー</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="" class="form-select rounded-pill select2">
+                <select name="" id="select4" class="form-select rounded-pill" data-no="4">
                     <option value="">ステータス</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
+                    <option value="">レビューする</option>
+                    <option value="">ステータス</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="" class="form-select rounded-pill select2">
+                <select name="" id="select5" class="form-select rounded-pill" data-no="5">
                     <option value="">評価</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                    <option value="">4</option>
+                    <option value="">5</option>
                 </select>
             </div>
         </div>
@@ -193,10 +185,8 @@
     </div>
 </main>
 <script>
-    $('.select2').each(function () {
-        $(this).select2({
-            dropdownParent: $(this).parent(),
-        });
-    });
+    // $(".form-select").each(function(dom){
+        
+    // })
 </script>
 @endsection
