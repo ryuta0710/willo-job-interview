@@ -49,6 +49,42 @@ main {
     padding-inline: 1rem;
 }
 
+#editor {
+    height: 412px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.ql-toolbar {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    text-align: center;
+}
+
+.ql-picker-label {
+    background-color: white;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.ql-picker-label svg {
+    margin-top: -11px !important;
+    right: -4px;
+    top: 50%;
+    width: 30px;
+}
+
+.ql-picker-label polygon:not(:first-child) {
+    display: none;
+}
+
+.ql-toolbar {
+    background-color: #D6DBDF;
+}
+
+.ql-formats:last-child {
+    display: none;
+}
 /* .ck.ck-editor__main {
     min-height: 300px;
 }

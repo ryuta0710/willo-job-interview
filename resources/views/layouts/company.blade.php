@@ -40,7 +40,7 @@
                             <a class="nav-link text-active" href="{{ route('myjob.index') }}">インタビュー</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('member.index') }}">応募者一覧</a>
+                            <a class="nav-link" href="{{ route('member.index') }}">求職者</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('company.index') }}">企業</a>
@@ -57,7 +57,7 @@
                                 <img src="{{ asset('/assets/img/avatar/01.png') }}" alt="Avatar" class="avatar-img"
                                     style="width: 40px; height: 40px;">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('profile.index') }}">プロフィール</a>
                                 <a class="dropdown-item" href="{{ route('user.index') }}">ユーザー</a>
                                 <a class="dropdown-item" href="{{ route('template.index') }}">ライブラリ</a>
