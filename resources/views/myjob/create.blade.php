@@ -217,13 +217,16 @@
                 <div class="row  m-0 mt-4">
                     <div class="col-12 col-xl-6">
                         <label for="input1" class="form-label px-4 mb-1">回答タイプ</label>
-                        <select type="text" class="form-select fs-6 px-4 rounded-5" id="input1" placeholder="面接タイトル">
-                            <option value="video" selected>&#xf03d;&nbsp; 動画</option>
-                            <option value="voice">&#xf130;&nbsp; 音声</option>
-                            <option value="writing">&#xf044;&nbsp; 書く</option>
-                            <option value="file">&#xf15b;&nbsp; ファイル</option>
-                            <option value="file">&#xf086;&nbsp; AIチャット面接</option>
-                        </select>
+                        <div class="input-group fs-6 rounded-5">
+                            <label class="input-group-text rounded-start-5 bg-white" for="input1"><i class="fa-solid fa-video"></i></label>
+                            <select class="form-select rounded-end-5" id="input1">
+                                <option selected>動画</option>
+                                <option value="1">音声</option>
+                                <option value="2">書く</option>
+                                <option value="3">ファイル</option>
+                                <option value="3">AIチャット面接</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-12 col-xl-6">
                         <div class="d-flex justify-content-between px-4">
@@ -240,14 +243,14 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5" id="input1" placeholder="面接タイトル">
+                            <select type="text" class="form-select rounded-end-5" id="input1">
                                 <option selected value="0">0回</option>
                                 <option value="1">1回</option>
                                 <option value="2">2回</option>
-                                <option value="3">&#xf021;3回</option>
-                                <option value="4">&#xf021;4回</option>
-                                <option value="5">&#xf021;5回</option>
-                                <option value="norepeat">&#f534 制限なし</option>
+                                <option value="3">3回</option>
+                                <option value="4">4回</option>
+                                <option value="5">5回</option>
+                                <option value="norepeat">制限なし</option>
                             </select>
                         </div>
                     </div>
