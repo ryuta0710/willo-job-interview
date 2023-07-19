@@ -43,10 +43,11 @@
         /* border-radius: 1rem; */
         /* background-color: ; */
     }
-/* 
+
+    
     span a {
         font-size: 12px !important;
-    } */
+    }
 </style>
 
 <main class="pt-5">
@@ -205,46 +206,58 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2({
-            // templateResult: addButtonsToOptions
+            templateResult: addButtonsToOptions,
+            placeholder: "asdfas"
         });
 
-        // function addButtonsToOptions(option) {
-        //     if (!option.id) {
-        //         return option.text;
-        //     }
+        function addButtonsToOptions(option) {
+            if (!option.id) {
+                return option.text;
+            }
 
-        //     var $option = $('<span></span>');
-        //     $option.text(option.text);
+            var $option = $('<span></span>');
+            $option.text(option.text);
 
-        //     if (option.element) {
-        //         $option.addClass($(option.element).attr('class'));
-        //     }
-        //     if (option.id === 'button') {
-        //         $option = $('<span><a href="./" class="btn btn-primary ms-1">確認</a><a href="" class="btn text-black border border-outline-primary ms-1 bg-hover-white text-hover-white">キャンセル</a></span>');
-        //         // $option.
-        //         $option.on('click', function(e) {
-        //             e.preventDefault()
-        //             console.log(e)
-        //             // alert("sadaf")
-        //             // // Perform action for Option 3 button
-        //             if ($('#select1').val() !== 'button') {
-        //                 alert("dsaf")
-        //                 $('#select1').val('button').trigger('1');
-        //             }
-        //         });
-        //     }
+            if (option.element) {
+                $option.addClass($(option.element).attr('class'));
+            }
+            if (option.id === 'button') {
+                $option = $('<span><a href="./" class="btn btn-primary ms-1">確認</a><a href="" class="btn text-black border border-outline-primary ms-1 bg-hover-white text-hover-white">キャンセル</a></span>');
+                // $option.
+                $option.on('click', function(e) {
+                    e.preventDefault()
+                    console.log(e)
+                    // alert("sadaf")
+                    // // Perform action for Option 3 button
+                    if ($('#select1').val() !== 'button') {
+                        // $('#select1').val('button').trigger('1');
+                        // let doms = document.getElementsByClassName("select2-results");
+                        // doms.foreach(function(dom) {
+                        //     dom.remove();
+                        // })
+                        // console.log(doms)
+                    }
+                });
+            }
 
-        //     return $option;
-        // }
+            return $option;
+        }
     });
-    // $("select").change(function(e){
-    //     if($(e.target).val() =="button"){
-    //         $(e.target).val() = "1"
-    //         document.getElementsByClassName("select2-container")[0].remove();
-    //         document.getElementsByClassName("select2-container")[2].remove();
-    //         // document.getElementsByClassName("select2-container")[0].remove();
-    //         // document.getElementsByClassName("select2-container")[0].remove();
-    //     }
-    // })
+    $(".select2").change(function(e) {
+        if ($(e.target).val() == "button") {
+            $(e.target).val("1");
+            let doms = document.getElementsByClassName("select2-container");
+            console.log(doms)
+            let len = doms.length;
+            for(let i=0; i < len; i++){
+                doms[i].remove();
+            }
+            // doms.map(function(dom) {
+            //     dom.remove();
+            // })
+            // document.getElementsByClassName("select2-container")[0].remove();
+            // document.getElementsByClassName("select2-container")[0].remove();
+        }
+    })
 </script>
 @endsection

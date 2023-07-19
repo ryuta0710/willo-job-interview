@@ -118,34 +118,91 @@
 </main>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <script>
-    $(".fa-eye").parent().click(function(e){
-        let text = $(e.target).parent().parent().parent().prev().html();
+    // $(".fa-eye").click(function(e){
+    //     let text = $(e.target).parent().parent().parent().prev().html();
+    //     $("#staticBackdrop .modal-body").html(text);
+    // })
+    function show() {
+
+        let doms = document.getElementsByClassName("fa-eye");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = show_set;
+        }
+    }
+
+    function show_set(e) {
+        let text = e.target.parentElement.parentElement.parentElement.previousElementSibling.innerHTML;
         $("#staticBackdrop .modal-body").html(text);
-    })
-    $(".fa-copy").parent().click(function(e){
-        let text = $(e.target).parent().parent().parent().prev().html();
-        navigator.clipboard.writeText(text);
-        $(".fa-copy").removeClass("text-primary")
-        $(e.target).addClass("text-primary")
-    })
-    $(".fa-trash").parent().click(function(e){
-        $(e.target).parent().parent().parent().remove();
-    })
+
+        show();
+        copy();
+        del();
+    }
+
+    function copy() {
+        let doms = document.getElementsByClassName("fa-copy");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = copy_set;
+        }
+    }
+
+    function copy_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement.parentElement;
+        let new_dom = dom.cloneNode(true);
+        dom.insertAdjacentElement("afterend", new_dom);
+
+        show();
+        copy();
+        del();
+    }
+
+    function del() {
+        let doms = document.getElementsByClassName("fa-trash");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = delete_set;
+        }
+    }
+
+    function delete_set(e) {
+        e.target.parentElement.parentElement.parentElement.parentElement.remove();
+    }
+
+    // let text = $(e.target).parent().parent().parent().parent().html();
+    // let dom = $(e.target).parent().parent().parent().parent()
+    // .after("<tr>"+text+"</tr>")
+    // .find(".fa-copy")
+    // $($(e.target).parent().parent().parent().parent()
+    // .after("<tr>"+text+"</tr>")
+    // .find(".fa-copy")[0]).click(function(){
+    //     alert("dsafa")
+    // })
+    // navigator.clipboard.writeText(text);
+    // $(".fa-copy").removeClass("text-primary")
+    // $(e.target).addClass("text-primary")
+    // let dom = e.target.parentElement.parentElement.parentElement.parentElement;
+    // let new_dom = dom.cloneNode(true);
+    // dom.insertAdjacentElement("afterend", new_dom);
+    show();
+    copy();
+    del();
 </script>
 @endsection
