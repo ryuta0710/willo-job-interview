@@ -117,18 +117,18 @@
     </div>
 </main>
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="staticBackdrop" style="background-color: rgb(0,0,0,0);" >
+    <div class="modal-dialog modal-dialog-centered" style="width: 60%;min-width: 800px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">プレビュー</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="min-height: 300px; height: 60vh; ">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
+                <button type="button" class="btn btn-primary rounded-5 px-3" data-bs-dismiss="modal">確認</button>
             </div>
         </div>
     </div>
