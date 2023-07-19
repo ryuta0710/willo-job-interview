@@ -62,7 +62,7 @@
                 <button id="open-dropdown1" class="btn btn-primary p-2 select2-hidden-accessible">検索</button>
                 <select name="" id="select1" class="form-select rounded-pill select2" data-no="1">
                     <option value="1">キリハレ株式会社</option>
-                    <option value="button">button</option>
+                    <option value="button"></option>
                 </select>
                 <!-- <div class="select2-buttons">
                     <button class="btn btn-primary" id="button1">Button 1</button>
@@ -72,28 +72,28 @@
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
                 <select name="" id="select2" class="form-select rounded-pill select2" data-no="2">
-                    <option value="">技術者募集</option>
+                    <option value="1">技術者募集</option>
+                    <option value="button"></option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
                 <select name="" id="select3" class="form-select rounded-pill select2" data-no="3">
-                    <option value="">オーナー</option>
+                    <option value="1">オーナー</option>
+                    <option value="button"></option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
                 <select name="" id="select4" class="form-select rounded-pill select2" data-no="4">
                     <!-- <option value="">ステータス</option> -->
-                    <option value="">レビューする</option>
+                    <option value="1">レビューする</option>
+                    <option value="button"></option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
                 <select name="" id="select5" class="form-select rounded-pill" data-no="5">
-                    <option value="">評価</option>
-                    <option value="">1</option>
-                    <option value="">2</option>
-                    <option value="">3</option>
-                    <option value="">4</option>
-                    <option value="">5</option>
+                    <option value="1">評価</option>
+                    <option value="2">5</option>
+                    <option value="button"></option>
                 </select>
             </div>
         </div>
@@ -205,9 +205,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.select2').select2({
+        $('#select1').select2({
             templateResult: addButtonsToOptions,
-            placeholder: "asdfas"
+            // placeholder: "asdfas"
+        });
+        $('#select2').select2({
+            templateResult: addButtonsToOptions,
+            // placeholder: "asdfas"
+        });
+        $('#select3').select2({
+            templateResult: addButtonsToOptions,
+            // placeholder: "asdfas"
+        });
+        $('#select4').select2({
+            templateResult: addButtonsToOptions,
+            // placeholder: "asdfas"
+        });
+        $('#select5').select2({
+            templateResult: addButtonsToOptions,
+            // placeholder: "asdfas"
         });
 
         function addButtonsToOptions(option) {
@@ -246,12 +262,12 @@
     $(".select2").change(function(e) {
         if ($(e.target).val() == "button") {
             $(e.target).val("1");
-            let doms = document.getElementsByClassName("select2-container");
-            console.log(doms)
-            let len = doms.length;
-            for(let i=0; i < len; i++){
-                doms[i].remove();
-            }
+            // let doms = document.getElementsByClassName("select2-dropdown");
+            // console.log(doms)
+            // let len = doms.length;
+            // for(let i=0; i < len; i++){
+            //     doms[i].remove();
+            // }
             // doms.map(function(dom) {
             //     dom.remove();
             // })
