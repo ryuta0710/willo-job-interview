@@ -12,16 +12,16 @@
                 <p class="mb-2">次の手順に従って 3 分以内に面接を開始するか、ビデオをご覧ください
                 </p>
                 <p class="mb-2">
-                    <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    会社概要を設定しましょう
+                    <a href="{{ route('company.create') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                        会社概要を設定しましょう</a>
                 </p>
                 <p class="mb-2">
-                    <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    最初のインタビューを作成しましょう
+                    <a href="{{ route('myjob.create') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                        最初のインタビューを作成しましょう</a>
                 </p>
                 <p class="mb-2">
-                    <span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                    インタビューに人々を招待しましょう
+                    <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                        インタビューに人々を招待しましょう</a>
                 </p>
             </div>
         </div>
@@ -97,7 +97,7 @@
                     <p class="mt-4 pt-3"> </p>
                     <a href="/contact" class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add">
                         <i class="fa-regular fa-plus"></i>&nbsp;&nbsp;&nbsp;作成
-</a>
+                    </a>
                 </div>
             </div>
         </div>

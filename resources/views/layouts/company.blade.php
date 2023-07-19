@@ -57,7 +57,7 @@
                                 <img src="{{ asset('/assets/img/avatar/01.png') }}" alt="Avatar" class="avatar-img"
                                     style="width: 40px; height: 40px;">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('profile.index') }}">プロフィール</a>
                                 <a class="dropdown-item" href="{{ route('user.index') }}">ユーザー</a>
                                 <a class="dropdown-item" href="{{ route('template.index') }}">ライブラリ</a>
