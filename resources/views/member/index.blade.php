@@ -4,12 +4,8 @@
 <link rel="stylesheet" href="{{ asset('/assets/css/member-list/index.css') }}">
 
 <!-- Select2 CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 
-<!-- Select2 JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/ja.min.js"></script>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2 {
         width: 100% !important;
@@ -34,6 +30,23 @@
     .select2-container .select2-selection--single .select2-container--default .select2-results>.select2-results__options {
         -webkit-overflow-scrolling: touch;
     }
+
+    .select2-button {
+        /* color: red; */
+        background-color: #337ab7;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .select2-dropdown {
+        /* width: 200px!important; */
+        /* border-radius: 1rem; */
+        /* background-color: ; */
+    }
+/* 
+    span a {
+        font-size: 12px !important;
+    } */
 </style>
 
 <main class="pt-5">
@@ -45,25 +58,31 @@
         </div>
         <div class="row justify-content-between align-items-center mb-5">
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select1" class="form-select rounded-pill" data-no="1">
-                    <option value="">会社</option>
+                <button id="open-dropdown1" class="btn btn-primary p-2 select2-hidden-accessible">検索</button>
+                <select name="" id="select1" class="form-select rounded-pill select2" data-no="1">
+                    <option value="1">キリハレ株式会社</option>
+                    <option value="button">button</option>
+                </select>
+                <!-- <div class="select2-buttons">
+                    <button class="btn btn-primary" id="button1">Button 1</button>
+                    <button class="btn btn-secondary" id="button2">Button 2</button>
+                </div> -->
+                <!-- <button id="open-dropdown2" class="btn btn-primary p-2 sselect2-hidden-accessible">リセット</button> -->
+            </div>
+            <div class="col-lg-2 mb-3 mb-lg-0">
+                <select name="" id="select2" class="form-select rounded-pill select2" data-no="2">
+                    <option value="">技術者募集</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select2" class="form-select rounded-pill" data-no="2">
-                    <option value="">インタビュー</option>
-                </select>
-            </div>
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select3" class="form-select rounded-pill" data-no="3">
+                <select name="" id="select3" class="form-select rounded-pill select2" data-no="3">
                     <option value="">オーナー</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select4" class="form-select rounded-pill" data-no="4">
-                    <option value="">ステータス</option>
+                <select name="" id="select4" class="form-select rounded-pill select2" data-no="4">
+                    <!-- <option value="">ステータス</option> -->
                     <option value="">レビューする</option>
-                    <option value="">ステータス</option>
                 </select>
             </div>
             <div class="col-lg-2 mb-3 mb-lg-0">
@@ -99,8 +118,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-2 justify-content-center">
                                         <div class="col-auto">
-                                            <img src="./assets/img/avatar/01.png" alt=""
-                                                style="width: 40px; height: 40px;">
+                                            <img src="./assets/img/avatar/01.png" alt="" style="width: 40px; height: 40px;">
                                         </div>
                                         <div class="col-auto">
                                             <p class="m-0">募集項目名</p>
@@ -121,8 +139,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5><span
-                                            class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>
+                                    <h5><span class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>
                                     </h5>
                                 </td>
                                 <td>
@@ -140,8 +157,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-2 justify-content-center">
                                         <div class="col-auto">
-                                            <img src="./assets/img/avatar/01.png" alt=""
-                                                style="width: 40px; height: 40px;">
+                                            <img src="./assets/img/avatar/01.png" alt="" style="width: 40px; height: 40px;">
                                         </div>
                                         <div class="col-auto">
                                             <p class="m-0">募集項目名</p>
@@ -162,8 +178,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5><span
-                                            class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>
+                                    <h5><span class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>
                                     </h5>
                                 </td>
                                 <td>
@@ -184,9 +199,52 @@
         </div>
     </div>
 </main>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-    // $(".form-select").each(function(dom){
-        
+    $(document).ready(function() {
+        $('.select2').select2({
+            // templateResult: addButtonsToOptions
+        });
+
+        // function addButtonsToOptions(option) {
+        //     if (!option.id) {
+        //         return option.text;
+        //     }
+
+        //     var $option = $('<span></span>');
+        //     $option.text(option.text);
+
+        //     if (option.element) {
+        //         $option.addClass($(option.element).attr('class'));
+        //     }
+        //     if (option.id === 'button') {
+        //         $option = $('<span><a href="./" class="btn btn-primary ms-1">確認</a><a href="" class="btn text-black border border-outline-primary ms-1 bg-hover-white text-hover-white">キャンセル</a></span>');
+        //         // $option.
+        //         $option.on('click', function(e) {
+        //             e.preventDefault()
+        //             console.log(e)
+        //             // alert("sadaf")
+        //             // // Perform action for Option 3 button
+        //             if ($('#select1').val() !== 'button') {
+        //                 alert("dsaf")
+        //                 $('#select1').val('button').trigger('1');
+        //             }
+        //         });
+        //     }
+
+        //     return $option;
+        // }
+    });
+    // $("select").change(function(e){
+    //     if($(e.target).val() =="button"){
+    //         $(e.target).val() = "1"
+    //         document.getElementsByClassName("select2-container")[0].remove();
+    //         document.getElementsByClassName("select2-container")[2].remove();
+    //         // document.getElementsByClassName("select2-container")[0].remove();
+    //         // document.getElementsByClassName("select2-container")[0].remove();
+    //     }
     // })
 </script>
 @endsection
