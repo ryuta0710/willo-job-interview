@@ -8,7 +8,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2 {
-        width: 100% !important;
+        width: auto !important;
+        min-width: 200px;
         /* force fluid responsive */
     }
 
