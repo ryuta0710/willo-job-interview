@@ -43,7 +43,7 @@ class TemplateController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('template.edit');
     }
 
     /**

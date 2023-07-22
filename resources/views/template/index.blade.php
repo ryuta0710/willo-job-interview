@@ -18,7 +18,8 @@
                 </select>
             </div>
             <div class="col-lg-3 mb-3 mb-lg-0 d-flex justify-content-end">
-                <a class="btn btn-primary px-4" href="{{ route('template.create') }}"><i class="fa fa-solid fa-plus"></i> 作成</a>
+                <a class="btn btn-primary px-4" href="{{ route('template.create') }}"><i
+                        class="fa fa-solid fa-plus"></i> 作成</a>
             </div>
         </div>
         <div class="row">
@@ -51,7 +52,7 @@
                                         <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                             <i class="fa fa-solid fa-eye me-3"></i>
                                         </a>
-                                        <a href="/template/create">
+                                        <a href="{{ route('template.edit', ['template'=>1]) }}">
                                             <i class="fa fa-solid fa-edit me-3"></i>
                                         </a>
                                         <a href="#">
@@ -116,24 +117,83 @@
         </div>
     </div>
 </main>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" style="background-color: rgb(0,0,0,0);" >
-    <div class="modal-dialog modal-dialog-centered" style="width: 60%;min-width: 800px;">
+
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">プレビュー</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div></div>
+                <h5 class="modal-title text-center" id="exampleModalLabel">Default Invite Email</h5>
+                <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="min-height: 300px; height: 60vh; ">
-
+            <div class="modal-body">
+                <h6 class="text-center">Hi {candidate_full_name},</h6>
+                <div class="text-center">
+                    <p>
+                        Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get to
+                        know you better with a short one-way video interview.
+                    </p>
+                    <p>
+                        Your interview will consist of a set of questions for you to answer using your camera and
+                        microphone. If you don't have access to a computer you can also complete your interview using
+                        any smartphone or tablet.
+                    </p>
+                    <p>
+                        How it works:<br>
+                        If you're unfamiliar with one-way interviews, they are simply interviews with pre-written
+                        questions where you record a video response, at your convenience. Each question should be
+                        answered before you move on to the next one.
+                    </p>
+                    <p>
+                        Completing this interview will allow us to get to know you more quickly than a phone or video
+                        call, and you can complete it anywhere, any time.
+                    </p>
+                    <p>
+                        Please read this guide to your interview before starting:<br>
+                        5 Easy steps to a great interview
+                    </p>
+                    <p>
+                        Thanks,<br>
+                        {interview_owner_name}
+                    </p>
+                    <a href="" class="btn btn-secondary rounded-pill mb-3">Go to interview</a>
+                    <p>
+                        Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get to
+                        know you better with a short one-way video interview.
+                    </p>
+                    <p>
+                        Your interview will consist of a set of questions for you to answer using your camera and
+                        microphone. If you don't have access to a computer you can also complete your interview using
+                        any smartphone or tablet.
+                    </p>
+                    <p>
+                        How it works:<br>
+                        If you're unfamiliar with one-way interviews, they are simply interviews with pre-written
+                        questions where you record a video response, at your convenience. Each question should be
+                        answered before you move on to the next one.
+                    </p>
+                    <p>
+                        Completing this interview will allow us to get to know you more quickly than a phone or video
+                        call, and you can complete it anywhere, any time.
+                    </p>
+                    <p>
+                        Please read this guide to your interview before starting:<br>
+                        5 Easy steps to a great interview
+                    </p>
+                    <p>
+                        Thanks,<br>
+                        {interview_owner_name}
+                    </p>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded-5 px-3" data-bs-dismiss="modal">確認</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     // $(".fa-eye").click(function(e){
     //     let text = $(e.target).parent().parent().parent().prev().html();
     //     $("#staticBackdrop .modal-body").html(text);
@@ -204,5 +264,5 @@
     show();
     copy();
     del();
-</script>
+</script> --}}
 @endsection

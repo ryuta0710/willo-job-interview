@@ -116,7 +116,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="align-middle">
                                 <td>
                                     <div class="d-flex align-items-center gap-2 justify-content-center">
                                         <div class="col-auto">
@@ -155,7 +155,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="align-middle">
                                 <td>
                                     <div class="d-flex align-items-center gap-2 justify-content-center">
                                         <div class="col-auto">

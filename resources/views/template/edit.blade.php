@@ -25,8 +25,7 @@
                 <div class="row">
                     <div class="col-lg-6 mb-3">
                         <label for="companyName" class="form-label px-3">テンプレートのタイトル</label>
-                        <input type="text" class="form-control rounded-pill" id="companyName"
-                            placeholder="テンプレートのタイトル">
+                        <input type="text" class="form-control rounded-pill" id="companyName" placeholder="テンプレートのタイトル">
                     </div>
                 </div>
                 <div class="row">
@@ -40,9 +39,7 @@
                     <div class="col-lg-6 mb-3">
                         <label for="companyName" class="form-label px-3">テンプレートトリガー</label>
                         <select name="" id="" class="form-select rounded-pill">
-                            <option value="">招待時</option>
-                            <option value="">回答返送時</option>
-                            <option value="">回答にエラー</option>
+                            <option value="">招待</option>
                         </select>
                     </div>
                 </div>
@@ -72,8 +69,7 @@
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 <script>
-    
-	var quill = new Quill('#editor', {
+    var quill = new Quill('#editor', {
 		theme: 'snow'
 	});
 	quill.on('text-change', function (delta, oldDelta, source) {

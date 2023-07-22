@@ -7,20 +7,24 @@
     <section id="card-box">
         <div class="container">
             <div class="card position-relativer mt-5">
-                <div class="close position-absolute fs-4"><i class="fa-regular fa-plus"></i></div>
+                <a class="close position-absolute fs-4" href="javascript:;"><i
+                        class="fa-regular fa-plus cursor-pointer"></i></a>
                 <h4 class="mb-3">こんにちは、始めましょう...</h4>
                 <p class="mb-2">次の手順に従って 3 分以内に面接を開始するか、ビデオをご覧ください
                 </p>
                 <p class="mb-2">
-                    <a href="{{ route('company.create') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                    <a href="{{ route('company.create') }}"><span class="text-primary fs-4 align-middle"><i
+                                class="fa-regular fa-circle-check"></i></span>
                         会社概要を設定しましょう</a>
                 </p>
                 <p class="mb-2">
-                    <a href="{{ route('myjob.create') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                    <a href="{{ route('myjob.create') }}"><span class="text-primary fs-4 align-middle"><i
+                                class="fa-regular fa-circle-check"></i></span>
                         最初のインタビューを作成しましょう</a>
                 </p>
                 <p class="mb-2">
-                    <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                    <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i
+                                class="fa-regular fa-circle-check"></i></span>
                         インタビューに人々を招待しましょう</a>
                 </p>
             </div>
@@ -31,8 +35,8 @@
     <!-- DASHBOARD -->
     <section id="sec-dashboard">
         <div class="container pt-4">
-            <div class="state px-3 d-flex justify-content-around justify-content-lg-between">
-                <div class="value d-flex gap-5 mb-4">
+            <div class="state px-3 d-flex justify-content-around justify-content-lg-between align-items-center mb-2">
+                <div class="value d-flex gap-5">
                     <div class="pe-2">
                         <span class="text-primary">開始</span>
                         0人
@@ -45,14 +49,13 @@
                 <div class="w-auto">
 
                 </div>
-                <select type="text" class="form-select rounded-5 w-auto pe-5 ps-3 fs-6" id="input1" placeholder="">
+                <select type="text" class="form-select rounded-pill w-auto fs-6" id="input1" placeholder="">
                     <option value="1">今日</option>
                     <option value="2">昨日</option>
                     <option value="3">7日前</option>
                     <option value="4">30日前</option>
                     <option value="5">今月</option>
                     <option value="6">先月</option>
-                    <option value="0">制限なし</option>
                 </select>
             </div>
             <div id="dashboard">
@@ -95,8 +98,9 @@
                     <p class="mb-4">質問がありますか?</p>
                     <p class="fs-4"></p>
                     <p class="mt-4 pt-3"> </p>
-                    <a href="/contact" class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add">
-                        <i class="fa-regular fa-plus"></i>&nbsp;&nbsp;&nbsp;作成
+                    <a href="/contact" class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold"
+                        id="job_add">
+                        <i class="fa-regular fa-plus cursor-pointer"></i>&nbsp;&nbsp;&nbsp;作成
                     </a>
                 </div>
             </div>

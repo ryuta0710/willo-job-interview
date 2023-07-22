@@ -99,7 +99,7 @@ Route::controller(TemplateController::class)->group(function(){
 
     // Route::delete('template/{template}', 'destroy')->name('template.destroy');
 
-    // Route::get('template/{template}/edit', 'edit')->name('template.edit');
+    Route::get('template/{template}/edit', 'edit')->name('template.edit');
 });
 
 Route::controller(ProfileController::class)->group(function(){

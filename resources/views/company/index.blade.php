@@ -8,7 +8,7 @@
             <div class="col-lg-4 mb-3">
                 <div class="w-100 bordered rounded shadow-sm py-4 px-3">
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center mb-3">
-                        <p class="m-0">会社名</p>
+                        <a class="m-0" href="{{ route('home') }}">会社名</a>
                         <p class="text-active m-0">デフォルト <i class="fa fa-solid fa-circle-check"></i></p>
                     </div>
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center">
@@ -23,7 +23,7 @@
             <div class="col-lg-4 mb-3">
                 <div class="w-100 bordered rounded shadow-sm py-4 px-3">
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center mb-3">
-                        <p class="m-0">会社名</p>
+                        <a class="m-0" href="{{ route('home') }}">会社名</a>
                         <p class="text-active m-0">デフォルト <i class="fa fa-solid fa-circle-check"></i></p>
                     </div>
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center">
@@ -38,7 +38,7 @@
             <div class="col-lg-4 mb-3">
                 <div class="w-100 bordered rounded shadow-sm py-4 px-3">
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center mb-3">
-                        <p class="m-0">会社名</p>
+                        <a class="m-0" href="{{ route('home') }}">会社名</a>
                         <p class="text-active m-0">デフォルト <i class="fa fa-solid fa-circle-check"></i></p>
                     </div>
                     <div class="col-12 px-2 d-flex justify-content-between align-items-center">

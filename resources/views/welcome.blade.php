@@ -32,9 +32,9 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" id="active1" href="#Home">トップ</a></li>
-                    <li class="nav-item"><a class="nav-link" id="active2" href="#Portfolio">導入する</a></li>
-                    <li class="nav-item"><a class="nav-link" id="active3" href="#Contact">お問い合わせ</a></li>
+                    <li class="nav-item"><a class="nav-link" id="active1" href="/">トップ</a></li>
+                    <li class="nav-item"><a class="nav-link" id="active2" href="{{ route('getJobList') }}">導入する</a></li>
+                    <li class="nav-item"><a class="nav-link" id="active3" href="{{ route('contact') }}">お問い合わせ</a></li>
                     @if (Route::has('login'))
                     <li class="nav-item"><a class="nav-link" id="active3" href="{{ route('register') }}">登録</a></li>
                     @if (Route::has('register'))
