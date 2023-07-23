@@ -193,28 +193,28 @@
         </div>
     </div>
 </div>
-{{-- <script>
+<script>
     // $(".fa-eye").click(function(e){
     //     let text = $(e.target).parent().parent().parent().prev().html();
     //     $("#staticBackdrop .modal-body").html(text);
     // })
-    function show() {
+    // function show() {
 
-        let doms = document.getElementsByClassName("fa-eye");
-        let len = doms.length;
-        for (let i = 0; i < len; i++) {
-            doms[i].onclick = show_set;
-        }
-    }
+    //     let doms = document.getElementsByClassName("fa-eye");
+    //     let len = doms.length;
+    //     for (let i = 0; i < len; i++) {
+    //         doms[i].onclick = show_set;
+    //     }
+    // }
 
-    function show_set(e) {
-        let text = e.target.parentElement.parentElement.parentElement.previousElementSibling.innerHTML;
-        $("#staticBackdrop .modal-body").html(text);
+    // function show_set(e) {
+    //     let text = e.target.parentElement.parentElement.parentElement.previousElementSibling.innerHTML;
+    //     $("#staticBackdrop .modal-body").html(text);
 
-        show();
-        copy();
-        del();
-    }
+    //     show();
+    //     copy();
+    //     del();
+    // }
 
     function copy() {
         let doms = document.getElementsByClassName("fa-copy");
@@ -229,7 +229,7 @@
         let new_dom = dom.cloneNode(true);
         dom.insertAdjacentElement("afterend", new_dom);
 
-        show();
+        // show();
         copy();
         del();
     }
@@ -261,8 +261,8 @@
     // let dom = e.target.parentElement.parentElement.parentElement.parentElement;
     // let new_dom = dom.cloneNode(true);
     // dom.insertAdjacentElement("afterend", new_dom);
-    show();
+    // show();
     copy();
     del();
-</script> --}}
+</script>
 @endsection
