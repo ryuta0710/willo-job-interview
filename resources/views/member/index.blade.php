@@ -172,10 +172,10 @@
                         <thead>
                             <tr class="bg-secondary-grey">
                                 <th class="py-4 text-center">名前</th>
-                                <th class="py-4">インタビュ-</th>
-                                <th class="py-4">理出済み</th>
-                                <th class="py-4">スターテス</th>
-                                <th class="py-4">評価</th>
+                                <th class="py-4">募集タイトル</th>
+                                <th class="py-4">提出日</th>
+                                <th class="py-4">ステータス</th>
+                                <th class="py-4">評価点</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -264,7 +264,6 @@
         </div>
     </div>
 </main>
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script> -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
