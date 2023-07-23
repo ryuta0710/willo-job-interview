@@ -17,9 +17,23 @@ $(document).ready(function () {
 	// company description
 	$("#state_toggle").change(function () {
 		$("#description_video").toggle(300)
+		console.log($("#video_url").attr("disabled"));
+		if ($("#video_url").attr("disabled") == "disabled") {
+			$("#video_url").removeAttr("disabled");
+		} else {
+			$("#video_url").attr("disabled", "disabled");
+
+		}
 	})
 	$(".step").click(function () {
 
+	})
+	$("#btn_upload").click(function () {
+		$("#file_upload").click();
+	})
+
+	$("#file_upload").change(function(){
+		$("#preview").html($("#file_upload").val())
 	})
 
 	// make questions
@@ -95,20 +109,20 @@ $(document).ready(function () {
 	//data limit set
 	let temp = "";
 	let now = new Date();
-	let end = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 30 )
-	while(now.getTime() < end.getTime()){
+	let end = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 30)
+	while (now.getTime() < end.getTime()) {
 		now = new Date(now.getTime() + 1000 * 60 * 60 * 24)
-		temp += "<option value='"+now.toString()+"'>"+now.getFullYear()+"年 "+(now.getMonth()+1)+"月 "+now.getDate()+"日</option>"
+		temp += "<option value='" + now.toString() + "'>" + now.getFullYear() + "年 " + (now.getMonth() + 1) + "月 " + now.getDate() + "日</option>"
 	}
 	$("#date_limit").prepend(temp);
 
 	//copy
-	function copy(text){
+	function copy(text) {
 		alert(text)
 		navigator.clipboard.writeText(text);
 	}
 
-	$(".fa-copy").click(function(e){
+	$(".fa-copy").click(function (e) {
 		$(e.target).toggleClass("text-primary");
 	})
 })

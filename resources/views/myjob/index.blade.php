@@ -106,10 +106,10 @@
                             <a href="" class="me-3">
                                 <i class="fa-solid fa-edit"></i>
                             </a>
-                            <a href="" class="me-3">
+                            <a href="#" class="me-3">
                                 <i class="fa-solid fa-copy"></i>
                             </a>
-                            <a href="">
+                            <a href="#">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
@@ -137,10 +137,10 @@
                             <a href="" class="me-3">
                                 <i class="fa-solid fa-edit"></i>
                             </a>
-                            <a href="" class="me-3">
+                            <a href="#" class="me-3">
                                 <i class="fa-solid fa-copy"></i>
                             </a>
-                            <a href="">
+                            <a href="#">
                                 <i class="fa-solid fa-trash"></i>
                             </a>
                         </td>
@@ -153,11 +153,38 @@
 </main>
 
 <script>
-    $('.select2').each(function () {
-        $(this).select2({
-            dropdownParent: $(this).parent(),
-        });
-    });
+    
+    function copy() {
+        let doms = document.getElementsByClassName("fa-copy");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = copy_set;
+        }
+    }
+
+    function copy_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement;
+        let new_dom = dom.cloneNode(true);
+        dom.insertAdjacentElement("afterend", new_dom);
+
+        // show();
+        copy();
+        del();
+    }
+
+    function del() {
+        let doms = document.getElementsByClassName("fa-trash");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = delete_set;
+        }
+    }
+
+    function delete_set(e) {
+        e.target.parentElement.parentElement.parentElement.remove();
+    }
+    copy();
+    del()
 </script>
 
 @endsection

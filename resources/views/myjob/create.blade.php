@@ -105,8 +105,8 @@
             <div class="row">
                 <div class="col-12 col-xl-6">
                     <div class="mb-3">
-                        <label for="input1" class="form-label px-4 mb-2 pb-1">面接タイトル</label>
-                        <input type="text" class="form-control px-4 rounded-5" id="input1" placeholder="面接タイトル">
+                        <label for="input1" class="form-label px-4 mb-2 pb-1">募集職種</label>
+                        <input type="text" class="form-control px-4 rounded-5" id="input1" placeholder="募集職種の入力">
                     </div>
                 </div>
                 <div class="col-12 col-xl-6">
@@ -115,15 +115,15 @@
                             <label for="input1" class="form-label">給料</label>
                             <div class="text-secondary">給料</div>
                         </div>
-                        <input type="text" class="form-control px-4 rounded-5" id="input2" placeholder="給料">
+                        <input type="text" class="form-control px-4 rounded-5" id="input2" placeholder="給料の入力">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 col-xl-6">
                     <div class="mb-3">
-                        <label for="input1" class="form-label px-4 mb-2 pb-1">会社</label>
-                        <input type="text" class="form-control px-4 rounded-5" id="input1" placeholder="会社名">
+                        <label for="input1" class="form-label px-4 mb-2 pb-1">会社名</label>
+                        <input type="text" class="form-control px-4 rounded-5" id="input1" placeholder="会社名の入力">
                     </div>
                 </div>
                 <div class="col-12 col-xl-6">
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="text" class="form-control px-4 rounded-5" id="input2" placeholder="給料">
+                        <input type="text" class="form-control px-4 rounded-5" id="video_url" placeholder="ビデオの紹介">
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@
             <!-- VIDEO -->
             <div class="w-100 px-5" id="description_video">
                 <div class="row card rounded-4 p-4 flex-row flex-wrap">
-                    <div class="col-12 col-xl-7 text-center">
+                    <div class="col-12 col-xl-7 text-center" id="preview">
                         <svg class="w-100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="590" height="333" viewBox="0 0 590 333">
                             <defs>
                                 <linearGradient id="linear-gradient" x1="0.286" y1="-0.069" x2="0.766" y2="1.048" gradientUnits="objectBoundingBox">
@@ -179,7 +179,8 @@
                             を®単[こ伝える•現®者との信頼問係をn く</p>
                         <button class="btn-normal text-white bg-active mb-2 w-100 max-300">録音を閧始</button>
                         <p class="pt-1 pb-1">また</p>
-                        <button class="btn-normal w-100 bg-white border border-primary bg-hover-primary max-300">アップロード&nbsp;&nbsp;<i class="fa fa-angle-right me-2"></i></button>
+                        <input type="file" class="d-none" id="file_upload">
+                        <button id="btn_upload" class="btn-normal w-100 bg-white border border-primary bg-hover-primary max-300">アップロード&nbsp;&nbsp;<i class="fa-solid fa-cloud-arrow-up"></i></button>
                     </div>
                 </div>
 
