@@ -34,18 +34,18 @@
             <p class="pt-1">採用担当名</p>
             <div class="w-100 d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-column flex-md-row flex-wrap gap-3 px-2 fs-14">
-                    <div class="cs-state bg-primary text-white px-4 w-auto">
+                    <a class="cs-state bg-primary text-white px-4 w-auto" href="">
                         <i class="fa-solid fa-share-nodes"></i>
                         招待
-                    </div>
-                    <div class="cs-state border-gray bg-white text-black px-4 w-auto">
+                    </a>
+                    <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="">
                         <i class="fa-regular fa-edit"></i>
                         編集
-                    </div>
-                    <div class="cs-state border-gray bg-white text-black px-4 w-auto">
+                    </a>
+                    <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="">
                         <i class="fa-solid fa-eye"></i>
                         プレビュー
-                    </div>
+                    </a>
                 </div>
                 <div class="d-flex">
                     <div class="" style="width:36px;">
