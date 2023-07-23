@@ -44,7 +44,7 @@
         /* background-color: ; */
     }
 
-    
+
     span a {
         font-size: 12px !important;
     }
@@ -54,47 +54,110 @@
     <div class="container px-4">
         <div class="row mb-3">
             <div class="col-auto">
-                <input type="text" class="form-control rounded-pill" placeholder="タイトルで検索する" name="" id="" value="">
+                <input type="text" class="form-control rounded-pill" placeholder="応募者氏名 " name="" id="" value="">
             </div>
         </div>
         <div class="row justify-content-between align-items-center mb-5">
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <button id="open-dropdown1" class="btn btn-primary p-2 select2-hidden-accessible">検索</button>
-                <select name="" id="select1" class="form-select rounded-pill select2" data-no="1">
+            <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
+                <!-- <button id="open-dropdown1" class="btn btn-primary p-2 select2-hidden-accessible">検索</button> -->
+                <!-- <select name="" id="select1" class="form-select rounded-pill select2" data-no="1">
                     <option value="1">キリハレ株式会社</option>
                     <option value="button"></option>
-                </select>
-                <!-- <div class="select2-buttons">
-                    <button class="btn btn-primary" id="button1">Button 1</button>
-                    <button class="btn btn-secondary" id="button2">Button 2</button>
-                </div> -->
-                <!-- <button id="open-dropdown2" class="btn btn-primary p-2 sselect2-hidden-accessible">リセット</button> -->
+                </select> -->
+                <input name="company" id="company" class="form-select rounded-pill select2" placeholder="募集した会社 " data-no="1">
+                <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                    <div class="cus-search">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                    </div>
+                    <div class="cus-options py-2">
+                        <div class="cus-notfound"><span>見つかりません</span></div>
+                        <div class="cus-option"><span>キリハレ株式会社</span></div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary rounded-2 ok">適用</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                    </div>
+                    <div class="cus-bg position-fixed">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select2" class="form-select rounded-pill select2" data-no="2">
-                    <option value="1">技術者募集</option>
-                    <option value="button"></option>
-                </select>
+            <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
+                <input name="" id="select2" class="form-select rounded-pill select2" data-no="2" placeholder="募集のタイトル">
+                <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                    <div class="cus-search">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                    </div>
+                    <div class="cus-options py-2">
+                        <div class="cus-notfound"><span>見つかりません</span></div>
+                        <div class="cus-option"><span>技術者募集</span></div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary rounded-2 ok">適用</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                    </div>
+                    <div class="cus-bg position-fixed">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select3" class="form-select rounded-pill select2" data-no="3">
-                    <option value="1">オーナー</option>
-                    <option value="button"></option>
-                </select>
+            <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
+                <input name="" id="select3" class="form-select rounded-pill select2" data-no="3" placeholder="応募先">
+                <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                    <div class="cus-search">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                    </div>
+                    <div class="cus-options py-2">
+                        <div class="cus-notfound"><span>見つかりません</span></div>
+                        <div class="cus-option"><span>オーナー</span></div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary rounded-2 ok">適用</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                    </div>
+                    <div class="cus-bg position-fixed">
+
+                    </div>
+                </div>
+
             </div>
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select4" class="form-select rounded-pill select2" data-no="4">
-                    <!-- <option value="">ステータス</option> -->
-                    <option value="1">レビューする</option>
-                    <option value="button"></option>
-                </select>
+            <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
+                <input name="" id="select4" class="form-select rounded-pill select2" data-no="4" placeholder="現時点の評価">
+                <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                    <div class="cus-search">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="評価">
+                    </div>
+                    <div class="cus-options py-2">
+                        <div class="cus-notfound"><span>見つかりません</span></div>
+                        <div class="cus-option"><span>レビューする</span></div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary rounded-2 ok">適用</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                    </div>
+                    <div class="cus-bg position-fixed">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 mb-3 mb-lg-0">
-                <select name="" id="select5" class="form-select rounded-pill" data-no="5">
-                    <option value="1">評価</option>
-                    <option value="2">5</option>
-                    <option value="button"></option>
-                </select>
+            <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
+                <input name="" id="select5" class="form-select rounded-pill select2" data-no="5" placeholder="評価">
+                <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                    <div class="cus-search">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                    </div>
+                    <div class="cus-options py-2">
+                        <div class="cus-notfound"><span>見つかりません</span></div>
+                        <div class="cus-option"><span>5</span></div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-primary rounded-2 ok">適用</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                    </div>
+                    <div class="cus-bg position-fixed">
+
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -204,76 +267,111 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#select1').select2({
-            templateResult: addButtonsToOptions,
-            // placeholder: "asdfas"
-        });
-        $('#select2').select2({
-            templateResult: addButtonsToOptions,
-            // placeholder: "asdfas"
-        });
-        $('#select3').select2({
-            templateResult: addButtonsToOptions,
-            // placeholder: "asdfas"
-        });
-        $('#select4').select2({
-            templateResult: addButtonsToOptions,
-            // placeholder: "asdfas"
-        });
-        $('#select5').select2({
-            templateResult: addButtonsToOptions,
-            // placeholder: "asdfas"
-        });
-
-        function addButtonsToOptions(option) {
-            if (!option.id) {
-                return option.text;
-            }
-
-            var $option = $('<span></span>');
-            $option.text(option.text);
-
-            if (option.element) {
-                $option.addClass($(option.element).attr('class'));
-            }
-            if (option.id === 'button') {
-                $option = $('<span><a href="./" class="btn btn-primary ms-1">確認</a><a href="" class="btn text-black border border-outline-primary ms-1 bg-hover-white text-hover-white">キャンセル</a></span>');
-                // $option.
-                $option.on('click', function(e) {
-                    e.preventDefault()
-                    console.log(e)
-                    // alert("sadaf")
-                    // // Perform action for Option 3 button
-                    if ($('#select1').val() !== 'button') {
-                        // $('#select1').val('button').trigger('1');
-                        // let doms = document.getElementsByClassName("select2-results");
-                        // doms.foreach(function(dom) {
-                        //     dom.remove();
-                        // })
-                        // console.log(doms)
-                    }
-                });
-            }
-
-            return $option;
-        }
-    });
-    $(".select2").change(function(e) {
-        if ($(e.target).val() == "button") {
-            $(e.target).val("1");
-            // let doms = document.getElementsByClassName("select2-dropdown");
-            // console.log(doms)
-            // let len = doms.length;
-            // for(let i=0; i < len; i++){
-            //     doms[i].remove();
-            // }
-            // doms.map(function(dom) {
-            //     dom.remove();
-            // })
-            // document.getElementsByClassName("select2-container")[0].remove();
-            // document.getElementsByClassName("select2-container")[0].remove();
-        }
+    $(".select2").focus(function(e) {
+        $(".select2 + .select-cus").hide();
+        $(e.target).next().show();
+        $(".cus-bg").show();
     })
+
+    $(".select-cus .cus-option span").click(function(e) {
+        $(e.target).parent().parent().parent().hide();
+        $(e.target).parent().parent().parent().prev().val(e.target.textContent);
+    })
+
+    $(".select-cus .ok").click(function(e) {
+        $(e.target).parent().parent().hide();
+        $(e.target).parent().parent().prev().val($(e.target).parent().parent().find('input').val());
+    })
+
+    $(".select-cus .cancel").click(function(e) {
+        $(e.target).parent().parent().hide();
+        $(e.target).parent().parent().prev().val("");
+    })
+
+    $(".cus-bg").click(function(e) {
+        $(e.target).parent().hide();
+        $(e.target).parent().prev().val("");
+    })
+
+    $(".select-search").keyup(function(e) {
+
+        let listDom = e.target.parentElement.nextElementSibling.getElementsByTagName("DIV");
+        let val = e.target.value.trim();
+        let listData = [];
+        let len = listDom.length;
+        let nooptionsdom = e.target.parentElement.nextElementSibling.firstElementChild;
+        console.log(nooptionsdom)
+        nooptionsdom.style.display = "block"
+
+        for (let i = 1; i < len; i++) {
+            if (val.length == 0) {
+                listDom[i].style.display = "block";
+                nooptionsdom.style.display = "none"
+            } else {
+                if (listDom[i].textContent.indexOf(val) != -1) {
+                    listDom[i].style.display = "block";
+                    nooptionsdom.style.display = "none"
+                } else {
+                    listDom[i].style.display = "none";
+                }
+            }
+        }
+
+    })
+    // $(document).ready(function() {
+    //     $('#select1').select2({
+    //         templateResult: addButtonsToOptions,
+    //         // placeholder: "asdfas"
+    //     });
+    //     $('#select2').select2({
+    //         templateResult: addButtonsToOptions,
+    //         // placeholder: "asdfas"
+    //     });
+    //     $('#select3').select2({
+    //         templateResult: addButtonsToOptions,
+    //         // placeholder: "asdfas"
+    //     });
+    //     $('#select4').select2({
+    //         templateResult: addButtonsToOptions,
+    //         // placeholder: "asdfas"
+    //     });
+    //     $('#select5').select2({
+    //         templateResult: addButtonsToOptions,
+    //         // placeholder: "asdfas"
+    //     });
+
+    //     function addButtonsToOptions(option) {
+    //         if (!option.id) {
+    //             return option.text;
+    //         }
+
+    //         var $option = $('<span></span>');
+    //         $option.text(option.text);
+
+    //         if (option.element) {
+    //             $option.addClass($(option.element).attr('class'));
+    //         }
+    //         if (option.id === 'button') {
+    //             $option = $('<span><a href="./" class="btn btn-primary ms-1">確認</a><a href="" class="btn text-black border border-outline-primary ms-1 bg-hover-white text-hover-white">キャンセル</a></span>');
+    //             // $option.
+    //             $option.on('click', function(e) {
+    //                 e.preventDefault()
+    //                 console.log(e)
+    //                 // alert("sadaf")
+    //                 // // Perform action for Option 3 button
+    //                 if ($('#select1').val() !== 'button') {
+    //                     // $('#select1').val('button').trigger('1');
+    //                     // let doms = document.getElementsByClassName("select2-results");
+    //                     // doms.foreach(function(dom) {
+    //                     //     dom.remove();
+    //                     // })
+    //                     // console.log(doms)
+    //                 }
+    //             });
+    //         }
+
+    //         return $option;
+    //     }
+    // });
 </script>
 @endsection
