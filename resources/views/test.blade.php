@@ -23,7 +23,7 @@
 <body>
     <header>
         <div class="container max-1200">
-            <h1>会社ロゴ</h1>
+            <a href="/" class="fs-1 text-black">会社ロゴ</a>
         </div>
     </header>
     <main class="message">

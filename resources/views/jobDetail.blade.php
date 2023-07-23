@@ -47,7 +47,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <a href="" class="btn btn-primary px-5">応募する</a>
+                        <a href="{{ route('test') }}" class="btn btn-primary px-5">応募する</a>
                     </div>
                 </div>
             </div>
