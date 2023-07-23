@@ -41,15 +41,21 @@ $(document).ready(async function () {
   $("#save_continue").click(function(){
     $("#tab-1").removeClass("active");
     $("#tab-2").addClass("active");
-    document.querySelectorAll(".no-group a");
+    elements = document.querySelectorAll(".no-group a");
     for (let i = 0; i < 2; i++) {
       elements[i].classList.add("active");
     }
   })
 
-  $("#multiplefileupload").change(function(){
-    let fileName = this.files[0]  
+  $(".btn_upload").click(function(e){
+    $("#fileupload").click();
+
   })
+
+$("#fileupload").change(function(e){
+  $(".file_preview").html(e.target.value)
+})
+
   $("#go_interview").click(function(){
     $("#welcome_message").addClass("d-none");
     $("#test").removeClass("d-none")
@@ -107,15 +113,21 @@ $(document).ready(async function () {
       privewEle.innerHTML="<div style='width:100%;text-align:center;padding-top:25%' ><a href='"+data+"'>"+name+"</a></div>";
     }
   })
+
+  
+
   $("#answer_confirm").click(function() {
     // $(".test-complete").hide();
     // $(".meeting-book").show();
     $(".test-complete").removeClass("d-block").addClass("d-none");
     $(".meeting-book").removeClass("d-none").addClass("d-block");
   })
-  $("#meeting_book_ok, #meeting_book_skip1").click(function() {
+  $("#meeting_book_ok").click(function() {
     $(".meeting-book").removeClass("d-block").addClass("d-none");
     $(".congratulation").removeClass("d-none").addClass("d-block");
+  })
+  $("#meeting_book_skip1").click(function() {
+    $(".meeting-book td").removeClass("active");
   })
 
   $(".meeting-book td").click(function(){
