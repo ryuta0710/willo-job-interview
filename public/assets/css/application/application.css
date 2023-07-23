@@ -272,7 +272,7 @@ footer .container-fluid:last-child {
 
 /* file upload */
 
-#multiplefileupload {
+#fileupload {
   display: none;
 }
 
