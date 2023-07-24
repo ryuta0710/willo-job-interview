@@ -235,10 +235,11 @@
             <div class="row mt-5 d-flex flex-column flex-md-row align-items-center gap-4 ms-0 ms-185">
                 <button class="btn-normal bg-green-strong w-auto text-white">
                     <i class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;受け入れる</button>
-                <button class="btn-normal bg-red-strong w-auto text-white"><i
-                        class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;受け入れる</button>
-                <button class="btn-normal w-auto"><i
-                        class="fa-solid fa-share-nodes"></i>&nbsp;&nbsp;&nbsp;受け入れる</button>
+                <button class="btn-normal bg-red-strong w-auto text-white" data-bs-toggle="modal"
+                    data-bs-target="#refuseModal">
+                    <i class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;拒絶</button>
+                <button class="btn-normal w-auto" data-bs-toggle="modal" data-bs-target="#shareModal">
+                    <i class="fa-solid fa-share-nodes"></i>&nbsp;&nbsp;&nbsp;共有</button>
             </div>
         </div>
         <div class="container max-1200 px-70 pt-3">
@@ -698,6 +699,172 @@
     </section>
 
 </main>
+
+
+<div class="modal fade" id="refuseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="" method="POST" class="py-3">
+                    <div class="row justify-content-center gap-4 mb-3">
+                        <div class="col-auto">
+                            <button class="btn btn-primary">拒絶</button>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-secondary">出金</button>
+                        </div>
+                    </div>
+                    <div class="row px-5 gap-3 mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                社風に合わなかった
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                希望する資格を満たしていない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                最低条件を満たしていない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                            <label class="form-check-label" for="flexRadioDefault4">
+                                容脊要件を満たしていない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                            <label class="form-check-label" for="flexRadioDefault5">
+                                不完全なアプリケーション
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+                            <label class="form-check-label" for="flexRadioDefault6">
+                                場所で働く資格がない
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
+                            <label class="form-check-label" for="flexRadioDefault7">
+                                誤って伝えられた資格
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
+                            <label class="form-check-label" for="flexRadioDefault8">
+                                より適格な候補老が選択されましな
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
+                            <label class="form-check-label" for="flexRadioDefault9">
+                                無反応
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <button class="btn btn-primary">保 存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">のリンクを共有</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">他のユーザーと共有できるリンクを生成します。サインインは必要ありません。</p>
+                <div class="row mb-3 px-4">
+                    <div class="col-9">
+                        <input type="text" name="" id="" class="form-control w-100"
+                            placeholder="https://app.willotalent.com/show/kuTG4N/"
+                            value="https://app.willotalent.com/show/kuTG4N/">
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary w-100">コピー</button>
+                    </div>
+                </div>
+                <div class="row mb-3 px-4">
+                    <div class="col-6 d-flex justify-content-center">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">リンク有効</label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center align-items-center">
+                        <i class="fa fa-eye me-3"></i> 0 ビュー
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center px-4">
+                    <div class="col-auto">
+                        <i class="fa fa-message me-2"></i>質問1
+                        <p class="ms-4">自己紹介</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center px-4">
+                    <div class="col-auto">
+                        <i class="fa fa-message me-2"></i>質問2
+                        <p class="ms-4">志望試</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center px-4">
+                    <div class="col-auto">
+                        <i class="fa fa-message me-2"></i>質問3
+                        <p class="ms-4">会社でやりたい事</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center px-4">
+                    <div class="col-auto">
+                        <i class="fa fa-message me-2"></i>質問4
+                        <p class="ms-4">あなたの情熱</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between align-items-center px-4">
+                    <p class="text-center">コンテンツは、このリンクを知っている人なら誰でも公關されます。 このリンクは、信頼できる人とのみ共有してください。</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
 <script src="{{ asset('/assets/js/common/plyr.min.js') }}"></script>

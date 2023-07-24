@@ -229,7 +229,7 @@
                             <img src="{{ asset('/assets/img/company/avatar.png') }}" alt="avatar">
                         </div>
                         <div class="content">
-                            <p class="fs-14"><a href="./applicant.html">応募者名</a></p>
+                            <p class="fs-14"><a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">応募者名</a></p>
                             <p class="fs-10">2023 年 6 月 29 日</p>
                         </div>
 
@@ -241,7 +241,7 @@
                             <img src="{{ asset('/assets/img/company/avatar.png') }}" alt="avatar">
                         </div>
                         <div class="content">
-                            <p class="fs-14"><a href="./applicant.html">応募者名</a></p>
+                            <p class="fs-14"><a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">応募者名</a></p>
                             <p class="fs-10">2023 年 6 月 29 日</p>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                             <img src="{{ asset('/assets/img/company/avatar.png') }}" alt="avatar">
                         </div>
                         <div class="content">
-                            <p class="fs-14"><a href="./applicant.html">応募者名</a></p>
+                            <p class="fs-14"><a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">応募者名</a></p>
                             <p class="fs-10">2023 年 6 月 29 日</p>
                             <p class="fs-10 text-warning">
                                 <i class="fa-regular fa-star"></i>
@@ -285,7 +285,7 @@
                             <img src="{{ asset('/assets/img/company/avatar.png') }}" alt="avatar">
                         </div>
                         <div class="content">
-                            <p class="fs-14"><a href="./applicant.html">応募者名</a></p>
+                            <p class="fs-14"><a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">応募者名</a></p>
                             <p class="fs-10">2023 年 6 月 29 日</p>
                         </div>
 
