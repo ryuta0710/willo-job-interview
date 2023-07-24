@@ -11,33 +11,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/ja.min.js"></script>
 
-<style>
-    .select2 {
-        /* width: 100% !important; */
-        /* force fluid responsive */
-    }
-
-    .select2-container .select2-selection--single {
-        height: 40px;
-        border-radius: 20px;
-        position: relative;
-    }
-
-    .select2-container .select2-selection--single .select2-selection__rendered {
-        line-height: 40px;
-    }
-
-    .select2-container .select2-selection--single .select2-selection__arrow {
-        top: 8px;
-        right: 8px;
-    }
-
-    .select2-container .select2-selection--single .select2-container--default .select2-results>.select2-results__options {
-        -webkit-overflow-scrolling: touch;
-        /* use momentum scrolling */
-    }
-</style>
-
 <main style="min-height: calc(100vh - 251px);">
     <section id="sec_condistions">
         <div class="container px-5">
@@ -45,24 +18,65 @@
                 <div class="col-lg-2">
                     <input class="form-control rounded-5 w-auto fs-14 h-100" type="text" placeholder="タイトルで検索する">
                 </div>
-                <div class="col-lg-2">
-                    <select name="" id="" class="form-select select2 w-100">
-                        <option value="">会社ごとにフ</option>
-                    </select>
+                <div class="col-lg-2 position-relative">
+                    <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="会社名による検索">
+                    <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                        <div class="cus-search">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                        </div>
+                        <div class="cus-options py-2">
+                            <div class="cus-notfound"><span>見つかりません</span></div>
+                            <div class="cus-option"><span>会社ごとにフ</span></div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary rounded-2 ok">適用</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        </div>
+                        <div class="cus-bg position-fixed">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 position-relative">
+                    <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="所有者名による検索">
+                    <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                        <div class="cus-search">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                        </div>
+                        <div class="cus-options py-2">
+                            <div class="cus-notfound"><span>見つかりません</span></div>
+                            <div class="cus-option"><span>所有者でフィ</span></div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary rounded-2 ok">適用</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        </div>
+                        <div class="cus-bg position-fixed">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 position-relative">
+                    <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="ステータスによる検索">
+                    <div class="select-cus position-absolute card p-3 shadow rounded-4">
+                        <div class="cus-search">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                        </div>
+                        <div class="cus-options py-2">
+                            <div class="cus-notfound"><span>見つかりません</span></div>
+                            <div class="cus-option"><span>所有者でフィ</span></div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary rounded-2 ok">適用</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">ステータスで </button>
+                        </div>
+                        <div class="cus-bg position-fixed">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-2">
-                    <select name="" id="" class="form-select select2 w-100">
-                        <option value="">所有者でフィ</option>
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <select name="" id="" class="form-select select2 w-100">
-                        <option value="">ステータスで</option>
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <a class="btn text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add"
-                        href="{{ route('myjob.create') }}">
+                    <a class="btn text-center px-4 px-xl-5 rounded-5 text-white fw-bold" id="job_add" href="{{ route('myjob.create') }}">
                         <i class="fa-regular fa-plus me-2"></i> 作成
                     </a>
                 </div>
@@ -153,7 +167,6 @@
 </main>
 
 <script>
-    
     function copy() {
         let doms = document.getElementsByClassName("fa-copy");
         let len = doms.length;
@@ -185,6 +198,58 @@
     }
     copy();
     del()
+    
+    $(".select2").focus(function(e) {
+        $(".select2 + .select-cus").hide();
+        $(e.target).next().show();
+        $(".cus-bg").show();
+    })
+
+    $(".select-cus .cus-option span").click(function(e) {
+        $(e.target).parent().parent().parent().hide();
+        $(e.target).parent().parent().parent().prev().val(e.target.textContent);
+    })
+
+    $(".select-cus .ok").click(function(e) {
+        $(e.target).parent().parent().hide();
+        $(e.target).parent().parent().prev().val($(e.target).parent().parent().find('input').val());
+    })
+
+    $(".select-cus .cancel").click(function(e) {
+        $(e.target).parent().parent().hide();
+        $(e.target).parent().parent().prev().val("");
+    })
+
+    $(".cus-bg").click(function(e) {
+        $(e.target).parent().hide();
+        $(e.target).parent().prev().val("");
+    })
+
+    $(".select-search").keyup(function(e) {
+
+        let listDom = e.target.parentElement.nextElementSibling.getElementsByTagName("DIV");
+        let val = e.target.value.trim();
+        let listData = [];
+        let len = listDom.length;
+        let nooptionsdom = e.target.parentElement.nextElementSibling.firstElementChild;
+        console.log(nooptionsdom)
+        nooptionsdom.style.display = "block"
+
+        for (let i = 1; i < len; i++) {
+            if (val.length == 0) {
+                listDom[i].style.display = "block";
+                nooptionsdom.style.display = "none"
+            } else {
+                if (listDom[i].textContent.indexOf(val) != -1) {
+                    listDom[i].style.display = "block";
+                    nooptionsdom.style.display = "none"
+                } else {
+                    listDom[i].style.display = "none";
+                }
+            }
+        }
+
+    })
 </script>
 
 @endsection
