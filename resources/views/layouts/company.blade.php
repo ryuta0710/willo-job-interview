@@ -20,14 +20,13 @@
 
     <script src="{{ asset('/assets/js/common/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/js/common/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <header class="bg-light py-1 position-sticky w-100 top-0" style="z-index: 2">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand pe-5" href="/">
+                <a class="navbar-brand pe-5" href="{{ route('home') }}">
                     <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -80,7 +79,7 @@
         <div class="py-3 bg-secondary-grey">
             <div class="container d-flex justify-content-between align-items-center">
                 <div class="">
-                    <a href="">
+                    <a href="{{ route('home') }}">
                         <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
                     </a>
                 </div>

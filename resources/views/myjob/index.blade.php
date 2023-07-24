@@ -10,13 +10,14 @@
 <!-- Select2 JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/i18n/ja.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
 
 <main style="min-height: calc(100vh - 251px);">
     <section id="sec_condistions">
         <div class="container px-5">
             <div class="row flex-column flex-md-row justify-content-between gap-4 flex-wrap flex-xl-nowrap">
                 <div class="col-lg-2">
-                    <input class="form-control rounded-5 w-auto fs-14 h-100" type="text" placeholder="タイトルで検索する">
+                    <input class="form-control rounded-5 fs-14 h-100" type="text" placeholder="タイトルで検索する">
                 </div>
                 <div class="col-lg-2 position-relative">
                     <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="会社名による検索">

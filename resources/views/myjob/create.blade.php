@@ -11,7 +11,7 @@
         <div class="row">
             <ul class="list-inline">
                 <li class="list-inline-item me-2">
-                    <a class="u-link-v5" href="/">
+                    <a class="u-link-v5" href="{{ route('myjob.index') }}">
                         <i class="fa-solid fa-play me-2"></i>インタビュー
                     </a>
                 </li>
@@ -188,7 +188,7 @@
             <!-- END VIDEO -->
             <div class="px-5 pt-4 pb-2 d-flex justify-content-between">
                 <div>説明</div>
-                <div class="text-secondary">オプション</div>
+                <div class="text-secondary">任意</div>
             </div>
             <!-- TEXT EDITOR -->
             <div class="w-100 mx-0 mx-md-4">
@@ -217,7 +217,7 @@
                 </div>
                 <div class="row  m-0 mt-4">
                     <div class="col-12 col-xl-6">
-                        <label for="input1" class="form-label px-4 mb-1">回答タイプ</label>
+                        <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
                             <label class="input-group-text rounded-start-5 bg-white" for="input1"><i class="fa-solid fa-video"></i></label>
                             <select class="form-select rounded-end-5" id="input1">
@@ -258,7 +258,7 @@
                 </div>
                 <div class="row  m-0 mt-4">
                     <div class="col-12 col-xl-6">
-                        <label for="input1" class="form-label px-4 mb-1">回答時間</label>
+                        <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
                             <select type="text" class="form-select rounded-end-5" id="input1" placeholder="回答時間">
@@ -272,7 +272,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-xl-6">
-                        <label for="input1" class="form-label px-4 mb-1">回答思考時間</label>
+                        <label for="input1" class="form-label px-4 mb-1">シンキングタイムの設定</label>
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
@@ -314,7 +314,7 @@
                 <div class="col-12 col-xl-6 mb-3 pt-1 ">
                     <div class="d-flex justify-content-between pb-1 px-4">
                         <label for="input1" class="form-label"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                        <div class="text-active"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;&nbsp;プレビュー</div>
+                        <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
                     </div>
                     <select type="text" class="form-select rounded-5">
                         <option selected> </option>
@@ -327,7 +327,7 @@
                     <div class="d-flex justify-content-between pb-1 px-4">
                         <label for="input1" class="form-label"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
                             テンプレート</label>
-                        <div class="text-active"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;&nbsp;プレビュー</div>
+                        <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
                     </div>
                     <select type="text" class="form-select rounded-5">
                         <option selected> </option>
@@ -344,10 +344,10 @@
                 <div class="col-12 col-xl-6 mb-3 pt-1 ">
                     <div class="d-flex justify-content-between pb-1 px-4">
                         <label for="input1" class="form-label"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                        <div class="text-active"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;&nbsp;プレビュー</div>
+                        <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
                     </div>
                     <select type="text" class="form-select rounded-5">
-                        <option selected> </option>
+                        <option selected></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -357,7 +357,7 @@
                     <div class="d-flex justify-content-between pb-1 px-4">
                         <label for="input1" class="form-label"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
                             テンプレート</label>
-                        <div class="text-active"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;&nbsp;プレビュー</div>
+                        <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
                     </div>
                     <select type="text" class="form-select rounded-5">
                         <option selected> </option>
@@ -374,7 +374,7 @@
                 <div class="col-12 col-xl-6 mb-3 pt-1 ">
                     <div class="d-flex justify-content-between pb-1 px-4">
                         <label for="input1" class="form-label"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                        <div class="text-active"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;&nbsp;プレビュー</div>
+                        <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
                     </div>
                     <select type="text" class="form-select rounded-5">
                         <option selected> </option>
@@ -476,7 +476,7 @@
     <!-- END PUBLIC -->
     <div class="container">
         <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
-            <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4" id="before">次に</button>
+            <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4" id="before">戻る</button>
             <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
             <a class="btn  btn-normal rounded-5 bg-active text-white none" id="btn_public" href="{{ route('invite-people') }}">公開</a>
         </div>

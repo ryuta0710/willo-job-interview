@@ -50,6 +50,14 @@ th {
     
 }
 
+@media ( max-width: 990px){
+    .select-cus{
+        width: 98%;
+        left: 1%;
+        
+    }
+}
+
 .select-cus .btn-group{
     display: flex;
     justify-content: flex-end;

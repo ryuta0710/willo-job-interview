@@ -8,7 +8,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2 {
-        width: auto !important;
+        /* width: auto !important; */
         min-width: 200px;
         /* force fluid responsive */
     }
@@ -186,8 +186,8 @@
                                             <img src="./assets/img/avatar/01.png" alt="" style="width: 40px; height: 40px;">
                                         </div>
                                         <div class="col-auto">
-                                            <p class="m-0">募集項目名</p>
-                                            <a href="mailto:abcd1234@gmail.com">abcd1234@gmail.com</a>
+                                            <a class="m-0" href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">募集項目名</a><br>
+                                            <a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">abcd1234@gmail.com</a>
                                         </div>
                                     </div>
                                 </td>
@@ -225,8 +225,8 @@
                                             <img src="./assets/img/avatar/01.png" alt="" style="width: 40px; height: 40px;">
                                         </div>
                                         <div class="col-auto">
-                                            <p class="m-0">募集項目名</p>
-                                            <a href="mailto:abcd1234@gmail.com">abcd1234@gmail.com</a>
+                                            <a class="m-0" href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">募集項目名</a><br>
+                                            <a href="{{ route('myjob.person', ['myjob' => 1, 'user_id' => 1]) }}">abcd1234@gmail.com</a>
                                         </div>
                                     </div>
                                 </td>

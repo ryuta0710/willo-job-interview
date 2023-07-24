@@ -51,14 +51,14 @@
             <button type="button" class="btn-close" id="hide-toggle-menu" aria-label="Close"></button>
         </div>
         <div class="container d-flex flex-column">
-            <a href="" class="py-4 text-center">トップ</a>
-            <a href="" class="py-4 text-center">導入する</a>
-            <a href="" class="py-4 text-center">お問い合わせ</a>
+            <a href="/" class="py-4 text-center">トップ</a>
+            <a href="{{ route('getJobList') }}" class="py-4 text-center">導入する</a>
+            <a href="{{ route('contact') }}" class="py-4 text-center">お問い合わせ</a>
             @if (Route::has('register'))
-            <a href="" class="py-4 text-center">登録</a>
+            <a href="{{ route('register') }}" class="py-4 text-center">登録</a>
             @endif
             @if (Route::has('login'))
-            <a href="" class="py-4 text-center">ログイン</a>
+            <a href="{{ route('login') }}" class="py-4 text-center">ログイン</a>
             @endif
         </div>
     </div>
