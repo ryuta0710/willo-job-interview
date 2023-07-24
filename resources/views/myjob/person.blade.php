@@ -748,10 +748,10 @@
                 <p class="text-center">他のユーザーと共有できるリンクを生成します。サインインは必要ありません。</p>
                 <div class="row mb-3 px-4">
                     <div class="col-9">
-                        <input type="text" name="" id="" class="form-control w-100" placeholder="https://app.willotalent.com/show/kuTG4N/" value="https://app.willotalent.com/show/kuTG4N/">
+                        <input type="text" name="" id="invite_url" class="form-control w-100" placeholder="https://app.willotalent.com/show/kuTG4N/" value="https://app.willotalent.com/show/kuTG4N/">
                     </div>
                     <div class="col-3">
-                        <button class="btn btn-primary w-100">コピー</button>
+                        <button class="btn btn-primary w-100" onclick="navigator.clipboard.writeText(document.getElementById('invite_url').value)">コピー</button>
                     </div>
                 </div>
                 <div class="row mb-3 px-4">
