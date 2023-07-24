@@ -14,9 +14,7 @@
             <div class="row">
                 <div class="col-1 pt-5 btn " id="slider_before">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23.44" height="39.881" viewBox="0 0 23.44 39.881">
-                        <path id="left" d="M2024.4-6367.952l-9.369,9.369-5.621,5.622,14.99,14.99"
-                            transform="translate(-2005.912 6372.901)" fill="none" stroke="#707070"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="7" />
+                        <path id="left" d="M2024.4-6367.952l-9.369,9.369-5.621,5.622,14.99,14.99" transform="translate(-2005.912 6372.901)" fill="none" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" />
                     </svg>
                 </div>
                 <div class="col-10 row slider-for">
@@ -26,14 +24,10 @@
                                 <div class="d-flex flex-column flex-md-row">
                                     <!-- avatar -->
                                     <div class="me-4 pt-2 text-center text-md-left">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
-                                            viewBox="0 0 100 100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
                                             <g id="avatar-default" transform="translate(-431 -163)">
-                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50"
-                                                    transform="translate(431 163)" fill="#6e6e6e" />
-                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt"
-                                                    d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z"
-                                                    transform="translate(457.158 189.159)" fill="#fff" />
+                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50" transform="translate(431 163)" fill="#6e6e6e" />
+                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z" transform="translate(457.158 189.159)" fill="#fff" />
                                             </g>
                                         </svg>
                                     </div>
@@ -93,14 +87,10 @@
                                 <div class="d-flex flex-column flex-md-row">
                                     <!-- avatar -->
                                     <div class="me-4 pt-2 text-center text-md-left">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
-                                            viewBox="0 0 100 100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
                                             <g id="avatar-default" transform="translate(-431 -163)">
-                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50"
-                                                    transform="translate(431 163)" fill="#6e6e6e" />
-                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt"
-                                                    d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z"
-                                                    transform="translate(457.158 189.159)" fill="#fff" />
+                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50" transform="translate(431 163)" fill="#6e6e6e" />
+                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z" transform="translate(457.158 189.159)" fill="#fff" />
                                             </g>
                                         </svg>
                                     </div>
@@ -160,14 +150,10 @@
                                 <div class="d-flex flex-column flex-md-row">
                                     <!-- avatar -->
                                     <div class="me-4 pt-2 text-center text-md-left">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
-                                            viewBox="0 0 100 100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
                                             <g id="avatar-default" transform="translate(-431 -163)">
-                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50"
-                                                    transform="translate(431 163)" fill="#6e6e6e" />
-                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt"
-                                                    d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z"
-                                                    transform="translate(457.158 189.159)" fill="#fff" />
+                                                <circle id="Ellipse_37" data-name="Ellipse 37" cx="50" cy="50" r="50" transform="translate(431 163)" fill="#6e6e6e" />
+                                                <path id="Icon_awesome-user-alt" data-name="Icon awesome-user-alt" d="M23.841,26.822A13.411,13.411,0,1,0,10.431,13.411,13.414,13.414,0,0,0,23.841,26.822ZM35.762,29.8H30.631a16.212,16.212,0,0,1-13.578,0H11.921A11.92,11.92,0,0,0,0,41.723v1.49a4.471,4.471,0,0,0,4.47,4.47H43.213a4.471,4.471,0,0,0,4.47-4.47v-1.49A11.92,11.92,0,0,0,35.762,29.8Z" transform="translate(457.158 189.159)" fill="#fff" />
                                             </g>
                                         </svg>
                                     </div>
@@ -225,18 +211,14 @@
                 </div>
                 <div class="col-1 pt-5 btn " id="slider_next">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23.44" height="39.881" viewBox="0 0 23.44 39.881">
-                        <path id="Path_162" data-name="Path 162"
-                            d="M2009.412-6367.952l9.369,9.369,5.621,5.622-14.99,14.99"
-                            transform="translate(-2004.462 6372.901)" fill="none" stroke="#707070"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="7" />
+                        <path id="Path_162" data-name="Path 162" d="M2009.412-6367.952l9.369,9.369,5.621,5.622-14.99,14.99" transform="translate(-2004.462 6372.901)" fill="none" stroke="#707070" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" />
                     </svg>
                 </div>
             </div>
             <div class="row mt-5 d-flex flex-column flex-md-row align-items-center gap-4 ms-0 ms-185">
                 <button class="btn-normal bg-green-strong w-auto text-white">
                     <i class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;受け入れる</button>
-                <button class="btn-normal bg-red-strong w-auto text-white" data-bs-toggle="modal"
-                    data-bs-target="#refuseModal">
+                <button class="btn-normal bg-red-strong w-auto text-white" data-bs-toggle="modal" data-bs-target="#refuseModal">
                     <i class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;拒絶</button>
                 <button class="btn-normal w-auto" data-bs-toggle="modal" data-bs-target="#shareModal">
                     <i class="fa-solid fa-share-nodes"></i>&nbsp;&nbsp;&nbsp;共有</button>
@@ -262,7 +244,7 @@
                         <div class="me-4">
                             <span class="me-5">回答 2/8</span>
                             <span class="mx-4"></span>
-                            <span class="ms-5">すべてダウンロード&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-download"></i></span>
+                            <a class="ms-5" href="{{ asset('/assets/video/interview01.mp4') }}" download id="download">すべてダウンロード&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-download"></i></a>
                         </div>
                     </div>
                     <div class="w-100 d-flex flex-column flex-lg-row gap-4 align-items-center">
@@ -306,13 +288,12 @@
                                 </div>
                                 <!-- END BOX -->
                                 <!-- video box -->
-                                <div class="answer-item rounded-2 row m-0 p-1 active" data-type="video">
+                                <div class="answer-item rounded-2 row m-0 p-1 active" data-type="video" data-bs-toggle="modal" data-bs-target="#video_preview">
                                     <!-- HEADER -->
                                     <div class="col-6 p-0">
                                         <div class="w-155 text-center h-100">
                                             <video class="rounded-4 w-100 h-100" crossorigin playsinline>
-                                                <source src="{{ asset('/assets/video/interview01.mp4') }}"
-                                                    type="video/mp4" size="300">
+                                                <source src="{{ asset('/assets/video/interview01.mp4') }}" type="video/mp4" size="300">
                                                 <a>Video Oynatılamıyor</a>
                                             </video>
                                         </div>
@@ -325,20 +306,18 @@
                                             &nbsp;&nbsp;&nbsp;質問1
                                         </div>
                                         <p>
-                                            さささ
+                                        回答内容回答内容回答内容回答内容
                                         </p>
                                     </div>
                                     <!-- END CONTENT -->
                                 </div>
                                 <!-- END BOX -->
                                 <!-- voice box -->
-                                <div class="answer-item rounded-2 row m-0 p-1" data-type="voice"
-                                    data-url="{{ asset('/assets/video/voice.wav') }}">
+                                <div class="answer-item rounded-2 row m-0 p-1" data-type="voice" data-url="{{ asset('/assets/video/voice.wav') }}">
                                     <!-- HEADER -->
                                     <div class="col-6 p-0">
                                         <div class="w-155 text-center h-100">
-                                            <img class="rounded-4 w-100 h-100"
-                                                src="{{ asset('/assets/img/application/answer-voice.png') }}" alt="">
+                                            <img class="rounded-4 w-100 h-100" src="{{ asset('/assets/img/application/answer-voice.png') }}" alt="">
                                         </div>
                                     </div>
                                     <!-- END HEADER -->
@@ -350,7 +329,7 @@
                                         </div>
                                         <div class="data">
                                             <p>
-                                                さささ
+                                            回答内容回答内容回答内容回答内容
                                             </p>
                                         </div>
                                     </div>
@@ -358,8 +337,7 @@
                                 </div>
                                 <!-- END BOX -->
                                 <!--FILEUPLOAD BOX -->
-                                <div class="answer-item rounded-2 row m-0 p-1" data-type="file"
-                                    data-url="./assets/video/wordpress.rar">
+                                <div class="answer-item rounded-2 row m-0 p-1" data-type="file" data-url="./assets/video/wordpress.rar">
                                     <!-- HEADER -->
                                     <div class="col-6 p-0">
                                         <div class="bg-white w-155 rounded-2 text-center h-100 pt-4">
@@ -378,21 +356,20 @@
                                             &nbsp;&nbsp;&nbsp;質問1
                                         </div>
                                         <p>
-                                            さささ
+                                        wordpress.rar
                                         </p>
                                     </div>
                                     <!-- END CONTENT -->
                                 </div>
                                 <!-- END BOX -->
-                                <!--FILEUPLOAD BOX -->
-                                <div class="answer-item rounded-2 row m-0 p-1" data-type="file"
-                                    data-url="./assets/video/wordpress.rar">
+                                <!--CHAT BOX -->
+                                <div class="answer-item rounded-2 row m-0 p-1" data-type="chat" data-url="./assets/video/wordpress.rar"  data-bs-toggle="modal" data-bs-target="#chat_preview">
                                     <!-- HEADER -->
                                     <div class="col-6 p-0">
                                         <div class="bg-white w-155 rounded-2 text-center h-100 pt-4">
-                                            <i class="fa-solid fa-cloud-arrow-up fs-2"></i>
+                                            <i class="fa-regular fa-comments"></i>
                                             <div class="mt-3 fs-14">
-                                                <span>wordpress.pdf</span>
+                                                <span>AIチャット</span>
                                             </div>
 
                                         </div>
@@ -402,10 +379,10 @@
                                     <div class="answer-content text-left col-6 p-0 overflow-hidden">
                                         <div class="w-100 pt-3 pb-2">
                                             <img src="{{ asset('/assets/img/application/chat-right.png') }}" alt="chat">
-                                            &nbsp;&nbsp;&nbsp;質問1
+                                            &nbsp;&nbsp;&nbsp;質問5
                                         </div>
                                         <p>
-                                            さささ
+                                        回答内容回答内容回答内容回答内容
                                         </p>
                                     </div>
                                     <!-- END CONTENT -->
@@ -421,57 +398,37 @@
                             <div class="form-group">
                                 <input type="text" class="form-control rounded-5 px-4" placeholder="メモを書いてください...">
                             </div>
-                            <div
-                                class="w-100 d-flex flex-wrap vertial-center aling-items-center justify-content-between">
+                            <div class="w-100 d-flex flex-wrap vertial-center aling-items-center justify-content-between">
                                 <p class="pt-4 mt-1 ms-5 text-md-nowrap">メモは組織内のユーザーのみに表示されます</p>
-                                <button class="btn-normal bg-secondary-subtle mt-4 mx-auto mb-3"
-                                    id="meeting_book_ok">メモを追加</button>
+                                <button class="btn-normal bg-secondary-subtle mt-4 mx-auto mb-3" id="meeting_book_ok">メモを追加</button>
                             </div>
                             <p>アクティビティ</p>
                             <div class="w-100 d-flex gap-3 ps-4">
                                 <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="216"
-                                        viewBox="0 0 40 216">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="216" viewBox="0 0 40 216">
                                         <g id="progress" transform="translate(-31 -829)">
-                                            <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(31 829)"
-                                                fill="#fff" stroke="#707070" stroke-width="0.5">
+                                            <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(31 829)" fill="#fff" stroke="#707070" stroke-width="0.5">
                                                 <circle cx="20" cy="20" r="20" stroke="none" />
                                                 <circle cx="20" cy="20" r="19.75" fill="none" />
                                             </g>
-                                            <g id="Ellipse_39" data-name="Ellipse 39" transform="translate(31 922)"
-                                                fill="#fff" stroke="#707070" stroke-width="0.5">
+                                            <g id="Ellipse_39" data-name="Ellipse 39" transform="translate(31 922)" fill="#fff" stroke="#707070" stroke-width="0.5">
                                                 <circle cx="20" cy="20" r="20" stroke="none" />
                                                 <circle cx="20" cy="20" r="19.75" fill="none" />
                                             </g>
-                                            <g id="Ellipse_40" data-name="Ellipse 40" transform="translate(31 1005)"
-                                                fill="#fff" stroke="#707070" stroke-width="0.5">
+                                            <g id="Ellipse_40" data-name="Ellipse 40" transform="translate(31 1005)" fill="#fff" stroke="#707070" stroke-width="0.5">
                                                 <circle cx="20" cy="20" r="20" stroke="none" />
                                                 <circle cx="20" cy="20" r="19.75" fill="none" />
                                             </g>
-                                            <line id="Line_58" data-name="Line 58" y2="54"
-                                                transform="translate(51.5 868.5)" fill="none" stroke="#707070"
-                                                stroke-width="0.5" />
-                                            <line id="Line_59" data-name="Line 59" y2="44"
-                                                transform="translate(51.5 961.5)" fill="none" stroke="#707070"
-                                                stroke-width="0.5" />
+                                            <line id="Line_58" data-name="Line 58" y2="54" transform="translate(51.5 868.5)" fill="none" stroke="#707070" stroke-width="0.5" />
+                                            <line id="Line_59" data-name="Line 59" y2="44" transform="translate(51.5 961.5)" fill="none" stroke="#707070" stroke-width="0.5" />
                                             <g id="Group_2359" data-name="Group 2359" transform="translate(38.5 837.5)">
-                                                <path id="Path_164" data-name="Path 164"
-                                                    d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.484,4.474a1.028,1.028,0,0,0-1.469,0L18.583,7.9,17.234,6.557a1.039,1.039,0,0,0-1.469,1.469l2.083,2.083a1.028,1.028,0,0,0,1.469,0l4.167-4.167A1.028,1.028,0,0,0,23.484,4.474ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z"
-                                                    transform="translate(-1.917)" fill="#4ca7ee" />
-                                                <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z"
-                                                    fill="none" />
+                                                <path id="Path_164" data-name="Path 164" d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.484,4.474a1.028,1.028,0,0,0-1.469,0L18.583,7.9,17.234,6.557a1.039,1.039,0,0,0-1.469,1.469l2.083,2.083a1.028,1.028,0,0,0,1.469,0l4.167-4.167A1.028,1.028,0,0,0,23.484,4.474ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z" transform="translate(-1.917)" fill="#4ca7ee" />
+                                                <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z" fill="none" />
                                             </g>
-                                            <path id="Icon_awesome-eye" data-name="Icon awesome-eye"
-                                                d="M19.928,10.675a11.164,11.164,0,0,0-9.9-6.175,11.166,11.166,0,0,0-9.9,6.175,1.126,1.126,0,0,0,0,1.016,11.164,11.164,0,0,0,9.9,6.175,11.166,11.166,0,0,0,9.9-6.175A1.126,1.126,0,0,0,19.928,10.675Zm-9.9,5.52a5.012,5.012,0,1,1,5.012-5.012A5.012,5.012,0,0,1,10.024,16.2Zm0-8.354a3.317,3.317,0,0,0-.881.132A1.666,1.666,0,0,1,6.815,10.3a3.334,3.334,0,1,0,3.21-2.461Z"
-                                                transform="translate(40.976 1014.569)" fill="#4ca7ee" />
-                                            <g id="Icon_feather-video" data-name="Icon feather-video"
-                                                transform="translate(40.976 935.47)">
-                                                <path id="Path_98" data-name="Path 98"
-                                                    d="M31.152,10.5,24,15.164l7.152,4.664Z"
-                                                    transform="translate(-10.104 -8.635)" fill="#4ca7ee" />
-                                                <path id="Path_99" data-name="Path 99"
-                                                    d="M3.544,7.5H14.783a1.961,1.961,0,0,1,2.044,1.866v9.329a1.961,1.961,0,0,1-2.044,1.866H3.544A1.961,1.961,0,0,1,1.5,18.694V9.366A1.961,1.961,0,0,1,3.544,7.5Z"
-                                                    transform="translate(-1.5 -7.5)" fill="#4ca7ee" />
+                                            <path id="Icon_awesome-eye" data-name="Icon awesome-eye" d="M19.928,10.675a11.164,11.164,0,0,0-9.9-6.175,11.166,11.166,0,0,0-9.9,6.175,1.126,1.126,0,0,0,0,1.016,11.164,11.164,0,0,0,9.9,6.175,11.166,11.166,0,0,0,9.9-6.175A1.126,1.126,0,0,0,19.928,10.675Zm-9.9,5.52a5.012,5.012,0,1,1,5.012-5.012A5.012,5.012,0,0,1,10.024,16.2Zm0-8.354a3.317,3.317,0,0,0-.881.132A1.666,1.666,0,0,1,6.815,10.3a3.334,3.334,0,1,0,3.21-2.461Z" transform="translate(40.976 1014.569)" fill="#4ca7ee" />
+                                            <g id="Icon_feather-video" data-name="Icon feather-video" transform="translate(40.976 935.47)">
+                                                <path id="Path_98" data-name="Path 98" d="M31.152,10.5,24,15.164l7.152,4.664Z" transform="translate(-10.104 -8.635)" fill="#4ca7ee" />
+                                                <path id="Path_99" data-name="Path 99" d="M3.544,7.5H14.783a1.961,1.961,0,0,1,2.044,1.866v9.329a1.961,1.961,0,0,1-2.044,1.866H3.544A1.961,1.961,0,0,1,1.5,18.694V9.366A1.961,1.961,0,0,1,3.544,7.5Z" transform="translate(-1.5 -7.5)" fill="#4ca7ee" />
                                             </g>
                                         </g>
                                     </svg>
@@ -501,8 +458,7 @@
                     <!-- MEETING BOOXING -->
                     <div class="meeting-book">
                         <div class="w-100 pt-3">
-                            <table id="booking_table"
-                                class="table table-hover table-bordered w-100 text-white text-center">
+                            <table id="booking_table" class="table table-hover table-bordered w-100 text-white text-center">
                                 <thead>
                                     <tr class="text-white">
                                         <th class="p-0"><i class="fa-solid fa-clock text-white"></i></th>
@@ -792,9 +748,7 @@
                 <p class="text-center">他のユーザーと共有できるリンクを生成します。サインインは必要ありません。</p>
                 <div class="row mb-3 px-4">
                     <div class="col-9">
-                        <input type="text" name="" id="" class="form-control w-100"
-                            placeholder="https://app.willotalent.com/show/kuTG4N/"
-                            value="https://app.willotalent.com/show/kuTG4N/">
+                        <input type="text" name="" id="" class="form-control w-100" placeholder="https://app.willotalent.com/show/kuTG4N/" value="https://app.willotalent.com/show/kuTG4N/">
                     </div>
                     <div class="col-3">
                         <button class="btn btn-primary w-100">コピー</button>
@@ -865,7 +819,79 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="video_preview" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-4" id="exampleModalToggleLabel">ビデオ回答</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="px-5">ビデオ</h5>
+                        <div class="pre-content border border-primary rounded-4 p-4">
+                            <video controls crossorigin playsinline style="width: 100%; height: 100%;">
+                                <source src="{{ asset('/assets/video/interview01.mp4') }}" type="video/mp4" size="100">
+                                <a>Video Oynatılamıyor</a>
+                            </video>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="px-5">評価内容</h5>
+                        <div class="eval-content border border-primary rounded-4 p-4">
+                            <p>評価内容評価内容評価内容評価内容評価内容</p>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <h5 class="px-5">回答内容</h5>
+                        <div class="text-content border border-primary rounded-4 p-4">
+                            <p>回答内容回答内容回答内容回答内容</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#video_preview" data-bs-toggle="modal">確認 </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="chat_preview" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title fs-4" id="exampleModalToggleLabel">AIチャット回答</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="px-5">チャットメッセージ</h5>
+                        <div class="pre-content border border-primary rounded-4 p-4">
+                            <p>チャットメッセージチャットメッセージチャットメッセージチャットメッセージ</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="px-5">設問分</h5>
+                        <div class="eval-content border border-primary rounded-4 p-4">
+                            <p>評価内容評価内容評価内容評価内容評価内容</p>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <h5 class="px-5">評価（テキスト）</h5>
+                        <div class="text-content border border-primary rounded-4 p-4">
+                            <p>回答内容回答内容回答内容回答内容</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#chatpreview" data-bs-toggle="modal">確認 </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
 <script src="{{ asset('/assets/js/common/plyr.min.js') }}"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

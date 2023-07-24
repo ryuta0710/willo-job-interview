@@ -16,7 +16,7 @@
             <div class="w-100 d-flex justify-content-center justify-content-md-between flex-wrap flex-lg-nowrap">
                 <div class="d-flex gap-5">
                     <div class="d-flex gap-5">
-                        <h4>募集トピック
+                        <h4>募集トピック</h4>
                     </div>
                     <div class="cs-state pb-2 bt-2 text-black h-85">ライブ</div>
 

@@ -22,6 +22,8 @@ $(document).ready(function () {
 		if (type == "writing") {
 			let data = $(this).find("div.data").html();
 			privewEle.innerHTML = data;
+			$("#download").attr("href","#")
+			$("#download").css("visibility","hidden")
 		}
 		else if (type == "video") {
 			let data = $(this).find("video").parent().html();
@@ -33,16 +35,29 @@ $(document).ready(function () {
 				volume: 1,
 				controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
 			});
+			let url = $(this).attr("data-url");
+			$("#download").attr("href",url)
+			$("#download").css("visibility","visibility")
 		} else if (type == "voice") {
 			let data = $(this).attr("data-url");
 			let ele = '<audio id="audio-player" controls="controls" src="' + data + '" type="audio/mpeg">';
 
 			privewEle.innerHTML = ele;
+			$("#download").attr("href",data)
+			$("#download").css("visibility","visibility")
 		} else if (type == "file") {
 			let data = $(this).attr("data-url");
+			$("#download").css("visibility","visibility")
+			$("#download").attr("href", data)
 			let name = data.split("/");
 			name = name[name.length - 1];
 			privewEle.innerHTML = "<a href='" + data + "'>" + name + "</a>";
+		} else if (type == "chat") {
+			let data = $(this).attr("data-url");
+			$("#download").attr("href", data)
+			$("#download").css("visibility","hidden")
+			
+			privewEle.innerHTML = "チャットメッセージチャットメッセージチャットメッセージチャットメッセージ";
 		}
 	})
 
