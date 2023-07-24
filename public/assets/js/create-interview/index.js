@@ -32,7 +32,7 @@ $(document).ready(function () {
 		$("#file_upload").click();
 	})
 
-	$("#file_upload").change(function(){
+	$("#file_upload").change(function () {
 		$("#preview").html($("#file_upload").val())
 	})
 
@@ -124,5 +124,24 @@ $(document).ready(function () {
 
 	$(".fa-copy").click(function (e) {
 		$(e.target).toggleClass("text-primary");
+	})
+
+	$(".answer_type").change(function (e) {
+		$(e.target).parent().parent().parent().attr("class", "row m-0 mt-4 question");
+
+		let val = e.target.value;
+
+		$("label[for=answer_type] i").hide();
+		if (val == "video") {
+			$(e.target).parent().parent().parent().addClass("question-video");
+		} else if (val == "voice") {
+			$(e.target).parent().parent().parent().addClass("question-voice");
+		} else if (val == "writing") {
+			$(e.target).parent().parent().parent().addClass("question-writing");
+		} else if (val == "file") {
+			$(e.target).parent().parent().parent().addClass("question-file");
+		} else if (val == "ai") {
+			$(e.target).parent().parent().parent().addClass("question-ai");
+		}
 	})
 })

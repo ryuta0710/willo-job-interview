@@ -1,20 +1,20 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: 'Noto Sans JP';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Noto Sans JP Regular'), local('NotoSansJP-Regular'),
-    url('../../fonts/static/NotoSansJP-Regular.ttf') format('ttf'),
-    url('../../fonts/static/NotoSansJP-Black.ttf') format('ttf');
+    font-family: 'Noto Sans JP';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noto Sans JP Regular'), local('NotoSansJP-Regular'),
+        url('../../fonts/static/NotoSansJP-Regular.ttf') format('ttf'),
+        url('../../fonts/static/NotoSansJP-Black.ttf') format('ttf');
 }
 
 
 * {
     font-family: 'Noto Sans JP', sans-serif;
     text-decoration: none;
-  }
-  
+}
+
 .text-active {
     color: #4CA7EE !important;
 }
@@ -161,27 +161,81 @@ select {
         font-size: 12px!important;
     } */
 
-    html{
-        font-size:80%;
+    html {
+        font-size: 80%;
     }
 }
+
 @media(max-width: 572px) {
-    .smaller span{
-        font-size: 12px!important;
+    .smaller span {
+        font-size: 12px !important;
     }
+
     .smaller .rounded-circle {
-        width: 44px!important;
-        height: 44px!important;
+        width: 44px !important;
+        height: 44px !important;
     }
+
     .smaller label {
-        font-size: 10px!important;
+        font-size: 10px !important;
     }
 }
+
 @media(max-width: 380px) {
-    .smaller span{
+    .smaller span {
         display: none;
     }
-    .smaller label{
-        font-size: 10px!important;
+
+    .smaller label {
+        font-size: 10px !important;
     }
+}
+
+.w50 {
+    width: 50px;
+}
+
+
+.question label[for=answer_type] i {
+    display: none;
+}
+
+.question-video i.fa-video {
+    display: inline!important;
+}
+
+.question-voice i.fa-microphone {
+    display: initial!important;
+}
+
+.question-writing i.fa-pen-to-square {
+    display: initial!important;
+}
+
+.question-file i.fa-file-arrow-up {
+    display: initial!important;
+}
+
+.question-ai i.fa-comments {
+    display: initial!important;
+}
+
+.question-writing .input-retake,
+.question-writing .input-time {
+    display: none;
+}
+
+.question-writing .input-limit,
+.question-writing .input-max {
+    display: block;
+}
+
+.question-file .input-retake,
+.question-file .input-time {
+    display: none;
+}
+
+.question-ai .input-retake,
+.question-ai .input-time {
+    display: none;
 }
