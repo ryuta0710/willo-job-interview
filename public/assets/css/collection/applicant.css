@@ -325,3 +325,12 @@ tr:last-child td:first-child {
   background-color: #BB3232;
   min-width: 100px;
 }
+
+
+.pre-content,
+.eval-content{
+	height: 360px;
+}
+.text-content{
+	height: 180px;
+}

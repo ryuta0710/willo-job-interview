@@ -318,3 +318,9 @@ tr {
 .cus-notfound{
     display: none;
 }
+
+.pre-content,
+.eval-content,
+.text-content{
+	height: 360px;
+}
