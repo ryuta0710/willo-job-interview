@@ -76,7 +76,7 @@
                         <a href="{{ route('myjob.index') }}">アクティブなインタビューを見る</a>
                     </p>
                     <p>
-                        <a href="">新しいインタビューをリストする</a>
+                        <a href="{{ route('myjob.index') }}">新しいインタビューをリストする</a>
                     </p>
                 </div>
                 <div class="card w-25">
@@ -98,9 +98,9 @@
                     <p class="mb-4">質問がありますか?</p>
                     <p class="fs-4"></p>
                     <p class="mt-4 pt-3"> </p>
-                    <a href="/contact" class="btn mt-5 mx-4 text-center px-4 px-xl-5 rounded-5 text-white fw-bold"
+                    <a href="/contact" class="btn mt-5 mx-4 text-center px-4 rounded-5 text-white fw-bold fs-14"
                         id="job_add">
-                        <i class="fa-regular fa-plus cursor-pointer"></i>&nbsp;&nbsp;&nbsp;作成
+                        サポート問い合わせ先
                     </a>
                 </div>
             </div>

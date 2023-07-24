@@ -6,12 +6,12 @@
         <div class="row">
             <ul class="list-inline">
                 <li class="list-inline-item me-2">
-                    <a class="u-link-v5" href="/">
+                    <a class="u-link-v5" href="{{ route('myjob.index') }}">
                         <i class="fa-solid fa-play me-2"></i>インタビュー
                     </a>
                 </li>
                 <li class="list-inline-item me-2">
-                    <a class="u-link-v5" href="/">
+                    <a class="u-link-v5" href="{{ route('myjob.create') }}">
                         <i class="fa fa-angle-right me-2"></i></i>インタビュー作成
                     </a>
                 </li>

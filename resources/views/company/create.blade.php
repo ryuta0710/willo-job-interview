@@ -7,7 +7,7 @@
         <div class="row">
             <ul class="list-inline">
                 <li class="list-inline-item me-2">
-                    <a class="u-link-v5" href="/">
+                    <a class="u-link-v5" href="{{ route('company.index') }}">
                         <i class="fa-solid fa-play me-2"></i>会社
                     </a>
                 </li>
@@ -21,28 +21,27 @@
         <div class="row mt-5">
             <form action="" method="" class="col-lg-6 mx-auto">
                 <div class="mb-3">
-                    <label for="companyName" class="form-label px-3">会社名 <span
-                            class="text-danger ms-3">必要</span></label>
+                    <label for="companyName" class="form-label px-3">会社名</label>
                     <input type="text" class="form-control rounded-pill" id="companyName" placeholder="会社名を入力してください" required>
                 </div>
                 <div class="mb-3">
-                    <label for="companyEmail" class="form-label px-3">メールアドレス</label>
-                    <input type="email" class="form-control rounded-pill" id="companyEmail" placeholder="場所を入力してください" required>
+                    <label for="companyEmail" class="form-label px-3">住所</label>
+                    <input type="text" class="form-control rounded-pill" id="companyEmail" placeholder="住所を入力してください">
                 </div>
                 <div class="mb-3">
                     <div class="w-100 d-flex justify-content-between px-3">
                         <label for="companySite" class="form-label">Webサイト</label>
+                        <span class="text-secondary">任意</span>
                         {{-- <span>オプション</span> --}}
                     </div>
                     <input type="text" class="form-control rounded-pill" id="companySite"
-                        placeholder="ウェブサイトを入力してください" required>
+                        placeholder="ウェブサイトを入力してください">
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-3">
-                                <label for="companyName" class="form-label px-3">ヘッダー/フッターの色 <span
-                                        class="text-danger ms-3">必要</span></label>
+                                <label for="companyName" class="form-label px-3">ヘッダー/フッターの色</label>
                                 <div class="position-relative">
                                     <div class="form-control p-0 rounded-pill py-2 px-3"
                                         style="height: 40px; cursor: pointer;" onclick="togglePicker(1)">
@@ -89,8 +88,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="companyName" class="form-label px-3">ボタンの色
-                                    <span class="text-danger ms-3">必要</span></label>
+                                <label for="companyName" class="form-label px-3">ボタンの色</label>
                                 <div class="position-relative">
                                     <div class="form-control p-0 rounded-pill py-2 px-3"
                                         style="height: 40px; cursor: pointer;" onclick="togglePicker(2)">
@@ -149,7 +147,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="companyName" class="form-label px-3">業界 <span class="text-danger ms-3">必要</span></label>
+                    <label for="companyName" class="form-label px-3">業界 </label>
                     <select name="" id="" class="form-select rounded-pill">
                         <option value="">自動車</option>
                     </select>
