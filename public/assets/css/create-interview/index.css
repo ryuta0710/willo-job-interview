@@ -201,7 +201,7 @@ select {
 }
 
 .question-video i.fa-video {
-    display: inline!important;
+    display: initial!important;
 }
 
 .question-voice i.fa-microphone {
@@ -238,4 +238,8 @@ select {
 .question-ai .input-retake,
 .question-ai .input-time {
     display: none;
+}
+
+#add_questioin:hover{
+    background-color: #e4e4e4;
 }
