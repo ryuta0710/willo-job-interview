@@ -127,21 +127,21 @@ $(document).ready(function () {
 	})
 
 	$(".answer_type").change(function (e) {
-		$(e.target).parent().parent().parent().attr("class", "row m-0 mt-4 question");
+		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question");
 
 		let val = e.target.value;
 
 		$("label[for=answer_type] i").hide();
 		if (val == "video") {
-			$(e.target).parent().parent().parent().addClass("question-video");
+			$(e.target).parent().parent().parent().parent().addClass("question-video");
 		} else if (val == "voice") {
-			$(e.target).parent().parent().parent().addClass("question-voice");
+			$(e.target).parent().parent().parent().parent().addClass("question-voice");
 		} else if (val == "writing") {
-			$(e.target).parent().parent().parent().addClass("question-writing");
+			$(e.target).parent().parent().parent().parent().addClass("question-writing");
 		} else if (val == "file") {
-			$(e.target).parent().parent().parent().addClass("question-file");
+			$(e.target).parent().parent().parent().parent().addClass("question-file");
 		} else if (val == "ai") {
-			$(e.target).parent().parent().parent().addClass("question-ai");
+			$(e.target).parent().parent().parent().parent().addClass("question-ai");
 		}
 	})
 })

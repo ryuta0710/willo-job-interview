@@ -202,7 +202,7 @@
     <!-- MAKE QUESTIONS -->
     <div class="container none" id="questions">
         <div class="max-710 m-auto d-flex flex-column gap-4" id="question_box">
-            <div class="card p-3 position-relative" id="question1" data-no="1">
+            <div class="card p-3 position-relative question question-video" id="question1" data-no="1">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     1
                 </div>
@@ -215,7 +215,7 @@
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4 question question-video">
+                <div class="row m-0 mt-4">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -318,7 +318,471 @@
                     </div>
                 </div>
             </div>
-            <button id="add_questioin" class="btn btn-normal p-5 w-100 text-active">新しい質問</button>
+            <div class="card p-3 position-relative question question-voice" id="" data-no="1">
+                <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
+                    2
+                </div>
+                <div class="ps-5">
+                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                </div>
+                <div class="w-100 ps-5 fs-5">
+                    <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
+                    <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
+                    <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
+                    <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="row m-0 mt-4">
+                    <div class="col-12 col-xl-6 input-type mb-4">
+                        <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
+                        <div class="input-group fs-6 rounded-5">
+                            <label class="input-group-text justify-content-center rounded-start-5 bg-white w50" for="answer_type"><i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-microphone"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <i class="fa-solid fa-comments"></i>
+                            </label>
+                            <select class="form-select rounded-end-5 answer_type" id="answer_type">
+                                <option value="video">動画</option>
+                                <option selected value="voice">音声</option>
+                                <option value="writing">書く</option>
+                                <option value="file">ファイル</option>
+                                <option value="ai">AIチャット面接</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <div class="d-flex justify-content-between px-4">
+                            <label for="input1" class="form-label">リテイク</label>
+                            <div class="text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656" viewBox="0 0 11.656 11.656">
+                                    <g id="Icon_feather-info" data-name="Icon feather-info" transform="translate(-2.5 -2.5)">
+                                        <path id="Path_93" data-name="Path 93" d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_94" data-name="Path 94" d="M18,20.131V18" transform="translate(-9.672 -9.672)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-9.672 -5.803)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
+                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                                <option selected value="0">0 回</option>
+                                <option value="1">1 回</option>
+                                <option value="2">2 回</option>
+                                <option value="3">3 回</option>
+                                <option value="4">4 回</option>
+                                <option value="5">5 回</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
+                        <div class="input-group">
+                            <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
+                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                                <option value="1">1分</option>
+                                <option value="2">2分</option>
+                                <option value="3">3分</option>
+                                <option value="4">4分</option>
+                                <option value="5">5分</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <label for="input1" class="form-label px-4 mb-1">単語制限</label>
+                        <div class="input-group">
+                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                                <option value="characters">文字</option>
+                                <option value="words">言葉</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <label for="input1" class="form-label px-4 mb-1">最大数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <label for="input1" class="form-label px-4 mb-1">シンキングタイムの設定</label>
+                        <div class="row">
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                    <div class="copy">
+                        <i class="fa-regular fa-copy"></i>
+                    </div>
+                    <div class="border border-end-1 border-secondary-subtle">
+
+                    </div>
+                    <div class="up">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    <div class="down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-3 position-relative question question-writing" id="" data-no="1">
+                <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
+                    3
+                </div>
+                <div class="ps-5">
+                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                </div>
+                <div class="w-100 ps-5 fs-5">
+                    <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
+                    <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
+                    <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
+                    <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="row m-0 mt-4">
+                    <div class="col-12 col-xl-6 input-type mb-4">
+                        <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
+                        <div class="input-group fs-6 rounded-5">
+                            <label class="input-group-text justify-content-center rounded-start-5 bg-white w50" for="answer_type"><i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-microphone"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <i class="fa-solid fa-comments"></i>
+                            </label>
+                            <select class="form-select rounded-end-5 answer_type" id="answer_type">
+                                <optiond value="video">動画</option>
+                                <option value="voice">音声</option>
+                                <option selected value="writing">書く</option>
+                                <option value="file">ファイル</option>
+                                <option value="ai">AIチャット面接</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <div class="d-flex justify-content-between px-4">
+                            <label for="input1" class="form-label">リテイク</label>
+                            <div class="text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656" viewBox="0 0 11.656 11.656">
+                                    <g id="Icon_feather-info" data-name="Icon feather-info" transform="translate(-2.5 -2.5)">
+                                        <path id="Path_93" data-name="Path 93" d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_94" data-name="Path 94" d="M18,20.131V18" transform="translate(-9.672 -9.672)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-9.672 -5.803)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
+                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                                <option selected value="0">0 回</option>
+                                <option value="1">1 回</option>
+                                <option value="2">2 回</option>
+                                <option value="3">3 回</option>
+                                <option value="4">4 回</option>
+                                <option value="5">5 回</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
+                        <div class="input-group">
+                            <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
+                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                                <option value="1">1分</option>
+                                <option value="2">2分</option>
+                                <option value="3">3分</option>
+                                <option value="4">4分</option>
+                                <option value="5">5分</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <label for="input1" class="form-label px-4 mb-1">単語制限</label>
+                        <div class="input-group">
+                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                                <option value="characters">文字</option>
+                                <option value="words">言葉</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <label for="input1" class="form-label px-4 mb-1">最大数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <label for="input1" class="form-label px-4 mb-1">シンキングタイムの設定</label>
+                        <div class="row">
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                    <div class="copy">
+                        <i class="fa-regular fa-copy"></i>
+                    </div>
+                    <div class="border border-end-1 border-secondary-subtle">
+
+                    </div>
+                    <div class="up">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    <div class="down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-3 position-relative question question-file" id="" data-no="1">
+                <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
+                    4
+                </div>
+                <div class="ps-5">
+                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                </div>
+                <div class="w-100 ps-5 fs-5">
+                    <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
+                    <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
+                    <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
+                    <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="row m-0 mt-4">
+                    <div class="col-12 col-xl-6 input-type mb-4">
+                        <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
+                        <div class="input-group fs-6 rounded-5">
+                            <label class="input-group-text justify-content-center rounded-start-5 bg-white w50" for="answer_type"><i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-microphone"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <i class="fa-solid fa-comments"></i>
+                            </label>
+                            <select class="form-select rounded-end-5 answer_type" id="answer_type">
+                                <option value="video">動画</option>
+                                <option value="voice">音声</option>
+                                <option value="writing">書く</option>
+                                <option selected value="file">ファイル</option>
+                                <option value="ai">AIチャット面接</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <div class="d-flex justify-content-between px-4">
+                            <label for="input1" class="form-label">リテイク</label>
+                            <div class="text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656" viewBox="0 0 11.656 11.656">
+                                    <g id="Icon_feather-info" data-name="Icon feather-info" transform="translate(-2.5 -2.5)">
+                                        <path id="Path_93" data-name="Path 93" d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_94" data-name="Path 94" d="M18,20.131V18" transform="translate(-9.672 -9.672)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-9.672 -5.803)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
+                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                                <option selected value="0">0 回</option>
+                                <option value="1">1 回</option>
+                                <option value="2">2 回</option>
+                                <option value="3">3 回</option>
+                                <option value="4">4 回</option>
+                                <option value="5">5 回</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
+                        <div class="input-group">
+                            <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
+                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                                <option value="1">1分</option>
+                                <option value="2">2分</option>
+                                <option value="3">3分</option>
+                                <option value="4">4分</option>
+                                <option value="5">5分</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <label for="input1" class="form-label px-4 mb-1">単語制限</label>
+                        <div class="input-group">
+                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                                <option value="characters">文字</option>
+                                <option value="words">言葉</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <label for="input1" class="form-label px-4 mb-1">最大数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <label for="input1" class="form-label px-4 mb-1">シンキングタイムの設定</label>
+                        <div class="row">
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                    <div class="copy">
+                        <i class="fa-regular fa-copy"></i>
+                    </div>
+                    <div class="border border-end-1 border-secondary-subtle">
+
+                    </div>
+                    <div class="up">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    <div class="down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-3 position-relative question question-ai" id="" data-no="1">
+                <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
+                    5
+                </div>
+                <div class="ps-5">
+                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                </div>
+                <div class="w-100 ps-5 fs-5">
+                    <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
+                    <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
+                    <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
+                    <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="row m-0 mt-4">
+                    <div class="col-12 col-xl-6 input-type mb-4">
+                        <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
+                        <div class="input-group fs-6 rounded-5">
+                            <label class="input-group-text justify-content-center rounded-start-5 bg-white w50" for="answer_type"><i class="fa-solid fa-video"></i>
+                                <i class="fa-solid fa-microphone"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <i class="fa-solid fa-comments"></i>
+                            </label>
+                            <select class="form-select rounded-end-5 answer_type" id="answer_type">
+                                <option value="video">動画</option>
+                                <option value="voice">音声</option>
+                                <option value="writing">書く</option>
+                                <option value="file">ファイル</option>
+                                <option selected value="ai">AIチャット面接</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <div class="d-flex justify-content-between px-4">
+                            <label for="input1" class="form-label">リテイク</label>
+                            <div class="text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656" viewBox="0 0 11.656 11.656">
+                                    <g id="Icon_feather-info" data-name="Icon feather-info" transform="translate(-2.5 -2.5)">
+                                        <path id="Path_93" data-name="Path 93" d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_94" data-name="Path 94" d="M18,20.131V18" transform="translate(-9.672 -9.672)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                        <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-9.672 -5.803)" fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
+                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                                <option selected value="0">0 回</option>
+                                <option value="1">1 回</option>
+                                <option value="2">2 回</option>
+                                <option value="3">3 回</option>
+                                <option value="4">4 回</option>
+                                <option value="5">5 回</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
+                        <div class="input-group">
+                            <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
+                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                                <option value="1">1分</option>
+                                <option value="2">2分</option>
+                                <option value="3">3分</option>
+                                <option value="4">4分</option>
+                                <option value="5">5分</option>
+                                <option value="norepeat">制限なし</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <label for="input1" class="form-label px-4 mb-1">単語制限</label>
+                        <div class="input-group">
+                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                                <option value="characters">文字</option>
+                                <option value="words">言葉</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <label for="input1" class="form-label px-4 mb-1">最大数</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <label for="input1" class="form-label px-4 mb-1">シンキングタイムの設定</label>
+                        <div class="row">
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group w-50">
+                                <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
+                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                    <div class="copy">
+                        <i class="fa-regular fa-copy"></i>
+                    </div>
+                    <div class="border border-end-1 border-secondary-subtle">
+
+                    </div>
+                    <div class="up">
+                        <i class="fa-solid fa-chevron-up"></i>
+                    </div>
+                    <div class="down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <button id="add_questioin" class="btn btn-normal p-5 w-100 bg-hover-secondary text-active">新しい質問</button>
         </div>
     </div>
     <!-- END MAKING QUESTIONS -->
