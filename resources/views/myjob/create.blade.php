@@ -201,21 +201,21 @@
     <!-- END DESCRIPTION -->
     <!-- MAKE QUESTIONS -->
     <div class="container none" id="questions">
-        <div class="max-710 m-auto d-flex flex-column gap-4" id="question_box">
+        <div class="max-710 m-auto d-flex flex-column gap-4 fs-14" id="question_box">
             <div class="card p-3 position-relative question question-video" id="question1" data-no="1">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     1
                 </div>
                 <div class="ps-5">
-                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                    <input type="text" class="form-control border-start-0 outline-none shadow-none border-secoandary border-top-0 border-end-0 input-title" placeholder="質問のタイトル">
                 </div>
-                <div class="w-100 ps-5 fs-5">
+                <div class="w-100 ps-5 fs-5 d-none">
                     <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
                     <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4">
+                <div class="row m-0 mt-4 card_input">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -249,7 +249,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                            <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
                                 <option value="1">1 回</option>
                                 <option value="2">2 回</option>
@@ -264,7 +264,7 @@
                         <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
                                 <option value="1">1分</option>
                                 <option value="2">2分</option>
                                 <option value="3">3分</option>
@@ -277,7 +277,7 @@
                     <div class="col-12 col-xl-6 input-limit none">
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
-                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
                                 <option value="characters">文字</option>
                                 <option value="words">言葉</option>
                             </select>
@@ -286,7 +286,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -294,16 +294,51 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                <div class="row card_preview fs-14 px-4">
+                    <div class="col-12 col-xl-6 input-type">
+                        <p>回答方法の選択</p>
+                        <p class="text-secondary-subtle"><i class="fa-solid fa-video"></i><i class="fa-solid fa-microphone"></i><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-file-arrow-up"></i><i class="fa-solid fa-comments"></i>
+                            <span class="dis_answer_type">動画</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <p class="mb-1">リテイク</p>
+                        <p class="text-secondary">
+                            <span class="dis_retake">制限なし</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <p>回答の時間</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i><span class="dis_time">1</span>分</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <p>単語制限</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i></span class="dis_limit"> 文字</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <p>最大数</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_max">500</span>字
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <p>シンキングタイムの設定</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_thinking_hour">0</span>時 <span class="dis_thinking_minute">0</span>分
+                        </p>
+                    </div>
+                    <!-- end card preview -->
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
                     </div>
@@ -318,20 +353,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 position-relative question question-voice" id="" data-no="1">
+            <div class="card p-3 position-relative question question-voice" id="question1" data-no="2">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     2
                 </div>
                 <div class="ps-5">
-                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                    <input type="text" class="form-control border-start-0 outline-none shadow-none border-secoandary border-top-0 border-end-0 input-title" placeholder="質問のタイトル">
                 </div>
-                <div class="w-100 ps-5 fs-5">
+                <div class="w-100 ps-5 fs-5 d-none">
                     <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
                     <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4">
+                <div class="row m-0 mt-4 card_input">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -365,7 +400,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                            <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
                                 <option value="1">1 回</option>
                                 <option value="2">2 回</option>
@@ -380,7 +415,7 @@
                         <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
                                 <option value="1">1分</option>
                                 <option value="2">2分</option>
                                 <option value="3">3分</option>
@@ -393,7 +428,7 @@
                     <div class="col-12 col-xl-6 input-limit none">
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
-                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
                                 <option value="characters">文字</option>
                                 <option value="words">言葉</option>
                             </select>
@@ -402,7 +437,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -410,16 +445,51 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                <div class="row card_preview fs-14 px-4">
+                    <div class="col-12 col-xl-6 input-type">
+                        <p>回答方法の選択</p>
+                        <p class="text-secondary-subtle"><i class="fa-solid fa-video"></i><i class="fa-solid fa-microphone"></i><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-file-arrow-up"></i><i class="fa-solid fa-comments"></i>
+                            <span class="dis_answer_type">動画</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <p class="mb-1">リテイク</p>
+                        <p class="text-secondary">
+                            <span class="dis_retake">制限なし</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <p>回答の時間</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i><span class="dis_time">1</span>分</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <p>単語制限</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i></span class="dis_limit"> 文字</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <p>最大数</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_max">500</span>字
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <p>シンキングタイムの設定</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_thinking_hour">0</span>時 <span class="dis_thinking_minute">0</span>分
+                        </p>
+                    </div>
+                    <!-- end card preview -->
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
                     </div>
@@ -434,20 +504,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 position-relative question question-writing" id="" data-no="1">
+            <div class="card p-3 position-relative question question-writing" id="question1" data-no="3">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     3
                 </div>
                 <div class="ps-5">
-                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                    <input type="text" class="form-control border-start-0 outline-none shadow-none border-secoandary border-top-0 border-end-0 input-title" placeholder="質問のタイトル">
                 </div>
-                <div class="w-100 ps-5 fs-5">
+                <div class="w-100 ps-5 fs-5 d-none">
                     <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
                     <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4">
+                <div class="row m-0 mt-4 card_input">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -458,7 +528,7 @@
                                 <i class="fa-solid fa-comments"></i>
                             </label>
                             <select class="form-select rounded-end-5 answer_type" id="answer_type">
-                                <optiond value="video">動画</option>
+                                <option value="video">動画</option>
                                 <option value="voice">音声</option>
                                 <option selected value="writing">書く</option>
                                 <option value="file">ファイル</option>
@@ -481,7 +551,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                            <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
                                 <option value="1">1 回</option>
                                 <option value="2">2 回</option>
@@ -496,7 +566,7 @@
                         <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
                                 <option value="1">1分</option>
                                 <option value="2">2分</option>
                                 <option value="3">3分</option>
@@ -509,7 +579,7 @@
                     <div class="col-12 col-xl-6 input-limit none">
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
-                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
                                 <option value="characters">文字</option>
                                 <option value="words">言葉</option>
                             </select>
@@ -518,7 +588,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -526,16 +596,51 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                <div class="row card_preview fs-14 px-4">
+                    <div class="col-12 col-xl-6 input-type">
+                        <p>回答方法の選択</p>
+                        <p class="text-secondary-subtle"><i class="fa-solid fa-video"></i><i class="fa-solid fa-microphone"></i><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-file-arrow-up"></i><i class="fa-solid fa-comments"></i>
+                            <span class="dis_answer_type">動画</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <p class="mb-1">リテイク</p>
+                        <p class="text-secondary">
+                            <span class="dis_retake">制限なし</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <p>回答の時間</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i><span class="dis_time">1</span>分</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <p>単語制限</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i></span class="dis_limit"> 文字</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <p>最大数</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_max">500</span>字
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <p>シンキングタイムの設定</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_thinking_hour">0</span>時 <span class="dis_thinking_minute">0</span>分
+                        </p>
+                    </div>
+                    <!-- end card preview -->
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
                     </div>
@@ -550,20 +655,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 position-relative question question-file" id="" data-no="1">
+            <div class="card p-3 position-relative question question-file" id="question1" data-no="4">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     4
                 </div>
                 <div class="ps-5">
-                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                    <input type="text" class="form-control border-start-0 outline-none shadow-none border-secoandary border-top-0 border-end-0 input-title" placeholder="質問のタイトル">
                 </div>
-                <div class="w-100 ps-5 fs-5">
+                <div class="w-100 ps-5 fs-5 d-none">
                     <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
                     <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4">
+                <div class="row m-0 mt-4 card_input">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -575,9 +680,9 @@
                             </label>
                             <select class="form-select rounded-end-5 answer_type" id="answer_type">
                                 <option value="video">動画</option>
-                                <option value="voice">音声</option>
+                                <option selected value="voice">音声</option>
                                 <option value="writing">書く</option>
-                                <option selected value="file">ファイル</option>
+                                <option value="file">ファイル</option>
                                 <option value="ai">AIチャット面接</option>
                             </select>
                         </div>
@@ -597,7 +702,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                            <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
                                 <option value="1">1 回</option>
                                 <option value="2">2 回</option>
@@ -612,7 +717,7 @@
                         <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
                                 <option value="1">1分</option>
                                 <option value="2">2分</option>
                                 <option value="3">3分</option>
@@ -625,7 +730,7 @@
                     <div class="col-12 col-xl-6 input-limit none">
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
-                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
                                 <option value="characters">文字</option>
                                 <option value="words">言葉</option>
                             </select>
@@ -634,7 +739,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -642,16 +747,51 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                <div class="row card_preview fs-14 px-4">
+                    <div class="col-12 col-xl-6 input-type">
+                        <p>回答方法の選択</p>
+                        <p class="text-secondary-subtle"><i class="fa-solid fa-video"></i><i class="fa-solid fa-microphone"></i><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-file-arrow-up"></i><i class="fa-solid fa-comments"></i>
+                            <span class="dis_answer_type">動画</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <p class="mb-1">リテイク</p>
+                        <p class="text-secondary">
+                            <span class="dis_retake">制限なし</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <p>回答の時間</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i><span class="dis_time">1</span>分</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <p>単語制限</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i></span class="dis_limit"> 文字</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <p>最大数</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_max">500</span>字
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <p>シンキングタイムの設定</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_thinking_hour">0</span>時 <span class="dis_thinking_minute">0</span>分
+                        </p>
+                    </div>
+                    <!-- end card preview -->
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
                     </div>
@@ -666,20 +806,20 @@
                     </div>
                 </div>
             </div>
-            <div class="card p-3 position-relative question question-ai" id="" data-no="1">
+            <div class="card p-3 position-relative question question-ai" id="question1" data-no="5">
                 <div class="question-no position-absolute circle pt-1 p-lg-0 text-center fs-5 fw-bold rounded-circle bg-active text-white">
                     5
                 </div>
                 <div class="ps-5">
-                    <input type="text" class="form-control border-start-0 border-primary border-top-0 border-end-0" placeholder="質問のタイトル">
+                    <input type="text" class="form-control border-start-0 outline-none shadow-none border-secoandary border-top-0 border-end-0 input-title" placeholder="質問のタイトル">
                 </div>
-                <div class="w-100 ps-5 fs-5">
+                <div class="w-100 ps-5 fs-5 d-none">
                     <span class="fw-bold">B</span>&nbsp;&nbsp;&nbsp;
                     <span class="fst-italic">I</span>&nbsp;&nbsp;&nbsp;
                     <span class="text-decoration-underline">U</span>&nbsp;&nbsp;&nbsp;
                     <span class=""><i class="fa-solid fa-link"></i></span>&nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="row m-0 mt-4">
+                <div class="row m-0 mt-4 card_input">
                     <div class="col-12 col-xl-6 input-type mb-4">
                         <label for="input1" class="form-label px-4 mb-1">回答方法の選択</label>
                         <div class="input-group fs-6 rounded-5">
@@ -690,11 +830,11 @@
                                 <i class="fa-solid fa-comments"></i>
                             </label>
                             <select class="form-select rounded-end-5 answer_type" id="answer_type">
-                                <option value="video">動画</option>
+                                <optiond value="video">動画</option>
                                 <option value="voice">音声</option>
                                 <option value="writing">書く</option>
                                 <option value="file">ファイル</option>
-                                <option selected value="ai">AIチャット面接</option>
+                                <option selecte value="ai">AIチャット面接</option>
                             </select>
                         </div>
                     </div>
@@ -713,7 +853,7 @@
                         </div>
                         <div class="input-group">
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
-                            <select type="text" class="form-select rounded-end-5 w50 " id="input1">
+                            <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
                                 <option value="1">1 回</option>
                                 <option value="2">2 回</option>
@@ -728,7 +868,7 @@
                         <label for="input1" class="form-label px-4 mb-1">回答の時間</label>
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                            <select type="text" class="form-select rounded-end-5 " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
                                 <option value="1">1分</option>
                                 <option value="2">2分</option>
                                 <option value="3">3分</option>
@@ -741,7 +881,7 @@
                     <div class="col-12 col-xl-6 input-limit none">
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
-                            <select type="text" class="form-select rounded-pill " id="input1" placeholder="回答時間">
+                            <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
                                 <option value="characters">文字</option>
                                 <option value="words">言葉</option>
                             </select>
@@ -750,7 +890,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -758,16 +898,51 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5" placeholder="秒" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-100 d-flex justify-content-end gap-3 mt-5">
+                <div class="row card_preview fs-14 px-4">
+                    <div class="col-12 col-xl-6 input-type">
+                        <p>回答方法の選択</p>
+                        <p class="text-secondary-subtle"><i class="fa-solid fa-video"></i><i class="fa-solid fa-microphone"></i><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-file-arrow-up"></i><i class="fa-solid fa-comments"></i>
+                            <span class="dis_answer_type">動画</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-retake">
+                        <p class="mb-1">リテイク</p>
+                        <p class="text-secondary">
+                            <span class="dis_retake">制限なし</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-time">
+                        <p>回答の時間</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i><span class="dis_time">1</span>分</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-limit none">
+                        <p>単語制限</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i></span class="dis_limit"> 文字</span>
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-max none">
+                        <p>最大数</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_max">500</span>字
+                        </p>
+                    </div>
+                    <div class="col-12 col-xl-6 input-thinking-time">
+                        <p>シンキングタイムの設定</p>
+                        <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span class="dis_thinking_hour">0</span>時 <span class="dis_thinking_minute">0</span>分
+                        </p>
+                    </div>
+                    <!-- end card preview -->
+                </div>
+                <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
                     </div>
