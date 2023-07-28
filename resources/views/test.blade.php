@@ -279,7 +279,7 @@
                     </a>
                 </div>
             </div>
-            <div class="test-content">
+            <div class="test-content text-start">
                 <!-- WRITE -->
                 <div class="test-writing w-100 tab-content active" id="tab-1">
                     <!-- NO -->
@@ -770,7 +770,9 @@
                                 <p>自己紹介</p>
                             </div>
                             <div id="test-preview" class="w-100 mb-4">
-                                <img src="./assets/img/application/test_preview.png" alt="Test Preview">
+                                <video class="rounded-4 w-100 h-100" crossorigin="" playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+                                    <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>Video Oynatılamıyor</a>
+                                </video>
                             </div>
                         </div>
                         <div class="w-100 text-center mb-4">
@@ -803,7 +805,7 @@
                                 </div>
                                 <!-- END HEADER -->
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -819,10 +821,12 @@
                             <div class="answer-item p-1 rounded-3 d-flex gap-4 active" data-type="video" data-content="./assets/video/interview01.mp4">
                                 <!-- HEADER -->
                                 <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
-                                    <img src="./assets/img/application/answer-video.png" alt="">
+                                    <video class="rounded-4 w-100 h-100" crossorigin="" playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+                                        <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>Video Oynatılamıyor</a>
+                                    </video>
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -840,7 +844,7 @@
                                     <img src="./assets/img/application/answer-voice.png" alt="">
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-  100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -861,7 +865,7 @@
                                     </div>
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -882,7 +886,7 @@
                                     </div>
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -900,7 +904,7 @@
                                     <img src="./assets/img/application/answer-video.png" alt="">
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -918,7 +922,7 @@
                                     <img src="./assets/img/application/answer-voice.png" alt="">
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -939,7 +943,7 @@
                                     </div>
                                 </div>
                                 <!-- CONTENT -->
-                                <div class="answer-content text-left flex-grow-1 overflow-hidden">
+                                <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
                                         <img src="./assets/img/application/chat-right.png" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
@@ -1272,7 +1276,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">試験再起動</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -1289,21 +1293,21 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h2 class="modal-title fs-5" id="staticBackdropLabel">入力</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="#" method="post">
                         <div class="mb-3">
-                            <label for="info_name" class="form-label">名前</label>
+                            <label for="info_name" class="form-label ms-3">名前</label>
                             <input type="text" class="form-control rounded-pill" id="info_name" placeholder="名前入力">
                         </div>
                         <div class="mb-3">
-                            <label for="info_mail" class="form-label">メールアドレス</label>
+                            <label for="info_mail" class="form-label ms-3">メールアドレス</label>
                             <input type="email" class="form-control rounded-pill" id="info_mail" placeholder="メールアドレス入力">
                         </div>
                         <div class="mb-3">
-                            <label for="info_phone" class="form-label">電話番号</label>
+                            <label for="info_phone" class="form-label ms-3">電話番号</label>
                             <input type="text" class="form-control rounded-pill" id="info_phone" placeholder="電話番号入力">
                         </div>
                     </form>

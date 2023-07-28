@@ -200,6 +200,10 @@ select {
     display: none;
 }
 
+.card_preview i{
+    display: none!important;
+}
+
 .question-video i.fa-video {
     display: initial!important;
 }
@@ -242,4 +246,59 @@ select {
 
 #add_questioin:hover{
     background-color: #e4e4e4;
+}
+
+#questions .card{
+    border-width: 3px;
+    border-radius: 16px;
+    transition: all;
+    transition-duration: 0.5s;
+}
+
+
+#questions .card .operators{
+    display: none!important;
+}
+
+#questions .card.active .operators,
+#questions .card:hover .operators{
+    display: flex!important;
+}
+
+.card.active .input-title{
+    border-color: var(--bs-primary) !important;
+}
+
+.card_preview p{
+    margin-bottom: 3px !important;
+}
+
+.card_preview .col-12{
+    margin-top: 1rem !important;
+}
+#questions .card:hover{
+    border-color: var(--bs-primary)!important;
+}
+
+#questions .card.active{
+    border-color: var(--bs-primary)!important;
+}
+
+#questions .card_input{
+    display: none;
+}
+
+#questions .card.active .card_input{
+    display: flex;
+}
+
+#questions .card.active .card_preview{
+    display: none;
+}
+
+.question-no {
+    background-color: #b9b9b9 !important;
+}
+.card.active .question-no {
+    background-color: var(--bs-primary) !important;
 }

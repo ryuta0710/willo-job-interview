@@ -127,7 +127,7 @@ $(document).ready(function () {
 	})
 
 	$(".answer_type").change(function (e) {
-		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question");
+		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question active	");
 
 		let val = e.target.value;
 
@@ -144,4 +144,52 @@ $(document).ready(function () {
 			$(e.target).parent().parent().parent().parent().addClass("question-ai");
 		}
 	})
+
+	$("#questions .card").click(function (e) {
+		$(".card").removeClass("active");
+
+		if ($(e.target).hasClass("card"))
+			$(e.target).addClass("active");
+		else
+			$(e.target).parents(".card").addClass("active");
+
+		e.preventDefault();
+	})
+
+	$(".answer_type").change(function (e) {
+		$(e.target).parents(".card").find(".dis_answer_type").html(e.target.value);
+	})
+
+	$(".retake").change(function (e) {
+		$(e.target).parents(".card").find(".dis_retake").html(e.target.value);
+	})
+
+	$(".time").change(function (e) {
+		$(e.target).parents(".card").find(".dis_time").html(e.target.value);
+	})
+
+	$(".limit").change(function (e) {
+		$(e.target).parents(".card").find(".dis_limit").html(e.target.value);
+	})
+
+	$(".max").change(function (e) {
+		$(e.target).parents(".card").find(".dis_max").html(e.target.value);
+	})
+
+	$(".thinking_hour").change(function (e) {
+		$(e.target).parents(".card").find(".dis_thinking_hour").html(parseInt(e.target.value));
+	})
+
+	$(".thinking_minute").change(function (e) {
+		$(e.target).parents(".card").find(".dis_thinking_minute").html(parseInt(e.target.value));
+	})
+
+	$("*").click(function (e) {
+		if ($(e.target).parents(".card").length == 0) {
+			$(".card").removeClass("active");
+		}
+		// console.log("sdf")
+	})
+
+
 })
