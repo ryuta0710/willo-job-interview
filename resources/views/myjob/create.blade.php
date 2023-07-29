@@ -830,11 +830,11 @@
                                 <i class="fa-solid fa-comments"></i>
                             </label>
                             <select class="form-select rounded-end-5 answer_type" id="answer_type">
-                                <optiond value="video">動画</option>
+                                <option value="video">動画</option>
                                 <option value="voice">音声</option>
                                 <option value="writing">書く</option>
                                 <option value="file">ファイル</option>
-                                <option selecte value="ai">AIチャット面接</option>
+                                <option selected  value="ai">AIチャット面接</option>
                             </select>
                         </div>
                     </div>
@@ -1143,5 +1143,68 @@
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ asset('/assets/js/create-interview/index.js') }}"></script>
+<script>
+    
+    function copy() {
+        let doms = document.getElementsByClassName("copy");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = copy_set;
+        }
+    }
+
+    function copy_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement;
+        let new_dom = dom.cloneNode(true);
+        dom.insertAdjacentElement("afterend", new_dom);
+
+        // show();
+        copy();
+        // del();
+    }
+    function up() {
+        let doms = document.getElementsByClassName("fa-chevron-up");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = up_set;
+        }
+    }
+
+    function up_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement;
+        let prevedom = dom.previousElementSibling;
+
+        $(dom).insertBefore($(prevedom));
+        up()
+        recount()
+    }
+    function down() {
+        let doms = document.getElementsByClassName("fa-chevron-up");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = down_set;
+        }
+    }
+
+    function down_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement;
+        let prevedom = dom.previousElementSibling;
+
+        $(dom).insertNext($(prevedom));
+        up()
+        recount();
+    }
+
+    function recount(){
+        let doms = document.getElementsByClassName("card");
+        let len = doms.length;
+        for( let i = 0; i < len; i++){
+            $(doms[i]).find(".question-no").html(i)
+        }
+    }
+
+    copy();
+    up();
+</script>
 
 @endsection
