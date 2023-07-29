@@ -1161,6 +1161,7 @@
         // show();
         copy();
         // del();
+        recount();
     }
     function up() {
         let doms = document.getElementsByClassName("fa-chevron-up");
