@@ -117,10 +117,10 @@ $(document).ready(function () {
 	$("#date_limit").prepend(temp);
 
 	//copy
-	function copy(text) {
-		alert(text)
-		navigator.clipboard.writeText(text);
-	}
+	// function copy(text) {
+	// 	alert(text)
+	// 	navigator.clipboard.writeText(text);
+	// }
 
 	$(".fa-copy").click(function (e) {
 		$(e.target).toggleClass("text-primary");
@@ -130,17 +130,16 @@ $(document).ready(function () {
 		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question active	");
 
 		let val = e.target.value;
-
 		$("label[for=answer_type] i").hide();
-		if (val == "video") {
+		if (val == "動画") {
 			$(e.target).parent().parent().parent().parent().addClass("question-video");
-		} else if (val == "voice") {
+		} else if (val == "音声") {
 			$(e.target).parent().parent().parent().parent().addClass("question-voice");
-		} else if (val == "writing") {
+		} else if (val == "書く") {
 			$(e.target).parent().parent().parent().parent().addClass("question-writing");
-		} else if (val == "file") {
+		} else if (val == "ファイル") {
 			$(e.target).parent().parent().parent().parent().addClass("question-file");
-		} else if (val == "ai") {
+		} else if (val == "AIチャット面接") {
 			$(e.target).parent().parent().parent().parent().addClass("question-ai");
 		}
 	})
