@@ -31,7 +31,7 @@
                 <div class="mb-3">
                     <div class="w-100 d-flex justify-content-between px-3">
                         <label for="companySite" class="form-label">Webサイト</label>
-                        <span class="text-secondary">任意</span>
+                        <span class="text-secondary">オプション</span>
                         {{-- <span>オプション</span> --}}
                     </div>
                     <input type="text" class="form-control rounded-pill" id="companySite"

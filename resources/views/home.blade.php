@@ -50,10 +50,10 @@
 
                 </div>
                 <select type="text" class="form-select rounded-pill w-auto fs-6" id="input1" placeholder="">
-                    <option value="1">今日</option>
+                    <option value="1">本日</option>
                     <option value="2">昨日</option>
-                    <option value="3">7日前</option>
-                    <option value="4">30日前</option>
+                    <option value="3">過去7日</option>
+                    <option value="4">過去30日</option>
                     <option value="5">今月</option>
                     <option value="6">先月</option>
                 </select>

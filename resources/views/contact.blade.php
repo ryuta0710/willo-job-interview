@@ -94,7 +94,7 @@
                     <div class="row align-items-center mb-4">
                         <div class="col-md-5 d-flex justify-content-start mb-2 mb-md-0 justify-content-md-end">
                             <label for="companyName" class="me-4">ご担当者名(フリガナ)</label>
-                            <span class="bg-active text-white px-2 py-1 rounded">任意</span>
+                            <span class="bg-active text-white px-2 py-1 rounded">オプション</span>
                         </div>
                         <div class="col-md-7">
                             <input type="text" class="form-control" name="companyName" id="companyName">
