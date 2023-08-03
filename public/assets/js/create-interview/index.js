@@ -17,7 +17,6 @@ $(document).ready(function () {
 	// company description
 	$("#state_toggle").change(function () {
 		$("#description_video").toggle(300)
-		console.log($("#video_url").attr("disabled"));
 		if ($("#video_url").attr("disabled") == "disabled") {
 			$("#video_url").removeAttr("disabled");
 		} else {
