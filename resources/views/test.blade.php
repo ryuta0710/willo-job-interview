@@ -376,9 +376,9 @@
 
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <!-- <video id="preview" class="w-100" height="333" autoplay muted></video> -->
-                            <!-- <video id="recording" class="d-none" width="590" height="333" controls></video> -->
-                            <img class="w-100" src="./assets/img/application/camera-screen.svg" alt="camera_screen">
+                            <video id="videoLive" class="w-100" autoplay muted style="background-color: #a2aab7;"></video>
+                            <video id="videoRecorded" class="w-100 none" controls></video>
+                            <!-- <img class="w-100" src="./assets/img/application/camera-screen.svg" alt="camera_screen"> -->
                         </div>
                     </div>
                 </div>
@@ -1377,6 +1377,78 @@
                 });
             }
         });
+        
+    let recording = false;
+
+    async function record() {
+        const videoLive = document.querySelector('#videoLive')
+        const videoRecorded = document.querySelector('#videoRecorded')
+        let stream;
+
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            await navigator.mediaDevices.getUserMedia({ // <1>
+                video: true,
+                audio: true,
+            }).then(function(sss) {
+                stream = sss;
+
+                videoLive.srcObject = stream
+
+                if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
+                    console.warn('video/webm is not supported')
+                }
+
+                const mediaRecorder = new MediaRecorder(stream, { // <3>
+                    mimeType: 'video/webm',
+                })
+
+                mediaRecorder.start()
+                recording = true;
+                $("#record").html('録音を停止')
+
+
+                $("#record").click(function(){
+
+                    if (!recording) {
+                        mediaRecorder.start() // <4>
+                        $("#record").html('録音を停止')
+                        $("#videoLive").show();
+                        $("#videoRecorded").hide();
+
+                    } else {
+                        mediaRecorder.stop()
+                        $("#record").html('録音を閧始')
+                        $("#videoLive").hide();
+                        $("#videoRecorded").show();
+
+                    }
+                    recording = !recording;
+                })
+
+
+                mediaRecorder.addEventListener('dataavailable', event => {
+                    videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                })
+            }).catch(function(res) {
+                console.log(res);
+                // alert("カメラを接続してください。")
+            })
+        } else {
+                console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
+        }
+        
+
+    }
+    let flag = true;
+
+$("#record").click(function(){
+    if(flag){
+        record();
+        flag = false;
+    }
+})
+
     </script>
 
 </body>

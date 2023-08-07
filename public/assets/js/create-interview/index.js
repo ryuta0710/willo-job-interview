@@ -1,4 +1,8 @@
 $(document).ready(function () {
+	func()
+})
+
+function func() {
 	var quill = new Quill('#editor', {
 		theme: 'snow'
 	});
@@ -33,19 +37,6 @@ $(document).ready(function () {
 
 	$("#file_upload").change(function () {
 		$("#preview").html($("#file_upload").val())
-	})
-
-	// make questions
-	let question_no = 1;
-	$("#add_questioin").click(function () {
-		let old = document.getElementById("question1");
-		let newEle = old.cloneNode(true);
-		$(this).before(newEle);
-		question_no++;
-
-		$(newEle).attr("data-no", question_no);
-		$(newEle).attr("id", "question" + question_no)
-			.find(".question-no").html(question_no);
 	})
 
 	// $(".up").click(function(){
@@ -121,9 +112,7 @@ $(document).ready(function () {
 	// 	navigator.clipboard.writeText(text);
 	// }
 
-	$(".fa-copy").click(function (e) {
-		$(e.target).toggleClass("text-primary");
-	})
+	
 
 	$(".answer_type").change(function (e) {
 		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question active	");
@@ -189,5 +178,17 @@ $(document).ready(function () {
 		// console.log("sdf")
 	})
 
-
+}
+// make questions
+$("#add_questioin").click(function () {
+	let old = document.getElementById("question1");
+	let newEle = old.cloneNode(true);
+	$(this).before(newEle);
+	func();
+	
+    copy();
+    del();
+    up();
+    down();
+	recount();
 })

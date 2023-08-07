@@ -244,11 +244,11 @@
                             <label class="input-group-text  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-repeat"></i></label>
                             <select type="text" class="form-select rounded-end-5 w50 retake" id="input1">
                                 <option selected value="0">0 回</option>
-                                <option value="1">1 回</option>
-                                <option value="2">2 回</option>
-                                <option value="3">3 回</option>
-                                <option value="4">4 回</option>
-                                <option value="5">5 回</option>
+                                <option value="1回">1回</option>
+                                <option value="2回">2回</option>
+                                <option value="3回">3回</option>
+                                <option value="4回">4回</option>
+                                <option value="5回">5回</option>
                                 <option value="norepeat">制限なし</option>
                             </select>
                         </div>
@@ -258,11 +258,11 @@
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
                             <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
-                                <option value="1">1分</option>
-                                <option value="2">2分</option>
-                                <option value="3">3分</option>
-                                <option value="4">4分</option>
-                                <option value="5">5分</option>
+                                <option value="1分">1分</option>
+                                <option value="2分">2分</option>
+                                <option value="3分">3分</option>
+                                <option value="4分">4分</option>
+                                <option value="5分">5分</option>
                                 <option value="norepeat">制限なし</option>
                             </select>
                         </div>
@@ -271,8 +271,8 @@
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
                             <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
-                                <option value="characters">文字</option>
-                                <option value="words">言葉</option>
+                                <option value="文字">文字</option>
+                                <option value="言葉">言葉</option>
                             </select>
                         </div>
                     </div>
@@ -335,6 +335,9 @@
                 <div class="w-100 d-flex justify-content-end gap-3 mt-5 operators">
                     <div class="copy">
                         <i class="fa-regular fa-copy"></i>
+                    </div>
+                    <div class="delete">
+                        <i class="fa-regular fa-trash-can"></i>
                     </div>
                     <div class="border border-end-1 border-secondary-subtle">
 
@@ -1247,13 +1250,13 @@
     }
 
     function copy_set(e) {
-        let dom = e.target.parentElement.parentElement.parentElement;
+        let dom = e.target.parentElement.parentElement;
+        if (!$(dom).hasClass("card")) {
+            dom = e.target.parentElement.parentElement.parentElement;
+        }
         let new_dom = dom.cloneNode(true);
         dom.insertAdjacentElement("afterend", new_dom);
 
-        // show();
-        copy();
-        recount()
         $("#questions .card").click(function(e) {
             $(".card").removeClass("active");
 
@@ -1298,7 +1301,6 @@
             if ($(e.target).parents(".card").length == 0) {
                 $(".card").removeClass("active");
             }
-            // console.log("sdf")
         })
         $(".fa-copy").click(function(e) {
             $(e.target).toggleClass("text-primary");
@@ -1321,14 +1323,32 @@
                 $(e.target).parent().parent().parent().parent().addClass("question-ai");
             }
         })
-        // del();
+
+        $(new_dom).find(".answer_type").val($(dom).find(".answer_type").val())
+        $(new_dom).find(".retake").val($(dom).find(".retake").val())
+        $(new_dom).find(".time").val($(dom).find(".time").val())
+        $(new_dom).find(".limit").val($(dom).find(".limit").val())
+        $(new_dom).find(".max").val($(dom).find(".max").val())
+        $(new_dom).find(".thinking_hour").val($(dom).find(".thinking_hour").val())
+        $(new_dom).find(".thinking_minute").val($(dom).find(".thinking_minute").val())
+
+        if ($(e.target).hasClass("card"))
+            $(e.target).addClass("active");
+        else
+            $(e.target).parents(".card").addClass("active");
+
+        e.preventDefault();
+        copy();
+        up();
+        down();
+        del();
         recount();
     }
 
     function up() {
         let doms = document.getElementsByClassName("fa-chevron-up");
         let len = doms.length;
-        for (let i = 0; i < len; i++) {
+        for (let i = 1; i < len; i++) {
             doms[i].onclick = up_set;
         }
     }
@@ -1338,24 +1358,52 @@
         let prevedom = dom.previousElementSibling;
 
         $(dom).insertBefore($(prevedom));
-        up()
+        e.preventDefault();
+        copy();
+        del();
+        up();
+        down();
         recount()
     }
 
     function down() {
-        let doms = document.getElementsByClassName("fa-chevron-up");
+        let doms = document.getElementsByClassName("fa-chevron-down");
         let len = doms.length;
-        for (let i = 0; i < len; i++) {
+        for (let i = 0; i < len - 1; i++) {
             doms[i].onclick = down_set;
         }
+
     }
 
     function down_set(e) {
         let dom = e.target.parentElement.parentElement.parentElement;
-        let prevedom = dom.previousElementSibling;
+        let nextedom = dom.nextElementSibling;
 
-        $(dom).insertNext($(prevedom));
-        up()
+        $(dom).insertAfter($(nextedom));
+        e.preventDefault();
+        copy();
+        del();
+        up();
+        down();
+        recount()
+    }
+
+    function del() {
+        let doms = document.getElementsByClassName("fa-trash-can");
+        let len = doms.length;
+        for (let i = 0; i < len; i++) {
+            doms[i].onclick = del_set;
+        }
+    }
+
+    function del_set(e) {
+        let dom = e.target.parentElement.parentElement.parentElement;
+        $(dom).remove();
+        e.preventDefault();
+        copy();
+        del();
+        up();
+        down();
         recount();
     }
 
@@ -1368,13 +1416,9 @@
     }
 
     copy();
+    del();
     up();
-</script>
-<script>
-    // $("#record").click(function() {
-    //     record();
-    // })
-
+    down();
     let recording = false;
 
     async function record() {
@@ -1382,70 +1426,74 @@
         const videoRecorded = document.querySelector('#videoRecorded')
         let stream;
 
+        try {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true,
+                }).then(function(sss) {
+                    stream = sss;
 
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            await navigator.mediaDevices.getUserMedia({ // <1>
-                video: true,
-                audio: true,
-            }).then(function(sss) {
-                stream = sss;
+                    videoLive.srcObject = stream
 
-                videoLive.srcObject = stream
-
-                if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
-                    console.warn('video/webm is not supported')
-                }
-
-                const mediaRecorder = new MediaRecorder(stream, { // <3>
-                    mimeType: 'video/webm',
-                })
-
-                mediaRecorder.start()
-                recording = true;
-                $("#record").html('録音を停止')
-
-
-                $("#record").click(function(){
-
-                    if (!recording) {
-                        mediaRecorder.start() // <4>
-                        $("#record").html('録音を停止')
-                        $("#videoLive").show();
-                        $("#videoRecorded").hide();
-
-                    } else {
-                        mediaRecorder.stop()
-                        $("#record").html('録音を閧始')
-                        $("#videoLive").hide();
-                        $("#videoRecorded").show();
-
+                    if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
+                        console.warn('video/webm is not supported')
                     }
-                    recording = !recording;
-                })
+
+                    const mediaRecorder = new MediaRecorder(stream, { // <3>
+                        mimeType: 'video/webm',
+                    })
+
+                    mediaRecorder.start()
+                    recording = true;
+                    $("#record").html('録音を停止')
 
 
-                mediaRecorder.addEventListener('dataavailable', event => {
-                    videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                    $("#record").click(function() {
+
+                        if (!recording) {
+                            mediaRecorder.start() // <4>
+                            $("#record").html('録音を停止')
+                            $("#videoLive").show();
+                            $("#videoRecorded").hide();
+
+                        } else {
+                            mediaRecorder.stop()
+                            $("#record").html('録音を閧始')
+                            $("#videoLive").hide();
+                            $("#videoRecorded").show();
+
+                        }
+                        recording = !recording;
+                    })
+
+
+                    mediaRecorder.addEventListener('dataavailable', event => {
+                        videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                    })
+                }).catch(function(res) {
+                    console.log(res);
+                    alert("カメラを接続してください。")
                 })
-            }).catch(function(res) {
-                console.log(res);
-                // alert("カメラを接続してください。")
-            })
-        } else {
+            } else {
                 console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
+            }
+
+        } catch (e) {
+            alert("現在、規約ではサポートしていません。httpsで接続してください。")
         }
-        
+
 
     }
     let flag = true;
 
-$("#record").click(function(){
-    if(flag){
-        record();
-        flag = false;
-    }
-})
-
-    
+    $("#record").click(function() {
+        if (flag) {
+            record();
+            flag = false;
+        }
+    })
 </script>
+
+
 @endsection
