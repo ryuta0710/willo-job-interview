@@ -49,6 +49,10 @@
     span a {
         font-size: 12px !important;
     }
+
+.select-cus button{
+	font-size: 13px!important;
+}
 </style>
 
 <main class="pt-5">
@@ -75,8 +79,8 @@
                         <div class="cus-option"><span>キリハレ株式会社</span></div>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary rounded-2 ok">適用</button>
-                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        <button class="btn btn-primary rounded-2 ok">申し込み</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
                     </div>
                     <div class="cus-bg position-fixed">
 
@@ -94,8 +98,8 @@
                         <div class="cus-option"><span>技術者募集</span></div>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary rounded-2 ok">適用</button>
-                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        <button class="btn btn-primary rounded-2 ok">申し込み</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
                     </div>
                     <div class="cus-bg position-fixed">
 
@@ -113,8 +117,8 @@
                         <div class="cus-option"><span>オーナー</span></div>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary rounded-2 ok">適用</button>
-                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        <button class="btn btn-primary rounded-2 ok">申し込み</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
                     </div>
                     <div class="cus-bg position-fixed">
 
@@ -133,8 +137,8 @@
                         <div class="cus-option"><span>レビューする</span></div>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary rounded-2 ok">適用</button>
-                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        <button class="btn btn-primary rounded-2 ok">申し込み</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
                     </div>
                     <div class="cus-bg position-fixed">
 
@@ -152,8 +156,8 @@
                         <div class="cus-option"><span>5</span></div>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-primary rounded-2 ok">適用</button>
-                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">キャンセル </button>
+                        <button class="btn btn-primary rounded-2 ok">申し込み</button>
+                        <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
                     </div>
                     <div class="cus-bg position-fixed">
 

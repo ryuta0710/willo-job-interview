@@ -332,3 +332,7 @@ tr {
 .text-content{
 	height: 360px;
 }
+
+.select-cus button{
+	font-size: 13px!important;
+}
