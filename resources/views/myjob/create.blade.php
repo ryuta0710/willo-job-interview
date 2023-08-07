@@ -258,11 +258,11 @@
                         <div class="input-group">
                             <label class="input-group-text w50  rounded-start-5 bg-white border-end-0" for="input1"><i class="fa-solid fa-stopwatch"></i></label>
                             <select type="text" class="form-select rounded-end-5 time" id="input1" placeholder="回答時間">
-                                <option value="1分">1分</option>
-                                <option value="2分">2分</option>
-                                <option value="3分">3分</option>
-                                <option value="4分">4分</option>
-                                <option value="5分">5分</option>
+                                <option value="1">1分</option>
+                                <option value="2">2分</option>
+                                <option value="3">3分</option>
+                                <option value="4">4分</option>
+                                <option value="5">5分</option>
                                 <option value="norepeat">制限なし</option>
                             </select>
                         </div>

@@ -36,13 +36,13 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link text-active" href="{{ route('myjob.index') }}">インタビュー</a>
+                            <a class="nav-link @if(strpos(url()->current(), '/myjob') != false) text-active @endif" href="{{ route('myjob.index') }}">インタビュー</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('member.index') }}">求職者</a>
+                            <a class="nav-link @if(strpos(url()->current(), '/member') != false) text-active @endif" href="{{ route('member.index') }}" href="{{ route('member.index') }}">求職者</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('company.index') }}">企業</a>
+                            <a class="nav-link @if(strpos(url()->current(), '/company') != false) text-active @endif" href="{{ route('company.index') }}" href="{{ route('company.index') }}">企業</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto align-items-center">
