@@ -11,10 +11,8 @@
             </div>
             <div class="col-lg-3 mb-3 mb-lg-0">
                 <select name="" id="" class="form-select rounded-pill">
-                    <option value="">所有者でフィ</option>
-                    <option value="">会社2</option>
-                    <option value="">会社3</option>
-                    <option value="">会社4</option>
+                    <option value="email">Eメール</option>
+                    <option value="SMS">SMS</option>
                 </select>
             </div>
             <div class="col-lg-3 mb-3 mb-lg-0 d-flex justify-content-end">
@@ -246,22 +244,6 @@
         e.target.parentElement.parentElement.parentElement.parentElement.remove();
     }
 
-    // let text = $(e.target).parent().parent().parent().parent().html();
-    // let dom = $(e.target).parent().parent().parent().parent()
-    // .after("<tr>"+text+"</tr>")
-    // .find(".fa-copy")
-    // $($(e.target).parent().parent().parent().parent()
-    // .after("<tr>"+text+"</tr>")
-    // .find(".fa-copy")[0]).click(function(){
-    //     alert("dsafa")
-    // })
-    // navigator.clipboard.writeText(text);
-    // $(".fa-copy").removeClass("text-primary")
-    // $(e.target).addClass("text-primary")
-    // let dom = e.target.parentElement.parentElement.parentElement.parentElement;
-    // let new_dom = dom.cloneNode(true);
-    // dom.insertAdjacentElement("afterend", new_dom);
-    // show();
     copy();
     del();
 </script>

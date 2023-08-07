@@ -302,3 +302,11 @@ select {
 .card.active .question-no {
     background-color: var(--bs-primary) !important;
 }
+
+.card:first-child .delete{
+    display: none;
+}
+
+.up, .down, .copy, .delete{
+    cursor: pointer;
+}
