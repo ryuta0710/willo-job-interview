@@ -23,7 +23,7 @@
                     <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="会社名による検索">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
-                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索...">
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
@@ -42,7 +42,7 @@
                     <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="所有者名による検索">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
-                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索...">
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
@@ -61,7 +61,7 @@
                     <input name="" id="" class="form-select select2 w-100 rounded-pill" placeholder="ステータスによる検索">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
-                            <input type="text" name="search" class="form-control select-search" placeholder="検索語を入力">
+                            <input type="text" name="search" class="form-control select-search" placeholder="検索...">
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>

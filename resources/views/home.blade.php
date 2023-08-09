@@ -50,10 +50,11 @@
 
                 </div>
                 <select type="text" class="form-select rounded-pill w-auto fs-6" id="input1" placeholder="">
-                    <option value="1">今日</option>
+                    <option value="1">本日</option>
                     <option value="2">昨日</option>
-                    <option value="3">7日前</option>
-                    <option value="4">30日前</option>
+                    <option value="3">過去7日</option>
+                    <option value="4">過去30日</option>
+                    <option value="4">今月</option>
                     <option value="5">先月</option>
                 </select>
             </div>
@@ -68,7 +69,7 @@
     <section id="sec-card-box">
         <div class="container pt-5">
             <div class="d-flex justify-content-around justify-content-xxl-between gap-2 fs-14 flex-wrap">
-                <div class="card  w-25">
+                <div class="card w-25">
                     <p class="mb-4">すべてのアクティブなインタビュー</p>
                     <p class="fs-4">0</p>
                     <p class="mt-4 pt-3">
