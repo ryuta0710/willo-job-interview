@@ -219,11 +219,11 @@
                                 <i class="fa-solid fa-comments"></i>
                             </label>
                             <select class="form-select rounded-end-5 answer_type" id="answer_type">
-                                <option selected value="動画">動画</option>
-                                <option value="音声">音声</option>
-                                <option value="書く">書く</option>
+                                <option selected value="ビデオ">ビデオ</option>
+                                <option value="オーディオ">オーディオ</option>
+                                <option value="文章">文章</option>
                                 <option value="ファイル">ファイル</option>
-                                <option value="AIチャット面接">AIチャット面接</option>
+                                <option value="AIチャット">AIチャット</option>
                             </select>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                                 <option value="3回">3回</option>
                                 <option value="4回">4回</option>
                                 <option value="5回">5回</option>
-                                <option value="norepeat">制限なし</option>
+                                <option value="制限なし">制限なし</option>
                             </select>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                                 <option value="3">3分</option>
                                 <option value="4">4分</option>
                                 <option value="5">5分</option>
-                                <option value="norepeat">制限なし</option>
+                                <option value="制限なし">制限なし</option>
                             </select>
                         </div>
                     </div>
@@ -271,15 +271,15 @@
                         <label for="input1" class="form-label px-4 mb-1">単語制限</label>
                         <div class="input-group">
                             <select type="text" class="form-select rounded-pill limit" id="input1" placeholder="回答時間">
-                                <option value="文字">文字</option>
-                                <option value="言葉">言葉</option>
+                                <option value="文字のみ">文字のみ</option>
+                                <option value="イラスト">イラスト</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill max" value="500" step="10">
+                            <input type="number" class="form-control rounded-pill max" min=1 value="500" max=500 step="10">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">
@@ -287,11 +287,11 @@
                         <div class="row">
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5 thinking_hour" placeholder="時" aria-label="" aria-describedby="basic-addon1">
+                                <input type="number" class="form-control rounded-end-5 thinking_hour" placeholder="時" min=0 aria-label="" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group w-50">
                                 <span class="input-group-text rounded-start-5 bg-white border-end-0"><i class="fa-solid fa-hourglass-start"></i></span>
-                                <input type="text" class="form-control rounded-end-5 thinking_minute" placeholder="分" aria-label="" aria-describedby="basic-addon1">
+                                <input type="number" class="form-control rounded-end-5 thinking_minute" placeholder="分" min=0 max=59 aria-label="" aria-describedby="basic-addon1">
                             </div>
                         </div>
                     </div>
@@ -1290,11 +1290,13 @@
         })
 
         $(".thinking_hour").change(function(e) {
-            $(e.target).parents(".card").find(".dis_thinking_hour").html(parseInt(e.target.value));
+            let val = Number(e.target.value);
+            $(e.target).parents(".card").find(".dis_thinking_hour").html(val);
         })
 
         $(".thinking_minute").change(function(e) {
-            $(e.target).parents(".card").find(".dis_thinking_minute").html(parseInt(e.target.value));
+            let val = Number(e.target.value);
+            $(e.target).parents(".card").find(".dis_thinking_minute").html(val);
         })
 
         $("*").click(function(e) {

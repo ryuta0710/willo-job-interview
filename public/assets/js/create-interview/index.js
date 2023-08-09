@@ -119,15 +119,15 @@ function func() {
 
 		let val = e.target.value;
 		$("label[for=answer_type] i").hide();
-		if (val == "動画") {
+		if (val == "ビデオ") {
 			$(e.target).parent().parent().parent().parent().addClass("question-video");
-		} else if (val == "音声") {
+		} else if (val == "オーディオ") {
 			$(e.target).parent().parent().parent().parent().addClass("question-voice");
-		} else if (val == "書く") {
+		} else if (val == "文章") {
 			$(e.target).parent().parent().parent().parent().addClass("question-writing");
 		} else if (val == "ファイル") {
 			$(e.target).parent().parent().parent().parent().addClass("question-file");
-		} else if (val == "AIチャット面接") {
+		} else if (val == "AIチャット") {
 			$(e.target).parent().parent().parent().parent().addClass("question-ai");
 		}
 	})
@@ -164,11 +164,13 @@ function func() {
 	})
 
 	$(".thinking_hour").change(function (e) {
-		$(e.target).parents(".card").find(".dis_thinking_hour").html(parseInt(e.target.value));
+		let val = Number(e.target.value);
+		$(e.target).parents(".card").find(".dis_thinking_hour").html(val);
 	})
 
 	$(".thinking_minute").change(function (e) {
-		$(e.target).parents(".card").find(".dis_thinking_minute").html(parseInt(e.target.value));
+		let val = Number(e.target.value);
+		$(e.target).parents(".card").find(".dis_thinking_minute").html(val);
 	})
 
 	$("*").click(function (e) {
@@ -180,9 +182,9 @@ function func() {
 
 }
 // make questions
+let old11 = document.getElementById("question1");
 $("#add_questioin").click(function () {
-	let old = document.getElementById("question1");
-	let newEle = old.cloneNode(true);
+	let newEle = old11.cloneNode(true);
 	$(this).before(newEle);
 	func();
 	

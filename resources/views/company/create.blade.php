@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="companyEmail" class="form-label px-3">メールアドレス</label>
-                    <input type="text" class="form-control rounded-pill" id="companyEmail" placeholder="住所を入力してください">
+                    <input type="email" class="form-control rounded-pill" id="companyEmail" placeholder="メールアドレスを入力してください">
                 </div>
                 <div class="mb-3">
                     <div class="w-100 d-flex justify-content-between px-3">
