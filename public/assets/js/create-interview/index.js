@@ -1,8 +1,4 @@
 $(document).ready(function () {
-	func()
-})
-
-function func() {
 	var quill = new Quill('#editor', {
 		theme: 'snow'
 	});
@@ -105,15 +101,10 @@ function func() {
 		temp += "<option value='" + now.toString() + "'>" + now.getFullYear() + "年 " + (now.getMonth() + 1) + "月 " + now.getDate() + "日</option>"
 	}
 	$("#date_limit").prepend(temp);
+	func();
+})
 
-	//copy
-	// function copy(text) {
-	// 	alert(text)
-	// 	navigator.clipboard.writeText(text);
-	// }
-
-	
-
+function func() {
 	$(".answer_type").change(function (e) {
 		$(e.target).parent().parent().parent().parent().attr("class", "card p-3 position-relative question active	");
 
@@ -153,6 +144,12 @@ function func() {
 
 	$(".time").change(function (e) {
 		$(e.target).parents(".card").find(".dis_time").html(e.target.value);
+		if (e.target.value == "制限なし") {
+			$($(e.target).parents(".card").find(".dis_time_minute")[0]).hide();
+
+		} else {
+			$($(e.target).parents(".card").find(".dis_time_minute")[0]).show();
+		}
 	})
 
 	$(".limit").change(function (e) {
@@ -175,7 +172,7 @@ function func() {
 
 	$("*").click(function (e) {
 		if ($(e.target).parents(".card").length == 0) {
-			$(".card").removeClass("active");
+			$("#.card").removeClass("active");
 		}
 		// console.log("sdf")
 	})
@@ -183,14 +180,15 @@ function func() {
 }
 // make questions
 let old11 = document.getElementById("question1");
+let newEle = old11.cloneNode(true);
 $("#add_questioin").click(function () {
-	let newEle = old11.cloneNode(true);
-	$(this).before(newEle);
+	let newEle1 = newEle.cloneNode(true);
+	$(this).before(newEle1);
 	func();
-	
-    copy();
-    del();
-    up();
-    down();
+
+	copy();
+	del();
+	up();
+	down();
 	recount();
 })
