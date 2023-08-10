@@ -69,11 +69,11 @@
 
     function copy(text) {
         dom.select();
-        navigator.clipboard.writeText(dom.value);
         $(".my-tooltip").fadeIn(1000);
         setTimeout(() => {
             $(".my-tooltip").fadeOut(1000)
         }, 3000);
+        navigator.clipboard.writeText(dom.value);
     }
 </script>
 @endsection

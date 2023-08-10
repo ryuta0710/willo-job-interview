@@ -72,7 +72,7 @@
                 <input name="company" id="company" class="form-select rounded-pill select2" placeholder="募集した会社 " data-no="1">
                 <div class="select-cus position-absolute card p-3 shadow rounded-4">
                     <div class="cus-search">
-                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索...">
                     </div>
                     <div class="cus-options py-2">
                         <div class="cus-notfound"><span>見つかりません</span></div>
@@ -91,7 +91,7 @@
                 <input name="" id="select2" class="form-select rounded-pill select2" data-no="2" placeholder="募集のタイトル">
                 <div class="select-cus position-absolute card p-3 shadow rounded-4">
                     <div class="cus-search">
-                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索...">
                     </div>
                     <div class="cus-options py-2">
                         <div class="cus-notfound"><span>見つかりません</span></div>
@@ -110,7 +110,7 @@
                 <input name="" id="select3" class="form-select rounded-pill select2" data-no="3" placeholder="応募先">
                 <div class="select-cus position-absolute card p-3 shadow rounded-4">
                     <div class="cus-search">
-                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索...">
                     </div>
                     <div class="cus-options py-2">
                         <div class="cus-notfound"><span>見つかりません</span></div>
@@ -149,7 +149,7 @@
                 <input name="" id="select5" class="form-select rounded-pill select2" data-no="5" placeholder="評価">
                 <div class="select-cus position-absolute card p-3 shadow rounded-4">
                     <div class="cus-search">
-                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索語入力">
+                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="検索...">
                     </div>
                     <div class="cus-options py-2">
                         <div class="cus-notfound"><span>見つかりません</span></div>
