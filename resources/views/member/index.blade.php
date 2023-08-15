@@ -130,7 +130,7 @@
                 <input name="" id="select4" class="form-select rounded-pill select2" data-no="4" placeholder="現時点の評価">
                 <div class="select-cus position-absolute card p-3 shadow rounded-4">
                     <div class="cus-search">
-                        <input type="text" name="search-compayny" class="form-control select-search" placeholder="評価">
+                        <input type="text" name="search-company" class="form-control select-search" placeholder="検索…">
                     </div>
                     <div class="cus-options py-2">
                         <div class="cus-notfound"><span>見つかりません</span></div>
