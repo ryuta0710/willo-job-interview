@@ -692,7 +692,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                             <label class="form-check-label" for="flexRadioDefault4">
-                                容脊要件を満たしていない
+                            審育要件を満たしていない
                             </label>
                         </div>
                         <div class="form-check">
@@ -716,7 +716,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
                             <label class="form-check-label" for="flexRadioDefault8">
-                                より適格な候補老が選択されましな
+                                より適格な候補者が選択されました
                             </label>
                         </div>
                         <div class="form-check">
