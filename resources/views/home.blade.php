@@ -55,7 +55,7 @@
                 </select>
             </div>
             <div id="dashboard">
-                <canvas id="chart" style="width:100%; height: 100%;"></canvas>
+                <canvas id="chart" style="width:100%; height: 300px;"></canvas>
             </div>
         </div>
 
@@ -111,6 +111,8 @@
 
 <script>
     $(document).ready(function() {
+
+        $("#chart").width($("#dashboard").width())
         const xValues = ["6/1", "6/2", "6/3", "6/4", "6/5", "6/6", "6/7", "6/8", "6/9", "6/10"];
 
         new Chart("chart", {
@@ -128,6 +130,9 @@
                 }]
             },
             options: {
+
+                responsive: true, // Adjust based on parent container size
+                maintainAspectRatio: false, // Chart will not take in aspect ratio, allowing full customisability.
                 legend: {
                     display: false
                 }
