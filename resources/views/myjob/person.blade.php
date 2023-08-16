@@ -692,7 +692,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
                             <label class="form-check-label" for="flexRadioDefault4">
-                            審育要件を満たしていない
+                            審査要件を満たしていない
                             </label>
                         </div>
                         <div class="form-check">
