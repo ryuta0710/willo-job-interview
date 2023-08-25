@@ -89,7 +89,7 @@ Route::controller(TemplateController::class)->group(function(){
 
     Route::get('template', 'index')->name('template.index');
 
-    // Route::post('template', 'store')->name('template.store');
+    Route::post('template', 'store')->name('template.store');
 
     Route::get('template/create', 'create')->name('template.create');
 
