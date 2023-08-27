@@ -25,22 +25,21 @@
                 <div class="row">
                     <div class="col-lg-6 mb-3">
                         <label for="companyName" class="form-label px-3">テンプレートのタイトル</label>
-                        <input type="text" class="form-control rounded-pill" id="companyName"
-                            placeholder="テンプレートのタイトル">
+                        <input type="text" class="form-control rounded-pill" id="title" placeholder="テンプレートのタイトル">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mb-3">
                         <label for="companyName" class="form-label px-3">テンプレートの種類</label>
-                        <select name="" id="" class="form-select rounded-pill">
-                            <option value="">E メール</option>
-                            <option value="">SMS</option>
+                        <select name="type" id="type" class="form-select rounded-pill">
+                            <option value="email">E メール</option>
+                            <option value="sms">SMS</option>
                         </select>
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label for="companyName" class="form-label px-3">テンプレートトリガー</label>
-                        <select name="" id="" class="form-select rounded-pill">
-                            <option value="">招待時</option>
+                        <select name="trigger" id="trigger" class="form-select rounded-pill">
+                            <option value="invite">招待時</option>
                             <option value="">回答返送時</option>
                             <option value="">回答にエラー</option>
                         </select>
@@ -58,10 +57,11 @@
                     <div id="editor">
 
                     </div>
+                    <input type="hidden" name="content" id="content">
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <button class="btn btn-secondary rounded-pill" type="submit" id="save">保 存</button>
+                        <input class="btn btn-secondary rounded-pill" id="submit" type="submit" id="save" value="保 存">
                     </div>
                 </div>
             </form>
@@ -70,23 +70,5 @@
 </main>
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-<script>
-    
-	var quill = new Quill('#editor', {
-		theme: 'snow'
-	});
-	quill.on('text-change', function (delta, oldDelta, source) {
-		if (source == 'api') {
-			console.log("An API call triggered this change.");
-		} else if (source == 'user') {
-			if (new String(quill.getContents().ops[0].insert) == '\n') {
-				$("#save").removeClass("bg-primary").attr("disabled", "");
-
-			} else {
-				$("#save").addClass("bg-primary").removeAttr("disabled");
-			}
-		}
-	});
-</script>
+<script src="{{ asset('/assets/js/template/create.js') }}">
 @endsection

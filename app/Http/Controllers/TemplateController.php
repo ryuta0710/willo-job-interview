@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\HTTP\Response;
+use App\Models\Message;
 
 class TemplateController extends Controller
 {
@@ -11,7 +13,12 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('template.index');
+        $messages = Message::all();
+        $messages->transform(function ($message) {
+            $message->content = strip_tags($message->content);
+            return $message;
+        });
+        return view('template.index', compact('messages'));
     }
 
     /**
@@ -27,7 +34,19 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+            'trigger' => 'required',
+            'content' => 'required'
+        ]);
+  
+        $save_data = Message::create($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $save_data,
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -35,7 +54,8 @@ class TemplateController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $message = Message::find($id);
+        return response()->json($message);
     }
 
     /**

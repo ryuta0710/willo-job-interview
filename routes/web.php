@@ -89,11 +89,11 @@ Route::controller(TemplateController::class)->group(function(){
 
     Route::get('template', 'index')->name('template.index');
 
-    Route::post('template', 'store')->name('template.store');
+    Route::post('/template', 'store')->name('template.store');
 
     Route::get('template/create', 'create')->name('template.create');
 
-    // Route::get('template/{template}', 'show')->name('template.show');
+    Route::get('template/{id}', 'show')->name('template.show');
 
     // Route::put('template/{template}', 'update')->name('template.update');
 
