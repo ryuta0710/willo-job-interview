@@ -68,3 +68,7 @@ td {
     /* or */
     word-break: break-all;
  }
+
+ .modal-preview {
+    font-size: 14px;
+ }

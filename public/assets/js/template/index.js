@@ -7,7 +7,7 @@ $(document).ready(function () {
             "/template/" + id,
             function (data, status) {
                 if (status == "success") {
-                    $(modal_name + " .modal-body").html(data.content);
+                    $(modal_name + " .message-content").html(data.content);
                     $(modal_name + " .modal-title").html(data.title);
                 } else {
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('trigger');
             $table->text('content');
+            $table->integer('editable')->default(1);
             $table->string('writer')->default("admin@gmail.com");
             $table->string('memo')->default("");
             $table->timestamps();

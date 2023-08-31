@@ -24,20 +24,20 @@
             <form action="" method="post" class="col-lg-10 mx-auto">
                 <div class="row">
                     <div class="col-lg-6 mb-3">
-                        <label for="companyName" class="form-label px-3">テンプレートのタイトル</label>
+                        <label for="title" class="form-label px-3">テンプレートのタイトル</label>
                         <input type="text" class="form-control rounded-pill" id="title" placeholder="テンプレートのタイトル">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mb-3">
-                        <label for="companyName" class="form-label px-3">テンプレートの種類</label>
+                        <label for="type" class="form-label px-3">テンプレートの種類</label>
                         <select name="type" id="type" class="form-select rounded-pill">
                             <option value="email">E メール</option>
                             <option value="sms">SMS</option>
                         </select>
                     </div>
                     <div class="col-lg-6 mb-3">
-                        <label for="companyName" class="form-label px-3">テンプレートトリガー</label>
+                        <label for="trigger" class="form-label px-3">テンプレートトリガー</label>
                         <select name="trigger" id="trigger" class="form-select rounded-pill">
                             <option value="invite">招待時</option>
                             <option value="">回答返送時</option>
