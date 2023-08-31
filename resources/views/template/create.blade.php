@@ -40,8 +40,8 @@
                         <label for="trigger" class="form-label px-3">テンプレートトリガー</label>
                         <select name="trigger" id="trigger" class="form-select rounded-pill">
                             <option value="invite">招待時</option>
-                            <option value="">回答返送時</option>
-                            <option value="">回答にエラー</option>
+                            <option value="success">回答返送時</option>
+                            <option value="reminder">回答にエラー</option>
                         </select>
                     </div>
                 </div>
@@ -70,5 +70,5 @@
 </main>
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script src="{{ asset('/assets/js/template/create.js') }}">
+<script src="{{ asset('/assets/js/template/create.js') }}"></script>
 @endsection
