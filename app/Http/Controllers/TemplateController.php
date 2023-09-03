@@ -40,7 +40,7 @@ class TemplateController extends Controller
             'trigger' => 'required',
             'content' => 'required'
         ]);
-  
+
         $save_data = Message::create($request->all());
 
         return response()->json([
@@ -55,7 +55,7 @@ class TemplateController extends Controller
     public function show(string $id)
     {
         $message = Message::find($id);
-        if(!$message){
+        if (!$message) {
             return redirect()->back();
         }
         return response()->json($message);
@@ -83,6 +83,24 @@ class TemplateController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = Message::find($id);
+        if ($message) {
+            if ($message->editable == 1) {
+                $message->delete();
+                return response()->json([
+                    'status' => 'success',
+                    'message' => '削除操作が正常に行われました。'
+                ], Response::HTTP_OK);
+            }
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'このメッセージは削除できません。'
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        return response()->json([
+            'status' => 'failed',
+            'message' => '削除操作が失敗しました。',
+            'data' => $message,
+        ], Response::HTTP_BAD_REQUEST);
     }
 }

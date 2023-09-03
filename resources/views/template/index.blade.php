@@ -72,7 +72,7 @@
                                     <i class="fa fa-solid fa-copy me-3"></i>
                                 </a>
                                 @if ($message->editable == 1)
-                                    <a href="javascript:;" onclick="del()" data-id="{{$message->id}}">
+                                    <a href="javascript:;" onclick="del({{$message->id}})">
                                         <i class="fa fa-solid fa-trash"></i>
                                     </a>
                                 @else

@@ -31,23 +31,23 @@ $(document).ready(function () {
 
         // show();
         copy();
-        del();
-    }
-
-    function del() {
-        let doms = document.getElementsByClassName("fa-trash");
-        let len = doms.length;
-        for (let i = 0; i < len; i++) {
-            doms[i].onclick = delete_set;
-        }
-    }
-
-    function delete_set(e) {
-        e.target.parentElement.parentElement.parentElement.parentElement.remove();
     }
 
     copy();
-    del();
-
-
 })
+
+function del(id){
+    $.ajax({
+        url: '/template/'+id,
+        type: 'DELETE',
+        data: {
+            _token : $("meta[name=csrf-token]").attr("content"),
+        },
+        success: function(response) {
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            alert(xhr.responseJSON.message);
+        }
+    });
+}
