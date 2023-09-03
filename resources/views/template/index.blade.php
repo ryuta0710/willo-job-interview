@@ -62,7 +62,7 @@
                                 <i class="fa fa-solid fa-eye me-3"></i>
                                 </a>
                                 @if ($message->editable == 1)
-                                    <a href="{{ route('template.edit', ['template' => 1]) }}">
+                                    <a href="{{ route('template.edit', ['template' => $message->id ]) }}">
                                         <i class="fa fa-solid fa-edit me-3"></i>
                                     </a>
                                 @else
@@ -72,7 +72,7 @@
                                     <i class="fa fa-solid fa-copy me-3"></i>
                                 </a>
                                 @if ($message->editable == 1)
-                                    <a href="#">
+                                    <a href="javascript:;" onclick="del()" data-id="{{$message->id}}">
                                         <i class="fa fa-solid fa-trash"></i>
                                     </a>
                                 @else

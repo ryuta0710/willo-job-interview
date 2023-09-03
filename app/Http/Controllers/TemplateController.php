@@ -55,6 +55,9 @@ class TemplateController extends Controller
     public function show(string $id)
     {
         $message = Message::find($id);
+        if(!$message){
+            return redirect()->back();
+        }
         return response()->json($message);
     }
 
@@ -63,7 +66,8 @@ class TemplateController extends Controller
      */
     public function edit(string $id)
     {
-        return view('template.edit');
+        $message = Message::find($id);
+        return view('template.edit', compact('message'));
     }
 
     /**

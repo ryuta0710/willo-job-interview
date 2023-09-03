@@ -36,8 +36,8 @@ $(document).ready(function() {
             trigger,
             content,
         }
-        $.post(
-            "/template",
+        $.put(
+            "/template/{{$message->id}}",
             postData,
             function(data, status) {
                 console.log(data, status);

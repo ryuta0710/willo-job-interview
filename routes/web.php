@@ -95,9 +95,9 @@ Route::controller(TemplateController::class)->group(function(){
 
     Route::get('template/{id}', 'show')->name('template.show');
 
-    // Route::put('template/{template}', 'update')->name('template.update');
+    Route::put('template/{template}', 'update')->name('template.update');
 
-    // Route::delete('template/{template}', 'destroy')->name('template.destroy');
+    Route::delete('template/{template}', 'destroy')->name('template.destroy');
 
     Route::get('template/{template}/edit', 'edit')->name('template.edit');
 });
