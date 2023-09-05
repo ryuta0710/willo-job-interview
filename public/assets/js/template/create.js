@@ -6,13 +6,14 @@ $(document).ready(function() {
         if (source == 'api') {
             console.log("An API call triggered this change.");
         } else if (source == 'user') {
-            let content = new String(quill.getContents().ops[0].insert)
+            let content = new String(quill.getContents().ops[0].insert);
             if (content == '\n') {
                 $("#save").removeClass("bg-primary").attr("disabled", "");
+                $("#content").val("");
     
             } else {
                 $("#save").addClass("bg-primary").removeAttr("disabled");
-                $("#content").val(content);
+                $("#content").val(quill.root.innerHTML);
             }
         }
     });
@@ -23,11 +24,18 @@ $(document).ready(function() {
     })
     
     function message_add() {
-        let title = $("#title").val();
-        let type = $("#type").val();
-        let trigger = $("#trigger").val();
-        let content = $("#content").val();
-        let token = $("meta[name=csrf-token]").attr("content")
+        let title = $("#title").val().trim();
+        let type = $("#type").val().trim();
+        let trigger = $("#trigger").val().trim();
+        let content = $("#content").val().trim();
+        let token = $("meta[name=csrf-token]").attr("content");
+        if(title == "" || type == "" || trigger == "" || content == ""){
+            alert("内容を正確に入力してください。");
+            return;
+        }
+        if( type = "sms"){
+            content = new String(quill.getContents().ops[0].insert);
+        }
     
         let postData = {
             _token: token,
@@ -36,11 +44,10 @@ $(document).ready(function() {
             trigger,
             content,
         }
-        $.put(
-            "/template/{{$message->id}}",
+        $.post(
+            "/template",
             postData,
-            function(data, status) {
-                console.log(data, status);
+            function(data, status) {    
                 if(status = 'success'){
                     window.location.href = "/template"
                 }

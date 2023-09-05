@@ -106,11 +106,18 @@
             })
 
             function message_add() {
-                let title = $("#title").val();
-                let type = $("#type").val();
-                let trigger = $("#trigger").val();
-                let content = $("#content").val();
-                let token = $("meta[name=csrf-token]").attr("content")
+                let title = $("#title").val().trim();
+                let type = $("#type").val().trim();
+                let trigger = $("#trigger").val().trim();
+                let content = $("#content").val().trim();
+                let token = $("meta[name=csrf-token]").attr("content");
+                if (title == "" || type == "" || trigger == "" || content == "") {
+                    alert("内容を正確に入力してください。");
+                    return;
+                }
+                if (type = "sms") {
+                    content = new String(quill.getContents().ops[0].insert);
+                }
 
                 let postData = {
                     _token: token,

@@ -15,31 +15,27 @@ $(document).ready(function () {
             }
         )
     })
-
-    function copy() {
-        let doms = document.getElementsByClassName("fa-copy");
-        let len = doms.length;
-        for (let i = 0; i < len; i++) {
-            doms[i].onclick = copy_set;
-        }
-    }
-
-    function copy_set(e) {
-        let dom = e.target.parentElement.parentElement.parentElement.parentElement;
-        let new_dom = dom.cloneNode(true);
-        dom.insertAdjacentElement("afterend", new_dom);
-
-        // show();
-        copy();
-    }
-
-    copy();
 })
 
 function del(id){
     $.ajax({
         url: '/template/'+id,
         type: 'DELETE',
+        data: {
+            _token : $("meta[name=csrf-token]").attr("content"),
+        },
+        success: function(response) {
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            alert(xhr.responseJSON.message);
+        }
+    });
+}
+function copy(id){
+    $.ajax({
+        url: '/template/'+id+"/copy",
+        type: 'post',
         data: {
             _token : $("meta[name=csrf-token]").attr("content"),
         },

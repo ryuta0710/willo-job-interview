@@ -68,11 +68,11 @@
                                 @else
                                     <div style="display: inline-block;width: 32px;"></div>
                                 @endif
-                                <a href="#">
+                                <a href="javascript:;" onclick="copy('{{$message->id}}')">
                                     <i class="fa fa-solid fa-copy me-3"></i>
                                 </a>
                                 @if ($message->editable == 1)
-                                    <a href="javascript:;" onclick="del({{$message->id}})">
+                                    <a href="javascript:;" onclick="del('{{$message->id}}')">
                                         <i class="fa fa-solid fa-trash"></i>
                                     </a>
                                 @else

@@ -93,6 +93,8 @@ Route::controller(TemplateController::class)->group(function(){
 
     Route::get('template/create', 'create')->name('template.create');
 
+    Route::post('template/{id}/copy', 'copy')->name('template.copy');
+
     Route::get('template/{id}', 'show')->name('template.show');
 
     Route::put('template/{template}', 'update')->name('template.update');
