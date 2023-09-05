@@ -109,15 +109,6 @@
                             <input type="text" class="form-control" name="companyName" id="companyName">
                         </div>
                     </div>
-                    <div class="row align-items-center mb-4">
-                        <div class="col-md-5 d-flex justify-content-start mb-2 mb-md-0 justify-content-md-end">
-                            <label for="companyName" class="me-4">電話番号</label>
-                            <span class="bg-danger text-white px-2 py-1 rounded">必須</span>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" name="companyName" id="companyName">
-                        </div>
-                    </div>
                     <div class="row align-items-start mb-4">
                         <div class="col-md-5 d-flex justify-content-start mb-2 mb-md-0 justify-content-md-end">
                             <label for="companyName" class="me-4">お問い合わせ内容</label>

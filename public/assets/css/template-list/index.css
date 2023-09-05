@@ -43,3 +43,32 @@ th {
 main {
     min-height: calc(100vh - 251px);
 }
+
+#messages_table {
+    box-sizing: border-box;
+    max-width: 1200px;
+    width: 100%;
+}
+
+#messages_table tr td:first-child {
+    padding-left: 48px;
+}
+
+#messages_table tr td:nth-child(3) {
+    text-wrap: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+    max-width: 300px;
+}
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    /* or */
+    word-break: break-all;
+ }
+
+ .modal-preview {
+    font-size: 14px;
+ }
