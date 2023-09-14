@@ -18,6 +18,14 @@ a {
   text-decoration: none;
 }
 
+.none {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 main {
   --width-min: calc(100vh - 256px);
   min-height: var(--width-min);
@@ -98,7 +106,7 @@ main {
 .table-sec th:last-child{
   border-top-right-radius: 1rem;
 }
-/* .table-sec thead,
-.table-sec tr {
-  border-
-} */
+
+#edit_profile {
+  cursor: pointer;
+}

@@ -28,7 +28,7 @@ $(document).ready(function() {
         let type = $("#type").val().trim();
         let trigger = $("#trigger").val().trim();
         let content = $("#content").val().trim();
-        let token = $("meta[name=csrf-token]").attr("content");
+
         if(title == "" || type == "" || trigger == "" || content == ""){
             alert("内容を正確に入力してください。");
             return;
@@ -36,6 +36,8 @@ $(document).ready(function() {
         if( type = "sms"){
             content = new String(quill.getContents().ops[0].insert);
         }
+        
+        let token = $("meta[name=csrf-token]").attr("content");
     
         let postData = {
             _token: token,

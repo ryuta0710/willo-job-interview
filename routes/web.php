@@ -114,7 +114,7 @@ Route::controller(ProfileController::class)->group(function(){
 
     // Route::get('profile/{profile}', 'show')->name('profile.show');
 
-    // Route::put('profile/{profile}', 'update')->name('profile.update');
+    Route::put('profile', 'update')->name('profile.update');
 
     // Route::delete('profile/{profile}', 'destroy')->name('profile.destroy');
 
@@ -125,7 +125,7 @@ Route::controller(UserController::class)->group(function(){
 
     Route::get('user', 'index')->name('user.index');
 
-    // Route::post('user', 'store')->name('user.store');
+    Route::post('user', 'store')->name('user.store');
 
     // Route::get('user/create', 'create')->name('user.create');
 
