@@ -33,10 +33,10 @@ $(document).ready(function() {
             alert("内容を正確に入力してください。");
             return;
         }
-        if( type = "sms"){
+        if( type == "sms"){
             content = new String(quill.getContents().ops[0].insert);
         }
-        
+
         let token = $("meta[name=csrf-token]").attr("content");
     
         let postData = {

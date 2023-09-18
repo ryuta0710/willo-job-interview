@@ -26,7 +26,7 @@ class TemplateController extends Controller
 
 
         $user = Auth::user();
-        if ($user) {
+        if (!empty($user)) {
             $messages = Message::where("writer", $user->email)
                 ->orWhere('editable', 0)->orderBy('id', 'desc')->get();
             $messages->transform(function ($message) {
@@ -52,7 +52,7 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if ($user) {
+        if (!empty($user)) {
             $request->validate([
                 'title' => 'required',
                 'type' => 'required',
@@ -77,7 +77,7 @@ class TemplateController extends Controller
     public function copy($id)
     {
         $user = Auth::user();
-        if ($user) {
+        if (!empty($user)) {
             $message = Message::find($id);
             $new_message = [
                 'title' => $message->title,
@@ -90,7 +90,7 @@ class TemplateController extends Controller
             $save_data = Message::create($new_message);
             Log::info($message);
 
-            if ($save_data) {
+            if (!empty($save_data)) {
                 return response()->json([
                     'status' => 'success',
                     'data' => $save_data,
@@ -111,7 +111,7 @@ class TemplateController extends Controller
     public function show(string $id)
     {
         $message = Message::find($id);
-        if (!$message) {
+        if (empty($message)) {
             return redirect()->back();
         }
         return response()->json($message);
@@ -141,7 +141,7 @@ class TemplateController extends Controller
     {
         $message = Message::find($id);
         $email = Auth::user()->email;
-        if ($message) {
+        if (!empty($message)) {
             if ($email == $message->writer) {
                 if ($message->editable == 1) {
                     $message->delete();

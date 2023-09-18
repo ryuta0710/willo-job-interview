@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvitedUsers extends Model
 {
-    protected $table = 'invited_users';
     protected $fillable = [
-        'id', 'title', 'type', 'trigger', 'content', 'writer', 'memo'
+        'id', 'user_id', 'email', 'inviter', 'role', 'status'
     ];
     use HasFactory;
-
 }

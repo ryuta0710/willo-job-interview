@@ -3,6 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/template-list/index.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/common/modal-preview.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <main class="pt-5">
         <div class="container px-4">
@@ -226,4 +227,5 @@
     </div>
 
     <script src="{{ asset('/assets/js/template/index.js') }}"></script>
-@endsection
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @endsection

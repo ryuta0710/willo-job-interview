@@ -1,8 +1,16 @@
 @extends('layouts.company')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/top/profile.css') }}">
-
+<style>
+    .display-none, .dis_role{
+        display:none;
+    }
+    .display-none + .dis_role{
+        display: block;
+    }
+</style>
     <main>
         <section id="users">
             <div class="container m-1200 fs-14">
@@ -27,9 +35,9 @@
                         <!-- radio button -->
                         <div class="w-100 d-flex flex-wrap  ">
                             <div class="form-check w-auto me-3 pe-2">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="standard"
-                                    checked>
-                                <label class="form-check-label" for="standard">
+                                <input class="form-check-input" type="radio" name="role" id="role_standard"
+                                    value="standard" checked>
+                                <label class="form-check-label" for="role_standard">
                                     スタンダード
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13.33" height="13.33"
                                         viewBox="0 0 13.33 13.33">
@@ -50,9 +58,9 @@
                                 </label>
                             </div>
                             <div class="form-check w-auto">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="admin"
-                                    checked>
-                                <label class="form-check-label" for="admin">
+                                <input class="form-check-input" type="radio" name="role" id="role_admin"
+                                    value="admin">
+                                <label class="form-check-label" for="role_admin">
                                     管理者
                                     <svg xmlns="http://www.w3.org/2000/svg" width="13.33" height="13.33"
                                         viewBox="0 0 13.33 13.33">
@@ -89,22 +97,47 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <tr class="bg-secondary">
-                                <td class="border-start">Admin</td>
-                                <td>Admin@gmail.com</td>
-                                <td>-</td>
+                                <td class="border-start">{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
                                 <td>オーナー</td>
                                 <td>参加しました</td>
-                                <td class="border-end">
-                                    <a href="javascript:;">
-                                        <i class="fa fa-solid fa-edit me-3"></i>
-                                    </a>
-                                    <a href="javascript:;" onclick="">
-                                        <i class="fa fa-solid fa-trash"></i>
-                                    </a>
+                                <td class="border-end" style="min-width: 115px;">
                                 </td>
                             </tr>
+                            @foreach ($display_users as $invited_user)
+                                <tr class="bg-secondary" data-id="{{ $invited_user->id }}">
+                                    <td class="border-start">{{ $invited_user->name }}</td>
+                                    <td>{{ $invited_user->email }}</td>
+                                    <td>{{ $invited_user->phone }}</td>
+                                    <td><select class="display-none role_{{ $invited_user->id }} select_role display-none">
+                                            <option value="admin">管理者</option>
+                                            <option value="standard" selected>一般ユーザー</option>
+                                        </select><div class="dis_role">{{ $invited_user->role }}</div></td>
+                                    <td>{{ $invited_user->status }}</td>
+                                    <td class="border-end">
+                                        <a href="javascript:;" class="invited_user_edit han_btn"
+                                            data-del-id="{{ $invited_user->id }}">
+                                            <i class="fa fa-solid fa-edit me-3"></i>
+                                        </a>
+                                        <a href="javascript:;" class="invited_user_del han_btn"
+                                            data-del-id="{{ $invited_user->id }}">
+                                            <i class="fa fa-solid fa-trash"></i>
+                                        </a>
+                                        
+                                        <a href="javascript:;" class="invited_user_ok display-none han_btn"
+                                        data-del-id="{{ $invited_user->id }}">
+                                        <i class="fa fa-solid fa-check me-3"></i>
+                                    </a>
+                                    <a href="javascript:;" class="invited_user_cancel display-none han_btn"
+                                        data-del-id="{{ $invited_user->id }}">
+                                        <i class="fa fa-solid fa-close"></i>
+                                    </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -128,22 +161,115 @@
 
             $("#invite").click(function() {
                 var email = $("#email").val().trim();
+                if (!emailPattern.test(email)) {
+                    return;
+                }
+                var role = $("[name=role]:checked").val().trim();
                 var token = $("meta[name=csrf-token]").attr("content");
 
                 var postData = {
                     _token: token,
-                    email
+                    email,
+                    role,
                 }
                 $.post(
-                    "/user",
-                    postData,
-                    function(data, status) {
-                        if (status = 'success') {
-                            location.reload();
+                        "/user",
+                        postData,
+                        function(data, status) {
+                            if (status == 'success') {
+                                toastr.success('招待が成功しました。');
+                                var save_data = data.data;
+                                var role_text = role == "admin" ? "管理者" : "一般ユーザー";
+                                var code = `<tr class="bg-secondary"  data-id="` + save_data.id + `">
+                                <td class="border-start">` + save_data.name + `</td>
+                                <td>` + email + `</td>
+                                <td>` + save_data.phone + `</td>
+                                <td>` + role_text + `<select class="role_` + save_data.id + `"><option value="admin">管理者</option><option value="standard" selected="">一般ユーザー</option></select></td>
+                                <td>参加しました</td>
+                                <td class="border-end" style="width: 115px;">
+                                    <a href="javascript:;" class="invited_user_edit han_btn" data-del-id="` + save_data.id + `">
+                                        <i class="fa fa-solid fa-edit me-3"></i>
+                                    </a>
+                                    <a href="javascript:;" class="invited_user_del han_btn" data-del-id="` + save_data.id + `">
+                                        <i class="fa fa-solid fa-trash"></i>
+                                    </a>
+                                    
+                                    <a href="javascript:;" class="invited_user_ok han_btn" data-del-id="` + save_data.id + `">
+                                        <i class="fa fa-solid fa-check me-3"></i>
+                                    </a>
+                                    <a href="javascript:;" class="invited_user_cancel han_btn" data-del-id="` + save_data.id + `">
+                                        <i class="fa fa-solid fa-close"></i>
+                                    </a>
+                                </td>
+                            </tr>`;
+
+                                $("#tbody").append(code);
+                                handlers();
+                            };
                         }
+                    ).done(function(data) {
+
+                    })
+                    .fail(function(xhr, status, error) {
+                        toastr.error('すでに招待されているユーザーです。');
+                    });
+            });
+
+            function del(id) {
+                $.ajax({
+                    url: '/user/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: $("meta[name=csrf-token]").attr("content"),
+                    },
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseJSON.message);
                     }
-                )
-            })
+                });
+            }
+
+            function change(id) {
+                var change_role = $(".role_" + id).val();
+                $.ajax({
+                    url: '/user/' + id,
+                    type: 'PUT',
+                    data: {
+                        _token: $("meta[name=csrf-token]").attr("content"),
+                        role: change_role,
+                    },
+                    success: function(response) {
+                        location.reload(); 
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseJSON.message);
+                    }
+                });
+            }
+
+            function handlers() {
+                $(".invited_user_edit, .invited_user_cancel").click(function(e) {
+                    $(e.currentTarget).parents("tr").find(".han_btn").toggleClass("display-none");
+                    $(e.currentTarget).parents("tr").find(".dis_role, select").toggleClass("display-none");
+                });
+
+                $(".invited_user_ok").click(function(e) {
+                    var id = $(e.currentTarget).attr("data-del-id");
+                    change(id);
+                });
+
+                $(".invited_user_del").click(function(e) {
+                    var id = $(e.currentTarget).attr("data-del-id");
+                    del(id);
+                });
+
+            }
+
+            handlers();
+
         })
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @endsection

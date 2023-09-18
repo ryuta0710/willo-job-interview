@@ -131,9 +131,9 @@ Route::controller(UserController::class)->group(function(){
 
     // Route::get('user/{user}', 'show')->name('user.show');
 
-    // Route::put('user/{user}', 'update')->name('user.update');
+    Route::put('user/{id}', 'update')->name('user.update');
 
-    // Route::delete('user/{user}', 'destroy')->name('user.destroy');
+    Route::delete('user/{id}', 'destroy')->name('user.destroy');
 
     // Route::get('user/{user}/edit', 'edit')->name('user.edit');
 });
