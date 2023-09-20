@@ -20,11 +20,13 @@
                 </ul>
             </div>
             <div class="row mt-5">
-                <form action="{{ route('company.store') }}" enctype="multipart/form-data" method="post" class="col-lg-6 mx-auto">
+                <form action="{{ route('company.update', ['id' => $company->id ]) }}" id="form" enctype="multipart/form-data" method="POST"
+                    class="col-lg-6 mx-auto">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label px-3">会社名</label>
-                        <input name="name" value="{{ old('name') }}" type="text" class="form-control rounded-pill"
+                        <input name="name" value="{{ $company->name }}" type="text" class="form-control rounded-pill"
                             id="name" placeholder="会社名を正しく入力してください。">
                         @error('name')
                             <span class="text-danger">
@@ -34,8 +36,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label px-3">アドレス</label>
-                        <input name="address" value="{{ old('address') }}" type="text" class="form-control rounded-pill"
-                            id="address" placeholder="アドレスを入力してください">
+                        <input name="address" value="{{ $company->address }}" type="text"
+                            class="form-control rounded-pill" id="address" placeholder="アドレスを入力してください">
                         @error('address')
                             <span class="text-danger">
                                 <strong>アドレスを正しく入力してください</strong>
@@ -48,8 +50,8 @@
                             <span class="text-secondary">オプション</span>
                             {{-- <span>オプション</span> --}}
                         </div>
-                        <input name="website" value="{{ old('website') }}" type="text" class="form-control rounded-pill"
-                            id="website" placeholder="ウェブサイトを入力してください">
+                        <input name="website" value="{{ $company->website }}" type="text"
+                            class="form-control rounded-pill" id="website" placeholder="ウェブサイトを入力してください">
                         @error('website')
                             <span class="text-danger">
                                 <strong>ウェブサイトを正しく入力してください</strong>
@@ -101,7 +103,8 @@
                                                     onclick="changeColor(1, '9900EF')"
                                                     style="width: 35px; height: 35px; background-color: #9900EF;"></button>
                                                 <input type="text"name="header_color" class="form-control m-0"
-                                                    id="previewValue1" style="max-width: 155px; height: 35px;" readonly>
+                                                    value="{{ $company->header_color }}" id="previewValue1"
+                                                    style="max-width: 155px; height: 35px;" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -149,7 +152,8 @@
                                                     onclick="changeColor(2, '9900EF')"
                                                     style="width: 35px; height: 35px; background-color: #9900EF;"></button>
                                                 <input type="text" name="button_color" class="form-control m-0"
-                                                    id="previewValue2" style="max-width: 155px; height: 35px;" readonly>
+                                                    value="{{ $company->header_color }}" id="previewValue2"
+                                                    style="max-width: 155px; height: 35px;" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -160,12 +164,12 @@
                                 <div class="drop-zone">
                                     <span class="drop-zone__prompt text-active"><i
                                             class="fa fa-solid fa-plus text-active"></i><br>アップロ一ド</span>
-                                    <input type="file" name="logo" id="logo"
+                                    <input type="file" name="logo" id="logo" 
                                         accept="image/jpeg, image/png, image/jpg" class="drop-zone__input">
                                 </div>
                                 @error('logo')
                                     <span class="text-danger">
-                                        <strong>ロゴを正しく入力してください{{$message}}</strong>
+                                        <strong>ロゴを正しく入力してください{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -173,20 +177,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="field" class="form-label px-3">業界 </label>
-                        <select name="field" id="field" class="form-select rounded-pill" value="{{old('field')}}">
-                            <option value="" selected class="display-none"></option>
-                            <option value="企業">企業</option>
-                            <option value="自動車">自動車</option>
-                            <option value="自動化">自動化</option>
-                            <option value="電子工業">電子工業</option>
-                            <option value="電子工業">電子工業</option>
+                        <select name="field" id="field" class="form-select rounded-pill">
+                            <option value=""></option>
+                            @foreach ($fields as $field)
+                                <option value="{{ $field->id }}" @if ($company->field == $field->id) selected @endif>
+                                    {{ $field->name }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-4">
                         <div class="d-flex justify-content-between px-3">
                             <p class="m-0"><i class="fa fa-solid fa-circle-info"></i> デフォルトの会社として使用</p>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" name="default" type="checkbox" id="flexSwitchCheckDefault">
+                                <input class="form-check-input" name="default" type="checkbox"
+                                    id="flexSwitchCheckDefault">
                             </div>
                         </div>
                     </div>
@@ -202,4 +207,43 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('/assets/js/company/create.js') }}"></script>
+    <script>
+        @if (strlen($company->header_color) == 7)
+            changeColor(1, '{{ substr($company->header_color, 1) }}');
+            togglePicker(1);
+        @endIf
+
+        @if (strlen($company->button_color) == 7)
+            changeColor(2, '{{ substr($company->header_color, 1) }}');
+            togglePicker(2);
+        @endIf
+
+        @if (strlen($company->logo) > 13)
+
+            // var fileInput = document.getElementById('logo');
+            var url = "{{ asset('/assets/upload/company_logos/' . $company->logo) }}";
+            // $("#logo").val(imageUrl);
+
+            getImgURL(url, (imgBlob) => {
+                // Load img blob to input
+                // WIP: UTF8 character error
+                let fileName = 'logo.jpg'
+                let file = new File([imgBlob], fileName, {
+                    type: "image/jpeg",
+                    lastModified: new Date().getTime()
+                }, 'utf-8');
+                let container = new DataTransfer();
+                container.items.add(file);
+
+                // const dropZoneElement = inputElement.closest(".drop-zone");
+
+                console.log(document.querySelectorAll(".drop-zone__input")[0]);
+                
+                document.querySelectorAll(".drop-zone__input")[0].files = container.files;
+                const dropZoneElement = document.querySelectorAll(".drop-zone__input")[0].closest(".drop-zone");
+                updateThumbnail(dropZoneElement, file);
+
+            })
+        @endIf
+    </script>
 @endsection

@@ -16,25 +16,14 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $messages = Message::all();
-        // $messages->transform(function ($message) {
-        //     $message->content = strip_tags($message->content);
-        //     return $message;
-        // });
-        // return view('template.index', compact('messages'));
-
 
         $user = Auth::user();
-        if (!empty($user)) {
-            $messages = Message::where("writer", $user->email)
-                ->orWhere('editable', 0)->orderBy('id', 'desc')->get();
-            $messages->transform(function ($message) {
-                $message->content = strip_tags($message->content);
-                return $message;
-            });
-            return view('template.index', compact('messages'));
-        }
+        $messages = Message::where("writer", $user->email)
+            ->orWhere('editable', 0)->orderBy('id', 'desc')->get();
+        $messages->transform(function ($message) {
+            $message->content = strip_tags($message->content);
+            return $message;
+        });
         redirect("home");
     }
 
@@ -52,7 +41,7 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if (!empty($user)) {
+        if (Auth::check()) {
             $request->validate([
                 'title' => 'required',
                 'type' => 'required',
@@ -77,7 +66,7 @@ class TemplateController extends Controller
     public function copy($id)
     {
         $user = Auth::user();
-        if (!empty($user)) {
+        if (Auth::check()) {
             $message = Message::find($id);
             $new_message = [
                 'title' => $message->title,
@@ -131,7 +120,29 @@ class TemplateController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Auth::user();
+        if (!empty($user)) {
+            $request->validate([
+                'title' => 'required',
+                'type' => 'required',
+                'trigger' => 'required',
+                'content' => 'required'
+            ]);
+            $request['writer'] = $user->email;
+
+            $save_data = Message::find($id);
+            $save_data['title'] = $request['title'];
+            $save_data['type'] = $request['type'];
+            $save_data['trigger'] = $request['trigger'];
+            $save_data['content'] = $request['content'];
+            $save_data->save();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $save_data,
+            ], Response::HTTP_OK);
+        }
+        redirect("home");
     }
 
     /**

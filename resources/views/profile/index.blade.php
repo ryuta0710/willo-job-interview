@@ -80,12 +80,12 @@
                                 <i class="fa-solid fa-video me-2 text-main"></i>
                             </div>
                             <div class="d-flex flex-column flex-grow-1">
-                                <span class="">{{ $org->interviews_count }}</span>
+                                <span class="">{{ $user->interviews_count }}</span>
                                 <div class="progress w-auto" role="progressbar" style="height: 6px;"
                                     aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" id="interview_progress_bar" style="width: 0%"></div>
                                 </div>
-                                <div class="text-end"><span>{{ $org->total_interviews }}</span></div>
+                                <div class="text-end"><span>{{ $user->total_interviews }}</span></div>
                             </div>
                             <div class="d-flex align-items-center ms-2 fs-14">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13.33" height="13.33"
@@ -110,19 +110,19 @@
                         <div class="form-check form-switch mt-3 ps-0 fs-14">
                             <label class="form-check-label ms-2" for="flexSwitchCheckChecked">SMS 招待:</label>
                             <input class="form-check-input ms-0 text-main" type="checkbox" role="switch"
-                                id="flexSwitchCheckChecked">
+                                id="flexSwitchCheckChecked" checked>
                         </div>
                         <div class="w-100 d-flex fs-14" id="show_sms_status">
                             <div class="w-auto d-flex me-2 align-items-center">
-                                <i class="fa-solid fa-video me-2 text-main"></i>
+                                <i class="fa-solid fa-comment me-2 text-main"></i>
                             </div>
                             <div class="d-flex flex-column flex-grow-1">
-                                <span class="">{{ $org->sms_count }}</span>
+                                <span class="">{{ $user->sms_count }}</span>
                                 <div class="progress w-auto" role="progressbar" style="height: 6px;"
                                     aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar" id="interview_progress_bar" style="width: 0%"></div>
+                                    <div class="progress-bar" id="sms_progress_bar" style="width: 0%"></div>
                                 </div>
-                                <div class="text-end"><span>{{ $org->total_sms }}</span></div>
+                                <div class="text-end"><span>{{ $user->total_sms }}</span></div>
                             </div>
                             <div class="d-flex align-items-center ms-2 fs-14">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13.33" height="13.33"
@@ -171,7 +171,7 @@
                         </div>
                         <p class="mt-3 fs-20 text-main">
                             <i class="fa-solid fa-person me-2"></i>
-                            <a href="/users">{{ $org->users_count }}</a>
+                            <a href="/users">{{ $user->users_count }}</a>
                         </p>
                         <p class=" fs-14">
                             プランは 2023 年 8 月 13 日に更新されます<br>今月の追加インタビュー: $0.00
@@ -216,20 +216,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            let interview_percent = {!! $org->interviews_count !!} / {!! $org->total_interviews !!} * 100 + "%";
+            let interview_percent = {!! $user->interviews_count !!} / {!! $user->total_interviews !!} * 100 + "%";
             $("#interview_progress_bar").css("width", interview_percent);
 
-            @if ($org->total_sms != 0)
-                let sms_percent = {!! $org->sms_count !!} / {!! $org->total_sms !!} * 100 + "%";
+            @if ($user->total_sms != 0)
+                let sms_percent = {!! $user->sms_count !!} / {!! $user->total_sms !!} * 100 + "%";
                 $("#sms_progress_bar").css("width", sms_percent);
             @endif
 
             $("#flexSwitchCheckChecked").change(function(e) {
-                if ($(this).is(':checked')) {
-                    $("#show_sms_status").show();
-                } else {
-                    $("#show_sms_status").hide();
-                }
+                $("#show_sms_status").toggleClass("d-none");
 
             });
 

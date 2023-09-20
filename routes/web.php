@@ -72,17 +72,17 @@ Route::controller(CompanyController::class)->group(function(){
 
     Route::get('company', 'index')->name('company.index');
 
-    // Route::post('company', 'store')->name('company.store');
+    Route::post('company', 'store')->name('company.store');
 
     Route::get('company/create', 'create')->name('company.create');
 
     // Route::get('company/{company}', 'show')->name('company.show');
+    
+    Route::put('company/{id}', 'update')->name('company.update');
 
-    // Route::put('company/{company}', 'update')->name('company.update');
+    Route::delete('company/{id}', 'destroy')->name('company.destroy');
 
-    // Route::delete('company/{company}', 'destroy')->name('company.destroy');
-
-    // Route::get('company/{company}/edit', 'edit')->name('company.edit');
+    Route::get('company/{id}/edit', 'edit')->name('company.edit');
 });
 
 Route::controller(TemplateController::class)->group(function(){
@@ -124,7 +124,7 @@ Route::controller(ProfileController::class)->group(function(){
 Route::controller(UserController::class)->group(function(){
 
     Route::get('user', 'index')->name('user.index');
-
+//save
     Route::post('user', 'store')->name('user.store');
 
     // Route::get('user/create', 'create')->name('user.create');

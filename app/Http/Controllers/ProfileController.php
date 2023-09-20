@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\HTTP\Response;
-use App\Models\Organization;
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $org = Organization::where("id", $user->organization_id)
+        $org = Company::where("id", $user->main_company_id)
         ->get()->first();
         if(!$org){
             return response('Bad Request', 400);
@@ -72,8 +72,8 @@ class ProfileController extends Controller
             $profile = User::where('id', $user->id)->first();
             $profile->phone = $newPhone;
             $profile->save();
-            $org_id = $profile->organization_id;
-            $org = Organization::where('id', $org_id)->first();
+            $main_company_id = $profile->main_company_id;
+            $org = Company::where('id', $main_company_id)->first();
             $org->name = $newName;
             $org->save();
             return response()->json([
