@@ -310,3 +310,8 @@ select {
 .up, .down, .copy, .delete{
     cursor: pointer;
 }
+
+form .text-danger {
+    padding-left: 28px;
+    font-size: 14px;
+}

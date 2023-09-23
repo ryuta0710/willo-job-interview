@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
-        <form action="{{ route('myjob.store') }}" enctype="multipart/form-data" method="post">
+        <form action="{{ route('myjob.store') }}" method="post">
             @csrf
             <div class="container mb-5">
                 <!-- nav link -->
@@ -161,7 +161,7 @@
                             <div class="mb-3">
                                 <label for="title" class="form-label px-4 mb-2 pb-1">募集職種</label>
                                 <input name="title" type="text" class="form-control px-4 rounded-5" id="title"
-                                    placeholder="募集職種の入力" value="{{ old('title') }}">
+                                    placeholder="募集職種の入力">
                                 @error('title')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -175,8 +175,8 @@
                                     <label for="salary" class="form-label">給料</label>
                                     <div class="text-secondary">オプション</div>
                                 </div>
-                                <input name="salary" id="salary" type="number" step="100" class="form-control px-4 rounded-5"
-                                    placeholder="給料の入力" value="{{ old('salary') }}">
+                                <input name="salary" id="salary" type="text" class="form-control px-4 rounded-5"
+                                    placeholder="給料の入力">
                                 @error('salary')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -228,12 +228,12 @@
                                         </span>
                                         <div class="form-check form-switch">
                                             <input name="state_toggle" class="form-check-input" type="checkbox"
-                                                role="switch" id="state_toggle" @error('video') checked @enderror>
+                                                role="switch" id="state_toggle">
                                         </div>
                                     </div>
                                 </div>
                                 <input type="text" name="video_url" class="form-control px-4 rounded-5"
-                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください" value="{{ old('video_url') }}">
+                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください">
                                 @error('video_url')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -268,15 +268,7 @@
                                 <p class="pt-1 pb-1">また</p>
                                 <button id="btn_upload"
                                     class="btn-normal w-100 bg-white border border-primary bg-hover-primary max-300">アップロード&nbsp;&nbsp;<i
-                                        class="fa-solid fa-cloud-arrow-up"></i>
-                                </button>
-                                <p>
-                                    @error('video')
-                                        <span class="text-danger">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </p>
+                                        class="fa-solid fa-cloud-arrow-up"></i></button>
                             </div>
                         </div>
 
@@ -312,27 +304,4 @@
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="{{ asset('/assets/js/create-interview/create.js') }}"></script>
-    <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-        quill.on('text-change', function(delta, oldDelta, source) {
-            if (source == 'api') {
-                console.log("An API call triggered this change.");
-            } else if (source == 'user') {
-                let content = new String(quill.getContents().ops[0].insert);
-                if (content == '\n') {
-                    $("#next").removeClass("active").addClass("bg-secondary-subtle").attr("disabled", "");
-                    $("#content").val("");
-
-                } else {
-                    $("#next").addClass("active").removeClass("bg-secondary-subtle").removeAttr("disabled");
-                    $("#content").val(quill.root.innerHTML);
-                }
-            }
-        });
-        // quill.setContents("{{ old('discription') }}");
-        // quill.root.innerHTML = "{{ old('discription') }}"
-        // .setContents()
-    </script>
 @endsection

@@ -24,7 +24,7 @@ class TemplateController extends Controller
             $message->content = strip_tags($message->content);
             return $message;
         });
-        redirect("home");
+        return view('template.index', compact('messages'));
     }
 
     /**

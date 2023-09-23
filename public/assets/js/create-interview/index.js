@@ -172,7 +172,7 @@ function func() {
 
 	$("*").click(function (e) {
 		if ($(e.target).parents(".card").length == 0) {
-			$("#.card").removeClass("active");
+			$(".card").removeClass("active");
 		}
 		// console.log("sdf")
 	})

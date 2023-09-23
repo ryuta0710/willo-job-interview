@@ -165,7 +165,7 @@
                                 </div>
                                 @error('logo')
                                     <span class="text-danger">
-                                        <strong>ロゴを正しく入力してください{{$message}}</strong>
+                                        <strong>{{$message}}</strong>
                                     </span>
                                 @enderror
                             </div>

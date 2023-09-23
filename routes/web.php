@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,15 +38,18 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::get('myjob/create', 'create')->name('myjob.create');
 
+    Route::get('myjob/{myjob}/create-questions', 'create_questions')->name('myjob.create_questions');
+
     Route::get('myjob/{myjob}', 'show')->name('myjob.show');
 
-    Route::put('myjob/{myjob}', 'update')->name('myjob.update');
+    // Route::put('myjob/{myjob}', 'update')->name('myjob.update');
 
-    Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
+    // Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
 
     Route::get('myjob/{myjob}/edit', 'edit')->name('myjob.edit');
 
     Route::get('myjob/{myjob}/{user_id}/edit', 'person')->name('myjob.person');
+
 
 });
 
