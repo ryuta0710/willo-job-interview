@@ -217,11 +217,6 @@
 
                     </div>
                 </div>
-                {{-- <div class="modal-footer justify-content-center">
-                    <a href="/" class="text-center">
-                        <img src="{{ asset('/assets/img/logo01.png') }}" style="width: 150px;" alt="logo">
-                    </a>
-                </div> --}}
             </div>
         </div>
     </div>

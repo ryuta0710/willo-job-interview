@@ -40,6 +40,10 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::get('myjob/{myjob}/create-questions', 'create_questions')->name('myjob.create_questions');
 
+    Route::post('myjob/{myjob}/store-questions', 'store_questions')->name('myjob.store_questions');
+
+    Route::get('myjob/{myjob}/select-messages', 'select_messages')->name('myjob.select_messages');
+
     Route::get('myjob/{myjob}', 'show')->name('myjob.show');
 
     // Route::put('myjob/{myjob}', 'update')->name('myjob.update');
@@ -51,7 +55,7 @@ Route::controller(MyJobController::class)->group(function(){
     Route::get('myjob/{myjob}/{user_id}/edit', 'person')->name('myjob.person');
 
 
-});
+})->middleware('auth');;
 
 Route::get('invite-people', [OtherController::class, 'invitePeople'])->name('invite-people');
 

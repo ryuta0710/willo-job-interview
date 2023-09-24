@@ -85,7 +85,13 @@ function func() {
 	})
 
 	$(".max").change(function (e) {
-		$(e.target).parents(".card").find(".dis_max").html(e.target.value);
+		let val = parseInt(e.target.value);
+		if (val <= 0 || isNaN(val)) {
+			e.target.value = 1;
+			val=1;
+		}
+		$(e.target).parents(".card").find(".dis_max").html(val);
+
 	})
 
 	$(".thinking_hour").change(function (e) {
@@ -120,42 +126,10 @@ function func() {
 		// console.log("sdf")
 	});
 
-	$("#next").click(function () {
-		if (questions_check()) {
-
-			let questions = document.getElementsByClassName("card");
-			let length = questions.length;
-
-			for (let i = 0; i < length; i++) {
-
-				let type = $(questions[i]).find('.answer_type').val();
-				let retake = $(questions[i]).find('.retake').val();
-				let q_content = $(questions[i]).find('.q_content').val();
-				let answer_time = $(questions[i]).find('.answer_time').val();
-				let limit = $(questions[i]).find('.limit').val();
-				let max = $(questions[i]).find('.max').val();
-				let thinking_hour = $(questions[i]).find('.answer_type').val();
-				let thinking_minute = $(questions[i]).find('.answer_type').val();
-				let question_no = $(questions[i]).find('.question-no').val();
-
-				$data = {
-					type,
-					retake,
-					content: q_content,
-					answer_time,
-					limit_type: limit,
-					max,
-					thinking_hour,
-					thinking_minute,
-					question_no,
-				}
-			}
-		}
-	})
 
 }
 // make questions
-let old11 = document.getElementById("question1");
+let old11 = document.getElementsByClassName("card")[0];
 let newEle = old11.cloneNode(true);
 $("#add_questioin").click(function () {
 	let newEle1 = newEle.cloneNode(true);

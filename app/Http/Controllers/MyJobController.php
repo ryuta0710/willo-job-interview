@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Job;
+use App\Models\Questions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use Illuminate\HTTP\Response;
+use App\Models\Message;
 
 
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -85,7 +96,7 @@ class MyJobController extends Controller
 
 
             if ($request->hasFile('video')) {
-                
+
                 $video = $request->file('video');
                 $fileName = time() . '.' . $video->getClientOriginalExtension();
 
@@ -142,6 +153,104 @@ class MyJobController extends Controller
 
     public function create_questions(string $myjob)
     {
-        return view('myjob.create_questions', compact('myjob'));
+        $job = Job::where(['id'=>$myjob])->get();
+        $user_id = Auth::user()->id;
+        if(count($job) != 1)
+            return redirect()->back();
+        
+        $questions = Questions::where([
+            'job_id' => intval($myjob),
+            'user_id' => intval($user_id),
+        ])->orderBy('question_no', 'asc')->get();
+        // $questions = [];
+        return view('myjob.create_questions', compact('myjob', 'questions'));
+    }
+
+    public function store_questions(Request $request, string $myjob)
+    {
+        $length = $request->length;
+        $user = Auth::user();
+        $job = Job::where([
+            'id' => $myjob,
+            'user_id' => $user->id,
+        ])->get();
+
+        if ($length != 0 || count($job) > 0) {
+            //early exist data is deleted
+            Questions::where([
+                'job_id' => intval($myjob),
+                'user_id' => intval($user->id),
+            ])->delete();
+
+            $arr = $request->data;
+            foreach ($arr as $question) {
+                $data = [
+                    'type' => $question['type'],
+                    'content' => $question['content'],
+                    'retake' => $question['retake'],
+                    'answer_time' => $question['answer_time'],
+                    'limit_type' => $question['limit_type'],
+                    'max' => $question['max'],
+                    'thinking_hour' => $question['thinking_hour'],
+                    'thinking_minute' => $question['thinking_minute'],
+                    'question_no' => $question['question_no'],
+                    'job_id' => $myjob,
+                    'user_id' => $user->id,
+                ];
+                // return response()->json($data);
+                Questions::create($data);
+            }
+            return redirect()->route("myjob.select_messages", ['myjob' => $myjob]);
+
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => '操作が成功しました',
+            // ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => '操作が失敗しました。'
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function select_messages(Request $request, string $myjob)
+    {
+        $user_id = Auth::user()->id;
+        $jobs = Job::where([
+            'id' => $myjob,
+            'user_id' => $user_id,
+        ])
+        ->get();
+        $messages = Message::where([
+            'writer' => Auth::user()->email,
+        ])
+        ->orWhere([
+            'editable' => 0,
+        ])->get()
+        ->toArray();
+
+        if (count($jobs) == 1 && count($messages) > 0) {
+            $mail_invites = array_filter($messages, function($item){
+                return $item['type'] == "email" && $item['trigger'] == "invite";
+            });
+            $mail_success = array_filter($messages, function($item){
+                return $item['type'] == "email" && $item['trigger'] == "success";
+            });
+            $mail_reminder = array_filter($messages, function($item){
+                return $item['type'] == "email" && $item['trigger'] == "reminder";
+            });
+            $sms_invites = array_filter($messages, function($item){
+                return $item['type'] == "email" && $item['trigger'] == "invite";
+            });
+            $sms_reminders = array_filter($messages, function($item){
+                return $item['type'] == "email" && $item['trigger'] == "reminder";
+            });
+            //early exist data is deleted
+            return view("myjob.select_message", compact("mail_invites"
+            ,"mail_success","mail_reminder", "sms_invites", "sms_reminders", "myjob"));
+        } else {
+            return redirect()->back();
+        }
     }
 }
