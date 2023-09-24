@@ -93,14 +93,6 @@ $(document).ready(function () {
 	})
 
 	//data limit set
-	let temp = "";
-	let now = new Date();
-	let end = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 30)
-	while (now.getTime() < end.getTime()) {
-		now = new Date(now.getTime() + 1000 * 60 * 60 * 24)
-		temp += "<option value='" + now.toString() + "'>" + now.getFullYear() + "年 " + (now.getMonth() + 1) + "月 " + now.getDate() + "日</option>"
-	}
-	$("#date_limit").prepend(temp);
 	func();
 })
 

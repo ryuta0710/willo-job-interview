@@ -175,7 +175,7 @@
                                     <label for="salary" class="form-label">給料</label>
                                     <div class="text-secondary">オプション</div>
                                 </div>
-                                <input name="salary" id="salary" type="number" step="100" class="form-control px-4 rounded-5"
+                                <input name="salary" id="salary" type="number" class="form-control px-4 rounded-5"
                                     placeholder="給料の入力" value="{{ old('salary') }}">
                                 @error('salary')
                                     <span class="text-danger">
@@ -302,8 +302,7 @@
                     <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4"
                         id="before">戻る</button>
                     <button class="btn bg-secondary-subtle btn-normal rounded-5" disabled id="next">次に</button>
-                    <a class="btn  btn-normal rounded-5 bg-active text-white none" id="btn_public"
-                        href="{{ route('invite-people') }}">公開</a>
+                    
                 </div>
 
             </div>

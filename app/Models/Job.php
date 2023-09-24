@@ -16,7 +16,17 @@ class Job extends Model
         'video_rc_url',
         'description',
         'record',
-        'user_id'
+        'user_id',
+        'mail_invite_id',
+        'mail_success_id',
+        'mail_reminder_id',
+        'sms_invite_id',
+        'sms_reminder_id',
+        'limit_date',
+        'redirect_url',
+        'language',
+        'isTip',
+        'url'
     ];
     use HasFactory;
 }

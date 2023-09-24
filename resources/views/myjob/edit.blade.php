@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
-        <form action="{{ route('myjob.store') }}" method="post">
+        <form action="{{ route('myjob.update', ['myjob' => $job]) }}" enctype="multipart/form-data" method="post">
             @csrf
+            @method('PUT')
             <div class="container mb-5">
                 <!-- nav link -->
                 <div class="row">
@@ -161,7 +162,7 @@
                             <div class="mb-3">
                                 <label for="title" class="form-label px-4 mb-2 pb-1">募集職種</label>
                                 <input name="title" type="text" class="form-control px-4 rounded-5" id="title"
-                                    placeholder="募集職種の入力">
+                                    placeholder="募集職種の入力" value="{{ $job->title }}">
                                 @error('title')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -175,8 +176,8 @@
                                     <label for="salary" class="form-label">給料</label>
                                     <div class="text-secondary">オプション</div>
                                 </div>
-                                <input name="salary" id="salary" type="text" class="form-control px-4 rounded-5"
-                                    placeholder="給料の入力">
+                                <input name="salary" id="salary" type="number" class="form-control px-4 rounded-5"
+                                    placeholder="給料の入力" value="{{ $job->salary }}">
                                 @error('salary')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -191,7 +192,9 @@
                                 <label for="company_id" class="form-label px-4 mb-2 pb-1">会社名</label>
                                 <select class="form-control px-4 rounded-5" name="company_id" id="company_id">
                                     @foreach ($companies as $company)
-                                        <option value="{{ $company->id }}"> {{ $company->name }}</option>
+                                        <option value="{{ $company->id }}" @if ($job->company_id == $company->id)
+                                            selected
+                                        @endif> {{ $company->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('company_id')
@@ -228,12 +231,12 @@
                                         </span>
                                         <div class="form-check form-switch">
                                             <input name="state_toggle" class="form-check-input" type="checkbox"
-                                                role="switch" id="state_toggle">
+                                                role="switch" id="state_toggle" @error('video') checked @enderror>
                                         </div>
                                     </div>
                                 </div>
                                 <input type="text" name="video_url" class="form-control px-4 rounded-5"
-                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください">
+                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください" value="{{ old('video_url') }}">
                                 @error('video_url')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -268,7 +271,15 @@
                                 <p class="pt-1 pb-1">また</p>
                                 <button id="btn_upload"
                                     class="btn-normal w-100 bg-white border border-primary bg-hover-primary max-300">アップロード&nbsp;&nbsp;<i
-                                        class="fa-solid fa-cloud-arrow-up"></i></button>
+                                        class="fa-solid fa-cloud-arrow-up"></i>
+                                </button>
+                                <p>
+                                    @error('video')
+                                        <span class="text-danger">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </p>
                             </div>
                         </div>
 
@@ -294,8 +305,7 @@
                     <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4"
                         id="before">戻る</button>
                     <button class="btn bg-secondary-subtle btn-normal rounded-5" disabled id="next">次に</button>
-                    <a class="btn  btn-normal rounded-5 bg-active text-white none" id="btn_public"
-                        href="{{ route('invite-people') }}">公開</a>
+                    
                 </div>
 
             </div>
@@ -303,5 +313,26 @@
     </main>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="{{ asset('/assets/js/create-interview/create.js') }}"></script>
+    <script src="{{ asset('/assets/js/create-interview/update.js') }}"></script>
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+        quill.on('text-change', function(delta, oldDelta, source) {
+            if (source == 'api') {
+                console.log("An API call triggered this change.");
+            } else if (source == 'user') {
+                let content = new String(quill.getContents().ops[0].insert);
+                if (content == '\n') {
+                    $("#next").removeClass("active").addClass("bg-secondary-subtle").attr("disabled", "");
+                    $("#content").val("");
+
+                } else {
+                    $("#next").addClass("active").removeClass("bg-secondary-subtle").removeAttr("disabled");
+                    $("#content").val(quill.root.innerHTML);
+                }
+            }
+        });
+        quill.root.innerHTML = "{!! $job['description'] !!}";
+    </script>
 @endsection

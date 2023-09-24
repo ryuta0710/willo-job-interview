@@ -109,7 +109,7 @@
                         </td>
                         <td>2023/07/20
                         </td>
-                        <td><a href="{{ route('myjob.show', ['myjob' => 1]) }}">20</a>
+                        <td><a href="{{ route('myjob.show', ['myjob' => $myjob]) }}">20</a>
                         </td>
                         <td>
                             <div class="cs-state">募集中</div>

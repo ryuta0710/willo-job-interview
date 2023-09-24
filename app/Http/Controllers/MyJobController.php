@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\Job;
 use App\Models\Questions;
+use App\Models\InvitedUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
@@ -127,7 +128,12 @@ class MyJobController extends Controller
      */
     public function edit(string $id)
     {
-        return view('myjob.edit');
+        $user = Auth::user();
+        $companies = Company::orderBy('name', 'asc')->get();
+        $job = Job::where(['id' => $id])->first();
+        if(empty($job))
+            return redirect()->route("myjob.create");
+        return view('myjob.edit', compact("companies", "job"));
     }
 
     /**
@@ -153,11 +159,11 @@ class MyJobController extends Controller
 
     public function create_questions(string $myjob)
     {
-        $job = Job::where(['id'=>$myjob])->get();
+        $job = Job::where(['id' => $myjob])->get();
         $user_id = Auth::user()->id;
-        if(count($job) != 1)
+        if (count($job) != 1)
             return redirect()->back();
-        
+
         $questions = Questions::where([
             'job_id' => intval($myjob),
             'user_id' => intval($user_id),
@@ -221,36 +227,126 @@ class MyJobController extends Controller
             'id' => $myjob,
             'user_id' => $user_id,
         ])
-        ->get();
+            ->get();
         $messages = Message::where([
             'writer' => Auth::user()->email,
         ])
-        ->orWhere([
-            'editable' => 0,
-        ])->get()
-        ->toArray();
+            ->orWhere([
+                'editable' => 0,
+            ])->get()
+            ->toArray();
 
         if (count($jobs) == 1 && count($messages) > 0) {
-            $mail_invites = array_filter($messages, function($item){
+            $mail_invites = array_filter($messages, function ($item) {
                 return $item['type'] == "email" && $item['trigger'] == "invite";
             });
-            $mail_success = array_filter($messages, function($item){
+            $mail_success = array_filter($messages, function ($item) {
                 return $item['type'] == "email" && $item['trigger'] == "success";
             });
-            $mail_reminder = array_filter($messages, function($item){
+            $mail_reminder = array_filter($messages, function ($item) {
                 return $item['type'] == "email" && $item['trigger'] == "reminder";
             });
-            $sms_invites = array_filter($messages, function($item){
+            $sms_invites = array_filter($messages, function ($item) {
                 return $item['type'] == "email" && $item['trigger'] == "invite";
             });
-            $sms_reminders = array_filter($messages, function($item){
+            $sms_reminders = array_filter($messages, function ($item) {
                 return $item['type'] == "email" && $item['trigger'] == "reminder";
             });
             //early exist data is deleted
-            return view("myjob.select_message", compact("mail_invites"
-            ,"mail_success","mail_reminder", "sms_invites", "sms_reminders", "myjob"));
+            return view("myjob.select_message", compact(
+                "mail_invites",
+                "mail_success",
+                "mail_reminder",
+                "sms_invites",
+                "sms_reminders",
+                "myjob"
+            ));
         } else {
             return redirect()->back();
+        }
+    }
+
+    public function store_messages(Request $request, string $myjob)
+    {
+        $user = Auth::user();
+        $job = Job::where([
+            'id' => $myjob,
+            'user_id' => $user->id,
+        ])->first();
+
+        if (!empty($job)) {
+            $job['mail_invite_id'] = $request['mail_invite_id'];
+            $job['mail_success_id'] = $request['mail_success_id'];
+            $job['mail_reminder_id'] = $request['mail_reminder_id'];
+            $job['sms_invite_id'] = $request['sms_invite_id'];
+            $job['sms_reminder_id'] = $request['sms_reminder_id'];
+            
+            $job->save();
+            return response()->json([
+                'status' => "success",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => '操作が失敗しました。'
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function publish(Request $request, string $myjob)
+    {
+        $user_id = Auth::user()->id;
+        $job = Job::where([
+            'id' => $myjob,
+            'user_id' => $user_id,
+        ])
+            ->first();
+
+        if (!empty($job)) {
+
+            $user = Auth::user();
+            $invited_users = InvitedUsers::where('inviter', $user->email)->get();
+            //early exist data is deleted
+            return view("myjob.publish", compact("myjob", "invited_users"));
+        } else {
+            return redirect()->back();
+        }
+    }
+    
+    public function store_publish(Request $request, string $myjob)
+    {
+        $user = Auth::user();
+        $job = Job::where([
+            'id' => $myjob,
+            'user_id' => $user->id,
+        ])->first();
+
+        if (!empty($job)) {
+
+            $length = 50;
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = '';
+
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, strlen($characters) - 1)];
+            }
+
+            $job['limit_date'] = $request['limit_date'];
+            $job['redirect_url'] = $request['redirect_url'];
+            $job['language'] = $request['language'];
+            // $job['isTip'] = $request['isTip'];
+            // $job['isFollow'] = $request['isFollow'];
+            $job['url'] = $randomString;
+            $job->save();
+            return response()->json([
+                'status' => "success",
+                'url' => $randomString,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => '操作が失敗しました。'
+            ], Response::HTTP_BAD_REQUEST);
         }
     }
 }

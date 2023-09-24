@@ -2,6 +2,7 @@
 
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/assets/css/common/modal-preview.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
@@ -161,11 +162,13 @@
                         <div class="d-flex justify-content-between pb-1 px-4">
                             <label for="input1" class="form-label"><i
                                     class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                            <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
+                            <a class="text-active modal-show" data-bs-target="#inviteModal" data-bs-toggle="modal"
+                                type="mail" trigger="invite" data-tar="#mail_invite" href="javascript:;"><i
+                                    class="fa-solid fa-eye me-2"></i>プレビュー</a>
                         </div>
-                        <select type="text" class="form-select rounded-5">
+                        <select type="text" class="form-select rounded-5" id="mail_invite">
                             @foreach ($mail_invites as $item)
-                                <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -174,11 +177,13 @@
                             <label for="input1" class="form-label"><i
                                     class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
                                 テンプレート</label>
-                            <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
+                            <a class="text-active modal-show" data-bs-target="#smsModal" data-bs-toggle="modal"
+                                type="sms" trigger="invite" data-tar="#sms_invite" href="javascript:;"><i
+                                    class="fa-solid fa-eye me-2"></i>プレビュー</a>
                         </div>
-                        <select type="text" class="form-select rounded-5">
+                        <select type="text" class="form-select rounded-5" id="sms_invite">
                             @foreach ($sms_invites as $item)
-                                <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -191,11 +196,13 @@
                         <div class="d-flex justify-content-between pb-1 px-4">
                             <label for="input1" class="form-label"><i
                                     class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                            <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
+                            <a class="text-active modal-show" data-bs-target="#reminderModal" data-bs-toggle="modal"
+                                type="mail" trigger="reminder" data-tar="#mail_reminder" href="javascript:;"><i
+                                    class="fa-solid fa-eye me-2"></i>プレビュー</a>
                         </div>
-                        <select type="text" class="form-select rounded-5">
+                        <select type="text" class="form-select rounded-5" id="mail_reminder">
                             @foreach ($mail_reminder as $item)
-                                <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -204,11 +211,13 @@
                             <label for="input1" class="form-label"><i
                                     class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
                                 テンプレート</label>
-                            <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
+                            <a class="text-active modal-show" data-bs-target="#smsModal" data-bs-toggle="modal"
+                                type="sms" trigger="reminder" data-tar="#sms_reminder" href="javascript:;"><i
+                                    class="fa-solid fa-eye me-2"></i>プレビュー</a>
                         </div>
-                        <select type="text" class="form-select rounded-5">
+                        <select type="text" class="form-select rounded-5" id="sms_reminder">
                             @foreach ($sms_reminders as $item)
-                                <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -221,11 +230,13 @@
                         <div class="d-flex justify-content-between pb-1 px-4">
                             <label for="input1" class="form-label"><i
                                     class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;メールテンプレート</label>
-                            <a class="text-active" href="javascript:;"><i class="fa-solid fa-eye me-2"></i>プレビュー</a>
+                            <a class="text-active modal-show" data-bs-target="#successModal" data-bs-toggle="modal"
+                                data-tar="#mail_success" type="mail" trigger="success" href="javascript:;"><i
+                                    class="fa-solid fa-eye me-2"></i>プレビュー</a>
                         </div>
-                        <select type="text" class="form-select rounded-5">
+                        <select type="text" class="form-select rounded-5" id="mail_success">
                             @foreach ($mail_success as $item)
-                                <option value="{{$item['id']}}">{{$item['title']}}</option>
+                                <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -239,13 +250,186 @@
                 <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4"
                     id="before">戻る</button>
                 <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
-                <a class="btn  btn-normal rounded-5 bg-active text-white none" id="btn_public"
-                    href="{{ route('invite-people') }}">公開</a>
             </div>
 
         </div>
     </main>
 
+    <div class="modal fade modal-preview" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content rounded-5">
+                <div class="modal-header">
+                    <div></div>
+                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <div class="body-header">
+                        <img src="{{ asset('/assets/img/success.jpg') }}" alt="success icon">
+                    </div>
+                    <div class="message-content">
+
+                    </div>
+                    <div class="body-footer mt-5">
+                        <hr>
+                        <p class="text-center">
+                            We've let {recruiter_name} know you've completed this interview.
+                            <br><br>
+                            <span class="text-success">This interview produced 93% fewer emissions than a traditional
+                                face-to-face interview.</span>
+                            <br>👋
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="/" class="text-center">
+                        <img src="{{ asset('/assets/img/logo01.png') }}" style="width: 150px;" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-preview" id="inviteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content rounded-5">
+                <div class="modal-header">
+                    <div></div>
+                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <div class="message-content">
+
+                    </div>
+                    <div class="body-footer mt-4 text-center">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary px-4 py-3 rounded-pill"
+                                data-bs-dismiss="modal">Go to the interview</button>
+                        </div>
+                        <hr class="mb-4 mt-4">
+                        <h6>Before you get started 💡</h6>
+                        <p>Please allow sufficient time to complete the interview. We recommend using the latest version of
+                            Google Chrome or Firefox browser in Incognito mode, on a stable and fast internet connection.
+                            Relax and put your best self forward, you can practice as many times as you like to feel
+                            comfortable.
+                        </p>
+                        <h6>Technical question or issue?
+                        </h6>
+                        <p>Please visit the 24/7 support portal or email support@willo.video.
+                            <br><br>
+                            We sent you this email on behalf of {interview_owner_name}.
+                            {{-- <a href="/ ">Report abuse here.</a> --}}
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="/" class="text-center">
+                        <img src="{{ asset('/assets/img/logo01.png') }}" style="width: 150px;" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-preview" id="reminderModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content rounded-5">
+                <div class="modal-header">
+                    <div></div>
+                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <div class="message-content">
+
+                    </div>
+                    <div class="body-footer mt-4 text-center">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary px-4 py-3 rounded-pill"
+                                data-bs-dismiss="modal">Go to the interview</button>
+                        </div>
+                        <hr>
+                        <p class="text-center mt-4">Willo sent you this email on behalf of {recruiter_name}.
+                            {{-- <a href=""> Report abuse.</a> --}}
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="/" class="text-center">
+                        <img src="{{ asset('/assets/img/logo01.png') }}" style="width: 150px;" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-preview" id="smsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content rounded-5">
+                <div class="modal-header">
+                    <div></div>
+                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-5">
+                    <div class="message-content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script></script>
+    <script>
+        $(".modal-show").click(function(e) {
+            const type = $(e.currentTarget).attr("type");
+            const tar = $(e.currentTarget).attr("data-tar");
+            const message_id = $(tar).val();
+            const modal_name = $(e.currentTarget).attr("data-bs-target");
+
+            $.get(
+                "/template/" + message_id,
+                function(data, status) {
+                    if (status == "success") {
+                        $(modal_name + " .message-content").html(data.content);
+                        $(modal_name + " .modal-title").html(data.title);
+                    } else {
+
+                    }
+                }
+            )
+        });
+
+        $("#next").click(function() {
+            const mail_invite_id = $("#mail_invite").val();
+            const mail_success_id = $("#mail_reminder").val();
+            const mail_reminder_id = $("#mail_success").val();
+            const sms_invite_id = $("#sms_invite").val();
+            const sms_reminder_id = $("#sms_reminder").val();
+
+            $.ajax({
+                url: "{{ route('myjob.store_messages', ['myjob' => $myjob]) }}",
+                type: 'post',
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    mail_invite_id,
+                    mail_success_id,
+                    mail_reminder_id,
+                    sms_invite_id,
+                    sms_reminder_id,
+                },
+                success: function(response) {
+                    location.href = "{{route('myjob.publish', ['myjob' => $myjob])}}";
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        });
+    </script>
 @endsection

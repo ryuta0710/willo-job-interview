@@ -43,10 +43,16 @@ Route::controller(MyJobController::class)->group(function(){
     Route::post('myjob/{myjob}/store-questions', 'store_questions')->name('myjob.store_questions');
 
     Route::get('myjob/{myjob}/select-messages', 'select_messages')->name('myjob.select_messages');
+    
+    Route::post('myjob/{myjob}/store-messages', 'store_messages')->name('myjob.store_messages');
 
-    Route::get('myjob/{myjob}', 'show')->name('myjob.show');
+    Route::get('myjob/{myjob}/publish', 'publish')->name('myjob.publish');
 
-    // Route::put('myjob/{myjob}', 'update')->name('myjob.update');
+    Route::post('myjob/{myjob}/publish', 'store_publish')->name('myjob.store_publish');
+
+    // Route::get('myjob/{myjob}', 'show')->name('myjob.show');
+
+    Route::put('myjob/{myjob}', 'update')->name('myjob.update');
 
     // Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
 
@@ -57,7 +63,7 @@ Route::controller(MyJobController::class)->group(function(){
 
 })->middleware('auth');;
 
-Route::get('invite-people', [OtherController::class, 'invitePeople'])->name('invite-people');
+Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
 
 Route::controller(MemberController::class)->group(function(){
 
@@ -150,4 +156,4 @@ Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobLi
 Route::get('getJobDetail', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
 Route::get('contact', [OtherController::class, 'contact'])->name('contact');
 
-Route::get('test', [OtherController::class, 'test'])->name('test');
+Route::get('test/{id}', [OtherController::class, 'test'])->name('test');
