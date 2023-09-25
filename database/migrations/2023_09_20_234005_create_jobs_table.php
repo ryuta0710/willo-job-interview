@@ -26,12 +26,14 @@ return new class extends Migration
             $table->integer('mail_reminder_id')->nullable();
             $table->integer('sms_invite_id')->nullable();
             $table->integer('sms_reminder_id')->nullable();
-            $table->integer('limit_date')->nullable();
-            $table->integer('redirect_url')->nullable();
-            $table->integer('language')->nullable();
-            $table->integer('isTip')->nullable();
-            $table->integer('isFollow')->nullable();
-            $table->integer('url')->nullable();
+            $table->string('limit_date')->nullable();
+            $table->string('redirect_url')->nullable();
+            $table->string('language')->nullable();
+            $table->string('isTip')->nullable();
+            $table->string('isFollow')->nullable();
+            $table->string('url')->nullable();
+            $table->integer('responses_count')->default(0);
+            $table->string('status')->default('draft');
             $table->timestamps();
         });
     }

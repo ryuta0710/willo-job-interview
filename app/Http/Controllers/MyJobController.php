@@ -30,8 +30,14 @@ class MyJobController extends Controller
      */
     public function index()
     {
-
-        return view('myjob.index');
+        $user = Auth::user();
+        $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
+            ->join('users', 'jobs.user_id', '=', 'users.id')
+            ->where('jobs.user_id', $user->id)
+            ->orderBy('jobs.created_at', 'desc')
+            ->select('jobs.*', 'companies.name as company_name', 'users.name as user_name', 'users.email as email')
+            ->get();
+        return view('myjob.index', compact("jobs"));
     }
 
     /**
@@ -60,7 +66,7 @@ class MyJobController extends Controller
                 'salary' => 'required',
                 'company_id' => 'required',
                 'video_url' => 'required|url',
-                'discription' => 'required',
+                'description' => 'required',
             ]);
             $validator->validate();
 
@@ -69,7 +75,7 @@ class MyJobController extends Controller
                 'salary' =>  $request['salary'],
                 'company_id' =>  $request['company_id'],
                 'video_url' =>  $request['video_url'],
-                'discription' =>  $request['discription'],
+                'description' =>  $request['description'],
                 'user_id' =>  $user->id,
             ];
 
@@ -81,7 +87,7 @@ class MyJobController extends Controller
                 'title' => 'required',
                 'salary' => 'required',
                 'company_id' => 'required',
-                'discription' => 'required',
+                'description' => 'required',
                 // 'video' => 'required|mimes:mp4,mov,avi',
                 'video' => 'required',
             ]);
@@ -91,7 +97,7 @@ class MyJobController extends Controller
                 'title' => $request['title'],
                 'salary' =>  $request['salary'],
                 'company_id' =>  $request['company_id'],
-                'discription' =>  $request['discription'],
+                'description' =>  $request['description'],
                 'user_id' =>  $user->id,
             ];
 
@@ -130,8 +136,8 @@ class MyJobController extends Controller
     {
         $user = Auth::user();
         $companies = Company::orderBy('name', 'asc')->get();
-        $job = Job::where(['id' => $id])->first();
-        if(empty($job))
+        $job = Job::where(['id' => $id, 'user_id' => $user->id])->first();
+        if (empty($job))
             return redirect()->route("myjob.create");
         return view('myjob.edit', compact("companies", "job"));
     }
@@ -141,15 +147,81 @@ class MyJobController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Auth::user();
+        $job = Job::where(['id' => $id, 'user_id' => $user->id])->first();
+
+        if (empty($job))
+            return redirect()->route('myjob.create');
+
+
+        if (!$request->has('state_toggle')) {
+
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'salary' => 'required',
+                'company_id' => 'required',
+                'video_url' => 'required|url',
+                'description' => 'required',
+            ]);
+            $validator->validate();
+            $job['title'] = $request['title'];
+            $job['salary'] = $request['salary'];
+            $job['company_id'] = $request['company_id'];
+            $job['video_url'] = $request['video_url'];
+            $job['description'] = $request['description'];
+
+            $job->save();
+
+            return redirect()->route('myjob.create_questions', ['myjob' => $id]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'title' => 'required',
+                'salary' => 'required',
+                'company_id' => 'required',
+                'description' => 'required',
+                // 'video' => 'required|mimes:mp4,mov,avi',
+                'video' => 'required',
+            ]);
+            $validator->validate();
+
+            $validator->validate();
+            $job['title'] = $request['title'];
+            $job['salary'] = $request['salary'];
+            $job['company_id'] = $request['company_id'];
+            $job['description'] = $request['description'];
+
+
+            if ($request->hasFile('video')) {
+
+                $video = $request->file('video');
+                $fileName = time() . '.' . $video->getClientOriginalExtension();
+
+                $video->move(public_path('/assets/upload/job_intro_video/'), $fileName);
+                $job['video_url'] = asset('/assets/upload/job_intro_video/' . $fileName);;
+            }
+            $job->save();
+
+            return redirect()->route('myjob.create_questions', ['myjob' => $id]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $myjob)
     {
-        //
+        $user_id = Auth::user()->id;
+        $job = Job::where(['id' => $myjob, 'user_id' => $user_id])->first();
+        if (!empty($job)) {
+            $job->delete();
+            return response()->json([
+                'status' => 'success'
+            ], Response::HTTP_OK);
+        }
+        return response()->json([
+            'status' => 'failed',
+            'message' => '操作が失敗しました',
+        ], Response::HTTP_OK);
     }
 
     public function person(string $myjob, string $user_id)
@@ -170,6 +242,57 @@ class MyJobController extends Controller
         ])->orderBy('question_no', 'asc')->get();
         // $questions = [];
         return view('myjob.create_questions', compact('myjob', 'questions'));
+    }
+
+    public function copy(string $myjob)
+    {
+        $user_id = Auth::user()->id;
+        $job = Job::where(['id' => $myjob, 'user_id' => $user_id])->first();
+
+        if (empty($job))
+            return redirect()->back();
+        $new_job = [];
+        $new_job['title'] = $job['title'];
+        $new_job['salary'] = $job['salary'];
+        $new_job['company_id'] = $job['company_id'];
+        $new_job['description'] = $job['description'];
+        $new_job['video_url'] = $job['video_url'];
+        $new_job['user_id'] = $job['user_id'];
+        $new_job['mail_invite_id'] = intval($job['mail_invite_id']);
+        $new_job['mail_success_id'] = intval($job['mail_success_id']);
+        $new_job['mail_reminder_id'] = intval($job['mail_reminder_id']);
+        $new_job['sms_invite_id'] = intval($job['sms_invite_id']);
+        $new_job['sms_reminder_id'] = intval($job['sms_reminder_id']);
+        $new_job['status'] = $job['status'];
+        $new_job['url'] = $this->randomUrl();
+        
+        $job_id = Job::create($new_job)->id;
+
+        $questions = Questions::where([
+            'job_id' => intval($myjob),
+            'user_id' => intval($user_id),
+        ])->orderBy('question_no', 'asc')->get();
+
+        foreach ($questions as $question) {
+            $data = [
+                'type' => $question['type'],
+                'content' => $question['content'],
+                'retake' => $question['retake'],
+                'answer_time' => $question['answer_time'],
+                'limit_type' => $question['limit_type'],
+                'max' => $question['max'],
+                'thinking_hour' => $question['thinking_hour'],
+                'thinking_minute' => $question['thinking_minute'],
+                'question_no' => $question['question_no'],
+                'job_id' => $job_id,
+                'user_id' => $user_id,
+            ];
+            Questions::create($data);
+        }
+
+        return response()->json([
+            'status' => 'success',
+        ], Response::HTTP_OK);
     }
 
     public function store_questions(Request $request, string $myjob)
@@ -275,12 +398,12 @@ class MyJobController extends Controller
         ])->first();
 
         if (!empty($job)) {
-            $job['mail_invite_id'] = $request['mail_invite_id'];
-            $job['mail_success_id'] = $request['mail_success_id'];
-            $job['mail_reminder_id'] = $request['mail_reminder_id'];
-            $job['sms_invite_id'] = $request['sms_invite_id'];
-            $job['sms_reminder_id'] = $request['sms_reminder_id'];
-            
+            $job['mail_invite_id'] = intval($request['mail_invite_id']);
+            $job['mail_success_id'] = intval($request['mail_success_id']);
+            $job['mail_reminder_id'] = intval($request['mail_reminder_id']);
+            $job['sms_invite_id'] = intval($request['sms_invite_id']);
+            $job['sms_reminder_id'] = intval($request['sms_reminder_id']);
+
             $job->save();
             return response()->json([
                 'status' => "success",
@@ -307,12 +430,12 @@ class MyJobController extends Controller
             $user = Auth::user();
             $invited_users = InvitedUsers::where('inviter', $user->email)->get();
             //early exist data is deleted
-            return view("myjob.publish", compact("myjob", "invited_users"));
+            return view("myjob.publish", compact("myjob", "invited_users", "job"));
         } else {
             return redirect()->back();
         }
     }
-    
+
     public function store_publish(Request $request, string $myjob)
     {
         $user = Auth::user();
@@ -322,14 +445,7 @@ class MyJobController extends Controller
         ])->first();
 
         if (!empty($job)) {
-
-            $length = 50;
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randomString = '';
-
-            for ($i = 0; $i < $length; $i++) {
-                $randomString .= $characters[rand(0, strlen($characters) - 1)];
-            }
+            $randomString = $this->randomUrl();
 
             $job['limit_date'] = $request['limit_date'];
             $job['redirect_url'] = $request['redirect_url'];
@@ -337,6 +453,7 @@ class MyJobController extends Controller
             // $job['isTip'] = $request['isTip'];
             // $job['isFollow'] = $request['isFollow'];
             $job['url'] = $randomString;
+            $job['status'] = 'live';
             $job->save();
             return response()->json([
                 'status' => "success",
@@ -348,5 +465,17 @@ class MyJobController extends Controller
                 'message' => '操作が失敗しました。'
             ], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    protected function randomUrl()
+    {
+        $length = 30;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
     }
 }

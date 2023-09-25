@@ -32,7 +32,7 @@ class OtherController extends Controller
         return view('contact');
     }
 
-    public function test() {
+    public function interview() {
         return view('test');
     }
 }

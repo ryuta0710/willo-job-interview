@@ -289,7 +289,7 @@
                     <!-- TEXT EDITOR -->
                     <div class="w-100 mx-0 mx-md-4">
                         <div class="" id="editor"></div>
-                        <input type="hidden" name="discription" id="content">
+                        <input type="hidden" name="description" id="content">
                     </div>
                     <!-- END TEXTEDITOR -->
                 </div>
@@ -330,8 +330,8 @@
                 }
             }
         });
-        // quill.setContents("{{ old('discription') }}");
-        // quill.root.innerHTML = "{{ old('discription') }}"
+        // quill.setContents("{{ old('description') }}");
+        // quill.root.innerHTML = "{{ old('description') }}"
         // .setContents()
     </script>
 @endsection

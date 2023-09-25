@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
-        <form action="{{ route('myjob.update', ['myjob' => $job]) }}" enctype="multipart/form-data" method="post">
+        <form action="{{ route('myjob.update', ['id' => $job]) }}" enctype="multipart/form-data" method="post">
             @csrf
             @method('PUT')
             <div class="container mb-5">
@@ -236,7 +236,7 @@
                                     </div>
                                 </div>
                                 <input type="text" name="video_url" class="form-control px-4 rounded-5"
-                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください" value="{{ old('video_url') }}">
+                                    id="video_url" placeholder="YouTubeビデオのリンクを入力してください" value="{{ $job['video_url'] }}">
                                 @error('video_url')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
@@ -292,7 +292,7 @@
                     <!-- TEXT EDITOR -->
                     <div class="w-100 mx-0 mx-md-4">
                         <div class="" id="editor"></div>
-                        <input type="hidden" name="discription" id="content">
+                        <input type="hidden" name="description" id="content">
                     </div>
                     <!-- END TEXTEDITOR -->
                 </div>

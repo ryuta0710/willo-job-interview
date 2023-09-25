@@ -26,7 +26,9 @@ class Job extends Model
         'redirect_url',
         'language',
         'isTip',
-        'url'
+        'url',
+        'responses_count',
+        'status'
     ];
     use HasFactory;
 }

@@ -50,11 +50,13 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::post('myjob/{myjob}/publish', 'store_publish')->name('myjob.store_publish');
 
-    // Route::get('myjob/{myjob}', 'show')->name('myjob.show');
+    Route::get('myjob/{myjob}', 'show')->name('myjob.show');
 
-    Route::put('myjob/{myjob}', 'update')->name('myjob.update');
+    Route::put('myjob/{id}', 'update')->name('myjob.update');
 
-    // Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
+    Route::get('myjob/{id}/copy', 'copy')->name('myjob.copy');
+
+    Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
 
     Route::get('myjob/{myjob}/edit', 'edit')->name('myjob.edit');
 
@@ -156,4 +158,4 @@ Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobLi
 Route::get('getJobDetail', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
 Route::get('contact', [OtherController::class, 'contact'])->name('contact');
 
-Route::get('test/{id}', [OtherController::class, 'test'])->name('test');
+Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview');
