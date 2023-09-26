@@ -39,7 +39,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        
+        $fields = Field::query()->orderby('name', 'asc')->get();
+        return view('company.create', compact('fields'));
     }
 
     /**

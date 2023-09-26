@@ -63,19 +63,27 @@ class MyJobController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'title' => 'required',
-                'salary' => 'required',
+                'salary' => 'required|integer',
                 'company_id' => 'required',
                 'video_url' => 'required|url',
                 'description' => 'required',
             ]);
             $validator->validate();
 
+            $company = Company::where([
+                'id' => intval($request['company_id']),
+            ])->first();
+
+            if(empty($company)){
+                return response('', 400);
+            }
             $data = [
                 'title' => $request['title'],
-                'salary' =>  $request['salary'],
+                'salary' =>  intval($request['salary']),
                 'company_id' =>  $request['company_id'],
                 'video_url' =>  $request['video_url'],
                 'description' =>  $request['description'],
+                'field_id' =>  $company->field,
                 'user_id' =>  $user->id,
             ];
 
@@ -85,7 +93,7 @@ class MyJobController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'title' => 'required',
-                'salary' => 'required',
+                'salary' => 'required|integer',
                 'company_id' => 'required',
                 'description' => 'required',
                 // 'video' => 'required|mimes:mp4,mov,avi',
@@ -93,11 +101,19 @@ class MyJobController extends Controller
             ]);
             $validator->validate();
 
+            $company = Company::where([
+                'id' => intval($request['company_id']),
+            ])->first();
+
+            if(empty($company)){
+                return response('', 400);
+            }
             $data = [
                 'title' => $request['title'],
-                'salary' =>  $request['salary'],
+                'salary' =>  intval($request['salary']),
                 'company_id' =>  $request['company_id'],
                 'description' =>  $request['description'],
+                'field_id' =>  $company->field_id,
                 'user_id' =>  $user->id,
             ];
 
@@ -158,14 +174,14 @@ class MyJobController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'title' => 'required',
-                'salary' => 'required',
+                'salary' => 'required|integer',
                 'company_id' => 'required',
                 'video_url' => 'required|url',
                 'description' => 'required',
             ]);
             $validator->validate();
             $job['title'] = $request['title'];
-            $job['salary'] = $request['salary'];
+            $job['salary'] = intval($request['salary']);
             $job['company_id'] = $request['company_id'];
             $job['video_url'] = $request['video_url'];
             $job['description'] = $request['description'];
@@ -186,7 +202,7 @@ class MyJobController extends Controller
 
             $validator->validate();
             $job['title'] = $request['title'];
-            $job['salary'] = $request['salary'];
+            $job['salary'] = intval($request['salary']);
             $job['company_id'] = $request['company_id'];
             $job['description'] = $request['description'];
 

@@ -28,7 +28,8 @@ class Job extends Model
         'isTip',
         'url',
         'responses_count',
-        'status'
+        'status',
+        'field_id'
     ];
     use HasFactory;
 }

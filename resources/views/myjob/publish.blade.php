@@ -42,7 +42,7 @@
                         <span>------</span>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2"
+                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2 bg-active"
                             style="width: 55px; height: 55px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <g id="Group_2215" data-name="Group 2215" transform="translate(-872 -254)">
@@ -61,7 +61,7 @@
                         <span>------</span>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2"
+                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2 bg-active"
                             style="width: 55px; height: 55px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
                                 <g id="Group_2216" data-name="Group 2216" transform="translate(-1026 -252)">
@@ -84,7 +84,7 @@
                         <span>------</span>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2"
+                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2 bg-active"
                             style="width: 55px; height: 55px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30.063" height="27.422"
                                 viewBox="0 0 30.063 27.422">

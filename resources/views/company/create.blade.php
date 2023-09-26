@@ -175,11 +175,9 @@
                         <label for="field" class="form-label px-3">業界 </label>
                         <select name="field" id="field" class="form-select rounded-pill" value="{{old('field')}}">
                             <option value="" selected class="display-none"></option>
-                            <option value="企業">企業</option>
-                            <option value="自動車">自動車</option>
-                            <option value="自動化">自動化</option>
-                            <option value="電子工業">電子工業</option>
-                            <option value="電子工業">電子工業</option>
+                            @foreach ($fields as $item)
+                            <option value="{{$item->id}}" >{{$item->name}}</option>                   
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-4">

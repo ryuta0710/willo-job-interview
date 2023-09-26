@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('salary');
+            $table->integer('salary');
             $table->string('company_id');
             $table->string('video_url')->nullable();
             $table->string('video_rc_url')->nullable();
@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->integer('responses_count')->default(0);
             $table->string('status')->default('draft');
+            $table->integer('field_id');
             $table->timestamps();
         });
     }

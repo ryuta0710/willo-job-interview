@@ -60,7 +60,7 @@
                         <span>------</span>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2"
+                        <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2 bg-active"
                             style="width: 55px; height: 55px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
                                 <g id="Group_2216" data-name="Group 2216" transform="translate(-1026 -252)">

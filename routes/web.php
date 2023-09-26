@@ -66,8 +66,6 @@ Route::controller(MyJobController::class)->group(function(){
 
 })->middleware('auth');;
 
-Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
-
 Route::controller(MemberController::class)->group(function(){
 
     Route::get('member', 'index')->name('member.index');
@@ -141,7 +139,7 @@ Route::controller(ProfileController::class)->group(function(){
 Route::controller(UserController::class)->group(function(){
 
     Route::get('user', 'index')->name('user.index');
-//save
+    //save
     Route::post('user', 'store')->name('user.store');
 
     // Route::get('user/create', 'create')->name('user.create');
@@ -158,7 +156,7 @@ Route::controller(UserController::class)->group(function(){
 Route::controller(InterviewController::class)->group(function(){
 
     Route::get('interview/{url}', 'index')->name('interview.index');
-//save
+    //save
     Route::post('interview', 'store')->name('interview.store');
 
     // Route::get('interview/create', 'create')->name('interview.create');
@@ -172,8 +170,12 @@ Route::controller(InterviewController::class)->group(function(){
     // Route::get('interview/{user}/edit', 'edit')->name('interview.edit');
 });
 
+
+Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
+Route::get('redirect-interview/{url}', [OtherController::class, 'redirect_interview'])->name('redirect-interview');
 Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobList');
-Route::get('getJobDetail', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
+Route::post('fetchJobs', [OtherController::class, 'fetchJobs'])->name('fetchJobs');
+Route::get('getJobDetail/{url}', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
 Route::get('contact', [OtherController::class, 'contact'])->name('contact');
 
 // Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview.index');   
