@@ -387,9 +387,9 @@
         let end = new Date(now.getTime() + 1000 * 60 * 60 * 24 * 30)
         while (now.getTime() < end.getTime()) {
             now = new Date(now.getTime() + 1000 * 60 * 60 * 24);
-            let year = currentDate.getFullYear();
-            let month = currentDate.getMonth() + 1; // Month starts from 0, so adding 1
-            let day = currentDate.getDate();
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1; // Month starts from 0, so adding 1
+            let day = now.getDate();
             temp += "<option value='" + year + "/" + (month + 1) + "/" + day + "'>" + year + "年 " + month + "月 " + day + "日</option>"
         }
         $("#date_limit").prepend(temp);

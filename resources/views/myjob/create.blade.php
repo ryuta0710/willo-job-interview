@@ -253,10 +253,12 @@
                     <!-- VIDEO -->
                     <div class="w-100 px-5" id="description_video">
                         <div class="row card rounded-4 p-4 flex-row flex-wrap">
-                            <div class="col-12 col-xl-7 text-center" id="preview">
+                            <div class="col-12 col-xl-7 text-center position-relative" id="preview">
                                 <input type="file" name="video" accept="video/*" class="d-none" id="file_upload">
                                 <video class="w-100" autoplay muted playsinline id="videoLive"
                                     style="background-color: #747474;"></video>
+                                    <div class="camera_not_connected text-danger d-none rounded-3 p-4">カメラまたはマイクへのアクセスは現在ブロックされています。
+                                        ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
                                 <video class="none w-100" controls playsinline id="videoRecorded"></video>
                             </div>
                             <div class="col-12 col-xl-5 text-center">
@@ -330,6 +332,22 @@
                 }
             }
         });
+        navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+                var hasCamera = devices.some(function(device) {
+                return device.kind === 'videoinput';
+                });
+
+                if (hasCamera) {
+                console.log('Camera is connected.');
+                } else {
+                    $(".camera_not_connected").removeClass("d-none");
+                    $("#record").attr("disabled","").removeClass("bg-active").addClass("bg-secondary-subtle");
+                }
+            })
+            .catch(function(err) {
+                console.error('Error accessing media devices: ', err);
+            });
         // quill.setContents("{{ old('description') }}");
         // quill.root.innerHTML = "{{ old('description') }}"
         // .setContents()

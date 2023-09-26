@@ -20,8 +20,10 @@
                         最初のインタビューを作成しましょう</a>
                 </p>
                 <p class="mb-2">
-                    <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                    <a href="javascript:;"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
                         インタビューに人々を招待しましょう</a>
+                        {{-- <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
+                            インタビューに人々を招待しましょう</a> --}}
                 </p>
             </div>
         </div>

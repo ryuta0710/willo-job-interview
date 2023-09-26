@@ -9,6 +9,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InterviewController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -154,8 +155,25 @@ Route::controller(UserController::class)->group(function(){
     // Route::get('user/{user}/edit', 'edit')->name('user.edit');
 });
 
+Route::controller(InterviewController::class)->group(function(){
+
+    Route::get('interview/{url}', 'index')->name('interview.index');
+//save
+    Route::post('interview', 'store')->name('interview.store');
+
+    // Route::get('interview/create', 'create')->name('interview.create');
+
+    // Route::get('interview/{user}', 'show')->name('interview.show');
+
+    Route::put('interview/{id}', 'update')->name('interview.update');
+
+    Route::delete('interview/{id}', 'destroy')->name('interview.destroy');
+
+    // Route::get('interview/{user}/edit', 'edit')->name('interview.edit');
+});
+
 Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobList');
 Route::get('getJobDetail', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
 Route::get('contact', [OtherController::class, 'contact'])->name('contact');
 
-Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview');
+// Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview.index');   

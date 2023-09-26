@@ -46,7 +46,7 @@
             <div class="col-lg-6 mx-auto">
                 <div class="rounded-pill position-relative p-2 border">
                     <div class="col col-lg-8">
-                        <input type="text" class="link-input form-control border-0 shadow-none" value="{{route('test', ['id' => $url ])}}" id="invite_url" readonly>
+                        <input type="text" class="link-input form-control border-0 shadow-none" value="{{route('interview.index', ['url' => $url ])}}" id="invite_url" readonly>
                         <div class="d-none d-lg-block">
                             <div class="position-absolute muted bg-dark text-white rounded text-center fs-12 my-tooltip" style="display:none;padding:8px ;bottom: 40px; right: 10px; font-size: 12px;z-index: 1000;"><span>リンクがコピーされました。</span></div>
                             <button class="btn btn-info py-2 position-absolute rounded-pill end-0 top-50 translate-middle-y me-2 text-white" type="button" style="z-index: 2;" onclick="copy()">リンクをコピーする</button>

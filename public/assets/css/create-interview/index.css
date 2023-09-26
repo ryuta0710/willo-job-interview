@@ -326,3 +326,14 @@ form .text-danger {
     padding-left: 28px;
     font-size: 14px;
 }
+
+.camera_not_connected {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-weight: 700;
+    font-size: 20px!important;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
