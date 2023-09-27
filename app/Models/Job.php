@@ -29,7 +29,8 @@ class Job extends Model
         'url',
         'responses_count',
         'status',
-        'field_id'
+        'field_id',
+        'started_count'
     ];
     use HasFactory;
 }

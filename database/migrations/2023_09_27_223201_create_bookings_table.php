@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('candidate_id');
+            $table->string('day');
+            $table->string('time');
         });
     }
 

@@ -23,6 +23,8 @@ class Candidate extends Model
         'note',
         'url',
         'retake',
+        'name',
+        'rate',
     ];
     use HasFactory;
 }

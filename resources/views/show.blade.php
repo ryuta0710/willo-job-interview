@@ -484,7 +484,7 @@
                     </div>
                     <div class="w-100 text-center mt-5 pb-5">
                         <!-- <button class="bg-white rounded-5">あなたの経験を評価してください</button> -->
-                        <button class="bg-white rounded-5" onclick="window.location.href='/'">トップとして</button>
+                        <a class="bg-white rounded-5" href="@if($redirect_url != null)$redirect_url@else/@endif">トップとして</a>
                     </div>
                 </div>
             </div>

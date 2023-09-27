@@ -120,11 +120,14 @@ class OtherController extends Controller
         //generate a random url
         $candidate_url = $this->randomUrl();
         //create candidate
+        $started = intval($job['started_count']) + 1;
+        $job['started_count'] = $started;
         Candidate::create([
             'job_id' => $job->id,
             'job_url' => $job->url,
             'url' => $candidate_url,
         ]);
+        $job->save();
 
         return redirect()->route('interview.index', ['url' => $candidate_url]);
     }

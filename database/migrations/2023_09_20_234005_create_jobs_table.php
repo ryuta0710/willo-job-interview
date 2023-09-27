@@ -35,6 +35,7 @@ return new class extends Migration
             $table->integer('responses_count')->default(0);
             $table->string('status')->default('draft');
             $table->integer('field_id');
+            $table->integer('started_count')->default(0);
             $table->timestamps();
         });
     }

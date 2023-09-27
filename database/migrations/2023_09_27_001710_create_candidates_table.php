@@ -23,11 +23,13 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->integer('review')->default(0);
             $table->dateTime('start_at')->nullable();
-            $table->dateTime('response_at')->nullable();
+            $table->string('response_at')->nullable();
             $table->string('is_email_send')->nullable();
             $table->string('note')->default("");
             $table->string('url');
             $table->string('retake')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('rate')->nullable();
         });
     }
 

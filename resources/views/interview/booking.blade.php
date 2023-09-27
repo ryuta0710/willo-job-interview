@@ -345,12 +345,13 @@
                 return;
             }
             let postData = {
-                _token: token,
+                _token: $("meta[name=csrf-token]").attr("content"),
                 name,
                 email,
                 tel,
-                is_book: is_skip,
-                schedules: schedules,
+                date,
+                is_book: is_skip || false,
+                schedules: schedules || [],
             };
 
             $.ajax({

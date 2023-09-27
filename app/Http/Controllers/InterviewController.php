@@ -8,6 +8,7 @@ use App\Models\Questions;
 use App\Models\Candidate;
 use App\Models\Message;
 use App\Models\Answer;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
 
@@ -121,13 +122,6 @@ class InterviewController extends Controller
     //show all answer
     public function booking(Request $request, string $url)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
-            'tel' => 'required',
-            'is_book' => 'required',
-        ]);
-        $validator->validate();
         $candidate = Candidate::where([
             'url' => $url,
         ])
@@ -135,36 +129,65 @@ class InterviewController extends Controller
         if (empty($candidate)) {
             return redirect()->back();
         }
-        if($request['is_book']){
-            
-        }
-        return view('interview.booking', compact('url'));
+        $job = Job::where([
+            'id' => $candidate->job_id,
+        ])->first();
+        $redirect_url = $job->redirect_url;
+        return view('interview.booking', compact('url', 'redirect_url'));
     }
 
     public function save_booking(Request $request, string $url)
     {
         $validator = Validator::make($request->all(), [
-            'content' => 'required',
-            'count' => 'required',
-            'q_no' => 'required|integer',
+            'name' => 'required',
+            'email' => 'required',
+            'tel' => 'required',
+            'is_book' => 'required',
+            'date' => 'required',
         ]);
         $validator->validate();
-
-        $answer = Answer::where([
+        $candidate = Candidate::where([
             'url' => $url,
         ])->first();
-        if (empty($answer)) {
-            return response([
-                'status' => 'failed',
-                'message' => 'Failed save',
-            ]);
-        }
-        // return $request['content'];  
-        $answer['content'] = $request['content'];
-        $answer['count'] = intval($request['count']);
-        $answer->save();
 
-        return response()->json([], Response::HTTP_OK);
+        if (empty($candidate)) {
+            return redirect()->back();
+        }
+        $candidate['name'] = $request['name'];
+        $candidate['email'] = $request['email'];
+        $candidate['tel'] = $request['tel'];
+        $candidate['response_at'] = $request['date'];
+        $candidate['status'] = 'responsed';
+        $candidate->save();
+
+        $job = Job::where([
+            'id' => $candidate->job_id,
+        ])->first();
+        $response_count = intval($job->response_count) + 1;
+        $job['response_count'] = $response_count;
+        $job->save();
+
+        Booking::where([
+            'candidate_id' => $candidate->id,
+        ])->delete();
+
+        if($request['is_book']){
+            $schedules = $request['schedules'];
+            foreach ($schedules as $item) {
+                if($item['day'] && $item['time']){
+
+                    $booking = Booking::create([
+                        'day' => "".$item['day'],
+                        'time' => "".$item['time'],
+                        'candidate_id' => $candidate->id,
+                    ]);
+                    return $booking;
+                }
+            }
+        }
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 
     public function save_text(Request $request, string $url)

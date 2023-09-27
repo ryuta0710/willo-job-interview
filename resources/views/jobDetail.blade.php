@@ -14,8 +14,8 @@
             <div class="card rounded p-4 border-0 shadow mb-5">
                 <div class="row mb-5">
                     <video controls crossorigin playsinline>
-                        <source src="{{asset('')}}" type="video/mp4" size="576">
-                        <a>Video Oynatılamıyor</a>
+                        <source src="{{$job->video_url}}" type="video/mp4" size="576">
+                        <a>Video</a>
                     </video>
                 </div>
                 <div class="row px-0 px-md-4">
