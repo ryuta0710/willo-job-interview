@@ -16,6 +16,7 @@ class Answer extends Model
         'question_type',
         'question_id',
         'url',
+        'question_content',
         'count',
     ];
     use HasFactory;

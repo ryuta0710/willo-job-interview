@@ -41,7 +41,7 @@ class InterviewController extends Controller
         ])->get();
         $count = count($questions);
         // return response()->json($job);
-        return view('interview', compact("job", "questions", 'count', 'message', 'url'));
+        return view('interview.index', compact("job", "questions", 'count', 'message', 'url'));
     }
     //answer show
     public function answer(Request $request, string $candidate_url, string $answer_url)
@@ -82,11 +82,67 @@ class InterviewController extends Controller
         $next_no = $question->question_no + 1;
 
         // return response()->json($question);
-        return view('answer', compact("question", "is_last", "count", "candidate_url", "next_no", "answer_url"));
+        return view('interview.answer', compact("question", "is_last", "count", "candidate_url", "next_no", "answer_url"));
+    }
+    //show all answer
+    public function confirm(Request $request, string $url)
+    {
+        $candidate = Candidate::where([
+            'url' => $url,
+        ])
+            ->first();
+        if (empty($candidate)) {
+            return redirect()->back();
+        }
+        //fetch the answers for the candidate
+        $answers = Answer::where([
+            'candidate_id' => $candidate->id,
+        ])->orderby('question_id', 'asc')
+            ->get();
+        if (count($answers) == 0) {
+            return redirect()->back();
+        }
+        //fetch questions
+        $questions = Questions::where([
+            'job_id' => $candidate->job_id,
+        ])->orderby('question_no', 'asc')
+            ->get();
+        if (count($questions) == 0) {
+            return redirect()->back();
+        }
+        //check if the count of questions and answers is equal
+        $count = count($questions);
+        if (count($questions) != count($answers)) {
+            return redirect()->back();
+        }
+        // return response()->json($question);
+        return view('interview.confirm', compact("questions", "answers", "url", "count"));
+    }
+    //show all answer
+    public function booking(Request $request, string $url)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'tel' => 'required',
+            'is_book' => 'required',
+        ]);
+        $validator->validate();
+        $candidate = Candidate::where([
+            'url' => $url,
+        ])
+            ->first();
+        if (empty($candidate)) {
+            return redirect()->back();
+        }
+        if($request['is_book']){
+            
+        }
+        return view('interview.booking', compact('url'));
     }
 
-    public function save_text (Request $request, string $url){
-        
+    public function save_booking(Request $request, string $url)
+    {
         $validator = Validator::make($request->all(), [
             'content' => 'required',
             'count' => 'required',
@@ -94,36 +150,12 @@ class InterviewController extends Controller
         ]);
         $validator->validate();
 
-        // $candidate = Candidate::where([
-        //     'url' => $url,
-        // ])->first();
-        // //check if the cnadidate is empty
-        // $job_id = $candidate->job_id;
-        // $job = Job::where([
-        //     'id' => $job_id,
-        // ])->first();
-        // if(empty($candidate) || empty($job)){
-        //     return response()->json([
-        //         'message' => 'リクエストが正確ではありません'
-        //     ], Response::HTTP_BAD_REQUEST);
-        // }
-
-        // //check if the cnadidate is empty
-        // $question = Questions::where([
-        //     'question_no' => intval($request['q_no']),
-        //     'job_id' => $job->id,
-        // ]);
-        // if(empty($question)){
-        //     return response()->json([
-        //         'message' => 'There isn\'t the question.'
-        //     ]);
-        // }
-        //check if the answer exists
         $answer = Answer::where([
             'url' => $url,
         ])->first();
-        if(empty($answer)){
-            return response(['status' => 'failed',
+        if (empty($answer)) {
+            return response([
+                'status' => 'failed',
                 'message' => 'Failed save',
             ]);
         }
@@ -135,8 +167,70 @@ class InterviewController extends Controller
         return response()->json([], Response::HTTP_OK);
     }
 
-    public function create_answer (Request $request, string $url){
-        
+    public function save_text(Request $request, string $url)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'content' => 'required',
+            'count' => 'required',
+            'q_no' => 'required|integer',
+        ]);
+        $validator->validate();
+
+        $answer = Answer::where([
+            'url' => $url,
+        ])->first();
+        if (empty($answer)) {
+            return response([
+                'status' => 'failed',
+                'message' => 'Failed save',
+            ]);
+        }
+        // return $request['content'];  
+        $answer['content'] = $request['content'];
+        $answer['count'] = intval($request['count']);
+        $answer->save();
+
+        return response()->json([], Response::HTTP_OK);
+    }
+
+    public function save_file(Request $request, string $url)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|file',
+            'count' => 'required',
+            'q_no' => 'required|integer',
+        ]);
+        $validator->validate();
+
+        $file = $request->file('file');
+        $originalfilename = $file->getClientOriginalName();
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+
+        $file->move(public_path('/assets/upload/answer/'), $fileName);
+        $file_url = asset('/assets/upload/answer/' . $fileName);
+
+        $answer = Answer::where([
+            'url' => $url,
+        ])->first();
+        if (empty($answer)) {
+            return response([
+                'status' => 'failed',
+                'message' => 'Failed save. The url is incorrect',
+            ]);
+        }
+        $answer['count'] = intval($request['count']);
+        $answer['rc_url'] = $file_url;
+        $answer['content'] = $originalfilename;
+        $answer->save();
+
+        return response()->json([], Response::HTTP_OK);
+    }
+
+    public function create_answer(Request $request, string $url)
+    {
+
         $validator = Validator::make($request->all(), [
             'q_no' => 'required|integer',
         ]);
@@ -150,7 +244,7 @@ class InterviewController extends Controller
         $job = Job::where([
             'id' => $job_id,
         ])->first();
-        if(empty($candidate) || empty($job)){
+        if (empty($candidate) || empty($job)) {
             return response()->json([
                 'message' => 'リクエストが正確ではありません'
             ], Response::HTTP_BAD_REQUEST);
@@ -161,7 +255,7 @@ class InterviewController extends Controller
             'question_no' => intval($request['q_no']),
             'job_id' => $job->id,
         ])->first();
-        if(empty($question)){
+        if (empty($question)) {
             return response()->json([
                 'message' => 'There isn\'t the question.'
             ]);
@@ -169,25 +263,26 @@ class InterviewController extends Controller
         //check if the answer exists
         $answer = Answer::where([
             'candidate_id' => $candidate->id,
+            'question_id' => $question->id,
         ])->first();
-        return $answer;
-        if(empty($answer)){
+        if (empty($answer)) {
             $ran_url = $this->randomUrl();
             $new_answer = Answer::create([
                 'job_id' => $job->id,
                 'candidate_id' => $candidate->id,
                 'question_type' => $question->type,
                 'question_id' => $question->id,
+                'question_content' => $question->content,
                 'url' => $ran_url,
             ]);
-            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url'=> $new_answer->url]) ]);
-        }else{
-            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url'=> $answer->url]) ]);
+            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $new_answer->url])]);
+        } else {
+            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $answer->url])]);
         }
 
         return response(['message' => 'Failed creating answer.'], Response::HTTP_BAD_REQUEST);
     }
-    
+
     protected function randomUrl()
     {
         $length = 30;

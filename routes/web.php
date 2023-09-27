@@ -158,7 +158,12 @@ Route::controller(InterviewController::class)->group(function(){
     Route::get('interview/{url}', 'index')->name('interview.index');
     //create answer
     Route::post('interview/{url}/create-answer', 'create_answer')->name('interview.create_answer');
+    
+    Route::get('interview/{url}/confirm', 'confirm')->name('interview.confirm');
 
+    Route::get('interview/{url}/booking', 'booking')->name('interview.booking');
+
+    Route::post('interview/{url}/booking', 'save_booking')->name('interview.save_booking');
     //save
     Route::get('interview/{candidate_url}/{answer_url}', 'answer')->name('interview.answer');
     //save

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('question_type');
             $table->integer('question_id');
             $table->string('url');
+            $table->string('question_content');
             $table->string('count')->nullable();
         });
     }

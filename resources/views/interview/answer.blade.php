@@ -35,7 +35,8 @@
                         1
                     </a>
                     @for ($i = 1; $i < $count; $i++)
-                        <a class="no d-flex justify-content-center align-items-center" href="javascript:;">
+                        <a class="no d-flex justify-content-center align-items-center @if ($i <= $question->question_no) active @endif"
+                            href="javascript:;">
                             {{ $i + 1 }}
                         </a>
                     @endfor
@@ -286,11 +287,11 @@
                                     </div>
                                 </div>
 
-                                <div class="test-descrtion">
-                                    <div>
-                                        <i class="fa-solid fa-hourglass-start"></i>
-                                    </div>
-                                    @if ($question->thinking_hour && $question->thinking_hour)
+                                @if ($question->thinking_hour && $question->thinking_hour)
+                                    <div class="test-descrtion">
+                                        <div>
+                                            <i class="fa-solid fa-hourglass-start"></i>
+                                        </div>
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
@@ -301,8 +302,8 @@
                                                         class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                                 <div class="test-problem">
                                     {{ $question->content }}
                                 </div>
@@ -316,6 +317,11 @@
                                                 応答時間 {{ $question->answer_time }}:00
                                             </span>
                                         @endif
+                                    </div>
+                                    <div
+                                        class="w-100 d-flex justify-content-center align-items-baseline text-center mb-3 save_continue">
+                                        <button class="btn rounded-5 bg-secondary" disabled id="save_continue"
+                                            onclick="save_file()">保存して続行</button>
                                     </div>
                                 </div>
 
@@ -332,13 +338,13 @@
                                                         <div class="upload-area">
                                                             <p class="file_preview">ここにファイルをドラッグ アンド ドロップしますまた</p>
                                                             <div> <button class="btn_upload"
-                                                                    onclick="select_file({{ $question->question_no }})">ブラウズ</button>
+                                                                    onclick="select_file()">ブラウズ</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input class="fileupload" id="fileupload{{ $question->question_no }}"
-                                                    type="file" accept="*.* " multiple=false />
+                                                <input class="fileupload" id="fileupload" type="file"
+                                                    accept="*.* " multiple=false />
                                             </div>
                                         </div>
                                     </div>
@@ -1177,7 +1183,7 @@
                 data: postData,
                 success: function(response) {
                     @if ($is_last)
-
+                        location.href = "{{route('interview.confirm', ['url' => $candidate_url])}}";
                     @else
                         create();
                     @endif
@@ -1191,22 +1197,26 @@
         function save_file() {
             q_no = {{ $question->question_no }};
             let token = $("meta[name=csrf-token]").attr("content");
-            let content = $("#text_content").val().trim();
-            if (content == "")
-                return;
-            let postData = {
-                _token: token,
-                content: content,
-                count: count,
-                q_no: {{ $question->question_no }},
-            };
+            let file_name = $("#fileupload").val();
+            if (!file_name) {
+                alert("ファイルを選択してください。");
+            }
+            var formData = new FormData();
+            var file = $('#fileupload')[0].files[0];
+            formData.append('file', file);
+            formData.append('_token', token);
+            formData.append('count', count);
+            formData.append('q_no', {{ $question->question_no }});
 
             $.ajax({
-                url: "{{ route('interview.save_text', ['url' => $answer_url]) }}",
+                url: "{{ route('interview.save_file', ['url' => $answer_url]) }}",
                 type: 'POST',
-                data: postData,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     @if ($is_last)
+                        location.href = "{{route('interview.confirm', ['url' => $candidate_url])}}";
                     @else
                         // create();
                     @endif
@@ -1230,13 +1240,22 @@
                 type: 'POST',
                 data: postData,
                 success: function(response) {
-                    // location.href = response.url;
+                    location.href = response.url;
                 },
                 error: function(xhr, status, error) {
                     alert(xhr.responseJSON.message);
                 }
             });
         }
+
+        function select_file() {
+            $("#fileupload").click();
+        }
+
+        $("#fileupload").change(function(e) {
+            $(".file_preview").html(e.target.value);
+            $("#save_continue").removeAttr("disabled").addClass("active").removeClass(" bg-secondary");
+        })
         //     var header = document.querySelector(".header");
         //     var chatRoom = document.querySelector(".chat-room");
         //     var typeArea = document.querySelector(".type-area");

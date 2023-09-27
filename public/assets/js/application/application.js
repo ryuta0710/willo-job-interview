@@ -66,41 +66,6 @@ $(document).ready(async function () {
   })
 
 
-  $(".answer-item").click(function () {
-    $(".answer-item").removeClass("active");
-    $(this).addClass("active");
-    let privewEle = document.getElementById("test-preview")
-
-    let type = $(this).attr("data-type");
-    if (type == "writing") {
-      let data = $(this).attr("data-content");
-      privewEle.innerHTML = data;
-    }
-    else if (type == "video") {
-      let data = $(this).attr("data-content");
-      let ele = '<video controls class="rounded-4 w-100 h-100" crossorigin playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">'
-        + '<source src="' + data + '" type="video/mp4" size="300">'
-        + '<a>Video Oynatılamıyor</a>'
-        + '</video>';
-
-      privewEle.innerHTML = ele;
-      var plaryer = new Plyr('video', {
-        muted: false,
-        volume: 1,
-        controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-      });
-    } else if (type == "voice") {
-      let data = $(this).attr("data-content");
-      let ele = '<div style="width:100%;text-align:center;padding-top:25%" >' +
-        '<audio style="height: 60px; max-width: 360px; margin:auto;" controls="controls" src="' + data + '" type="audio/mpeg"></div>';
-      privewEle.innerHTML = ele;
-    } else if (type == "file") {
-      let data = $(this).attr("data-content");
-      let name = data.split("/");
-      name = name[name.length - 1];
-      privewEle.innerHTML = "<div style='width:100%;text-align:center;padding-top:25%' ><a href='" + data + "'>" + name + "</a></div>";
-    }
-  })
 
 
 
@@ -109,17 +74,6 @@ $(document).ready(async function () {
     // $(".meeting-book").show();
     $(".test-complete").removeClass("d-block").addClass("d-none");
     $(".meeting-book").removeClass("d-none").addClass("d-block");
-  })
-  $("#meeting_book_ok").click(function () {
-    $(".meeting-book").removeClass("d-block").addClass("d-none");
-    $(".congratulation").removeClass("d-none").addClass("d-block");
-  })
-  $("#meeting_book_skip1").click(function () {
-    $(".meeting-book td").removeClass("active");
-  })
-
-  $(".meeting-book td").click(function () {
-    $(this).toggleClass("active");
   })
 
   // VIDEO RECODING
