@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
+    protected $fillable = [
+        'id',
+        'job_id',
+        'candidate_id',
+        'content',
+        'rc_url',
+        'question_type',
+        'question_id',
+        'url',
+        'count',
+    ];
     use HasFactory;
 }

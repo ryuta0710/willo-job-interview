@@ -22,6 +22,7 @@ class Candidate extends Model
         'is_email_send',
         'note',
         'url',
+        'retake',
     ];
     use HasFactory;
 }

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('is_email_send')->nullable();
             $table->string('note')->default("");
             $table->string('url');
+            $table->string('retake')->nullable();
         });
     }
 

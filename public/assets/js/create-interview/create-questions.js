@@ -155,30 +155,19 @@ function questions_check() {
 			$("#next").attr("disabled", "").removeClass("active").addClass("bg-secondary-subtle");
 			return false;
 		}
-		// let type = $(questions[i]).find('.answer_type').val();
-		// let retake = $(questions[i]).find('.retake').val();
-		// let answer_time = $(questions[i]).find('.answer_time').val();
-		// let limit = $(questions[i]).find('.limit').val();
-		// let max = $(questions[i]).find('.max').val();
-		// let thinking_hour = $(questions[i]).find('.answer_type').val();
-		// let thinking_minute = $(questions[i]).find('.answer_type').val();
-
-		// switch (type) {
-		// 	case 'video':
-		// 		if (retake)
-		// 			break;
-		// 	case 'audio':
-		// 		break;
-		// 	case 'text':
-		// 		break;
-		// 	case 'file':
-		// 		break;
-		// 	case 'ai':
-		// 		break;
-
-		// 	default:
-		// 		break;
-		// }
+		// $.ajax({
+		// 	url: url,
+		// 	type: 'DELETE',
+		// 	data: {
+		// 		_token: $("meta[name=csrf-token]").attr("content"),
+		// 	},
+		// 	success: function(response) {
+		// 		location.reload();
+		// 	},
+		// 	error: function(xhr, status, error) {
+		// 		alert(xhr.responseJSON.message);
+		// 	}
+		// });
 
 	}
 	return true;

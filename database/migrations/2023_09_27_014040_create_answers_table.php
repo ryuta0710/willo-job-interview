@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('job_id');
+            $table->integer('candidate_id');
+            $table->string('content')->nullable();
+            $table->string('rc_url')->nullable();
+            $table->string('question_type');
+            $table->integer('question_id');
+            $table->string('url');
+            $table->string('count')->nullable();
         });
     }
 

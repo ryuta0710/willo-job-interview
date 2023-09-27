@@ -156,8 +156,17 @@ Route::controller(UserController::class)->group(function(){
 Route::controller(InterviewController::class)->group(function(){
 
     Route::get('interview/{url}', 'index')->name('interview.index');
+    //create answer
+    Route::post('interview/{url}/create-answer', 'create_answer')->name('interview.create_answer');
+
     //save
-    Route::post('interview', 'store')->name('interview.store');
+    Route::get('interview/{candidate_url}/{answer_url}', 'answer')->name('interview.answer');
+    //save
+    Route::post('interview/{url}/video', 'save_video')->name('interview.save_video');
+    Route::post('interview/{url}/audio', 'save_audio')->name('interview.save_audio');
+    Route::post('interview/{url}/text', 'save_text')->name('interview.save_text');
+    Route::post('interview/{url}/file', 'save_file')->name('interview.save_file');
+    // Route::post('interview', 'store')->name('interview.store');
 
     // Route::get('interview/create', 'create')->name('interview.create');
 

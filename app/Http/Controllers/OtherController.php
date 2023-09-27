@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Models\Field;
 use App\Models\Candidate;
 use App\Models\Questions;
+use Illuminate\HTTP\Response;
 
 class OtherController extends Controller
 {
@@ -127,6 +128,7 @@ class OtherController extends Controller
 
         return redirect()->route('interview.index', ['url' => $candidate_url]);
     }
+    
     protected function randomUrl()
     {
         $length = 30;
