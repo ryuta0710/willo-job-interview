@@ -156,15 +156,16 @@ class InterviewController extends Controller
         $candidate['name'] = $request['name'];
         $candidate['email'] = $request['email'];
         $candidate['tel'] = $request['tel'];
-        $candidate['response_at'] = $request['date'];
+        $timestamp = time();
+        $candidate['response_at'] = date("Y/m/d", $timestamp);
         $candidate['status'] = 'responsed';
         $candidate->save();
 
         $job = Job::where([
             'id' => $candidate->job_id,
         ])->first();
-        $response_count = intval($job->response_count) + 1;
-        $job['response_count'] = $response_count;
+        $response_count = intval($job->responses_count) + 1;
+        $job['responses_count'] = $response_count;
         $job->save();
 
         Booking::where([

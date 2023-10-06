@@ -116,7 +116,7 @@
                                         {{ $item['limit_date'] }}
                                     @endif
                                 </td>
-                                <td><a href="./company-job-details.html">{{ $item['responses_count'] }}</a>
+                                <td><a href="{{route('myjob.show', ['myjob' => $item['id']])}}">{{ $item['responses_count'] }}</a>
                                 </td>
                                 <td>
                                     @if ($item['status'] == 'draft')
@@ -130,7 +130,7 @@
                                     @endif
                                 </td>
                                 <td class="text-right">
-                                    <a href="@if ($item['status'] == 'live'){{ route('interview.index', ['url' => $item['url']]) }}@else javascript:; @endif"
+                                    <a href="@if ($item['status'] == 'live'){{ route('getJobDetail', ['url' => $item['url']]) }}@else javascript:; @endif"
                                         @if ($item['status'] != 'live') style="visibility: hidden; cursor: pointer;" @endif
                                         class="me-3">
                                         <i class="fa-solid fa-link"></i>

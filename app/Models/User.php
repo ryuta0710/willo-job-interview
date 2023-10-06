@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Company;
+use App\Models\Job;
 
 class User extends Authenticatable
 {
@@ -20,9 +23,16 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'organization_id',
+        'main_company_id',
         'phone',
         'password',
+        'period_start',
+        'period_end',
+        'users_count',
+        'interviews_count',
+        'sms_count',
+        'total_interviews',
+        'total_sms',
     ];
 
     /**
@@ -44,4 +54,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function companies():HasMany
+    {
+        return $this->hasMany(Company::class, 'owner');
+    }
+
+    public function jobs():HasMany
+    {
+        return $this->hasMany(Job::class);
+    }
 }

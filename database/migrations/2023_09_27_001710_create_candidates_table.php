@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('retake')->nullable();
             $table->string('name')->nullable();
             $table->integer('rate')->nullable();
+            $table->integer('user_id');
         });
     }
 

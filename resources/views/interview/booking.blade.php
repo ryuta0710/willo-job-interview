@@ -46,19 +46,19 @@
                                     @if ($currentDate->isWeekday())
                                         <th class="text-white">
                                             @if ($currentDate->format('D') == 'Mon')
-                                                月曜日
+                                                月曜日<br>{{$currentDate->format('d')}}
                                             @endif
                                             @if ($currentDate->format('D') == 'Tue')
-                                                火曜日
+                                                火曜日<br>{{$currentDate->format('d')}}
                                             @endif
                                             @if ($currentDate->format('D') == 'Wed')
-                                                水曜日
+                                                水曜日<br>{{$currentDate->format('d')}}
                                             @endif
                                             @if ($currentDate->format('D') == 'Thu')
-                                                木曜日
+                                                木曜日<br>{{$currentDate->format('d')}}
                                             @endif
                                             @if ($currentDate->format('D') == 'Fri')
-                                                金曜日
+                                                金曜日<br>{{$currentDate->format('d')}}
                                             @endif
                                         </th>
                                         @php $weekdaysCount++; @endphp

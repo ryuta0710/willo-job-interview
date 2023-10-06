@@ -647,7 +647,7 @@
                         length: request_data.length,
                     },
                     success: function(response) {
-                        location.href = "{{route("myjob.select_messages", ['myjob' => $myjob])}}"
+                        location.href = "{{route(`myjob.select_messages`, ['myjob' => $myjob])}}"
                         $("#next").removeAttr("disabled");
                     },
                     error: function(xhr, status, error) {

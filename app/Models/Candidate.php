@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Job;
 
 class Candidate extends Model
 {
@@ -25,6 +26,15 @@ class Candidate extends Model
         'retake',
         'name',
         'rate',
+        'user_id',
     ];
     use HasFactory;
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner');
+    }
+    public function job()
+    {
+        return $this->belongsTo(Job::class);
+    }
 }

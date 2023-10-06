@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('field')->nullable();
             $table->string('logo')->nullable();
             $table->integer('owner')->nullable();
-            $table->integer('default')->nullable();
+            $table->string('default')->nullable();
             // $table->foreign('owner')->references('id')->on('users');
         });
     }

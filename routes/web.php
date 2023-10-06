@@ -6,6 +6,7 @@ use App\Http\Controllers\MyJobController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/fetch/{period}', [App\Http\Controllers\HomeController::class, 'fetch'])->name('home.fetch');
+
 
 Route::controller(MyJobController::class)->group(function(){
 
@@ -62,6 +66,12 @@ Route::controller(MyJobController::class)->group(function(){
     Route::get('myjob/{myjob}/edit', 'edit')->name('myjob.edit');
 
     Route::get('myjob/{myjob}/{user_id}/edit', 'person')->name('myjob.person');
+    
+    Route::post('candidate/add_note/{candidate_id}', 'add_note')->name('myjob.add_note');
+    
+    Route::post('candidate/change_status/{candidate_id}', 'candidate_status_change')->name('myjob.candidate_status_change');
+
+    Route::post('candidate/review_change/{candidate_id}', 'candidate_review_change')->name('myjob.candidate_review_change');
 
 
 })->middleware('auth');;
@@ -188,8 +198,10 @@ Route::controller(InterviewController::class)->group(function(){
 Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
 Route::get('redirect-interview/{url}', [OtherController::class, 'redirect_interview'])->name('redirect-interview');
 Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobList');
+Route::get('public-candidate/{candidate_id}', [OtherController::class, 'publicCandidate'])->name('publicCandidate');
 Route::post('fetchJobs', [OtherController::class, 'fetchJobs'])->name('fetchJobs');
 Route::get('getJobDetail/{url}', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
 Route::get('contact', [OtherController::class, 'contact'])->name('contact');
+Route::get('privacy', [OtherController::class, 'privacy'])->name('privacy');
 
 // Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview.index');   

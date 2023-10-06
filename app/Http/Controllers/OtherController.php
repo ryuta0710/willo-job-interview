@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Models\Field;
 use App\Models\Candidate;
 use App\Models\Questions;
+use App\Models\Answer;
 use Illuminate\HTTP\Response;
 
 class OtherController extends Controller
@@ -120,10 +121,11 @@ class OtherController extends Controller
         //generate a random url
         $candidate_url = $this->randomUrl();
         //create candidate
-        $started = intval($job['started_count']) + 1;
-        $job['started_count'] = $started;
+        // $started = intval($job['started_count']) + 1;
+        // $job['started_count'] = $started;
         Candidate::create([
             'job_id' => $job->id,
+            'user_id' => $job->user_id,
             'job_url' => $job->url,
             'url' => $candidate_url,
         ]);
@@ -132,6 +134,37 @@ class OtherController extends Controller
         return redirect()->route('interview.index', ['url' => $candidate_url]);
     }
     
+
+    public function publicCandidate(string $candidate_id)
+    {
+        $candidate = Candidate::where([
+            'id' => $candidate_id,
+        ])
+            ->first();
+        if (empty($candidate)) {
+            return redirect()->route('welcome');
+        }
+        //fetch the answers for the candidate
+        $answers = Answer::where([
+            'candidate_id' => $candidate->id,
+        ])->orderby('question_id', 'asc')
+            ->get();
+        if (count($answers) == 0) {
+            return redirect()->route('welcome');
+        }
+        //fetch questions
+        $questions = Questions::where([
+            'job_id' => $candidate->job_id,
+        ])->orderby('question_no', 'asc')
+            ->get();
+        if (count($questions) == 0) {
+            return redirect()->route('welcome');
+        }
+        //check if the count of questions and answers is equal
+        $count = count($questions);
+        // return response()->json($question);
+        return view('interview.public-candidate', compact("questions", "answers", 'candidate', "count"));
+    }
     protected function randomUrl()
     {
         $length = 30;
@@ -144,22 +177,8 @@ class OtherController extends Controller
         return $randomString;
     }
 
-
-    // public function interview(Request $request, string $url) {
-    //     $job = Job::where([
-    //         'url' => $url,
-    //     ])
-    //     ->first();
-    //     if(empty($job)){
-    //         return redirect("/");
-    //     }
-
-    //     $questions = Questions::where([
-    //         'job_id' => $job->id,
-    //     ])->get();
-    //     $count = count($questions);
-    //     return view('interview', compact("job", "questions", 'count'));
-    // }
-
+    public function privacy(){
+        return view("privacy");
+    }
 
 }

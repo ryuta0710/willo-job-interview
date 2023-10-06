@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Job;
 
 class Company extends Model
 {
@@ -13,4 +15,9 @@ class Company extends Model
          'field', 'owner', 'default'
     ];
     use HasFactory;
+
+    public function jobs():HasMany
+    {
+        return $this->hasMany(Job::class);
+    }
 }

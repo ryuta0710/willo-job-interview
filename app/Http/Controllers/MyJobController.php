@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
 use App\Models\Message;
-
-
+use App\Models\Candidate;
+use App\Models\Answer;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
@@ -74,7 +75,7 @@ class MyJobController extends Controller
                 'id' => intval($request['company_id']),
             ])->first();
 
-            if(empty($company)){
+            if (empty($company)) {
                 return response('', 400);
             }
             $data = [
@@ -105,7 +106,7 @@ class MyJobController extends Controller
                 'id' => intval($request['company_id']),
             ])->first();
 
-            if(empty($company)){
+            if (empty($company)) {
                 return response('', 400);
             }
             $data = [
@@ -113,7 +114,7 @@ class MyJobController extends Controller
                 'salary' =>  intval($request['salary']),
                 'company_id' =>  $request['company_id'],
                 'description' =>  $request['description'],
-                'field_id' =>  $company->field_id,
+                'field_id' =>  $company->field,
                 'user_id' =>  $user->id,
             ];
 
@@ -140,9 +141,64 @@ class MyJobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $myjob)
     {
-        return view('myjob.show');
+        $job_id = $myjob;
+        $job = Job::where([
+            'id' => $job_id,
+        ])->first();
+
+        $all_count = Candidate::where([
+            'job_id' => $job_id,
+        ])->count();
+
+        $all_responded = Candidate::where('status', '!=', 'init')
+            ->count();
+
+        $reviews = Candidate::where([
+            'job_id' => $job_id,
+            'status' => 'responsed',
+        ])
+            ->get();
+
+        $accepts = Candidate::where([
+            'job_id' => $job_id,
+            'status' => 'accepted',
+        ])->get();
+
+        $rejects = Candidate::where([
+            'job_id' => $job_id,
+            'status' => 'rejected',
+        ])->get();
+
+        $per1 = 0;
+        $per2 = 0;
+        $per3 = 0;
+        $per4 = 0;
+        $per5 = 0;
+        if ($all_count != 0) {
+            // $per1 = count($accepts)/$max * 100;
+            $per2 = count($reviews) / $all_count * 100;
+            $per3 = count($accepts) / $all_count * 100;
+            $per4 = count($rejects) / $all_count * 100;
+            $per5 = $all_responded / $all_count * 100;
+        }
+
+
+        return view('myjob.show', compact(
+            'job_id',
+            'job',
+            'reviews',
+            'accepts',
+            'rejects',
+            'all_count',
+            'per1',
+            'per2',
+            'per3',
+            'per4',
+            'per5',
+            'all_responded',
+        ));
     }
 
     /**
@@ -242,7 +298,68 @@ class MyJobController extends Controller
 
     public function person(string $myjob, string $user_id)
     {
-        return view('myjob.person');
+        $job = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
+            ->where([
+                'jobs.id' => $myjob,
+            ])->select('jobs.*', 'companies.name as company_name')
+            ->first();
+        $candidate = Candidate::where([
+            'id' => $user_id,
+        ])->first();
+
+        $status = $candidate->status;
+        $candidates_for = Candidate::where([
+            'status' => $status,
+            'job_id' => $candidate->job_id,
+        ])
+        ->orderby('id', 'asc')
+        ->get();
+        $next = 0;
+        $prev = 0;
+        $len = count($candidates_for);
+        for ($i = 0; $i < $len; $i++) {
+            if ($candidate->id == $candidates_for[$i]->id) {
+                if($i != 0){
+                    $prev = $candidates_for[$i-1]->id;
+                }
+                if ($i < $len - 1) {
+                    $next = $candidates_for[$i+1]->id;
+                }
+            }
+        }
+
+
+        if (empty($candidate)) {
+            return redirect()->back();
+        }
+        //fetch the answers for the candidate
+        $answers = Answer::where([
+            'candidate_id' => $candidate->id,
+        ])->orderby('question_id', 'asc')
+            ->get();
+        if (count($answers) == 0) {
+            return redirect()->back();
+        }
+        //fetch questions
+        $questions = Questions::where([
+            'job_id' => $candidate->job_id,
+        ])->orderby('question_no', 'asc')
+            ->get();
+        if (count($questions) == 0) {
+            return redirect()->back();
+        }
+        //check if the count of questions and answers is equal
+        $count = count($questions);
+        return view('myjob.person', compact(
+            'job',
+            'candidate',
+            'count',
+            'questions',
+            'answers',
+            'candidates_for',
+            'next',
+            'prev',
+        ));
     }
 
     public function create_questions(string $myjob)
@@ -281,7 +398,7 @@ class MyJobController extends Controller
         $new_job['sms_reminder_id'] = intval($job['sms_reminder_id']);
         $new_job['status'] = $job['status'];
         $new_job['url'] = $this->randomUrl();
-        
+
         $job_id = Job::create($new_job)->id;
 
         $questions = Questions::where([
@@ -493,5 +610,64 @@ class MyJobController extends Controller
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
         return $randomString;
+    }
+
+    public function add_note(Request $request, string $candidate_id)
+    {
+        $user = Auth::user();
+        $candidate = Candidate::where([
+            'id' => $candidate_id,
+        ])->first();
+        if (empty($candidate)) {
+            return response(['status' => 'failed', 'message' => '操作が失敗しました'], 400);
+        }
+        Activity::create([
+            'candidate_id' => $candidate->id,
+            'name' => $user->name,
+            'content' => $request['note'],
+            'type' => 'note',
+        ]);
+        return response(['status' => 'success']);
+    }
+
+    public function candidate_status_change(Request $request, string $candidate_id)
+    {
+        $user = Auth::user();
+        $candidate = Candidate::where([
+            'id' => $candidate_id,
+        ])->first();
+        if (empty($candidate)) {
+            return response(['status' => 'failed', 'message' => '操作が失敗しました'], 400);
+        }
+        $status = $request->status;
+        if($status == "accepted"){
+            $candidate['status'] = "accepted";
+            $candidate->save();
+            return response(['status' => 'success']);
+        }
+        if($status == "rejected"){
+            $candidate['status'] = "rejected";
+            $candidate->save();
+            return response(['status' => 'success']);
+        }
+        return response(['status' => 'failed', 'message' => '操作が失敗しました'], 400);
+    }
+
+    public function candidate_review_change(Request $request, int $candidate_id)
+    {
+        $user = Auth::user();
+        $candidate = Candidate::where([
+            'id' => 5,
+        ])->first();
+        if (empty($candidate)) {
+            return response()->json(['status' => 'failed', 'message' => '操作が失敗しました'], Response::HTTP_BAD_REQUEST);
+        }
+        $review = intval($request['review']);
+        if(!$review){
+            return response()->json(['status' => 'failed', 'message' => '操作が失敗しました'], Response::HTTP_BAD_REQUEST);
+        }
+        $candidate['review'] = $review;
+        $candidate->save();
+        return response(['status' => 'success']);
     }
 }
