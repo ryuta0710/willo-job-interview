@@ -8,11 +8,11 @@ $(document).ready(function() {
         } else if (source == 'user') {
             let content = new String(quill.getContents().ops[0].insert);
             if (content == '\n') {
-                $("#save").removeClass("bg-primary").attr("disabled", "");
+                $("#submit").removeClass("btn-primary").attr("disabled", "");
                 $("#content").val("");
     
             } else {
-                $("#save").addClass("bg-primary").removeAttr("disabled");
+                $("#submit").addClass("btn-primary").removeAttr("disabled");
                 $("#content").val(quill.root.innerHTML);
             }
         }

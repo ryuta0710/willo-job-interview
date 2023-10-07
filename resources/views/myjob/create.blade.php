@@ -286,7 +286,7 @@
                     <!-- END VIDEO -->
                     <div class="px-5 pt-4 pb-2 d-flex justify-content-between">
                         <div>説明</div>
-                        <div class="text-secondary">オプション</div>
+                        {{-- <div class="text-secondary">オプション</div> --}}
                     </div>
                     <!-- TEXT EDITOR -->
                     <div class="w-100 mx-0 mx-md-4">
@@ -301,8 +301,6 @@
             <!-- END DESCRIPTION -->
             <div class="container">
                 <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
-                    <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4"
-                        id="before">戻る</button>
                     <button class="btn bg-secondary-subtle btn-normal rounded-5" disabled id="next">次に</button>
                     
                 </div>
@@ -332,22 +330,30 @@
                 }
             }
         });
-        navigator.mediaDevices.enumerateDevices()
-            .then(function(devices) {
-                var hasCamera = devices.some(function(device) {
-                return device.kind === 'videoinput';
-                });
+        
+        try {
+            navigator.mediaDevices.enumerateDevices()
+                .then(function(devices) {
+                    var hasCamera = devices.some(function(device) {
+                        return device.kind === 'videoinput';
+                    });
 
-                if (hasCamera) {
-                console.log('Camera is connected.');
-                } else {
+                    if (hasCamera) {
+                        console.log('Camera is connected.');
+                    } else {
+                        $(".camera_not_connected").removeClass("d-none");
+                        $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Error accessing media devices: ', err);
                     $(".camera_not_connected").removeClass("d-none");
-                    $("#record").attr("disabled","").removeClass("bg-active").addClass("bg-secondary-subtle");
-                }
-            })
-            .catch(function(err) {
-                console.error('Error accessing media devices: ', err);
-            });
+                    $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                });
+        } catch (error) {
+            $(".camera_not_connected").removeClass("d-none");
+            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+        }
         // quill.setContents("{{ old('description') }}");
         // quill.root.innerHTML = "{{ old('description') }}"
         // .setContents()

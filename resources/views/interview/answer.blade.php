@@ -1057,22 +1057,29 @@
                 }
             });
         @endif
-        navigator.mediaDevices.enumerateDevices()
-            .then(function(devices) {
-                var hasCamera = devices.some(function(device) {
-                    return device.kind === 'videoinput';
-                });
+        try {
+            navigator.mediaDevices.enumerateDevices()
+                .then(function(devices) {
+                    var hasCamera = devices.some(function(device) {
+                        return device.kind === 'videoinput';
+                    });
 
-                if (hasCamera) {
-                    console.log('Camera is connected.');
-                } else {
+                    if (hasCamera) {
+                        console.log('Camera is connected.');
+                    } else {
+                        $(".camera_not_connected").removeClass("d-none");
+                        $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Error accessing media devices: ', err);
                     $(".camera_not_connected").removeClass("d-none");
                     $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
-                }
-            })
-            .catch(function(err) {
-                console.error('Error accessing media devices: ', err);
-            });
+                });
+        } catch (error) {
+            $(".camera_not_connected").removeClass("d-none");
+            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+        }
         let recording = false;
 
         async function video_record(question_no) {
@@ -1183,7 +1190,7 @@
                 data: postData,
                 success: function(response) {
                     @if ($is_last)
-                        location.href = "{{route('interview.confirm', ['url' => $candidate_url])}}";
+                        location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
                     @else
                         create();
                     @endif
@@ -1216,7 +1223,7 @@
                 contentType: false,
                 success: function(response) {
                     @if ($is_last)
-                        location.href = "{{route('interview.confirm', ['url' => $candidate_url])}}";
+                        location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
                     @else
                         // create();
                     @endif

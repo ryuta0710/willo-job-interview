@@ -39,6 +39,8 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::get('myjob', 'index')->name('myjob.index');
 
+    Route::post('myjob/search', 'search')->name('myjob.search');
+
     Route::post('myjob', 'store')->name('myjob.store');
 
     Route::get('myjob/create', 'create')->name('myjob.create');

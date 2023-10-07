@@ -31,46 +31,28 @@
         <div class="container py-5 d-flex justify-content-center" id="welcome_message">
             <div class="card rounded-5 shadow ">
                 <div class="title">
-                    <h3>Default Invite Email</h3>
+                    <h3>{!! $message->title !!}</h3>
                 </div>
                 <div class="content">
                     {!! $message->content !!}
                     
                 </div>
                 <div class="button-group">
-                    <button class="btn  rounded-5 bg-secondary" id="go_interview" onclick="make_answer(1)">Go to
-                        interview</button>
+                    <button class="btn  rounded-5 bg-secondary" id="go_interview" onclick="make_answer(1)">面接に行く</button>
                 </div>
                 <div class="content">
                     <p>
-                        Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get
-                        to
-                        know you
-                        better with a short one-way video interview.
+                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
                         <br><br>
-                        Your interview will consist of a set of questions for you to answer using your camera and
-                        microphone. If you
-                        don't have access to a computer you can also complete your interview using any smartphone or
-                        tablet.
+                        面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
                         <br><br>
-                        How it works:
-                        If you're unfamiliar with one-way interviews, they are simply interviews with pre-written
-                        questions where
-                        you record a video response, at your convenience. Each question should be answered before
-                        you
-                        move on to the
-                        next one.
+                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
                         <br><br>
-                        Completing this interview will allow us to get to know you more quickly than a phone or
-                        video
-                        call, and you
-                        can complete it anywhere, any time.
+                        このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
                         <br><br>
-                        Please read this guide to your interview before starting:
-                        5 Easy steps to a great interview
+                        開始する前に、面接ガイドをお読みください: 素晴らしい面接への 5 つの簡単なステップ
                         <br><br>
-                        Thanks,
-                        {interview_owner_name}
+                        ありがとう、{interview_owner_name}
                     </p>
                 </div>
 

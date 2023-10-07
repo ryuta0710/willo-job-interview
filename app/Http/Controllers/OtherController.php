@@ -9,6 +9,7 @@ use App\Models\Field;
 use App\Models\Candidate;
 use App\Models\Questions;
 use App\Models\Answer;
+use App\Models\Company;
 use Illuminate\HTTP\Response;
 
 class OtherController extends Controller
@@ -103,10 +104,9 @@ class OtherController extends Controller
 
     public function invitePeople(string $myjob)
     {
-        $url = Job::where([
-            'id' => $myjob,
-        ])->first()->url;
-        return view("invite-people", compact('url'));
+        $job = Job::find($myjob);
+        $company = Company::find($job->company_id);
+        return view("invite-people", compact('job', 'company'));
     }
 
     public function redirect_interview(string $url)

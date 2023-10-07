@@ -2,6 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/companyMana/list.css') }}">
+    <script src="{{ asset('/assets/js/common/jquery.min.js') }}"></script>
     <main class="pt-5">
         <div class="container">
             <div class="row">
@@ -21,9 +22,12 @@
                                 <div class="">
                                     <a href="{{ route('company.edit', ['id' => $item->id]) }}" class="me-2"><i
                                             class="fa fa-edit"></i></a>
+                                            
+                                @if ($item->default != 'true')
                                     <a href="javascript:;" class="item-delete"
                                         data-url="{{ route('company.destroy', ['id' => $item->id]) }}" class="ms-2"><i
                                             class="fa fa-trash"></i></a>
+                                @endif
                                 </div>
                             </div>
                         </div>
@@ -42,7 +46,7 @@
     </main>
     <script>
         $(".item-delete").click(function(e) {
-            $(e.target).parents(".company-item") $(".company-default")
+            $(e.target).parents(".company-item");
             const url = $(e.currentTarget).attr("data-url");
             $.ajax({
                 url: url,

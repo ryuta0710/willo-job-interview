@@ -247,8 +247,8 @@
         <!-- END NOTIFICATION MESSAGE -->
         <div class="container">
             <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
-                <button class="none btn  btn-normal rounded-5 bg-white border border-primary me-4"
-                    id="before">戻る</button>
+                <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4" href="{{route('myjob.create_questions', ['myjob' => $myjob])}}"
+                    id="before">戻る</a>
                 <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
             </div>
 

@@ -562,7 +562,7 @@
         <div class="container">
             <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
                 <a href="{{ route('myjob.edit', ['myjob' => $myjob]) }}"
-                    class="none btn  btn-normal rounded-5 bg-white border border-primary me-4" id="before">戻る</a>
+                    class="btn btn-normal rounded-5 bg-white border border-primary me-4" id="before">戻る</a>
                 <button class="btn  btn-normal bg-secondary-subtle rounded-5" id="next" disabled>次に</button>
                 {{-- <a class="btn  btn-normal rounded-5 bg-active text-white none" id="btn_public" href="{{ route('invite-people') }}">公開</a> --}}
             </div>
@@ -647,7 +647,7 @@
                         length: request_data.length,
                     },
                     success: function(response) {
-                        location.href = "{{route(`myjob.select_messages`, ['myjob' => $myjob])}}"
+                        location.href = "{{route('myjob.select_messages', ['myjob' => $myjob])}}"
                         $("#next").removeAttr("disabled");
                     },
                     error: function(xhr, status, error) {

@@ -62,7 +62,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-secondary rounded-pill" type="submit" id="save">保 存</button>
+                            <button class="btn btn-primary rounded-pill" type="submit" id="save">保 存</button>
                         </div>
                     </div>
                 </form>
@@ -83,10 +83,10 @@
                 } else if (source == 'user') {
                     let content = new String(quill.getContents().ops[0].insert)
                     if (content == '\n') {
-                        $("#save").removeClass("bg-primary").attr("disabled", "");
+                        $("#save").removeClass("btn-primary").addClass("bg-secondary").attr("disabled", "");
 
                     } else {
-                        $("#save").addClass("bg-primary").removeAttr("disabled");
+                        $("#save").addClass("btn-primary").removeClass("bg-secondary").removeAttr("disabled");
                         $("#content").val(content);
                     }
                 }

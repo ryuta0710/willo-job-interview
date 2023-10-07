@@ -16,10 +16,11 @@
             <div class="container px-5">
                 <div class="row flex-column flex-md-row justify-content-between gap-4 flex-wrap flex-xl-nowrap">
                     <div class="col-lg-2">
-                        <input class="form-control rounded-5 fs-14 h-100" type="text" placeholder="タイトルで検索する">
+                        <input class="form-control rounded-5 fs-14 h-100" type="text" placeholder="タイトルで検索する"
+                            id="search_title">
                     </div>
                     <div class="col-lg-2 position-relative">
-                        <input name="" id="" class="form-select select2 w-100 rounded-pill"
+                        <input name="" id="search_company" class="form-select select2 w-100 rounded-pill"
                             placeholder="会社名による検索">
                         <div class="select-cus position-absolute card p-3 shadow rounded-4">
                             <div class="cus-search">
@@ -27,7 +28,10 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>会社ごとにフ</span></div>
+                                {{-- <div class="cus-option"><span>会社ごとにフ</span></div> --}}
+                                @foreach ($companies as $item)
+                                <div class="cus-option"><span>{{$item->name}}</span></div>
+                                @endforeach
                             </div>
                             <div class="btn-group">
                                 <button class="btn btn-primary rounded-2 ok">申し込み</button>
@@ -39,7 +43,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 position-relative">
-                        <input name="" id="" class="form-select select2 w-100 rounded-pill"
+                        <input name="" id="search_owner" class="form-select select2 w-100 rounded-pill"
                             placeholder="所有者名による検索">
                         <div class="select-cus position-absolute card p-3 shadow rounded-4">
                             <div class="cus-search">
@@ -47,7 +51,10 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>所有者でフィ</span></div>
+                                <div class="cus-option"><span>{{$name}}</span></div>
+                                @foreach ($owners as $item)
+                                <div class="cus-option"><span>{{$item->name}}</span></div>
+                                @endforeach
                             </div>
                             <div class="btn-group">
                                 <button class="btn btn-primary rounded-2 ok">申し込み</button>
@@ -59,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 position-relative">
-                        <input name="" id="" class="form-select select2 w-100 rounded-pill"
+                        <input name="" id="search_status" class="form-select select2 w-100 rounded-pill"
                             placeholder="ステータスによる検索">
                         <div class="select-cus position-absolute card p-3 shadow rounded-4">
                             <div class="cus-search">
@@ -67,7 +74,9 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>所有者でフィ</span></div>
+                                <div class="cus-option"><span>草案</span></div>
+                                <div class="cus-option"><span>募集中</span></div>
+                                <div class="cus-option"><span>募集完了</span></div>
                             </div>
                             <div class="btn-group">
                                 <button class="btn btn-primary rounded-2 ok">申し込み</button>
@@ -93,14 +102,14 @@
                     <thead>
                         <tr class="border-top-0">
                             <th class="rounded-top-4 rounded-end-0">募集項目名</th>
-                            <th>募集会社名</th>
+                            <th>所有者名</th>
                             <th>募集終了日</th>
                             <th>現在の応募者数</th>
                             <th>募集中/募集終了</th>
                             <th class="rounded-top-4 rounded-start-0"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         @foreach ($jobs as $item)
                             <tr>
                                 <td>
@@ -116,7 +125,8 @@
                                         {{ $item['limit_date'] }}
                                     @endif
                                 </td>
-                                <td><a href="{{route('myjob.show', ['myjob' => $item['id']])}}">{{ $item['responses_count'] }}</a>
+                                <td><a
+                                        href="{{ route('myjob.show', ['myjob' => $item['id']]) }}">{{ $item['responses_count'] }}</a>
                                 </td>
                                 <td>
                                     @if ($item['status'] == 'draft')
@@ -130,7 +140,7 @@
                                     @endif
                                 </td>
                                 <td class="text-right">
-                                    <a href="@if ($item['status'] == 'live'){{ route('getJobDetail', ['url' => $item['url']]) }}@else javascript:; @endif"
+                                    <a href="@if ($item['status'] == 'live') {{ route('getJobDetail', ['url' => $item['url']]) }}@else javascript:; @endif"
                                         @if ($item['status'] != 'live') style="visibility: hidden; cursor: pointer;" @endif
                                         class="me-3">
                                         <i class="fa-solid fa-link"></i>
@@ -167,13 +177,13 @@
 
             const jobId = $(e.target.parentElement).attr('data-id');
             $.ajax({
-                url: '/myjob/' + jobId +"/copy",
+                url: '/myjob/' + jobId + "/copy",
                 type: 'get',
                 data: {
                     _token: $("meta[name=csrf-token]").attr("content"),
                 },
                 success: function(response) {
-                    // location.reload();
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     alert(xhr.responseJSON.message);
@@ -211,17 +221,20 @@
         $(".select2").focus(function(e) {
             $(".select2 + .select-cus").hide();
             $(e.target).next().show();
+            $(e.target).blur();
             $(".cus-bg").show();
         })
 
         $(".select-cus .cus-option span").click(function(e) {
             $(e.target).parent().parent().parent().hide();
             $(e.target).parent().parent().parent().prev().val(e.target.textContent);
+            search_job();
         })
 
         $(".select-cus .ok").click(function(e) {
             $(e.target).parent().parent().hide();
             $(e.target).parent().parent().prev().val($(e.target).parent().parent().find('input').val());
+            search_job();
         })
 
         $(".select-cus .cancel").click(function(e) {
@@ -231,7 +244,6 @@
 
         $(".cus-bg").click(function(e) {
             $(e.target).parent().hide();
-            $(e.target).parent().prev().val("");
         })
 
         $(".select-search").keyup(function(e) {
@@ -241,7 +253,6 @@
             let listData = [];
             let len = listDom.length;
             let nooptionsdom = e.target.parentElement.nextElementSibling.firstElementChild;
-            console.log(nooptionsdom)
             nooptionsdom.style.display = "block"
 
             for (let i = 1; i < len; i++) {
@@ -258,6 +269,94 @@
                 }
             }
 
-        })
+        });
+        $("#search_title, #search_company, #search_owner, #search_status").change(function() {
+            search_job();
+        });
+
+        function search_job() {
+            console.log("sdaf")
+            const title = $("#search_title").val().trim();
+            const company = $("#search_company").val().trim();
+            const owner = $("#search_owner").val().trim();
+            let status = $("#search_status").val().trim();
+            switch (status) {
+                case '草案':
+                    status = 'draft';
+                    break;
+                case '募集中':
+                    status = 'live';
+                    break;
+                case '募集完了':
+                    status = 'finish';
+                    break;
+                default:
+                    status = '';
+            }
+            $.ajax({
+                url: '/myjob/search',
+                type: 'POST',
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    title,
+                    company,
+                    owner,
+                    status,
+                },
+                success: function(response) {
+                    let dis = "";
+                    response.forEach(ele => {
+                        let status = "";
+                        let jobDetail = `<a href="javascript:;" style="visibility: hidden; cursor: pointer;" class="me-3"><i class="fa-solid fa-link"></i></a>`;
+                        switch (ele.status) {
+                            case 'draft': status = `<div class="cs-state bg-secondary-subtle text-black">草案</div>`; break;
+                            case 'live': status = `<div class="cs-state">募集中</div>`;
+                            jobDetail = `<a href="getJobDetail/${ele.url}" class="me-3"><i class="fa-solid fa-link"></i></a>`; break;
+                            case 'finish': status = `<div class="cs-state bg-red-subscribe text-black">募集終了</div>`; break;
+                        }
+                        let limit_date = "";
+                        if(ele.limit_date != null){
+                            limit_date = ele.limit_date;
+                        }
+                        dis += `
+                            <tr>
+                                <td>
+                                    <div>${ele.title}</div>
+                                    <div>${ele.company_name}</div>
+                                </td>
+                                <td>
+                                    <div>${ele.user_name}</div>
+                                    <div>${ele.email}</div>
+                                </td>
+                                <td>
+                                    ${limit_date}
+                                </td>
+                                <td><a href="/myjob/${ele.id}">${ele.responses_count}</a>
+                                </td>
+                                <td>${status}
+                                </td>
+                                <td class="text-right">
+                                    ${jobDetail}
+                                    <a href="/myjob/${ele.id}/edit" class="me-3">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </a>
+                                    <a href="javascript:;" class="me-3" data-id="${ele.id}">
+                                        <i class="fa-solid fa-copy"></i>
+                                    </a>
+                                    <a href="javascript:;" data-id="${ele.id}">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        `
+                    });
+                    console.log(dis);
+                    $("#tbody").html(dis);
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        }
     </script>
 @endsection

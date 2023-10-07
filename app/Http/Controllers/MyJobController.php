@@ -38,7 +38,44 @@ class MyJobController extends Controller
             ->orderBy('jobs.created_at', 'desc')
             ->select('jobs.*', 'companies.name as company_name', 'users.name as user_name', 'users.email as email')
             ->get();
-        return view('myjob.index', compact("jobs"));
+        $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
+        $owners = InvitedUsers::join('users', 'invited_users.inviter', '=', 'users.email')
+        ->where(['invited_users.inviter' => $user->email])
+        ->where('invited_users.user_id', '!=', 0)
+        ->select("users.name as name", "invited_users.*")
+        ->get();
+        $name = $user->name;
+        return view('myjob.index', compact("jobs",'companies', 'owners', 'name'));
+    }
+
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $title = $request->input('title');
+        $company = $request->input('company');
+        $owner = $request->input('owner');
+        $status = $request->input('status');
+
+        $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
+            ->join('users', 'jobs.user_id', '=', 'users.id')
+            ->where('jobs.user_id', $user->id)
+            ->when($title, function ($query) use ($title) {
+                return $query->where('jobs.title', 'LIKE', '%' . $title . '%');
+            })
+            ->when($company, function ($query) use ($company) {
+                return $query->where('companies.name', 'LIKE', '%' . $company . '%');
+            })
+            ->when($owner, function ($query) use ($owner) {
+                return $query->where('users.name', 'LIKE', '%' . $owner . '%');
+            })
+            ->when($status, function ($query) use ($status) {
+                return $query->where('jobs.status', $status);
+            })
+            ->orderBy('jobs.created_at', 'desc')
+            ->select('jobs.*', 'companies.name as company_name', 'users.name as user_name', 'users.email as email')
+            ->get();
+
+        return response()->json($jobs);
     }
 
     /**
@@ -47,7 +84,7 @@ class MyJobController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $companies = Company::orderBy('name', 'asc')->get();
+        $companies = Company::where(['user_id' => $user->id])->orderBy('name', 'asc')->get();
 
         return view('myjob.create', compact('companies'));
     }
@@ -385,12 +422,14 @@ class MyJobController extends Controller
         if (empty($job))
             return redirect()->back();
         $new_job = [];
-        $new_job['title'] = $job['title'];
+        $new_job['title'] = "コピー ".$job['title'];
         $new_job['salary'] = $job['salary'];
         $new_job['company_id'] = $job['company_id'];
         $new_job['description'] = $job['description'];
         $new_job['video_url'] = $job['video_url'];
         $new_job['user_id'] = $job['user_id'];
+        $new_job['field_id'] = $job['field_id'];
+        $new_job['limit_date'] = $job['limit_date'];
         $new_job['mail_invite_id'] = intval($job['mail_invite_id']);
         $new_job['mail_success_id'] = intval($job['mail_success_id']);
         $new_job['mail_reminder_id'] = intval($job['mail_reminder_id']);
