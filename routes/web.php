@@ -67,7 +67,7 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::get('myjob/{myjob}/edit', 'edit')->name('myjob.edit');
 
-    Route::get('myjob/{myjob}/{user_id}/edit', 'person')->name('myjob.person');
+    Route::get('myjob/{myjob}/{candidate_id}/edit', 'person')->name('myjob.person');
     
     Route::post('candidate/add_note/{candidate_id}', 'add_note')->name('myjob.add_note');
     

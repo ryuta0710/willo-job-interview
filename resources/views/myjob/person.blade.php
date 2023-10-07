@@ -901,15 +901,14 @@
                     "");
             }
         });
-        @if ($prev != 0)
+        @if ($prev)
             $("#slider_before").click(function() {
-                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'user_id' => $prev]) }}'
+                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $prev]) }}'
             })
         @endif
-        @if ($next != 0)
+        @if ($next)
             $("#slider_next").click(function() {
-                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'user_id' => $next]) }}'
-
+                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $next]) }}'
             })
         @endif
         $("#add_note").click(function() {

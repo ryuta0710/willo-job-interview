@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="content">
                                     <p class="fs-14"><a
-                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'user_id' => $item->id]) }}">{{ $item->name }}</a>
+                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'candidate_id' => $item->id]) }}">{{ $item->name }}</a>
                                     </p>
                                     <p class="fs-10">{{ date('Y', strtotime($item->updated_at)) }}年
                                         {{ date('m', strtotime($item->response_at)) }}月
@@ -276,7 +276,7 @@
                                 </div>
                                 <div class="content">
                                     <p class="fs-14"><a
-                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'user_id' => $item->id]) }}">{{ $item->name }}</a>
+                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'candidate_id' => $item->id]) }}">{{ $item->name }}</a>
                                     </p>
                                     <p class="fs-10">{{ date('Y', strtotime($item->updated_at)) }}年
                                         {{ date('m', strtotime($item->response_at)) }}月
@@ -314,7 +314,7 @@
                                 </div>
                                 <div class="content">
                                     <p class="fs-14"><a
-                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'user_id' => $item->id]) }}">{{ $item->name }}</a>
+                                            href="{{ route('myjob.person', ['myjob' => $job_id, 'candidate_id' => $item->id]) }}">{{ $item->name }}</a>
                                     </p>
                                     <p class="fs-10">{{ date('Y', strtotime($item->updated_at)) }}年
                                         {{ date('m', strtotime($item->response_at)) }}月

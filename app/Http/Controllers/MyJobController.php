@@ -333,7 +333,7 @@ class MyJobController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function person(string $myjob, string $user_id)
+    public function person(string $myjob, string $candidate_id)
     {
         $job = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
             ->where([
@@ -341,7 +341,7 @@ class MyJobController extends Controller
             ])->select('jobs.*', 'companies.name as company_name')
             ->first();
         $candidate = Candidate::where([
-            'id' => $user_id,
+            'id' => $candidate_id,
         ])->first();
 
         $status = $candidate->status;

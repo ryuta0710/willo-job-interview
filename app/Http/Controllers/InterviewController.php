@@ -158,6 +158,7 @@ class InterviewController extends Controller
         $candidate['tel'] = $request['tel'];
         $timestamp = time();
         $candidate['response_at'] = date("Y/m/d", $timestamp);
+        $candidate['time'] = date("H:i:s", $timestamp);
         $candidate['status'] = 'responsed';
         $candidate->save();
 
