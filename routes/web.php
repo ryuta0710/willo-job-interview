@@ -82,6 +82,8 @@ Route::controller(MemberController::class)->group(function(){
 
     Route::get('member', 'index')->name('member.index');
 
+    Route::post('member/search', 'search')->name('member.search');
+
     // Route::post('member', 'store')->name('member.store');
 
     // Route::get('member/create', 'create')->name('member.create');

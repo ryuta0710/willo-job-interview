@@ -28,7 +28,6 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                {{-- <div class="cus-option"><span>会社ごとにフ</span></div> --}}
                                 @foreach ($companies as $item)
                                 <div class="cus-option"><span>{{$item->name}}</span></div>
                                 @endforeach
@@ -224,10 +223,10 @@
             $(e.target).blur();
             $(".cus-bg").show();
         })
-
-        $(".select-cus .cus-option span").click(function(e) {
-            $(e.target).parent().parent().parent().hide();
-            $(e.target).parent().parent().parent().prev().val(e.target.textContent);
+        
+        $(".select-cus .cus-option").click(function(e) {
+            $(e.target).parent().parent().hide();
+            $(e.target).parent().parent().prev().val(e.target.textContent);
             search_job();
         })
 
@@ -275,7 +274,6 @@
         });
 
         function search_job() {
-            console.log("sdaf")
             const title = $("#search_title").val().trim();
             const company = $("#search_company").val().trim();
             const owner = $("#search_owner").val().trim();

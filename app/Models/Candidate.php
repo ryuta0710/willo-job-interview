@@ -27,6 +27,7 @@ class Candidate extends Model
         'name',
         'rate',
         'user_id',
+        'company_id',
         'time',
     ];
     use HasFactory;

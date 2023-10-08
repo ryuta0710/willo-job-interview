@@ -127,6 +127,7 @@ class OtherController extends Controller
             'job_id' => $job->id,
             'user_id' => $job->user_id,
             'job_url' => $job->url,
+            'company_id' => $job->company_id,
             'url' => $candidate_url,
         ]);
         $job->save();

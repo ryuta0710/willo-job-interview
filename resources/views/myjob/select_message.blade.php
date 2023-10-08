@@ -175,7 +175,7 @@
                     <div class="col-12 col-xl-6 mb-3 py ">
                         <div class="d-flex justify-content-between pb-1 px-4">
                             <label for="input1" class="form-label"><i
-                                    class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
+                                    class="fa-solid fa-comment"></i>&nbsp;&nbsp;&nbsp;SMS
                                 テンプレート</label>
                             <a class="text-active modal-show" data-bs-target="#smsModal" data-bs-toggle="modal"
                                 type="sms" trigger="invite" data-tar="#sms_invite" href="javascript:;"><i
@@ -209,7 +209,7 @@
                     <div class="col-12 col-xl-6 mb-3 py ">
                         <div class="d-flex justify-content-between pb-1 px-4">
                             <label for="input1" class="form-label"><i
-                                    class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;SMS
+                                    class="fa-solid fa-comment"></i>&nbsp;&nbsp;&nbsp;SMS
                                 テンプレート</label>
                             <a class="text-active modal-show" data-bs-target="#smsModal" data-bs-toggle="modal"
                                 type="sms" trigger="reminder" data-tar="#sms_reminder" href="javascript:;"><i

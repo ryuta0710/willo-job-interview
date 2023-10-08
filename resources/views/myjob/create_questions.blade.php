@@ -648,11 +648,9 @@
                     },
                     success: function(response) {
                         location.href = "{{route('myjob.select_messages', ['myjob' => $myjob])}}"
-                        $("#next").removeAttr("disabled");
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseJSON.message);
-                        $("#next").removeAttr("disabled");
                     }
                 });
             }

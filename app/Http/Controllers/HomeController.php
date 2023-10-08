@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Job;
 use App\Models\Questions;
 use App\Models\Candidate;
+use App\Models\InvitedUsers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -42,6 +43,11 @@ class HomeController extends Controller
         $companies = User::find($user->id)
             ->companies()
             ->get();
+
+        $first_interview = Candidate::where('user_id', $user->id)->first();
+        $exist_first_interview = !empty($first_interview);
+        $first_inviter = InvitedUsers::where('inviter', $user->email)->first();
+        $exist_invited_user = !empty($first_inviter);
 
         $live_jobs_count = User::find($user->id)
             ->jobs()
@@ -97,7 +103,7 @@ class HomeController extends Controller
         $all_count = count($candidates);
 
 
-        return view('home', compact('responses_count', 'all_count', 'live_jobs_count', 'candidates_data', 'response_data'));
+        return view('home', compact('responses_count', 'all_count', 'live_jobs_count', 'candidates_data', 'response_data', 'exist_first_interview', 'exist_invited_user'));
     }
 
     public function fetch(string $period)

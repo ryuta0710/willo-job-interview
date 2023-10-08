@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->integer('rate')->nullable();
             $table->integer('user_id');
+            $table->integer('company_id');
             $table->time('time')->nullable();
         });
     }

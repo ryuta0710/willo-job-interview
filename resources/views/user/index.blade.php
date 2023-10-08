@@ -184,7 +184,7 @@
                                 <td class="border-start">` + save_data.name + `</td>
                                 <td>` + email + `</td>
                                 <td>` + save_data.phone + `</td>
-                                <td>` + role_text + `<select class="role_` + save_data.id + `"><option value="admin">管理者</option><option value="standard" selected="">一般ユーザー</option></select></td>
+                                <td>` + role_text + `<select class="display-none role_` + save_data.id + `"><option value="admin">管理者</option><option value="standard" selected="">一般ユーザー</option></select></td>
                                 <td>参加しました</td>
                                 <td class="border-end" style="width: 115px;">
                                     <a href="javascript:;" class="invited_user_edit han_btn" data-del-id="` + save_data.id + `">
@@ -194,10 +194,10 @@
                                         <i class="fa fa-solid fa-trash"></i>
                                     </a>
                                     
-                                    <a href="javascript:;" class="invited_user_ok han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="display-none invited_user_ok han_btn" data-del-id="` + save_data.id + `">
                                         <i class="fa fa-solid fa-check me-3"></i>
                                     </a>
-                                    <a href="javascript:;" class="invited_user_cancel han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="display-none invited_user_cancel han_btn" data-del-id="` + save_data.id + `">
                                         <i class="fa fa-solid fa-close"></i>
                                     </a>
                                 </td>

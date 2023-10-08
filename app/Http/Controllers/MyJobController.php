@@ -84,7 +84,7 @@ class MyJobController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $companies = Company::where(['user_id' => $user->id])->orderBy('name', 'asc')->get();
+        $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
 
         return view('myjob.create', compact('companies'));
     }
@@ -501,12 +501,12 @@ class MyJobController extends Controller
                 // return response()->json($data);
                 Questions::create($data);
             }
-            return redirect()->route("myjob.select_messages", ['myjob' => $myjob]);
+            // return redirect()->route("myjob.select_messages", ['myjob' => $myjob]);
 
-            // return response()->json([
-            //     'status' => 'success',
-            //     'message' => '操作が成功しました',
-            // ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => '操作が成功しました',
+            ]);
         } else {
             return response()->json([
                 'status' => 'failed',
@@ -557,7 +557,8 @@ class MyJobController extends Controller
                 "myjob"
             ));
         } else {
-            return redirect()->back();
+            return response()->json(['status' => 'failed', 'message' => '選択するメッセージがないため選択できません。
+            メッセージを参照してください。']);
         }
     }
 
