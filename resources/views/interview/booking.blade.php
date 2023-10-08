@@ -46,19 +46,19 @@
                                     @if ($currentDate->isWeekday())
                                         <th class="text-white">
                                             @if ($currentDate->format('D') == 'Mon')
-                                                月曜日<br>{{$currentDate->format('d')}}
+                                                月曜日<br>{{ $currentDate->format('d') }}
                                             @endif
                                             @if ($currentDate->format('D') == 'Tue')
-                                                火曜日<br>{{$currentDate->format('d')}}
+                                                火曜日<br>{{ $currentDate->format('d') }}
                                             @endif
                                             @if ($currentDate->format('D') == 'Wed')
-                                                水曜日<br>{{$currentDate->format('d')}}
+                                                水曜日<br>{{ $currentDate->format('d') }}
                                             @endif
                                             @if ($currentDate->format('D') == 'Thu')
-                                                木曜日<br>{{$currentDate->format('d')}}
+                                                木曜日<br>{{ $currentDate->format('d') }}
                                             @endif
                                             @if ($currentDate->format('D') == 'Fri')
-                                                金曜日<br>{{$currentDate->format('d')}}
+                                                金曜日<br>{{ $currentDate->format('d') }}
                                             @endif
                                         </th>
                                         @php $weekdaysCount++; @endphp
@@ -364,6 +364,9 @@
                     $(".congratulation").removeClass("d-none").addClass("d-block");
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

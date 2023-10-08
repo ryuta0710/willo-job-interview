@@ -31,18 +31,18 @@
 
                     </div>
                 </div>
-                <p class="pt-1">採用担当名</p>
+                <p class="pt-1">{{$company->name}}</p>
                 <div class="w-100 d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-column flex-md-row flex-wrap gap-3 px-2 fs-14">
-                        <a class="cs-state bg-primary text-white px-4 w-auto" href="">
+                        <a class="cs-state bg-primary text-white px-4 w-auto" href="{{ route('invite-people', ['myjob' => $job->id]) }}">
                             <i class="fa-solid fa-share-nodes"></i>
                             招待
                         </a>
-                        <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="">
+                        <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="{{ route('myjob.edit', ['myjob' => $job->id]) }}">
                             <i class="fa-regular fa-edit"></i>
                             編集
                         </a>
-                        <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="">
+                        <a class="cs-state border-gray bg-white text-black px-4 w-auto" href="{{route('getJobDetail', ['url' => $job->url])}}">
                             <i class="fa-solid fa-eye"></i>
                             プレビュー
                         </a>
@@ -146,7 +146,7 @@
                                 回答:
                             </div>
                             <div class="col-8">
-                                {{ $all_responded }}名（{{ $per5 }}％）
+                                {{ $all_responded }}名（{{ number_format($per5, 2) }}％）
                             </div>
                         </div>
                         <div class="row mt-4">

@@ -9,15 +9,17 @@
         <div class="container px-4">
             <div class="row justify-content-between align-items-center mb-5">
                 <div class="col-lg-3 mb-3 mb-lg-0">
-                    <input type="text" class="form-control rounded-pill" placeholder="タイトルで検索する">
+                    <input type="text" class="form-control rounded-pill" placeholder="タイトルで検索する" id="search_content">
                 </div>
                 <div class="col-lg-3 mb-3 mb-lg-0">
-                    <select name="" id="" class="form-select rounded-pill">
+                    <select name="" id="search_type" class="form-select rounded-pill">
+                        <option value="" disabled selected hidden>タイプで検索</option>
                         <option value="email">Eメール</option>
                         <option value="SMS">SMS</option>
                     </select>
                 </div>
-                <div class="col-lg-3 mb-3 mb-lg-0 d-flex justify-content-end">
+                <div class="col-lg-auto mb-3 mb-lg-0 d-flex justify-content-end">
+                    <span class="m-0 align-self-center me-4" id="filter_clear"><a href="javascript:;">すべてクリア</a></span>
                     <a class="btn btn-primary px-4" href="{{ route('template.create') }}"><i
                             class="fa fa-solid fa-plus"></i> 作成</a>
                 </div>
@@ -34,7 +36,7 @@
                                     <th class="py-4">アクション</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody">
                                 @foreach ($messages as $message)
                                     <tr>
                                         <td>
@@ -57,31 +59,31 @@
 													@else @if ($message->type == 'email' && $message->trigger == 'reminder')
 														data-bs-target="#reminderModal" @endif
                                                     @endif
-                                @endif
-                                @endif
-                                data-id = {{ $message->id }}>
-                                <i class="fa fa-solid fa-eye me-3"></i>
-                                </a>
-                                @if ($message->editable == 1)
-                                    <a href="{{ route('template.edit', ['template' => $message->id ]) }}">
-                                        <i class="fa fa-solid fa-edit me-3"></i>
-                                    </a>
-                                @else
-                                    <div style="display: inline-block;width: 32px;"></div>
-                                @endif
-                                <a href="javascript:;" onclick="copy('{{$message->id}}')">
-                                    <i class="fa fa-solid fa-copy me-3"></i>
-                                </a>
-                                @if ($message->editable == 1)
-                                    <a href="javascript:;" onclick="del('{{$message->id}}')">
-                                        <i class="fa fa-solid fa-trash"></i>
-                                    </a>
-                                @else
-                                    <div style="display: inline-block;width: 14px;height: 1rem;"></div>
-                                @endif
-                    </div>
-                    </td>
-                    </tr>
+                                                    @endif
+                                                    @endif
+                                                    data-id = {{ $message->id }}>
+                                                    <i class="fa fa-solid fa-eye me-3"></i>
+                                                    </a>
+                                                    @if ($message->editable == 1)
+                                                        <a href="{{ route('template.edit', ['template' => $message->id]) }}">
+                                                            <i class="fa fa-solid fa-edit me-3"></i>
+                                                        </a>
+                                                    @else
+                                                        <div style="display: inline-block;width: 32px;"></div>
+                                                    @endif
+                                                    <a href="javascript:;" onclick="copy('{{ $message->id }}')">
+                                                        <i class="fa fa-solid fa-copy me-3"></i>
+                                                    </a>
+                                                    @if ($message->editable == 1)
+                                                        <a href="javascript:;" onclick="del('{{ $message->id }}')">
+                                                            <i class="fa fa-solid fa-trash"></i>
+                                                        </a>
+                                                    @else
+                                                        <div style="display: inline-block;width: 14px;height: 1rem;"></div>
+                                                    @endif
+                                            </div>
+                                        </td>
+                                    </tr>
                     @endforeach
                     </tbody>
                     </table>
@@ -223,4 +225,4 @@
 
     <script src="{{ asset('/assets/js/template/index.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    @endsection
+@endsection

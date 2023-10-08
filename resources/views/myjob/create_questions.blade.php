@@ -647,9 +647,12 @@
                         length: request_data.length,
                     },
                     success: function(response) {
-                        location.href = "{{route('myjob.select_messages', ['myjob' => $myjob])}}"
+                        location.href = "{{ route('myjob.select_messages', ['myjob' => $myjob]) }}"
                     },
                     error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
                         alert(xhr.responseJSON.message);
                     }
                 });

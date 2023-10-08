@@ -247,8 +247,8 @@
         <!-- END NOTIFICATION MESSAGE -->
         <div class="container">
             <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
-                <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4" href="{{route('myjob.create_questions', ['myjob' => $myjob])}}"
-                    id="before">戻る</a>
+                <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4"
+                    href="{{ route('myjob.create_questions', ['myjob' => $myjob]) }}" id="before">戻る</a>
                 <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
             </div>
 
@@ -424,9 +424,12 @@
                     sms_reminder_id,
                 },
                 success: function(response) {
-                    location.href = "{{route('myjob.publish', ['myjob' => $myjob])}}";
+                    location.href = "{{ route('myjob.publish', ['myjob' => $myjob]) }}";
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

@@ -184,6 +184,10 @@ class MyJobController extends Controller
         $job = Job::where([
             'id' => $job_id,
         ])->first();
+        if(empty($job)){
+            return redirect()->back();
+        }
+        $company = Company::find($job->company_id);
 
         $all_count = Candidate::where([
             'job_id' => $job_id,
@@ -235,6 +239,7 @@ class MyJobController extends Controller
             'per4',
             'per5',
             'all_responded',
+            'company',
         ));
     }
 
@@ -542,10 +547,10 @@ class MyJobController extends Controller
                 return $item['type'] == "email" && $item['trigger'] == "reminder";
             });
             $sms_invites = array_filter($messages, function ($item) {
-                return $item['type'] == "email" && $item['trigger'] == "invite";
+                return $item['type'] == "sms" && $item['trigger'] == "invite";
             });
             $sms_reminders = array_filter($messages, function ($item) {
-                return $item['type'] == "email" && $item['trigger'] == "reminder";
+                return $item['type'] == "sms" && $item['trigger'] == "reminder";
             });
             //early exist data is deleted
             return view("myjob.select_message", compact(

@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Field;
 use DB;
-use Hash;
+use Carbon\Carbon;
 
 class MessageSeeder extends Seeder
 {
@@ -44,6 +42,9 @@ class MessageSeeder extends Seeder
             'trigger' => 'invite',
             'editable' => '0',
             'writer' => '',
+            'user_id' => 0,
+            'updated_at' => Carbon::now(),
+            'created_at' =>Carbon::now(),
         ]);
         DB::table('messages')->insert([
             'title' => 'デフォルトの招待SMS',
@@ -52,6 +53,9 @@ class MessageSeeder extends Seeder
             'trigger' => 'invite',
             'editable' => '0',
             'writer' => '',
+            'user_id' => 0,
+            'updated_at' => Carbon::now(),
+            'created_at' =>Carbon::now(),
         ]);
         DB::table('messages')->insert([
             'title' => 'デフォルトのリマインダメール',
@@ -79,6 +83,9 @@ class MessageSeeder extends Seeder
             'trigger' => 'reminder',
             'editable' => '0',
             'writer' => '',
+            'user_id' => 0,
+            'updated_at' => Carbon::now(),
+            'created_at' =>Carbon::now(),
         ]);
         DB::table('messages')->insert([
             'title' => 'デフォルトのリマインダーSMS',
@@ -87,6 +94,9 @@ class MessageSeeder extends Seeder
             'trigger' => 'success',
             'editable' => '0',
             'writer' => '',
+            'user_id' => 0,
+            'updated_at' => Carbon::now(),
+            'created_at' =>Carbon::now(),
         ]);
         DB::table('messages')->insert([
             'title' => 'デフォルトの招待メール',
@@ -117,6 +127,9 @@ class MessageSeeder extends Seeder
             'trigger' => 'success',
             'editable' => '0',
             'writer' => '',
+            'user_id' => 0,
+            'updated_at' => Carbon::now(),
+            'created_at' =>Carbon::now(),
         ]);
     }
 }

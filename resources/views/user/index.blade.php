@@ -3,14 +3,16 @@
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/top/profile.css') }}">
-<style>
-    .display-none, .dis_role{
-        display:none;
-    }
-    .display-none + .dis_role{
-        display: block;
-    }
-</style>
+    <style>
+        .display-none,
+        .dis_role {
+            display: none;
+        }
+
+        .display-none+.dis_role {
+            display: block;
+        }
+    </style>
     <main>
         <section id="users">
             <div class="container m-1200 fs-14">
@@ -115,7 +117,9 @@
                                     <td><select class="display-none role_{{ $invited_user->id }} select_role display-none">
                                             <option value="admin">管理者</option>
                                             <option value="standard" selected>一般ユーザー</option>
-                                        </select><div class="dis_role">{{ $invited_user->role }}</div></td>
+                                        </select>
+                                        <div class="dis_role">{{ $invited_user->role }}</div>
+                                    </td>
                                     <td>{{ $invited_user->status }}</td>
                                     <td class="border-end">
                                         <a href="javascript:;" class="invited_user_edit han_btn"
@@ -126,15 +130,15 @@
                                             data-del-id="{{ $invited_user->id }}">
                                             <i class="fa fa-solid fa-trash"></i>
                                         </a>
-                                        
+
                                         <a href="javascript:;" class="invited_user_ok display-none han_btn"
-                                        data-del-id="{{ $invited_user->id }}">
-                                        <i class="fa fa-solid fa-check me-3"></i>
-                                    </a>
-                                    <a href="javascript:;" class="invited_user_cancel display-none han_btn"
-                                        data-del-id="{{ $invited_user->id }}">
-                                        <i class="fa fa-solid fa-close"></i>
-                                    </a>
+                                            data-del-id="{{ $invited_user->id }}">
+                                            <i class="fa fa-solid fa-check me-3"></i>
+                                        </a>
+                                        <a href="javascript:;" class="invited_user_cancel display-none han_btn"
+                                            data-del-id="{{ $invited_user->id }}">
+                                            <i class="fa fa-solid fa-close"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -187,17 +191,24 @@
                                 <td>` + role_text + `<select class="display-none role_` + save_data.id + `"><option value="admin">管理者</option><option value="standard" selected="">一般ユーザー</option></select></td>
                                 <td>参加しました</td>
                                 <td class="border-end" style="width: 115px;">
-                                    <a href="javascript:;" class="invited_user_edit han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="invited_user_edit han_btn" data-del-id="` + save_data
+                                    .id + `">
                                         <i class="fa fa-solid fa-edit me-3"></i>
                                     </a>
-                                    <a href="javascript:;" class="invited_user_del han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="invited_user_del han_btn" data-del-id="` + save_data
+                                    .id +
+                                    `">
                                         <i class="fa fa-solid fa-trash"></i>
                                     </a>
                                     
-                                    <a href="javascript:;" class="display-none invited_user_ok han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="display-none invited_user_ok han_btn" data-del-id="` +
+                                    save_data.id +
+                                    `">
                                         <i class="fa fa-solid fa-check me-3"></i>
                                     </a>
-                                    <a href="javascript:;" class="display-none invited_user_cancel han_btn" data-del-id="` + save_data.id + `">
+                                    <a href="javascript:;" class="display-none invited_user_cancel han_btn" data-del-id="` +
+                                    save_data
+                                    .id + `">
                                         <i class="fa fa-solid fa-close"></i>
                                     </a>
                                 </td>
@@ -226,6 +237,9 @@
                         location.reload();
                     },
                     error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
                         alert(xhr.responseJSON.message);
                     }
                 });
@@ -241,9 +255,12 @@
                         role: change_role,
                     },
                     success: function(response) {
-                        location.reload(); 
+                        location.reload();
                     },
                     error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
                         alert(xhr.responseJSON.message);
                     }
                 });

@@ -120,6 +120,8 @@ Route::controller(TemplateController::class)->group(function(){
 
     Route::post('/template', 'store')->name('template.store');
 
+    Route::post('/template/search', 'search')->name('template.search');
+
     Route::get('template/create', 'create')->name('template.create');
 
     Route::post('template/{id}/copy', 'copy')->name('template.copy');

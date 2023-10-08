@@ -36,8 +36,8 @@
                     class="test-confirm w-100 d-flex flex-wrap flex-lg-nowrap justify-content-center gap-3">
                     <div class="flex-grow-1">
                         <div class="test-problem-no ms-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
                                 <path
                                     d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                             </svg>
@@ -72,8 +72,7 @@
                                     <path id="Path_133" data-name="Path 133"
                                         d="M6.571,14.005a.768.768,0,0,1,.964.5,5.561,5.561,0,0,0,10.83-1.6,5.471,5.471,0,0,0-5.535-5.4A5.578,5.578,0,0,0,9.246,8.795l1.673-.278a.773.773,0,0,1,.578.135.762.762,0,0,1,.308.5.773.773,0,0,1-.135.578.762.762,0,0,1-.5.308l-3.268.54H7.766a.767.767,0,0,1-.262-.046.315.315,0,0,1-.077-.046.6.6,0,0,1-.154-.085L7.2,10.321c0-.039-.069-.069-.1-.116s0-.077-.039-.108a1.03,1.03,0,0,1-.054-.139L6.432,6.875a.785.785,0,0,1,1.542-.293L8.182,7.7A7.1,7.1,0,0,1,12.83,5.966,7.012,7.012,0,0,1,19.906,12.9a7.012,7.012,0,0,1-7.076,6.938,7.033,7.033,0,0,1-6.8-4.872.788.788,0,0,1,.066-.6A.779.779,0,0,1,6.571,14.005Z"
                                         transform="translate(-3.719 -3.653)" fill="#4ca7ee" />
-                                    <path id="Path_134" data-name="Path 134" d="M18.5,0H0V18.5H18.5Z"
-                                        fill="none" />
+                                    <path id="Path_134" data-name="Path 134" d="M18.5,0H0V18.5H18.5Z" fill="none" />
                                 </svg>
 
                                 再受験
@@ -87,8 +86,7 @@
                         <div
                             class="list-box card rounded-2 px-2 m-auto d-flex flex-column py-2  align-items-center shadow gap-2 w-100">
                             <!--WRITING BOX -->
-                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="writing"
-                                data-content="さささ">
+                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="writing" data-content="さささ">
                                 <!-- HEADER -->
                                 <div class="answer-type text-center rounded-2 d-none d-sm-block">
                                     <i class="fa-solid fa-align-center"></i>
@@ -100,8 +98,7 @@
                                 <!-- CONTENT -->
                                 <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
-                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}"
-                                            alt="chat">
+                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
                                     </div>
                                     <p>
@@ -484,7 +481,8 @@
                     </div>
                     <div class="w-100 text-center mt-5 pb-5">
                         <!-- <button class="bg-white rounded-5">あなたの経験を評価してください</button> -->
-                        <a class="bg-white rounded-5" href="@if($redirect_url != null)$redirect_url@else/@endif">トップとして</a>
+                        <a class="bg-white rounded-5"
+                            href="@if ($redirect_url != null) $redirect_url@else/ @endif">トップとして</a>
                     </div>
                 </div>
             </div>
@@ -589,7 +587,8 @@
                     if (source == 'api') {
 
                     } else if (source == 'user') {
-                        $("[name=content{{ $question->question_no }}]").val=quill{{ $question->question_no }}.root.innerHTML;
+                        $("[name=content{{ $question->question_no }}]").val = quill{{ $question->question_no }}
+                            .root.innerHTML;
                         if (new String(quill{{ $question->question_no }}.getContents().ops[0].insert) == '\n') {
                             $("#save_continue{{ $question->question_no }}").removeClass("active");
                             $("#save_continue{{ $question->question_no }}").attr("disabled", " ");
@@ -689,6 +688,7 @@
         let interval = 0;
 
         let count = 0;
+
         function start_time(q_no) {
             if (interval != 0) {
                 clearInterval(interval);
@@ -727,7 +727,7 @@
                 return;
             }
             if () {
-                
+
                 return;
             }
             if (questions[q_no].type == 'video') {
@@ -757,17 +757,20 @@
                 content: content,
                 count: count,
                 q_no: q_no,
-                url: {{$url}},
+                url: {{ $url }},
             };
 
             $.ajax({
-                url: "{{route('interview.save_text', ['url' => $url])}}",
+                url: "{{ route('interview.save_text', ['url' => $url]) }}",
                 type: 'POST',
                 data: postData,
                 success: function(response) {
-                    
+
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

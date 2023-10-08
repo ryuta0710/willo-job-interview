@@ -29,7 +29,7 @@
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
                                 @foreach ($companies as $item)
-                                <div class="cus-option"><span>{{$item->name}}</span></div>
+                                    <div class="cus-option"><span>{{ $item->name }}</span></div>
                                 @endforeach
                             </div>
                             <div class="btn-group">
@@ -50,9 +50,9 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>{{$name}}</span></div>
+                                <div class="cus-option"><span>{{ $name }}</span></div>
                                 @foreach ($owners as $item)
-                                <div class="cus-option"><span>{{$item->name}}</span></div>
+                                    <div class="cus-option"><span>{{ $item->name }}</span></div>
                                 @endforeach
                             </div>
                             <div class="btn-group">
@@ -185,6 +185,9 @@
                     location.reload();
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });
@@ -210,6 +213,9 @@
                     location.reload();
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });
@@ -223,7 +229,7 @@
             $(e.target).blur();
             $(".cus-bg").show();
         })
-        
+
         $(".select-cus .cus-option").click(function(e) {
             $(e.target).parent().parent().hide();
             $(e.target).parent().parent().prev().val(e.target.textContent);
@@ -305,15 +311,24 @@
                     let dis = "";
                     response.forEach(ele => {
                         let status = "";
-                        let jobDetail = `<a href="javascript:;" style="visibility: hidden; cursor: pointer;" class="me-3"><i class="fa-solid fa-link"></i></a>`;
+                        let jobDetail =
+                            `<a href="javascript:;" style="visibility: hidden; cursor: pointer;" class="me-3"><i class="fa-solid fa-link"></i></a>`;
                         switch (ele.status) {
-                            case 'draft': status = `<div class="cs-state bg-secondary-subtle text-black">草案</div>`; break;
-                            case 'live': status = `<div class="cs-state">募集中</div>`;
-                            jobDetail = `<a href="getJobDetail/${ele.url}" class="me-3"><i class="fa-solid fa-link"></i></a>`; break;
-                            case 'finish': status = `<div class="cs-state bg-red-subscribe text-black">募集終了</div>`; break;
+                            case 'draft':
+                                status =
+                                    `<div class="cs-state bg-secondary-subtle text-black">草案</div>`;
+                                break;
+                            case 'live':
+                                status = `<div class="cs-state">募集中</div>`;
+                                jobDetail =
+                                    `<a href="getJobDetail/${ele.url}" class="me-3"><i class="fa-solid fa-link"></i></a>`;
+                                break;
+                            case 'finish':
+                                status = `<div class="cs-state bg-red-subscribe text-black">募集終了</div>`;
+                                break;
                         }
                         let limit_date = "";
-                        if(ele.limit_date != null){
+                        if (ele.limit_date != null) {
                             limit_date = ele.limit_date;
                         }
                         dis += `
@@ -352,6 +367,9 @@
                     $("#tbody").html(dis);
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

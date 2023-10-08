@@ -14,7 +14,8 @@
                                     @if (!empty($item->website) && !is_null($item->website)) href="{{ $item->website }}"
                                     @else href="javascript:;" style="cursor: default" @endif>{{ $item->name }}</a>
                                 @if ($item->default == 'true')
-                                    <p class="text-active m-0 company-default">デフォルト <i class="fa fa-solid fa-circle-check"></i></p>
+                                    <p class="text-active m-0 company-default">デフォルト <i
+                                            class="fa fa-solid fa-circle-check"></i></p>
                                 @endif
                             </div>
                             <div class="col-12 px-2 d-flex justify-content-between align-items-center">
@@ -22,12 +23,12 @@
                                 <div class="">
                                     <a href="{{ route('company.edit', ['id' => $item->id]) }}" class="me-2"><i
                                             class="fa fa-edit"></i></a>
-                                            
-                                @if ($item->default != 'true')
-                                    <a href="javascript:;" class="item-delete"
-                                        data-url="{{ route('company.destroy', ['id' => $item->id]) }}" class="ms-2"><i
-                                            class="fa fa-trash"></i></a>
-                                @endif
+
+                                    @if ($item->default != 'true')
+                                        <a href="javascript:;" class="item-delete"
+                                            data-url="{{ route('company.destroy', ['id' => $item->id]) }}" class="ms-2"><i
+                                                class="fa fa-trash"></i></a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -58,6 +59,9 @@
                     location.reload();
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

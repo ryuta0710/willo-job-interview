@@ -18,12 +18,14 @@
                             会社概要を設定しましょう</a>
                     </p>
                     <p class="mb-2">
-                        <a href="{{ route('myjob.create') }}"><span class="@if ($exist_first_interview)text-primary @else text-secondary @endif fs-4 align-middle"><i
+                        <a href="{{ route('myjob.create') }}"><span
+                                class="@if ($exist_first_interview) text-primary @else text-secondary @endif fs-4 align-middle"><i
                                     class="fa-regular fa-circle-check"></i></span>
                             最初のインタビューを作成しましょう</a>
                     </p>
                     <p class="mb-2">
-                        <a href="{{ route('user.index') }}"><span class="@if ($exist_invited_user)text-primary @else text-secondary @endif fs-4 align-middle"><i
+                        <a href="{{ route('user.index') }}"><span
+                                class="@if ($exist_invited_user) text-primary @else text-secondary @endif fs-4 align-middle"><i
                                     class="fa-regular fa-circle-check"></i></span>
                             インタビューに人々を招待しましょう</a>
                         {{-- <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
@@ -45,11 +47,13 @@
                         </div>
                         <div class="pe-2">
                             <span class="text-primary">回答した</span>
-                            <span class="response_count">{{ $responses_count }}</span>人(<span class="response_rate">@if ($all_count != 0)
-                                {{ number_format(($responses_count / $all_count) * 100, 2) }}
-                            @else
-                                0
-                            @endif</span>%)
+                            <span class="response_count">{{ $responses_count }}</span>人(<span class="response_rate">
+                                @if ($all_count != 0)
+                                    {{ number_format(($responses_count / $all_count) * 100, 2) }}
+                                @else
+                                    0
+                                @endif
+                            </span>%)
                         </div>
                     </div>
                     <div class="w-auto">
@@ -88,11 +92,13 @@
                     <div class="card w-25">
                         <p class="mb-4">回答率</p>
                         <p class="fs-4">
-                            <span class="response_rate">@if ($all_count != 0)
-                                {{ number_format(($responses_count / $all_count) * 100, 2) }}
-                            @else
-                                0
-                            @endif <span>%
+                            <span class="response_rate">
+                                @if ($all_count != 0)
+                                    {{ number_format(($responses_count / $all_count) * 100, 2) }}
+                                @else
+                                    0
+                                @endif
+                                <span>%
                         </p>
                     </div>
                     <div class="card w-25">
@@ -204,8 +210,8 @@
                     },
                     success: function(response) {
                         let response_rate = 0;
-                        if(response.all_count != 0){
-                            response_rate = response.responses_count/response.all_count * 100;
+                        if (response.all_count != 0) {
+                            response_rate = response.responses_count / response.all_count * 100;
                             response_rate = response_rate.toFixed(2);
                         }
                         $(".response_rate").html(response_rate);
@@ -236,8 +242,8 @@
                                 }]
                             },
                             options: {
-                                responsive: true, 
-                                maintainAspectRatio: false, 
+                                responsive: true,
+                                maintainAspectRatio: false,
                                 legend: {
                                     display: false
                                 },
@@ -270,6 +276,9 @@
                         });
                     },
                     error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
                         alert(xhr.responseJSON.message);
                     }
                 });

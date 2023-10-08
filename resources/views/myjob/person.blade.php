@@ -903,12 +903,14 @@
         });
         @if ($prev)
             $("#slider_before").click(function() {
-                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $prev]) }}'
+                location.href =
+                    '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $prev]) }}'
             })
         @endif
         @if ($next)
             $("#slider_next").click(function() {
-                location.href = '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $next]) }}'
+                location.href =
+                    '{{ route('myjob.person', ['myjob' => $candidate->job_id, 'candidate_id' => $next]) }}'
             })
         @endif
         $("#add_note").click(function() {
@@ -923,6 +925,9 @@
                     location.reload();
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });
@@ -946,15 +951,20 @@
                         let dis = "";
                         for (let i = 0; i < 5; i++) {
                             if (rate > i) {
-                                dis += `<i class="fa-solid fa-star" style="width: 21.5px" data-val="${i+1}"></i>`;
+                                dis +=
+                                    `<i class="fa-solid fa-star" style="width: 21.5px" data-val="${i+1}"></i>`;
                             } else {
-                                dis += `<i class="fa-regular fa-star" style="width: 21.5px" data-val="${i+1}"></i>`;
+                                dis +=
+                                    `<i class="fa-regular fa-star" style="width: 21.5px" data-val="${i+1}"></i>`;
                             }
                         }
                         $("#rating").html(dis);
                         init_rate();
                     },
                     error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
                         alert(xhr.responseJSON.message);
                     }
                 });
@@ -1042,6 +1052,9 @@
                     location.reload();
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

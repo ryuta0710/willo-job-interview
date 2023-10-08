@@ -35,18 +35,21 @@
                 </div>
                 <div class="content">
                     {!! $message->content !!}
-                    
+
                 </div>
                 <div class="button-group">
-                    <button class="btn  rounded-5 bg-secondary" id="go_interview" onclick="make_answer(1)">面接に行く</button>
+                    <button class="btn  rounded-5 bg-secondary" id="go_interview"
+                        onclick="make_answer(1)">面接に行く</button>
                 </div>
                 <div class="content">
                     <p>
-                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
+                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。
+                        短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
                         <br><br>
                         面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
                         <br><br>
-                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
+                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。
+                        次の質問に進む前に、各質問に回答する必要があります。
                         <br><br>
                         このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
                         <br><br>
@@ -114,8 +117,7 @@
                     <form action="#" method="post">
                         <div class="mb-3">
                             <label for="info_name" class="form-label ms-3">名前</label>
-                            <input type="text" class="form-control rounded-pill" id="info_name"
-                                placeholder="名前入力">
+                            <input type="text" class="form-control rounded-pill" id="info_name" placeholder="名前入力">
                         </div>
                         <div class="mb-3">
                             <label for="info_mail" class="form-label ms-3">メールアドレス</label>
@@ -147,7 +149,6 @@
     <script src="{{ asset('/assets/js/application/application.js') }}"></script>
 
     <script>
-
         function make_answer(q_no) {
             q_no = parseInt(q_no);
             if (!isNaN(q_no) && q_no <= 0) {
@@ -177,13 +178,16 @@
             };
 
             $.ajax({
-                url: "{{route('interview.create_answer', ['url' => $url])}}",
+                url: "{{ route('interview.create_answer', ['url' => $url]) }}",
                 type: 'POST',
                 data: postData,
                 success: function(response) {
                     location.href = response.url;
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

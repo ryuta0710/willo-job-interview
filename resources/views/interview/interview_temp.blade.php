@@ -954,18 +954,21 @@
                 </div>
                 <div class="content">
                     {!! $message->content !!}
-                    
+
                 </div>
                 <div class="button-group">
-                    <button class="btn  rounded-5 bg-secondary" id="go_interview" onclick="show_next(0)">面接に行く</button>
+                    <button class="btn  rounded-5 bg-secondary" id="go_interview"
+                        onclick="show_next(0)">面接に行く</button>
                 </div>
                 <div class="content">
                     <p>
-                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
+                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。
+                        短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
                         <br><br>
                         面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
                         <br><br>
-                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
+                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。
+                        次の質問に進む前に、各質問に回答する必要があります。
                         <br><br>
                         このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
                         <br><br>
@@ -1076,7 +1079,8 @@
                     if (source == 'api') {
 
                     } else if (source == 'user') {
-                        $("[name=content{{ $question->question_no }}]").val=quill{{ $question->question_no }}.root.innerHTML;
+                        $("[name=content{{ $question->question_no }}]").val = quill{{ $question->question_no }}
+                            .root.innerHTML;
                         if (new String(quill{{ $question->question_no }}.getContents().ops[0].insert) == '\n') {
                             $("#save_continue{{ $question->question_no }}").removeClass("active");
                             $("#save_continue{{ $question->question_no }}").attr("disabled", " ");
@@ -1176,6 +1180,7 @@
         let interval = 0;
 
         let count = 0;
+
         function start_time(q_no) {
             if (interval != 0) {
                 clearInterval(interval);
@@ -1214,7 +1219,7 @@
                 return;
             }
             if () {
-                
+
                 return;
             }
             if (questions[q_no].type == 'video') {
@@ -1244,17 +1249,20 @@
                 content: content,
                 count: count,
                 q_no: q_no,
-                url: {{$url}},
+                url: {{ $url }},
             };
 
             $.ajax({
-                url: "{{route('interview.save_text', ['url' => $url])}}",
+                url: "{{ route('interview.save_text', ['url' => $url]) }}",
                 type: 'POST',
                 data: postData,
                 success: function(response) {
-                    
+
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });

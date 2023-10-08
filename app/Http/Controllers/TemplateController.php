@@ -7,7 +7,7 @@ use Illuminate\HTTP\Response;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use SebastianBergmann\Template\Template;
 
 class TemplateController extends Controller
 {
@@ -27,8 +27,10 @@ class TemplateController extends Controller
     {
 
         $user = Auth::user();
-        $messages = Message::where("writer", $user->email)
-            ->orWhere('editable', 0)->orderBy('id', 'desc')->get();
+        $messages = Message::where("user_id", $user->id)
+            ->orWhere('editable', 0)
+            ->orderBy('id', 'desc')
+            ->get();
         $messages->transform(function ($message) {
             $message->content = strip_tags($message->content);
             return $message;
@@ -58,6 +60,7 @@ class TemplateController extends Controller
                 'content' => 'required'
             ]);
             $request['writer'] = $user->email;
+            $request['user_id'] = $user->id;
 
             $save_data = Message::create($request->all());
 
@@ -187,5 +190,34 @@ class TemplateController extends Controller
             'message' => '削除操作が失敗しました。',
             'data' => $message,
         ], Response::HTTP_BAD_REQUEST);
+    }
+
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $keyword = $request->input('keyword');
+        $type = $request->input('type');
+
+        $messages = Message::where('user_id', $user->id)
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('title', 'LIKE', '%'.$keyword.'%');
+            })
+            ->when($type, function ($query) use ($type) {
+                return $query->where(['type' => $type]);
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+        $defaultMessage = Message::where('editable', 0)
+        ->when($keyword, function ($query) use ($keyword) {
+            return $query->where('title', 'LIKE', '%'.$keyword.'%');
+        })
+        ->when($type, function ($query) use ($type) {
+            return $query->where(['type' => $type]);
+        })
+        ->get();
+
+        $messages = $defaultMessage->merge($messages);
+
+        return response()->json($messages);
     }
 }

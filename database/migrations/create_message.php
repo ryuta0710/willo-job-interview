@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('editable')->default(1);
             $table->string('writer')->default("");
             $table->string('memo')->default("");
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -372,8 +372,8 @@
         @endif
         <div class="container">
             <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
-                <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4"
-                    id="before" href="{{route('myjob.select_messages', ['myjob' => $myjob])}}">戻る</a>
+                <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4" id="before"
+                    href="{{ route('myjob.select_messages', ['myjob' => $myjob]) }}">戻る</a>
                 <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
             </div>
 
@@ -390,7 +390,8 @@
             let year = now.getFullYear();
             let month = now.getMonth() + 1; // Month starts from 0, so adding 1
             let day = now.getDate();
-            temp += "<option value='" + year + "/" + (month + 1) + "/" + day + "'>" + year + "年 " + month + "月 " + day + "日</option>"
+            temp += "<option value='" + year + "/" + (month) + "/" + day + "'>" + year + "年 " + month + "月 " + day +
+                "日</option>"
         }
         $("#date_limit").prepend(temp);
 
@@ -423,6 +424,9 @@
                     location.href = "{{ route('invite-people', ['myjob' => $myjob]) }}";
                 },
                 error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
                     alert(xhr.responseJSON.message);
                 }
             });
