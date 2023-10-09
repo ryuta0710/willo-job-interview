@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
@@ -115,7 +116,7 @@ class OtherController extends Controller
             'url' => $url,
         ])->first();
         //check if the job is empty
-        if(empty($job)){
+        if (empty($job)) {
             return redirect()->back();
         }
         //generate a random url
@@ -123,7 +124,7 @@ class OtherController extends Controller
         //create candidate
         // $started = intval($job['started_count']) + 1;
         // $job['started_count'] = $started;
-        Candidate::create([
+        $candidate = Candidate::create([
             'job_id' => $job->id,
             'user_id' => $job->user_id,
             'job_url' => $job->url,
@@ -131,10 +132,16 @@ class OtherController extends Controller
             'url' => $candidate_url,
         ]);
         $job->save();
+        $activity = [
+            'candidate_id' => $candidate->id,
+            'content' => 'インタビューページにアクセスしました',
+            'type' => 'visit_interview_page',
+        ];
+        Activity::create($activity);
 
         return redirect()->route('interview.index', ['url' => $candidate_url]);
     }
-    
+
 
     public function publicCandidate(string $candidate_id)
     {
@@ -178,8 +185,8 @@ class OtherController extends Controller
         return $randomString;
     }
 
-    public function privacy(){
+    public function privacy()
+    {
         return view("privacy");
     }
-
 }

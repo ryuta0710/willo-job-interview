@@ -40,12 +40,12 @@ class MyJobController extends Controller
             ->get();
         $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
         $owners = InvitedUsers::join('users', 'invited_users.inviter', '=', 'users.email')
-        ->where(['invited_users.inviter' => $user->email])
-        ->where('invited_users.user_id', '!=', 0)
-        ->select("users.name as name", "invited_users.*")
-        ->get();
+            ->where(['invited_users.inviter' => $user->email])
+            ->where('invited_users.user_id', '!=', 0)
+            ->select("users.name as name", "invited_users.*")
+            ->get();
         $name = $user->name;
-        return view('myjob.index', compact("jobs",'companies', 'owners', 'name'));
+        return view('myjob.index', compact("jobs", 'companies', 'owners', 'name'));
     }
 
     public function search(Request $request)
@@ -184,7 +184,7 @@ class MyJobController extends Controller
         $job = Job::where([
             'id' => $job_id,
         ])->first();
-        if(empty($job)){
+        if (empty($job)) {
             return redirect()->back();
         }
         $company = Company::find($job->company_id);
@@ -354,18 +354,18 @@ class MyJobController extends Controller
             'status' => $status,
             'job_id' => $candidate->job_id,
         ])
-        ->orderby('id', 'asc')
-        ->get();
+            ->orderby('id', 'asc')
+            ->get();
         $next = 0;
         $prev = 0;
         $len = count($candidates_for);
         for ($i = 0; $i < $len; $i++) {
             if ($candidate->id == $candidates_for[$i]->id) {
-                if($i != 0){
-                    $prev = $candidates_for[$i-1]->id;
+                if ($i != 0) {
+                    $prev = $candidates_for[$i - 1]->id;
                 }
                 if ($i < $len - 1) {
-                    $next = $candidates_for[$i+1]->id;
+                    $next = $candidates_for[$i + 1]->id;
                 }
             }
         }
@@ -392,6 +392,10 @@ class MyJobController extends Controller
         }
         //check if the count of questions and answers is equal
         $count = count($questions);
+        //activity history
+        $activities = Activity::where('candidate_id', $candidate->id)
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('myjob.person', compact(
             'job',
             'candidate',
@@ -401,6 +405,7 @@ class MyJobController extends Controller
             'candidates_for',
             'next',
             'prev',
+            'activities',
         ));
     }
 
@@ -427,7 +432,7 @@ class MyJobController extends Controller
         if (empty($job))
             return redirect()->back();
         $new_job = [];
-        $new_job['title'] = "コピー ".$job['title'];
+        $new_job['title'] = "コピー " . $job['title'];
         $new_job['salary'] = $job['salary'];
         $new_job['company_id'] = $job['company_id'];
         $new_job['description'] = $job['description'];
@@ -623,14 +628,16 @@ class MyJobController extends Controller
         ])->first();
 
         if (!empty($job)) {
-            $randomString = $this->randomUrl();
 
             $job['limit_date'] = $request['limit_date'];
             $job['redirect_url'] = $request['redirect_url'];
             $job['language'] = $request['language'];
             // $job['isTip'] = $request['isTip'];
             // $job['isFollow'] = $request['isFollow'];
-            $job['url'] = $randomString;
+            if (!$job['url']) {
+                $randomString = $this->randomUrl();
+                $job['url'] = $randomString;
+            }
             $job['status'] = 'live';
             $job->save();
             return response()->json([
@@ -685,14 +692,28 @@ class MyJobController extends Controller
             return response(['status' => 'failed', 'message' => '操作が失敗しました'], 400);
         }
         $status = $request->status;
-        if($status == "accepted"){
+        if ($status == "accepted") {
             $candidate['status'] = "accepted";
             $candidate->save();
+            $activity = [
+                'candidate_id' => $candidate->id,
+                'content' => '候補者が'.$user->name.'によって受け入れられました',
+                'type' => 'accept',
+                'name' => $user->name,
+            ];
+            Activity::create($activity);
             return response(['status' => 'success']);
         }
-        if($status == "rejected"){
+        if ($status == "rejected") {
             $candidate['status'] = "rejected";
             $candidate->save();
+            $activity = [
+                'candidate_id' => $candidate->id,
+                'content' => '候補者が'.$user->name.'によって拒否されました',
+                'type' => 'reject',
+                'name' => $user->name,
+            ];
+            Activity::create($activity);
             return response(['status' => 'success']);
         }
         return response(['status' => 'failed', 'message' => '操作が失敗しました'], 400);
@@ -702,17 +723,25 @@ class MyJobController extends Controller
     {
         $user = Auth::user();
         $candidate = Candidate::where([
-            'id' => 5,
+            'id' => $candidate_id,
         ])->first();
         if (empty($candidate)) {
             return response()->json(['status' => 'failed', 'message' => '操作が失敗しました'], Response::HTTP_BAD_REQUEST);
         }
         $review = intval($request['review']);
-        if(!$review){
+        if (!$review) {
             return response()->json(['status' => 'failed', 'message' => '操作が失敗しました'], Response::HTTP_BAD_REQUEST);
         }
         $candidate['review'] = $review;
         $candidate->save();
+
+        $activity = [
+            'candidate_id' => $candidate->id,
+            'content' => $user->name.'は '.$review.' つ星に投票しました',
+            'type' => 'vote',
+            'name' => $user->name,
+        ];
+        Activity::create($activity);
         return response(['status' => 'success']);
     }
 }

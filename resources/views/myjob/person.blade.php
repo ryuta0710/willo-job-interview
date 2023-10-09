@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/collection/applicant.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/collection/timeline.css') }}">
 
     <style>
         .show-answer-text {
@@ -26,7 +27,7 @@
     </style>
     <main>
         <section id="sec_applicant">
-            <div class="container max-1200 pt-76">
+            <div class="container max-1200">
                 <div class="row">
                     <button class="col-1 pt-5 btn border-0" id="slider_before" @disabled($prev == 0)>
                         <svg xmlns="http://www.w3.org/2000/svg" width="23.44" height="39.881" viewBox="0 0 23.44 39.881">
@@ -344,70 +345,82 @@
                                         id="add_note" disabled>メモを追加</button>
                                 </div>
                                 <p>アクティビティ</p>
-                                <div class="w-100 d-flex gap-3 ps-4">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="216"
-                                            viewBox="0 0 40 216">
-                                            <g id="progress" transform="translate(-31 -829)">
-                                                <g id="Ellipse_38" data-name="Ellipse 38" transform="translate(31 829)"
-                                                    fill="#fff" stroke="#707070" stroke-width="0.5">
-                                                    <circle cx="20" cy="20" r="20"
-                                                        stroke="none" />
-                                                    <circle cx="20" cy="20" r="19.75"
-                                                        fill="none" />
-                                                </g>
-                                                <g id="Ellipse_39" data-name="Ellipse 39" transform="translate(31 922)"
-                                                    fill="#fff" stroke="#707070" stroke-width="0.5">
-                                                    <circle cx="20" cy="20" r="20"
-                                                        stroke="none" />
-                                                    <circle cx="20" cy="20" r="19.75"
-                                                        fill="none" />
-                                                </g>
-                                                <g id="Ellipse_40" data-name="Ellipse 40" transform="translate(31 1005)"
-                                                    fill="#fff" stroke="#707070" stroke-width="0.5">
-                                                    <circle cx="20" cy="20" r="20"
-                                                        stroke="none" />
-                                                    <circle cx="20" cy="20" r="19.75"
-                                                        fill="none" />
-                                                </g>
-                                                <line id="Line_58" data-name="Line 58" y2="54"
-                                                    transform="translate(51.5 868.5)" fill="none" stroke="#707070"
-                                                    stroke-width="0.5" />
-                                                <line id="Line_59" data-name="Line 59" y2="44"
-                                                    transform="translate(51.5 961.5)" fill="none" stroke="#707070"
-                                                    stroke-width="0.5" />
-                                                <g id="Group_2359" data-name="Group 2359"
-                                                    transform="translate(38.5 837.5)">
-                                                    <path id="Path_164" data-name="Path 164"
-                                                        d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.484,4.474a1.028,1.028,0,0,0-1.469,0L18.583,7.9,17.234,6.557a1.039,1.039,0,0,0-1.469,1.469l2.083,2.083a1.028,1.028,0,0,0,1.469,0l4.167-4.167A1.028,1.028,0,0,0,23.484,4.474ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z"
-                                                        transform="translate(-1.917)" fill="#4ca7ee" />
-                                                    <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z"
-                                                        fill="none" />
-                                                </g>
-                                                <path id="Icon_awesome-eye" data-name="Icon awesome-eye"
-                                                    d="M19.928,10.675a11.164,11.164,0,0,0-9.9-6.175,11.166,11.166,0,0,0-9.9,6.175,1.126,1.126,0,0,0,0,1.016,11.164,11.164,0,0,0,9.9,6.175,11.166,11.166,0,0,0,9.9-6.175A1.126,1.126,0,0,0,19.928,10.675Zm-9.9,5.52a5.012,5.012,0,1,1,5.012-5.012A5.012,5.012,0,0,1,10.024,16.2Zm0-8.354a3.317,3.317,0,0,0-.881.132A1.666,1.666,0,0,1,6.815,10.3a3.334,3.334,0,1,0,3.21-2.461Z"
-                                                    transform="translate(40.976 1014.569)" fill="#4ca7ee" />
-                                                <g id="Icon_feather-video" data-name="Icon feather-video"
-                                                    transform="translate(40.976 935.47)">
-                                                    <path id="Path_98" data-name="Path 98"
-                                                        d="M31.152,10.5,24,15.164l7.152,4.664Z"
-                                                        transform="translate(-10.104 -8.635)" fill="#4ca7ee" />
-                                                    <path id="Path_99" data-name="Path 99"
-                                                        d="M3.544,7.5H14.783a1.961,1.961,0,0,1,2.044,1.866v9.329a1.961,1.961,0,0,1-2.044,1.866H3.544A1.961,1.961,0,0,1,1.5,18.694V9.366A1.961,1.961,0,0,1,3.544,7.5Z"
-                                                        transform="translate(-1.5 -7.5)" fill="#4ca7ee" />
-                                                </g>
-                                            </g>
-                                        </svg>
+                                <div class="w-100" id="timeline">
+                                    <div class="timeline-container" style="width: 100%;">
+                                        <ul class="tl" style="width: 100%;">
+                                            @foreach ($activities as $item)
+                                                <li>
+                                                    <div class="item-icon">
+                                                        @switch($item->type)
+                                                            @case('visit_interview_page')
+                                                            <i class="fa-solid fa-eye" style="color: #4ca7ee"></i>
+                                                            @break
 
-                                    </div>
-                                    <div class="fs-12">
-                                        <p class="fs-14 mb-2">メールが配信されました</p>
-                                        <p class="mb-2">招待状の配信: abcd1234@gmail.com</p>
-                                        <p>2023/06/29 午後 12:49</p>
-                                        <p class="fs-14">応答を受信しました</p>
-                                        <p>2023/06/29 午後 12:49</p>
-                                        <p class="fs-14 mt-4 mb-2">インタビューページにアクセスしました</p>
-                                        <p>2023/06/29 午後 12:48</p>
+                                                            @case('mail')
+                                                                <svg id="Group_2359" data-name="Group 2359"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                    height="25" viewBox="0 0 25 25">
+                                                                    <path id="Path_164" data-name="Path 164"
+                                                                        d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.484,4.474a1.028,1.028,0,0,0-1.469,0L18.583,7.9,17.234,6.557a1.039,1.039,0,0,0-1.469,1.469l2.083,2.083a1.028,1.028,0,0,0,1.469,0l4.167-4.167A1.028,1.028,0,0,0,23.484,4.474ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z"
+                                                                        transform="translate(-1.917)" fill="#4ca7ee" />
+                                                                    <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z"
+                                                                        fill="none" />
+                                                                </svg>
+                                                            @break
+
+                                                            @case('mail_failed')
+                                                            <svg id="Group_2359" data-name="Group 2359" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                                                                <path id="Path_164" data-name="Path 164" d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.663,3.7ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z" transform="translate(-1.917)" fill="#F37E7E"/>
+                                                                <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z" fill="none"/>
+                                                                <g id="Rectangle_359" data-name="Rectangle 359" transform="translate(14.069 2.91) rotate(45)" fill="#fff" stroke="#fff" stroke-width="1">
+                                                                  <rect width="11" height="2" rx="1" stroke="none"/>
+                                                                  <rect x="0.5" y="0.5" width="10" height="1" rx="0.5" fill="none"/>
+                                                                </g>
+                                                                <g id="Rectangle_360" data-name="Rectangle 360" transform="translate(20.433 2.91) rotate(45)" fill="#fff" stroke="#fff" stroke-width="1">
+                                                                  <rect width="2" height="11" rx="1" stroke="none"/>
+                                                                  <rect x="0.5" y="0.5" width="1" height="10" rx="0.5" fill="none"/>
+                                                                </g>
+                                                              </svg>
+                                                              
+                                                            @break
+
+                                                            @case('note')
+                                                            <i class="fa-solid fa-comment" style="color: #4ca7ee;"></i>
+                                                            @break
+
+                                                            @case('vote')
+                                                            <i class="fa-solid fa-star" style="color: #4ca7ee;"></i>
+                                                            @break
+
+                                                            @case('accept')
+                                                            <i class="fa-solid fa-check" style="color: #4ca7ee;"></i>
+                                                            @break
+
+                                                            @case('reject')
+                                                            <i class="fa-solid fa-xmark" style="color: #F37E7E"></i>
+                                                            @break
+
+                                                            @case('response')
+                                                            <i class="fa-solid fa-camera" style="color: #4ca7ee"></i>
+                                                            @break
+
+                                                            @default
+                                                        @endswitch
+                                                    </div>
+                                                    <div class="item-text">
+                                                        <div class="item-title">{{ $item->content }}</div>
+                                                        <div class="item-detail">{{ date('Y', strtotime($item->created_at)) }}年
+                                                            {{ date('m', strtotime($item->created_at)) }}月
+                                                            {{ date('d', strtotime($item->created_at)) }}日  @if(date('a', strtotime($item->created_at)) == "am") 午前 @else 午後 @endif {{ date('h:i:s', strtotime($item->created_at)) }}</div>
+                                                    </div>
+                                                    {{-- <div class="item-timestamp">
+                                                        3rd March 2015<br> 19:00
+                                                    </div> --}}
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -629,7 +642,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="" method="POST" class="py-3">
+                    <div class="py-3">
                         <div class="row justify-content-center gap-4 mb-3">
                             <div class="col-auto">
                                 <button class="btn btn-primary">拒絶</button>
@@ -640,63 +653,63 @@
                         </div>
                         <div class="row px-5 gap-3 mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="社風に合わなかった"
                                     id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     社風に合わなかった
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="希望する資格を満たしていない"
                                     id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     希望する資格を満たしていない
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="最低条件を満たしていない"
                                     id="flexRadioDefault3">
                                 <label class="form-check-label" for="flexRadioDefault3">
                                     最低条件を満たしていない
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="審査要件を満たしていない"
                                     id="flexRadioDefault4">
                                 <label class="form-check-label" for="flexRadioDefault4">
                                     審査要件を満たしていない
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="不完全なアプリケーション"
                                     id="flexRadioDefault5">
                                 <label class="form-check-label" for="flexRadioDefault5">
                                     不完全なアプリケーション
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="場所で働く資格がない"
                                     id="flexRadioDefault6">
                                 <label class="form-check-label" for="flexRadioDefault6">
                                     場所で働く資格がない
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="誤って伝えられた資格"
                                     id="flexRadioDefault7">
                                 <label class="form-check-label" for="flexRadioDefault7">
                                     誤って伝えられた資格
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="より適格な候補者が選択されました"
                                     id="flexRadioDefault8">
                                 <label class="form-check-label" for="flexRadioDefault8">
                                     より適格な候補者が選択されました
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                <input class="form-check-input" type="radio" name="reject_reason" value="無反応"
                                     id="flexRadioDefault9">
                                 <label class="form-check-label" for="flexRadioDefault9">
                                     無反応
@@ -705,10 +718,10 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-auto">
-                                <button class="btn btn-primary">保 存</button>
+                                <button class="btn bg-secondary-subtle" id="reject_button" disabled>保 存</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1059,5 +1072,32 @@
                 }
             });
         }
+        $("#reject_button").click(function(){
+            const reason = $('[name=reject_reason]').val();
+            if(!reason){
+                return;
+            }
+            $.ajax({
+                url: '{{ route('member.reject', ['candidate_id' => $candidate->id]) }}',
+                type: 'post',
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    status: "reject",
+                    reason,
+                },
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        });
+        $('[name=reject_reason]').change(function(e){
+            $("#reject_button").removeAttr("disabled").addClass("btn-primary").removeClass(" bg-secondary-subtle");
+        })
     </script>
 @endsection

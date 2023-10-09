@@ -9,11 +9,14 @@ use App\Models\Candidate;
 use App\Models\Message;
 use App\Models\Answer;
 use App\Models\Booking;
+use App\Models\Activity;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
+use Illuminate\Support\Facades\Auth;
 
 class InterviewController extends Controller
 {
+
     public function index(Request $request, string $url)
     {
         $candidate = Candidate::where([
@@ -162,6 +165,13 @@ class InterviewController extends Controller
         $candidate['status'] = 'responsed';
         $candidate->save();
 
+        $activity = [
+            'candidate_id' => $candidate->id,
+            'content' => '応答を受信しました',
+            'type' => 'reponse',
+        ];
+        Activity::create($activity);
+
         $job = Job::where([
             'id' => $candidate->job_id,
         ])->first();
@@ -173,17 +183,16 @@ class InterviewController extends Controller
             'candidate_id' => $candidate->id,
         ])->delete();
 
-        if($request['is_book']){
+        if ($request['is_book']) {
             $schedules = $request['schedules'];
-            foreach ($schedules as $item) {
-                if($item['day'] && $item['time']){
 
-                    $booking = Booking::create([
-                        'day' => "".$item['day'],
-                        'time' => "".$item['time'],
+            foreach ($schedules as $item) {
+                if ($item['day'] && $item['time']) {
+                    Booking::create([
+                        'day' => "" . $item['day'],
+                        'time' => "" . $item['time'],
                         'candidate_id' => $candidate->id,
                     ]);
-                    return $booking;
                 }
             }
         }
@@ -318,5 +327,77 @@ class InterviewController extends Controller
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
         return $randomString;
+    }
+
+    public function status(Request $request, string $id)
+    {
+        $interview = Job::where(['id' => $id])
+            ->first();
+        if (empty($interview)) {
+            return redirect()->back();
+        }
+        $status = $request['status'];
+        if ($interview['status'] == "live" && $status == "closed") {
+            $interview['status'] = "closed";
+            $interview->save();
+        } else if ($interview['status'] == "closed" && $status == "live") {
+            $interview['status'] = "live";
+            $interview->save();
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'リクエストが正確ではありません',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => '操作が成功しました',
+        ]);
+    }
+
+    public function search(Request $request, int $id)
+    {
+        $user = Auth::user();
+        $rate = $request->input('rate');
+        $keyword = $request->input('keyword');
+
+        $review = Candidate::where('job_id', $id)
+        ->where('user_id', $user->id)
+        ->where('status', 'responsed')
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->when($rate, function ($query) use ($rate) {
+                return $query->where('review', $rate);
+            })
+            ->get();
+
+        $accepted = Candidate::where('job_id', $id)
+            ->where('user_id', $user->id)
+            ->where('status', 'accepted')
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->when($rate, function ($query) use ($rate) {
+                return $query->where('review', $rate);
+            })
+            ->get();
+
+        $rejected = Candidate::where('job_id', $id)
+            ->where('user_id', $user->id)
+            ->where('status', 'rejected')
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('name', 'LIKE', '%' . $keyword . '%');
+            })
+            ->when($rate, function ($query) use ($rate) {
+                return $query->where('review', $rate);
+            })
+            ->get();
+
+        return response()->json([
+            'review' => $review,
+            'accepted' => $accepted,
+            'rejected' => $rejected,
+        ]);
     }
 }

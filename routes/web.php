@@ -84,6 +84,8 @@ Route::controller(MemberController::class)->group(function(){
 
     Route::post('member/search', 'search')->name('member.search');
 
+    Route::post('member/{candidate_id}/reject', 'reject')->name('member.reject');
+
     // Route::post('member', 'store')->name('member.store');
 
     // Route::get('member/create', 'create')->name('member.create');
@@ -195,7 +197,11 @@ Route::controller(InterviewController::class)->group(function(){
 
     Route::put('interview/{id}', 'update')->name('interview.update');
 
+    Route::post('interview/{id}/status', 'status')->name('interview.status');
+
     Route::delete('interview/{id}', 'destroy')->name('interview.destroy');
+
+    Route::post('interview/{id}/search', 'search')->name('interview.search');
 
     // Route::get('interview/{user}/edit', 'edit')->name('interview.edit');
 });

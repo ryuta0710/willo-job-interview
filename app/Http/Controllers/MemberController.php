@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\InvitedUsers;
+use App\Models\Activity;
 use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
@@ -78,6 +79,26 @@ class MemberController extends Controller
             ->get();
 
         return response()->json($candidates);
+    }
+    
+    public function reject(Request $request, int $candidate_id)
+    {
+        $user = Auth::user();
+        $candidate = Candidate::find($candidate_id);
+        if(empty($user) || empty($candidate)){
+            return response('', 400);
+        }
+        $candidate['status'] = "rejected";
+        $reason = $request['reason'];
+        $candidate->save();
+        $activity = [
+            'candidate_id' => $candidate->id,
+            'content' => '候補者が'.$user->name.'によって拒否されました',
+            'type' => 'reject',
+            'name' => $user->name,
+        ];
+        Activity::create($activity);
+        return response(['status' => 'success']);
     }
 
     /**

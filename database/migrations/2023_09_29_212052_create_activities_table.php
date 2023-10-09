@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer("candidate_id");
-            $table->string("name");
+            $table->string("name")->nullable();
             $table->string("type");
             $table->string("content");
         });

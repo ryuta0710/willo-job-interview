@@ -76,6 +76,7 @@
                                 <div class="cus-option"><span>草案</span></div>
                                 <div class="cus-option"><span>募集中</span></div>
                                 <div class="cus-option"><span>募集完了</span></div>
+                                <div class="cus-option"><span>クローズド</span></div>
                             </div>
                             <div class="btn-group">
                                 <button class="btn btn-primary rounded-2 ok">申し込み</button>
@@ -136,6 +137,9 @@
                                     @endif
                                     @if ($item['status'] == 'finish')
                                         <div class="cs-state bg-red-subscribe text-black">募集終了</div>
+                                    @endif
+                                    @if ($item['status'] == 'closed')
+                                        <div class="cs-state bg-warning-subtle text-black">クローズド</div>
                                     @endif
                                 </td>
                                 <td class="text-right">
@@ -293,12 +297,14 @@
                     break;
                 case '募集完了':
                     status = 'finish';
+                case 'クローズド':
+                    status = 'closed';
                     break;
                 default:
                     status = '';
             }
             $.ajax({
-                url: '/myjob/search',
+                url: '{{route("myjob.search")}}',
                 type: 'POST',
                 data: {
                     _token: $("meta[name=csrf-token]").attr("content"),
@@ -325,6 +331,9 @@
                                 break;
                             case 'finish':
                                 status = `<div class="cs-state bg-red-subscribe text-black">募集終了</div>`;
+                                break;
+                            case 'closed':
+                                status = `<div class="cs-state bg-warning-subtle text-black">クローズド</div>`;
                                 break;
                         }
                         let limit_date = "";
@@ -363,7 +372,6 @@
                             </tr>
                         `
                     });
-                    console.log(dis);
                     $("#tbody").html(dis);
                 },
                 error: function(xhr, status, error) {
