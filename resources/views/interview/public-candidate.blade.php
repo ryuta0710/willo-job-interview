@@ -35,6 +35,7 @@
             <!-- CONTENT CONFIRM -->
             <div class="test-complete">
                 <h1 class="text-center"> </h1>
+                @if (count($answers))
                 <div class="me-4 pt-2 text-center text-md-left mb-5">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"
                         viewBox="0 0 100 100">
@@ -215,6 +216,10 @@
                         <!-- END LIST -->
                     </div>
                 </div>
+                @else
+                <h3 class="text-center">おっと、このリンクは期限切れです。
+                    新しいものをリクエストするには、{{$email}} までご連絡ください。 </h3>
+                @endif
 
             </div>
             <!-- END CONTENT CONFIRM -->
@@ -253,7 +258,7 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <script src="{{ asset('/assets/js/application/application.js') }}"></script>
-
+@if (count($answers))
     <script>
         var plaryer = new Plyr('video', {
             muted: false,
@@ -332,6 +337,8 @@
             }
         })
     </script>
+    
+@endif
 
 </body>
 

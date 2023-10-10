@@ -30,9 +30,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/fetch/{period}', [App\Http\Controllers\HomeController::class, 'fetch'])->name('home.fetch');
+Route::get('/fetch/{period}', [HomeController::class, 'fetch'])->name('home.fetch');
 
 
 Route::controller(MyJobController::class)->group(function(){
@@ -86,6 +86,8 @@ Route::controller(MemberController::class)->group(function(){
 
     Route::post('member/{candidate_id}/reject', 'reject')->name('member.reject');
 
+    Route::post('member/candidate_share/{candidate_id}', 'candidate_share')->name('member.candidate_share');
+
     // Route::post('member', 'store')->name('member.store');
 
     // Route::get('member/create', 'create')->name('member.create');
@@ -114,6 +116,10 @@ Route::controller(CompanyController::class)->group(function(){
     Route::delete('company/{id}', 'destroy')->name('company.destroy');
 
     Route::get('company/{id}/edit', 'edit')->name('company.edit');
+
+    Route::get('company/{id}/detail', 'detail')->name('company.detail');
+
+    Route::get('company/{id}/fetch/{period}', 'fetch')->name('company.fetch');
 });
 
 Route::controller(TemplateController::class)->group(function(){
@@ -186,8 +192,11 @@ Route::controller(InterviewController::class)->group(function(){
     Route::get('interview/{candidate_url}/{answer_url}', 'answer')->name('interview.answer');
     //save
     Route::post('interview/{url}/video', 'save_video')->name('interview.save_video');
+
     Route::post('interview/{url}/audio', 'save_audio')->name('interview.save_audio');
+
     Route::post('interview/{url}/text', 'save_text')->name('interview.save_text');
+
     Route::post('interview/{url}/file', 'save_file')->name('interview.save_file');
     // Route::post('interview', 'store')->name('interview.store');
 
@@ -204,16 +213,36 @@ Route::controller(InterviewController::class)->group(function(){
     Route::post('interview/{id}/search', 'search')->name('interview.search');
 
     // Route::get('interview/{user}/edit', 'edit')->name('interview.edit');
+
+    Route::get('interview-closed', 'interview_closed')->name('interview.interview_closed');
 });
 
 
-Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
-Route::get('redirect-interview/{url}', [OtherController::class, 'redirect_interview'])->name('redirect-interview');
-Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobList');
-Route::get('public-candidate/{candidate_id}', [OtherController::class, 'publicCandidate'])->name('publicCandidate');
-Route::post('fetchJobs', [OtherController::class, 'fetchJobs'])->name('fetchJobs');
-Route::get('getJobDetail/{url}', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
-Route::get('contact', [OtherController::class, 'contact'])->name('contact');
-Route::get('privacy', [OtherController::class, 'privacy'])->name('privacy');
+// Route::get('invite-people/{myjob}', [OtherController::class, 'invitePeople'])->name('invite-people');
+// Route::get('redirect-interview/{url}', [OtherController::class, 'redirect_interview'])->name('redirect-interview');
+// Route::get('getJobList', [OtherController::class, 'getJobList'])->name('getJobList');
+// Route::get('public-candidate/{candidate_id}', [OtherController::class, 'publicCandidate'])->name('publicCandidate');
+// Route::post('fetchJobs', [OtherController::class, 'fetchJobs'])->name('fetchJobs');
+// Route::get('getJobDetail/{url}', [OtherController::class, 'getJobDetail'])->name('getJobDetail');
+// Route::get('contact', [OtherController::class, 'contact'])->name('contact');
+// Route::get('privacy', [OtherController::class, 'privacy'])->name('privacy');
 
-// Route::get('interview/{url}', [OtherController::class, 'interview'])->name('interview.index');   
+
+Route::controller(OtherController::class)->group(function(){
+
+    Route::get('invite-people/{myjob}', 'invitePeople')->name('invite-people');
+
+    Route::get('redirect-interview/{url}', 'redirect_interview')->name('redirect_interview');
+
+    Route::get('getJobList', 'getJobList')->name('getJobList');
+
+    Route::get('public-candidate/{candidate_id}', 'publicCandidate')->name('publicCandidate');
+
+    Route::get('fetchJobs', 'fetchJobs')->name('fetchJobs');
+
+    Route::get('getJobDetail/{url}', 'getJobDetail')->name('getJobDetail');
+
+    Route::get('contact', 'contact')->name('contact');
+
+    Route::get('privacy', 'privacy')->name('privacy');
+});

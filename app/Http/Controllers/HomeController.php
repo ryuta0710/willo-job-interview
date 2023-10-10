@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Company;
-use App\Models\Job;
-use App\Models\Questions;
 use App\Models\Candidate;
 use App\Models\InvitedUsers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
-use function PHPSTORM_META\type;
 
 class HomeController extends Controller
 {
@@ -111,13 +104,18 @@ class HomeController extends Controller
         $user = Auth::user();
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
-        if($period == "pastMonth"){
-            $currentMonth = Carbon::now()->subMonth()->format('Y-m');
+        if ($period == "pastMonth") {
+            $currentMonth = Carbon::now()->subMonth()->month;
+            $currentYear = Carbon::now()->subMonth()->year;
         }
         $candidates = new Collection();
         $responses = new Collection();
         $startDate = Carbon::now()->startOfMonth();
         $currentDate = Carbon::now();
+        if ($period == "pastMonth") {
+            $startDate = Carbon::now()->subMonth()->startOfMonth();
+            $currentDate = Carbon::now()->subMonth()->endOfMonth();
+        }
 
         if($period == "curMonth" || $period == "pastMonth"){
             $candidates = Candidate::where('user_id', $user->id)

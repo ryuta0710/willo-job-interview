@@ -277,7 +277,7 @@
 
                     </div>
                     <div class="col3 d-flex flex-column gap-4 px-2" id="accepted_list">
-                        <div class=" position-relative">承認されました&nbsp;&nbsp;&nbsp;
+                        <div class=" position-relative">承認済み&nbsp;&nbsp;&nbsp;
                             <span class="badge rounded-pill px-3 bg-3 accepted_count">{{ count($accepts) }}</span>
                         </div>
                         @foreach ($accepts as $item)

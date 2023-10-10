@@ -247,15 +247,15 @@
                                             <h5>
                                                 @if ($item->status == 'responsed')
                                                     <span
-                                                        class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>
+                                                        class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビュー中</span>
                                                 @endif
                                                 @if ($item->status == 'accepted')
                                                     <span
-                                                        class="badge rounded-pill text-dark bg-light-success py-1 px-3">承諾しました</span>
+                                                        class="badge rounded-pill text-dark bg-light-success py-1 px-3">承認済み</span>
                                                 @endif
                                                 @if ($item->status == 'rejected')
                                                     <span
-                                                        class="badge rounded-pill text-dark bg-danger-subtle py-1 px-3">拒否されました</span>
+                                                        class="badge rounded-pill text-dark bg-danger-subtle py-1 px-3">却下</span>
                                                 @endif
                                                 </span>
                                             </h5>
@@ -407,11 +407,11 @@
                                 break;
                             case 'accepted':
                                 status =
-                                    `<span class="badge rounded-pill text-dark  bg-light-success py-1 px-3">承諾しました</span>`;
+                                    `<span class="badge rounded-pill text-dark  bg-light-success py-1 px-3">承認済み</span>`;
                                 break;
                             case 'rejected':
                                 status =
-                                    `<span class="badge rounded-pill text-dark bg-danger-subtle py-1 px-3">拒否されました</span>`;
+                                    `<span class="badge rounded-pill text-dark bg-danger-subtle py-1 px-3">却下</span>`;
                                 break;
                         }
                         let rate = "";

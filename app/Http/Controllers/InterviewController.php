@@ -10,6 +10,7 @@ use App\Models\Message;
 use App\Models\Answer;
 use App\Models\Booking;
 use App\Models\Activity;
+use App\Models\CandidateShare;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
 use Illuminate\Support\Facades\Auth;
@@ -163,6 +164,8 @@ class InterviewController extends Controller
         $candidate['response_at'] = date("Y/m/d", $timestamp);
         $candidate['time'] = date("H:i:s", $timestamp);
         $candidate['status'] = 'responsed';
+        $candidate['share_link'] = $this->randomUrl();
+        $candidate['share_allow'] = 1;
         $candidate->save();
 
         $activity = [
@@ -319,7 +322,7 @@ class InterviewController extends Controller
 
     protected function randomUrl()
     {
-        $length = 30;
+        $length = 60;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 
@@ -399,5 +402,9 @@ class InterviewController extends Controller
             'accepted' => $accepted,
             'rejected' => $rejected,
         ]);
+    }
+
+    public function interview_closed(){
+        return view('error.interview-closed');
     }
 }

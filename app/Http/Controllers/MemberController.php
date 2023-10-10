@@ -101,6 +101,20 @@ class MemberController extends Controller
         return response(['status' => 'success']);
     }
 
+    public function candidate_share(Request $request, string $candidate_id)
+    {
+        $candidate = Candidate::where(['id' => $candidate_id])
+        ->first();
+        $user = Auth::user();
+        if(empty($candidate) || empty($user)){
+            return response()->json(['status' => 'failed', 'message' => 'Request Failed']);
+        }
+        $flag = $request['flag'] ? 1 : 0;
+        $candidate['share_allow'] = $flag;
+        $candidate->save();
+        return response()->json(['status' => 'success', 'message' => 'The operation is successed.']);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -13,6 +13,7 @@ use App\Models\Message;
 use App\Models\Candidate;
 use App\Models\Answer;
 use App\Models\Activity;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class MyJobController extends Controller
@@ -396,6 +397,8 @@ class MyJobController extends Controller
         $activities = Activity::where('candidate_id', $candidate->id)
         ->orderBy('created_at', 'desc')
         ->get();
+
+        $bookings = Booking::where('candidate_id', $candidate_id)->get();
         return view('myjob.person', compact(
             'job',
             'candidate',
@@ -406,6 +409,7 @@ class MyJobController extends Controller
             'next',
             'prev',
             'activities',
+            'bookings',
         ));
     }
 
@@ -654,7 +658,7 @@ class MyJobController extends Controller
 
     protected function randomUrl()
     {
-        $length = 30;
+        $length = 60;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 

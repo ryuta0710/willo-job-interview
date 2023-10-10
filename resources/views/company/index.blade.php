@@ -10,9 +10,7 @@
                     <div class="col-lg-4 mb-3 company-item">
                         <div class="w-100 bordered rounded shadow-sm py-4 px-3">
                             <div class="col-12 px-2 d-flex justify-content-between align-items-center mb-3">
-                                <a class="m-0"
-                                    @if (!empty($item->website) && !is_null($item->website)) href="{{ $item->website }}"
-                                    @else href="javascript:;" style="cursor: default" @endif>{{ $item->name }}</a>
+                                <a class="m-0" href="{{ route('company.detail', ['id' => $item->id])}}">{{ $item->name }}</a>
                                 @if ($item->default == 'true')
                                     <p class="text-active m-0 company-default">デフォルト <i
                                             class="fa fa-solid fa-circle-check"></i></p>

@@ -33,6 +33,9 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('company_id');
             $table->time('time')->nullable();
+            $table->string('share_link')->nullable();
+            $table->integer('share_allow')->nullable();
+            $table->integer('share_visit')->default(0);
         });
     }
 

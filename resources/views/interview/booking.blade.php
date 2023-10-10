@@ -371,10 +371,6 @@
                 }
             });
         })
-        $("#meeting_book_skip1").click(function() {
-
-            // $(".meeting-book td").removeClass("active");
-        })
         let schedules = [];
 
         $(".meeting-book td").click(function() {

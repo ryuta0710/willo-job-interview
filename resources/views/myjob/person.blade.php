@@ -24,6 +24,18 @@
         .slick-prev.slick-arrow {
             display: none !important;
         }
+
+        .reject-active {
+            border-bottom: 3px solid #4cadee;
+        }
+
+        #booking_table td:not(.active, :first-child) span {
+            visibility: hidden;
+        }
+
+        #booking_table td:first-child {
+            line-height: 43px;
+        }
     </style>
     <main>
         <section id="sec_applicant">
@@ -73,7 +85,7 @@
                                                     レビュー中
                                                 @endif
                                                 @if ($candidate->status == 'accepted')
-                                                    承諾しました
+                                                    承認済み
                                                 @endif
                                                 @if ($candidate->status == 'rejected')
                                                     拒否されました
@@ -83,7 +95,7 @@
                                                 <a href="{{ route('myjob.show', ['myjob' => $candidate->job_id]) }}"
                                                     class="text-decoration-underline">{{ $job->title }}</a>
                                                 &nbsp;&nbsp; の&nbsp;&nbsp;
-                                                <a href=""
+                                                <a href="{{ route('company.detail', ['id' => $candidate->company_id])}}"
                                                     class="text-decoration-underline">{{ $job->company_name }}</a>
                                             </p>
                                         </div>
@@ -142,7 +154,7 @@
                         class="btn-normal border border-danger bg-red-strong w-auto @if ($candidate->status == 'rejected') bg-white text-danger @else text-white bg-warning-strong @endif"
                         data-bs-toggle="modal" data-bs-target="#refuseModal">
                         <i class="fa-solid fa-check"></i>&nbsp;&nbsp;&nbsp;@if ($candidate->status == 'rejected')
-                            拒否されました@else拒否する
+                            拒否されました@else拒絶
                         @endif
                     </button>
                     <button class="btn-normal w-auto" data-bs-toggle="modal" data-bs-target="#shareModal">
@@ -353,7 +365,7 @@
                                                     <div class="item-icon">
                                                         @switch($item->type)
                                                             @case('visit_interview_page')
-                                                            <i class="fa-solid fa-eye" style="color: #4ca7ee"></i>
+                                                                <i class="fa-solid fa-eye" style="color: #4ca7ee"></i>
                                                             @break
 
                                                             @case('mail')
@@ -369,39 +381,51 @@
                                                             @break
 
                                                             @case('mail_failed')
-                                                            <svg id="Group_2359" data-name="Group 2359" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
-                                                                <path id="Path_164" data-name="Path 164" d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.663,3.7ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z" transform="translate(-1.917)" fill="#F37E7E"/>
-                                                                <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z" fill="none"/>
-                                                                <g id="Rectangle_359" data-name="Rectangle 359" transform="translate(14.069 2.91) rotate(45)" fill="#fff" stroke="#fff" stroke-width="1">
-                                                                  <rect width="11" height="2" rx="1" stroke="none"/>
-                                                                  <rect x="0.5" y="0.5" width="10" height="1" rx="0.5" fill="none"/>
-                                                                </g>
-                                                                <g id="Rectangle_360" data-name="Rectangle 360" transform="translate(20.433 2.91) rotate(45)" fill="#fff" stroke="#fff" stroke-width="1">
-                                                                  <rect width="2" height="11" rx="1" stroke="none"/>
-                                                                  <rect x="0.5" y="0.5" width="1" height="10" rx="0.5" fill="none"/>
-                                                                </g>
-                                                              </svg>
-                                                              
+                                                                <svg id="Group_2359" data-name="Group 2359"
+                                                                    xmlns="http://www.w3.org/2000/svg" width="25"
+                                                                    height="25" viewBox="0 0 25 25">
+                                                                    <path id="Path_164" data-name="Path 164"
+                                                                        d="M26.917,7.292A7.292,7.292,0,1,1,19.625,0,7.293,7.293,0,0,1,26.917,7.292ZM23.663,3.7ZM19.625,16.667A9.339,9.339,0,0,0,24.8,15.109a4.17,4.17,0,0,1-4.135,3.641H15.776l-5.99,3.99a1.042,1.042,0,0,1-1.62-.865V18.75A4.166,4.166,0,0,1,4,14.583V6.25A4.166,4.166,0,0,1,8.167,2.083h3.661a9.377,9.377,0,0,0,7.8,14.583Z"
+                                                                        transform="translate(-1.917)" fill="#F37E7E" />
+                                                                    <path id="Path_165" data-name="Path 165" d="M0,0H25V25H0Z"
+                                                                        fill="none" />
+                                                                    <g id="Rectangle_359" data-name="Rectangle 359"
+                                                                        transform="translate(14.069 2.91) rotate(45)"
+                                                                        fill="#fff" stroke="#fff" stroke-width="1">
+                                                                        <rect width="11" height="2" rx="1"
+                                                                            stroke="none" />
+                                                                        <rect x="0.5" y="0.5" width="10"
+                                                                            height="1" rx="0.5" fill="none" />
+                                                                    </g>
+                                                                    <g id="Rectangle_360" data-name="Rectangle 360"
+                                                                        transform="translate(20.433 2.91) rotate(45)"
+                                                                        fill="#fff" stroke="#fff" stroke-width="1">
+                                                                        <rect width="2" height="11" rx="1"
+                                                                            stroke="none" />
+                                                                        <rect x="0.5" y="0.5" width="1"
+                                                                            height="10" rx="0.5" fill="none" />
+                                                                    </g>
+                                                                </svg>
                                                             @break
 
                                                             @case('note')
-                                                            <i class="fa-solid fa-comment" style="color: #4ca7ee;"></i>
+                                                                <i class="fa-solid fa-comment" style="color: #4ca7ee;"></i>
                                                             @break
 
                                                             @case('vote')
-                                                            <i class="fa-solid fa-star" style="color: #4ca7ee;"></i>
+                                                                <i class="fa-solid fa-star" style="color: #4ca7ee;"></i>
                                                             @break
 
                                                             @case('accept')
-                                                            <i class="fa-solid fa-check" style="color: #4ca7ee;"></i>
+                                                                <i class="fa-solid fa-check" style="color: #4ca7ee;"></i>
                                                             @break
 
                                                             @case('reject')
-                                                            <i class="fa-solid fa-xmark" style="color: #F37E7E"></i>
+                                                                <i class="fa-solid fa-xmark" style="color: #F37E7E"></i>
                                                             @break
 
                                                             @case('response')
-                                                            <i class="fa-solid fa-camera" style="color: #4ca7ee"></i>
+                                                                <i class="fa-solid fa-camera" style="color: #4ca7ee"></i>
                                                             @break
 
                                                             @default
@@ -409,9 +433,15 @@
                                                     </div>
                                                     <div class="item-text">
                                                         <div class="item-title">{{ $item->content }}</div>
-                                                        <div class="item-detail">{{ date('Y', strtotime($item->created_at)) }}年
+                                                        <div class="item-detail">
+                                                            {{ date('Y', strtotime($item->created_at)) }}年
                                                             {{ date('m', strtotime($item->created_at)) }}月
-                                                            {{ date('d', strtotime($item->created_at)) }}日  @if(date('a', strtotime($item->created_at)) == "am") 午前 @else 午後 @endif {{ date('h:i:s', strtotime($item->created_at)) }}</div>
+                                                            {{ date('d', strtotime($item->created_at)) }}日 @if (date('a', strtotime($item->created_at)) == 'am')
+                                                                午前
+                                                            @else
+                                                                午後
+                                                            @endif
+                                                            {{ date('h:i:s', strtotime($item->created_at)) }}</div>
                                                     </div>
                                                     {{-- <div class="item-timestamp">
                                                         3rd March 2015<br> 19:00
@@ -443,7 +473,7 @@
                                     <thead>
                                         <tr class="text-white">
                                             <th class="p-0"><i class="fa-solid fa-clock text-white"></i></th>
-                                            <th class="text-white">木曜日</th>
+                                            <th class="text-white">木曜日{{ $bookings[0]['123'] }}</th>
                                             <th class="text-white">金曜日</th>
                                             <th class="text-white">月曜日</th>
                                             <th class="text-white">火曜日</th>
@@ -453,171 +483,276 @@
                                     <tbody class="text-white">
                                         <tr>
                                             <td>午前8:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td class="active">会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '8:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前8:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td class="active">会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '8:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前9:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td class="active">会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '9:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前9:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '9:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前10:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '10:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前10:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '10:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前11:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '11:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前11:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '11:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午前12:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '12:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後12:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '12:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後1:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '13:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後1:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '13:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後2:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '14:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後2:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '14:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後3:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '15:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後3:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '15:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後4:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '16:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後4:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '16:30';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後5:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '17:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後5:30</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '17:40';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
                                         <tr>
                                             <td>午後6:00</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
-                                            <td>会議のスケジュールを設定する</td>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @php
+                                                    $filteredBookings = $bookings->filter(function ($item) use ($i) {
+                                                        return $item->day == $i && $item->time == '18:00';
+                                                    });
+                                                @endphp
+                                                <td @if (count($filteredBookings)) class="active" @endif>
+                                                    <span>会議のスケジュールを設定する</span>
+                                                </td>
+                                            @endfor
                                         </tr>
 
                                     </tbody>
@@ -643,15 +778,13 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="py-3">
-                        <div class="row justify-content-center gap-4 mb-3">
-                            <div class="col-auto">
-                                <button class="btn btn-primary">拒絶</button>
+                        <div class="row justify-content-center mb-3">
+                            <div class="col-6 text-center reject-active" id="reject_tab_1">拒絶
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-secondary">出金</button>
+                            <div class="col-6 text-center" id="reject_tab_2">出金
                             </div>
                         </div>
-                        <div class="row px-5 gap-3 mb-3">
+                        <div class="row px-5 gap-3 mb-3 reject_tab_1">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="reject_reason" value="社風に合わなかった"
                                     id="flexRadioDefault1">
@@ -660,8 +793,8 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="reject_reason" value="希望する資格を満たしていない"
-                                    id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="reject_reason"
+                                    value="希望する資格を満たしていない" id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     希望する資格を満たしていない
                                 </label>
@@ -702,8 +835,8 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="reject_reason" value="より適格な候補者が選択されました"
-                                    id="flexRadioDefault8">
+                                <input class="form-check-input" type="radio" name="reject_reason"
+                                    value="より適格な候補者が選択されました" id="flexRadioDefault8">
                                 <label class="form-check-label" for="flexRadioDefault8">
                                     より適格な候補者が選択されました
                                 </label>
@@ -713,6 +846,71 @@
                                     id="flexRadioDefault9">
                                 <label class="form-check-label" for="flexRadioDefault9">
                                     無反応
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row px-5 gap-3 mb-3 reject_tab_2" style="display: none;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="別の仕事に就いた"
+                                    id="flexRadioDefault111">
+                                <label class="form-check-label" for="flexRadioDefault111">
+                                    別の仕事に就いた
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="補償"
+                                    id="flexRadioDefault211">
+                                <label class="form-check-label" for="flexRadioDefault211">
+                                    補償
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="個人的な理由"
+                                    id="flexRadioDefault311">
+                                <label class="form-check-label" for="flexRadioDefault311">
+                                    個人的な理由
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="通勤"
+                                    id="flexRadioDefault411">
+                                <label class="form-check-label" for="flexRadioDefault411">
+                                    通勤
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="文化的適合"
+                                    id="flexRadioDefault511">
+                                <label class="form-check-label" for="flexRadioDefault511">
+                                    文化的適合
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="採用担当者のフォロー不足"
+                                    id="flexRadioDefault611">
+                                <label class="form-check-label" for="flexRadioDefault611">
+                                    採用担当者のフォロー不足
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="紛らわしい職務内容"
+                                    id="flexRadioDefault711">
+                                <label class="form-check-label" for="flexRadioDefault711">
+                                    紛らわしい職務内容
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="今の会社に残ります"
+                                    id="flexRadioDefault811">
+                                <label class="form-check-label" for="flexRadioDefault811">
+                                    今の会社に残ります
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="reject_reason" value="そもそも興味がない"
+                                    id="flexRadioDefault911">
+                                <label class="form-check-label" for="flexRadioDefault911">
+                                    そもそも興味がない
                                 </label>
                             </div>
                         </div>
@@ -740,68 +938,43 @@
                         <div class="col-9">
                             <input type="text" name="" id="invite_url" class="form-control w-100"
                                 placeholder="{{ route('publicCandidate', ['candidate_id' => $candidate->id]) }}"
-                                value="{{ route('publicCandidate', ['candidate_id' => $candidate->id]) }}  ">
+                                value="{{ route('publicCandidate', ['candidate_id' => $candidate->share_link]) }}">
                         </div>
-                        <div class="col-3">
-                            <button class="btn btn-primary w-100"
-                                onclick="navigator.clipboard.writeText(document.getElementById('invite_url').value)">コピー</button>
+                        <div class="col-3 position-relative">
+                            <div id="copy_tip"
+                                class="position-absolute muted bg-dark text-white rounded text-center fs-12 my-tooltip"
+                                style="display:none;padding:8px ;bottom: 40px; width: 200px; right: -44px; font-size: 12px;z-index: 1000;">
+                                <span>リンクがコピーされました。</span>
+                            </div>
+                            <button class="btn btn-primary w-100" onclick="url_copy()" id="url_copy">コピー</button>
                         </div>
                     </div>
                     <div class="row mb-3 px-4">
                         <div class="col-6 d-flex justify-content-center">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                <label class="form-check-label" for="flexSwitchCheckDefault">リンク有効</label>
+                                <input class="form-check-input" type="checkbox" id="share_allow"
+                                    @if ($candidate->share_allow == 1) checked @endif>
+                                <label class="form-check-label" for="share_allow">リンク有効</label>
                             </div>
                         </div>
                         <div class="col-6 d-flex justify-content-center align-items-center">
                             <i class="fa fa-eye me-3"></i> 0 ビュー
                         </div>
                     </div>
-                    <div class="row justify-content-between align-items-center px-4">
-                        <div class="col-auto">
-                            <i class="fa fa-message me-2"></i>質問1
-                            <p class="ms-4">自己紹介</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                    @foreach ($questions as $item)
+                        <div class="row justify-content-between align-items-center px-4">
+                            <div class="col-auto">
+                                <i class="fa fa-message me-2"></i>質問{{ $item->question_no }}
+                                <p class="ms-4">{{ $item->content }}</p>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="question{{ $item->id }}"
+                                        checked>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-between align-items-center px-4">
-                        <div class="col-auto">
-                            <i class="fa fa-message me-2"></i>質問2
-                            <p class="ms-4">志望試</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between align-items-center px-4">
-                        <div class="col-auto">
-                            <i class="fa fa-message me-2"></i>質問3
-                            <p class="ms-4">会社でやりたい事</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-between align-items-center px-4">
-                        <div class="col-auto">
-                            <i class="fa fa-message me-2"></i>質問4
-                            <p class="ms-4">あなたの情熱</p>
-                        </div>
-                        <div class="col-auto">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                     <div class="row justify-content-between align-items-center px-4">
                         <p class="text-center">コンテンツは、このリンクを知っている人なら誰でも公關されます。 このリンクは、信頼できる人とのみ共有してください。</p>
                     </div>
@@ -1072,9 +1245,9 @@
                 }
             });
         }
-        $("#reject_button").click(function(){
+        $("#reject_button").click(function() {
             const reason = $('[name=reject_reason]').val();
-            if(!reason){
+            if (!reason) {
                 return;
             }
             $.ajax({
@@ -1096,8 +1269,52 @@
                 }
             });
         });
-        $('[name=reject_reason]').change(function(e){
-            $("#reject_button").removeAttr("disabled").addClass("btn-primary").removeClass(" bg-secondary-subtle");
+
+        $('[name=reject_reason]').change(function(e) {
+            $("#reject_button").removeAttr("disabled").addClass("btn-primary").removeClass("bg-secondary-subtle");
+        })
+
+        $("#reject_tab_1").click(function() {
+            $("#reject_tab_1").addClass("reject-active");
+            $("#reject_tab_2").removeClass("reject-active");
+            $(".reject_tab_1").show()
+            $(".reject_tab_2").hide();
+            // $("#reject_button").attr("disabled" ,'').removeClass("btn-primary").addClass("bg-secondary-subtle");
+        })
+        $("#reject_tab_2").click(function() {
+            $("#reject_tab_1").removeClass("reject-active");
+            $("#reject_tab_2").addClass("reject-active");
+            $(".reject_tab_1").hide();
+            $(".reject_tab_2").show();
+            // $("#reject_button").attr("disabled" ,'').removeClass("btn-primary").addClass("bg-secondary-subtle");
+        })
+
+        function url_copy() {
+            navigator.clipboard.writeText(document.getElementById('invite_url').value);
+            $("#copy_tip").show();
+            setTimeout(() => {
+                $("#copy_tip").fadeOut();
+            }, 3000);
+        }
+
+        $("#share_allow").change(function(e) {
+            $.ajax({
+                url: '{{ route('member.candidate_share', ['candidate_id' => $candidate->id]) }}',
+                type: 'post',
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    flag: $(this).is(":checked"),
+                },
+                success: function(response) {
+                    // location.reload();
+                },
+                error: function(xhr, status, error) {
+                    if (xhr.responseJSON.message == "Unauthenticated") {
+                        window.location.reload();
+                    }
+                    alert(xhr.responseJSON.message);
+                }
+            });
         })
     </script>
 @endsection

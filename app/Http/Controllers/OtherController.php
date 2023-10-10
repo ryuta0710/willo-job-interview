@@ -11,6 +11,7 @@ use App\Models\Candidate;
 use App\Models\Questions;
 use App\Models\Answer;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\HTTP\Response;
 
 class OtherController extends Controller
@@ -119,6 +120,16 @@ class OtherController extends Controller
         if (empty($job)) {
             return redirect()->back();
         }
+        if($job->status == "closed"){
+            return redirect()->route('interview.interview_closed');
+        }
+        if($job->limit_date){
+            $limit_date = date("Y/m/d", strtotime($job->limit_date));
+            $now = date('Y/m/d');
+            if($now > $limit_date){
+                return redirect()->route('interview.interview_closed');
+            }
+        }
         //generate a random url
         $candidate_url = $this->randomUrl();
         //create candidate
@@ -146,11 +157,19 @@ class OtherController extends Controller
     public function publicCandidate(string $candidate_id)
     {
         $candidate = Candidate::where([
-            'id' => $candidate_id,
+            'share_link' => $candidate_id,
         ])
             ->first();
         if (empty($candidate)) {
             return redirect()->route('welcome');
+        }
+        if(!$candidate->share_allow){
+            $questions = [];
+            $answers = [];
+            $count = 0;
+            $user = User::find($candidate->user_id);
+            $email = $user->email;
+            return view('interview.public-candidate', compact("questions", "answers", 'candidate', "count", 'email'));
         }
         //fetch the answers for the candidate
         $answers = Answer::where([
@@ -175,7 +194,7 @@ class OtherController extends Controller
     }
     protected function randomUrl()
     {
-        $length = 30;
+        $length = 60;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 
@@ -189,4 +208,5 @@ class OtherController extends Controller
     {
         return view("privacy");
     }
+
 }

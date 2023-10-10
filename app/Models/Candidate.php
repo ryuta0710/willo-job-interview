@@ -29,6 +29,9 @@ class Candidate extends Model
         'user_id',
         'company_id',
         'time',
+        'share_link',
+        'share_allow',
+        'share_visit',
     ];
     use HasFactory;
     public function owner()
