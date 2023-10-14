@@ -93,8 +93,7 @@
                         </div>
                         <div class="w-100 text-center mb-4">
                             <a href="{{ route('interview.index', ['url' => $url]) }}" id="restart_test"
-                                class="bg-white rounded-5 bg-red" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
+                                class="bg-white rounded-5 bg-red text-hover-white" >
                                 <svg id="Group_2290" data-name="Group 2290" xmlns="http://www.w3.org/2000/svg"
                                     width="18.5" height="18.5" viewBox="0 0 18.5 18.5">
                                     <g id="Group_2289" data-name="Group 2289" opacity="0">
@@ -106,7 +105,6 @@
                                         transform="translate(-3.719 -3.653)" fill="#4ca7ee" />
                                     <path id="Path_134" data-name="Path 134" d="M18.5,0H0V18.5H18.5Z" fill="none" />
                                 </svg>
-
                                 再受験
                             </a>
                         </div>

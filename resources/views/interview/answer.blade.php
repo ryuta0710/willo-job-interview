@@ -245,11 +245,9 @@
                             <div class="w-100 d-flex justify-content-between px-18">
                                 <span class="d-block">答え</span>
                                 <span class="d-block">
-                                    @if ($question->limit_type == 'words')
-                                        言葉
-                                    @else
-                                        文字
-                                    @endif数制限: {{ $question->max }}
+                                    @if ($question->limit_type == 'characters')
+                                    文字@else
+                                    文章@endif数制限: {{ $question->max }}
                                 </span>
                             </div>
                             {{-- <div class="card card-custom"> --}}
@@ -335,8 +333,10 @@
                                             <div class="file-upload-contain">
                                                 <div class="file-drop-zone clickable" tabindex="-1">
                                                     <div class="file-drop-zone-title">
-                                                        <div class="upload-area">
-                                                            <p class="file_preview">ここにファイルをドラッグ アンド ドロップしますまた</p>
+                                                        <div class="upload-area" id="uploadArea">
+                                                            <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
+                                                                または<br>
+                                                                ブラウズ</p>
                                                             <div> <button class="btn_upload"
                                                                     onclick="select_file()">ブラウズ</button>
                                                             </div>
@@ -1037,23 +1037,44 @@
             quill = new Quill('#editor', {
                 theme: 'snow'
             });
+            let limit_type = "{{ $question['limit_type'] }}";
+            let max = parseInt("{{ $question['max'] }}");
 
             quill.on('text-change', function(delta, oldDelta, source) {
                 if (source == 'api') {
 
                 } else if (source == 'user') {
                     $("[name=content]").val(quill.root.innerHTML);
-                    if (new String(quill.getContents().ops[0].insert) == '\n') {
+                    let text = quill.getText();
+                    let len = text.length;
+                    if (len == 1) {
                         $("#save_continue").removeClass("active");
                         $("#save_continue").attr("disabled", " ");
                         $("#save_continue").removeClass("active").attr("disabled",
                             "");
-                    } else {
-                        $("#save_continue").addClass("active");
-                        $("#save_continue").removeAttr("disabled");
-                        $("#save_continue").addClass("active").removeAttr(
-                            "disabled");
+                        return;
                     }
+                    if(limit_type == "characters" && len - 1 > max){
+                        $("#save_continue").removeClass("active");
+                        $("#save_continue").attr("disabled", " ");
+                        $("#save_continue").removeClass("active").attr("disabled",
+                            "");
+                        return;
+                    }
+                    if (limit_type == "sentences") {
+                        let arr = text.split("\n");
+                        if (arr.length -1 > max) {
+                            $("#save_continue").removeClass("active");
+                            $("#save_continue").attr("disabled", " ");
+                            $("#save_continue").removeClass("active").attr("disabled",
+                                "");
+                            return;
+                        }
+                    }
+                    $("#save_continue").addClass("active");
+                    $("#save_continue").removeAttr("disabled");
+                    $("#save_continue").addClass("active").removeAttr(
+                        "disabled");
                 }
             });
         @endif
@@ -1203,6 +1224,29 @@
                 }
             });
         }
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileupload');
+
+        // Prevent default behavior for drag events
+        uploadArea.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+        });
+
+        // Handle file drop event
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            $('#fileupload')[0].files = e.dataTransfer.files;
+            console.log($('#fileupload')[0].files[0]);
+        });
 
         function save_file() {
             q_no = {{ $question->question_no }};

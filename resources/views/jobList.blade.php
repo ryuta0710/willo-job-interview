@@ -110,8 +110,8 @@
                                     <p>{{ $item->salary }}円</p>
                                 </div>
                                 <div class="d-flex">
-                                    <strong>住所：</strong>
-                                    <p>{{ $item->address }}</p>
+                                    <strong>メールアドレス：</strong>
+                                    <p>{{ $item->email }}</p>
                                 </div>
                                 <div class="d-flex">
                                     <strong>業界：</strong>
@@ -174,7 +174,7 @@
                     let length = data.length;
                     let dis_html = "";
                     data.forEach(function(job) {
-                        let address = job.address || "";
+                        let email = job.email || "";
                         dis_html += `<div class="row border-top pt-4 mb-5">
                     <div class="col-lg-5 mb-4 mb-lg-4">
                         <video controls crossorigin playsinline>
@@ -190,8 +190,8 @@
                             <p>${job.salary}円</p>
                         </div>
                         <div class="d-flex">
-                            <strong>住所：</strong>
-                            <p>${address}</p>
+                            <strong>メールアドレス：</strong>
+                            <p>${email}</p>
                         </div>
                         <div class="d-flex">
                             <strong>業界：</strong>

@@ -95,7 +95,7 @@
                                                 <a href="{{ route('myjob.show', ['myjob' => $candidate->job_id]) }}"
                                                     class="text-decoration-underline">{{ $job->title }}</a>
                                                 &nbsp;&nbsp; の&nbsp;&nbsp;
-                                                <a href="{{ route('company.detail', ['id' => $candidate->company_id])}}"
+                                                <a href="{{ route('company.detail', ['id' => $candidate->company_id]) }}"
                                                     class="text-decoration-underline">{{ $job->company_name }}</a>
                                             </p>
                                         </div>
@@ -456,7 +456,8 @@
                             </div>
                             <div class="w-100 mt-5 d-flex gap-5 justify-content-around">
                                 <p>ライフサイクル ポリシーに基づいて、
-                                    このメディアは 6 か月 (26/12/23) 後に自動的に削除されます。</p>
+                                    このメディアは 6 か月 ({{ date('Y/m/d', $candidate->created_at->addMonth(6)->timestamp) }})
+                                    後に自動的に削除されます。</p>
                                 <button class="btn-normal text-white align-self-center"
                                     id="delete"><span>消去</span></button>
                             </div>
@@ -1315,6 +1316,26 @@
                     alert(xhr.responseJSON.message);
                 }
             });
+        })
+        $("#delete").click(function() {
+            if (confirm("本当に削除しますか？")) {
+                $.ajax({
+                    url: '{{ route('interview.candidate_remove', ['candidate_id' => $candidate->id]) }}',
+                    type: 'delete',
+                    data: {
+                        _token: $("meta[name=csrf-token]").attr("content"),
+                    },
+                    success: function(response) {
+                        location.href = "{{ route('myjob.show', ['myjob' => $candidate->job_id]) }}";
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
+                        alert(xhr.responseJSON.message);
+                    }
+                });
+            }
         })
     </script>
 @endsection

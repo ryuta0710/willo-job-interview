@@ -646,7 +646,7 @@ class MyJobController extends Controller
             $job->save();
             return response()->json([
                 'status' => "success",
-                'url' => $randomString,
+                'url' => $job['url'],
             ]);
         } else {
             return response()->json([

@@ -36,8 +36,8 @@
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
                         <i class="fa fa-solid fa-map"></i>
-                        <strong>住所：</strong>
-                        <p class="m-0">{{$job->address}}</p>
+                        <strong>メールアドレス：</strong>
+                        <p class="m-0">{{$job->email}}</p>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4">
                         <i class="fa fa-solid fa-earth"></i>

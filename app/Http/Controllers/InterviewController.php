@@ -365,8 +365,8 @@ class InterviewController extends Controller
         $keyword = $request->input('keyword');
 
         $review = Candidate::where('job_id', $id)
-        ->where('user_id', $user->id)
-        ->where('status', 'responsed')
+            ->where('user_id', $user->id)
+            ->where('status', 'responsed')
             ->when($keyword, function ($query) use ($keyword) {
                 return $query->where('name', 'LIKE', '%' . $keyword . '%');
             })
@@ -404,7 +404,31 @@ class InterviewController extends Controller
         ]);
     }
 
-    public function interview_closed(){
+    public function interview_closed()
+    {
         return view('error.interview-closed');
+    }
+
+    public function candidate_remove(string $candidate_id)
+    {
+        $candidate = Candidate::find($candidate_id);
+        if (empty($candidate)) {
+            return response()->json(['status' => 'failed'], Response::HTTP_BAD_REQUEST);
+        }
+        $answers = Answer::where('candidate_id', $candidate_id)
+            ->get();
+        foreach ($answers as $ans) {
+            if ($ans->rc_url) {
+                $publicPath = str_replace(url('/'), '', $ans->rc_url);
+                $publicPath = public_path($publicPath);
+                if (file_exists($publicPath)) {
+                    unlink($publicPath);
+                }
+            }
+        }
+        Answer::where('candidate_id', $candidate_id)
+        ->delete();
+        $candidate->delete();
+        return response()->json(['status' => 'success']);
     }
 }

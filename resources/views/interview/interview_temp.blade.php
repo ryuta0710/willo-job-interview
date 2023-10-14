@@ -248,11 +248,9 @@
                                 <div class="w-100 d-flex justify-content-between px-18">
                                     <span class="d-block">答え</span>
                                     <span class="d-block">
-                                        @if ($question->limit_type == 'words')
-                                            言葉
-                                        @else
+                                        @if ($question->limit_type == 'characters')
                                             文字
-                                        @endif数制限: {{ $question->max }}
+                                        @else 文章@endif数制限: {{ $question->max }}
                                     </span>
                                 </div>
                                 {{-- <div class="card card-custom"> --}}
@@ -335,7 +333,9 @@
                                                     <div class="file-drop-zone clickable" tabindex="-1">
                                                         <div class="file-drop-zone-title">
                                                             <div class="upload-area">
-                                                                <p class="file_preview">ここにファイルをドラッグ アンド ドロップしますまた</p>
+                                                                <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
+                                                                    または<br>
+                                                                    ブラウズ</p>
                                                                 <div> <button class="btn_upload"
                                                                         onclick="select_file({{ $question->question_no }})">ブラウズ</button>
                                                                 </div>

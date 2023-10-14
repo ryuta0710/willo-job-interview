@@ -61,8 +61,7 @@
                             </div>
                         </div>
                         <div class="w-100 text-center mb-4">
-                            <button id="restart_test" class="bg-white rounded-5 bg-red" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
+                            <button id="restart_test" class="bg-white rounded-5 bg-red text-hover-white">
                                 <svg id="Group_2290" data-name="Group 2290" xmlns="http://www.w3.org/2000/svg"
                                     width="18.5" height="18.5" viewBox="0 0 18.5 18.5">
                                     <g id="Group_2289" data-name="Group 2289" opacity="0">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('address')->nullable();
+            $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->string('header_color')->nullable();
             $table->string('button_color')->nullable();

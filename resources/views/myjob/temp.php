@@ -278,7 +278,7 @@
                     <div class="col-12 col-xl-6 input-max none">
                         <label for="input1" class="form-label px-4 mb-1">最大文字数</label>
                         <div class="input-group">
-                            <input type="number" class="form-control rounded-pill max" min=1 value="500" max=500 step="10">
+                            <input type="number" class="form-control rounded-pill max" min=1 value="500" max=500>
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 input-thinking-time">

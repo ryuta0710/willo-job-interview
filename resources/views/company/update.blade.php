@@ -35,10 +35,10 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label px-3">アドレス</label>
-                        <input name="address" value="{{ $company->address }}" type="text"
-                            class="form-control rounded-pill" id="address" placeholder="アドレスを入力してください">
-                        @error('address')
+                        <label for="email" class="form-label px-3">アドレス</label>
+                        <input name="email" value="{{ $company->email }}" type="text"
+                            class="form-control rounded-pill" id="email" placeholder="アドレスを入力してください">
+                        @error('email')
                             <span class="text-danger">
                                 <strong>アドレスを正しく入力してください</strong>
                             </span>

@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
 use App\Models\Candidate;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class CompanyController extends Controller
@@ -71,8 +72,8 @@ class CompanyController extends Controller
             $data['logo'] = $fileName;
         }
 
-        if (!empty($request['address']) && !is_null($request['address'])) {
-            $data['address'] = $request['address'];
+        if (!empty($request['email']) && !is_null($request['email'])) {
+            $data['email'] = $request['email'];
         }
         if (!empty($request['website']) && !is_null($request['website'])) {
             $data['website'] = $request['website'];
@@ -96,8 +97,10 @@ class CompanyController extends Controller
 
         $user_id = Auth::user()->id;
         $data['owner'] = $user_id;
-
-        Company::create($data);
+        $company = Company::create($data);
+        $user = User::find($user_id);
+        $user['main_company_id'] = $company->id;
+        $user->save();
 
 
         return redirect()->route('company.index');
@@ -156,10 +159,10 @@ class CompanyController extends Controller
                 $data['logo'] = $fileName;
             }
 
-            if (!empty($request['address']) && !is_null($request['address'])) {
-                $data['address'] = $request['address'];
+            if (!empty($request['email']) && !is_null($request['email'])) {
+                $data['email'] = $request['email'];
             } else {
-                $data['address'] = '';
+                $data['email'] = '';
             }
             if (!empty($request['website']) && !is_null($request['website'])) {
                 $data['website'] = $request['website'];
@@ -178,8 +181,6 @@ class CompanyController extends Controller
             }
             if (!empty($request['field']) && !is_null($request['field'])) {
                 $data['field'] = $request['field'];
-            } else {
-                $data['field'] = '';
             }
             $default = $request->has('default') ? true : false;
             if ($default) {
@@ -190,6 +191,9 @@ class CompanyController extends Controller
             }
 
             $data->save();
+            $user = User::find($user->id);
+            $user['main_company_id'] = $data->id;
+            $user->save();
 
             return redirect()->route('company.index');
         }

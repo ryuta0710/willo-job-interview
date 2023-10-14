@@ -62,13 +62,17 @@
                             <div class="card bg-white shadow m-auto mt-4 p-3" style="width: 400px; max-width: 500px;">
                                 <div class="">
                                     <div class="d-flex justify-content-between mb-3">
-                                        <div>{{ $item->title }}</div>
+                                        <div><a
+                                                href="{{ route('myjob.show', ['myjob' => $item->id]) }}">{{ $item->title }}</a>
+                                        </div>
                                         <div>
                                             <div class="form-check form-switch">
-                                                @if ($item->status == 'live') <input class="form-check-input" checked type="checkbox" class="job-allow" data-id="{{$item->id}}"
-                                                > @endif
-                                                @if ($item->status == 'closed') <input class="form-check-input" type="checkbox" class="job-allow" data-id="{{$item->id}}"
-                                                > @endif
+                                                @if ($item->status == 'live')
+                                                    <input class="form-check-input job-allow" checked type="checkbox" data-id="{{ $item->id }}">
+                                                @endif
+                                                @if ($item->status == 'closed')
+                                                    <input class="form-check-input job-allow" type="checkbox" data-id="{{ $item->id }}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +81,8 @@
                                             <span class="text-secondary">スタート: </span>{{ $item['started'] }}人
                                         </div>
                                         <div class="col-6">
-                                            <span class="text-secondary">開始日: </span>{{ date('Y/m/d', strtotime($item->created_at)) }}
+                                            <span class="text-secondary">開始日:
+                                            </span>{{ date('Y/m/d', strtotime($item->created_at)) }}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -85,10 +90,11 @@
                                             <span class="text-secondary">回答: </span>{{ $item['responsed'] }} 人
                                         </div>
                                         <div class="col-6">
-                                            <span class="text-secondary">終了日: </span>@if ($item->limit_date)
+                                            <span class="text-secondary">終了日: </span>
+                                            @if ($item->limit_date)
                                                 {{ date('Y/m/d', strtotime($item->limit_date)) }}
                                             @else
-                                            制限なし
+                                                制限なし
                                             @endif
                                         </div>
                                     </div>
@@ -113,8 +119,27 @@
                     "{{ $item['date'] }}",
                 @endforeach
             ];
-            $(".job-allow").change(function(){
+            $(".job-allow").change(function(e) {
+                console.log('sadf')
                 const job_id = $(this).attr("data-id");
+                const val = e.target.checked ? "live" : "closed";
+                $.ajax({
+                    url: '/interview/'+job_id+'/status',
+                    type: 'POST',
+                    data: {
+                        _token: $("meta[name=csrf-token]").attr("content"),
+                        status: val,
+                    },
+                    success: function(response) {
+                        // window.location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
+                        alert(xhr.responseJSON.message);
+                    }
+                });
             })
 
             new Chart("chart", {

@@ -262,7 +262,9 @@
                                             <div class="file-drop-zone clickable" tabindex="-1">
                                                 <div class="file-drop-zone-title">
                                                     <div class="upload-area">
-                                                        <p class="file_preview">ここにファイルをドラッグ アンド ドロップしますまた</p>
+                                                        <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
+または<br>
+ブラウズ</p>
                                                         <div> <button class="btn_upload">ブラウズ</button> </div>
                                                     </div>
                                                 </div>

@@ -133,6 +133,7 @@
     {{-- {{ $candidates_data }} --}}
     <script src="./assets/js/collection/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
     <script>
         $(document).ready(function() {
@@ -149,21 +150,27 @@
                 data: {
                     labels: xValues,
                     datasets: [{
+                        label: '開始',
                         data: [
                             @foreach ($candidates_data as $item)
                                 "{{ $item['count'] }}",
                             @endforeach
                         ],
                         borderColor: "#FF33FF",
-                        fill: false
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4,
                     }, {
+                        label: '回答',
                         data: [
                             @foreach ($response_data as $item)
                                 "{{ $item['count'] }}",
                             @endforeach
                         ],
                         borderColor: "#15D1F8",
-                        fill: false
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.4,
                     }]
                 },
                 options: {
@@ -234,10 +241,12 @@
                                 datasets: [{
                                     data: all_count,
                                     borderColor: "#FF33FF",
+                                    borderWidth: 1,
                                     fill: false
                                 }, {
                                     data: response_count,
                                     borderColor: "#15D1F8",
+                                    borderWidth: 1,
                                     fill: false
                                 }]
                             },

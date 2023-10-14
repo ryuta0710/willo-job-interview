@@ -288,30 +288,30 @@
     <script>
         $(".select2").focus(function(e) {
             $(".select2 + .select-cus").hide();
-            $(e.target).next().show();
-            $(e.target).blur();
+            $(this).next().show();
+            $(this).blur();
             $(".cus-bg").show();
         })
 
         $(".select-cus .cus-option").click(function(e) {
-            $(e.target).parent().parent().hide();
-            $(e.target).parent().parent().prev().val(e.target.textContent);
+            $(this).parent().parent().hide();
+            $(this).parent().parent().prev().val(this.textContent);
             search_job();
         })
 
         $(".select-cus .ok").click(function(e) {
-            $(e.target).parent().parent().hide();
-            $(e.target).parent().parent().prev().val($(e.target).parent().parent().find('input').val());
+            $(this).parent().parent().hide();
+            $(this).parent().parent().prev().val($(this).parent().parent().find('input').val());
             search_job();
         })
 
         $(".select-cus .cancel").click(function(e) {
-            $(e.target).parent().parent().hide();
-            $(e.target).parent().parent().prev().val("");
+            $(this).parent().parent().hide();
+            $(this).parent().parent().prev().val("");
         })
 
         $(".cus-bg").click(function(e) {
-            $(e.target).parent().hide();
+            $(this).parent().hide();
         })
 
         $(".select-search").keyup(function(e) {

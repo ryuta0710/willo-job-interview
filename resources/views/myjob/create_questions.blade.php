@@ -226,18 +226,12 @@
                                             for="retake"><i class="fa-solid fa-repeat"></i></label>
                                         <select name="retake" type="text"
                                             class="form-select rounded-end-5 w50 retake" id="retake">
-                                            <option value="0">0回
-                                            </option>
-                                            <option value="1">1回
-                                            </option>
-                                            <option value="2">2回
-                                            </option>
-                                            <option value="3">3回
-                                            </option>
-                                            <option value="4">4回
-                                            </option>
-                                            <option value="5">5回
-                                            </option>
+                                            <option value="0">0回</option>
+                                            <option value="1">1回</option>
+                                            <option value="2">2回</option>
+                                            <option value="3">3回</option>
+                                            <option value="4">4回</option>
+                                            <option value="5">5回</option>
                                             <option value="infinite">制限なし
                                             </option>
                                         </select>
@@ -249,19 +243,13 @@
                                         <label class="input-group-text w50  rounded-start-5 bg-white border-end-0"
                                             for="input1"><i class="fa-solid fa-stopwatch"></i></label>
                                         <select name="answer_time" type="text" class="form-select rounded-end-5 time"
-                                            id="input1" placeholder="回答時間">
-                                            <option value="1">1分
-                                            </option>
-                                            <option value="2">2分
-                                            </option>
-                                            <option value="3">3分
-                                            </option>
-                                            <option value="4">4分
-                                            </option>
-                                            <option value="5">5分
-                                            </option>
-                                            <option value="infinite">
-                                                制限なし</option>
+                                            id="input1">
+                                            <option value="1">1分</option>
+                                            <option value="2">2分</option>
+                                            <option value="3">3分</option>
+                                            <option value="4">4分</option>
+                                            <option value="5">5分</option>
+                                            <option value="infinite">制限なし</option>
                                         </select>
                                     </div>
                                 </div>
@@ -270,16 +258,16 @@
                                     <div class="input-group">
                                         <select type="text" class="form-select rounded-pill limit" id="limit"
                                             placeholder="回答時間">
-                                            <option value="words">文字</option>
-                                            <option value="characters">言葉</option>
+                                            <option value="characters">文字</option>
+                                            <option value="sentences">文章</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-6 input-max none">
-                                    <label for="max" class="form-label px-4 mb-1">最大文字数</label>
+                                    <label for="max" class="form-label px-4 mb-1">最大数</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control rounded-pill max" name="max"
-                                            id="max" min=1 value="500" step="10">
+                                            id="max" min=1 value="500">
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-6 input-thinking-time">
@@ -457,10 +445,9 @@
                             <div class="col-12 col-xl-6 input-limit none">
                                 <label for="limit" class="form-label px-4 mb-1">単語制限</label>
                                 <div class="input-group">
-                                    <select type="text" class="form-select rounded-pill limit" id="limit"
-                                        placeholder="回答時間">
-                                        <option value="words">文字</option>
-                                        <option value="characters">言葉</option>
+                                    <select type="text" class="form-select rounded-pill limit" id="limit">
+                                        <option value="characters">文字</option>
+                                        <option value="sentences">文章</option>
                                     </select>
                                 </div>
                             </div>
@@ -468,7 +455,7 @@
                                 <label for="max" class="form-label px-4 mb-1">最大文字数</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control rounded-pill max" name="max"
-                                        id="max" min=1 value="500" max=500 step="10">
+                                        id="max" min=1 value="500" max=500>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-6 input-thinking-time">
@@ -523,7 +510,7 @@
                             <div class="col-12 col-xl-6 input-max none">
                                 <p>最大数</p>
                                 <p class="text-secondary"><i class="fa-solid fa-stopwatch"></i> <span
-                                        class="dis_max">500</span>字
+                                        class="dis_max">500</span>
                                 </p>
                             </div>
                             <div class="col-12 col-xl-6 input-thinking-time">
@@ -896,10 +883,10 @@
                 }
                 //set limit type
                 $(questions[i]).find('.limit').val(saved_data[i].limit_type);
-                if (saved_data[i].limit_type == "words") {
-                    $(questions[i]).find(".dis_limit").html("文字のみ");
+                if (saved_data[i].limit_type == "characters") {
+                    $(questions[i]).find(".dis_limit").html("文字");
                 } else {
-                    $(questions[i]).find(".dis_limit").html("言葉");
+                    $(questions[i]).find(".dis_limit").html("文章");
                 }
                 //set max count
                 let max = saved_data[i].max;
@@ -907,6 +894,7 @@
                     $(questions[i]).find('.max').val("500");
                 } else {
                     $(questions[i]).find('.max').val(max);
+                    $(questions[i]).find('.dis_max').html(max);
                 }
                 //set thinking_hour
                 let thinking_hour = saved_data[i].thinking_hour;

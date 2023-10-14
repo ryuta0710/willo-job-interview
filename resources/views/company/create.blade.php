@@ -33,12 +33,12 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label px-3">アドレス</label>
-                        <input name="address" value="{{ old('address') }}" type="text" class="form-control rounded-pill"
-                            id="address" placeholder="アドレスを入力してください">
-                        @error('address')
+                        <label for="email" class="form-label px-3">メールアドレス</label>
+                        <input name="email" value="{{ old('email') }}" type="text" class="form-control rounded-pill"
+                            id="email" placeholder="メールアドレスを入力してください">
+                        @error('email')
                             <span class="text-danger">
-                                <strong>アドレスを正しく入力してください</strong>
+                                <strong>メールアドレスを正しく入力してください</strong>
                             </span>
                         @enderror
                     </div>

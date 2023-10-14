@@ -212,6 +212,8 @@ Route::controller(InterviewController::class)->group(function(){
 
     Route::post('interview/{id}/search', 'search')->name('interview.search');
 
+    Route::delete('candidate/{candidate_id}/remove', 'candidate_remove')->name('interview.candidate_remove');
+
     // Route::get('interview/{user}/edit', 'edit')->name('interview.edit');
 
     Route::get('interview-closed', 'interview_closed')->name('interview.interview_closed');
@@ -232,7 +234,7 @@ Route::controller(OtherController::class)->group(function(){
 
     Route::get('invite-people/{myjob}', 'invitePeople')->name('invite-people');
 
-    Route::get('redirect-interview/{url}', 'redirect_interview')->name('redirect_interview');
+    Route::get('redirect-interview/{url}', 'redirect_interview')->name('redirect-interview');
 
     Route::get('getJobList', 'getJobList')->name('getJobList');
 

@@ -77,10 +77,10 @@ function func() {
 	});
 
 	$(".limit").change(function (e) {
-		if (e.target.value == "words") {
-			$(e.target).parents(".card").find(".dis_limit").html("文字のみ");
+		if (e.target.value == "characters") {
+			$(e.target).parents(".card").find(".dis_limit").html("文字");
 		} else {
-			$(e.target).parents(".card").find(".dis_limit").html("言葉");
+			$(e.target).parents(".card").find(".dis_limit").html("文章");
 		}
 	})
 

@@ -25,7 +25,7 @@ class OtherController extends Controller
                 'status' => 'live',
             ])
             ->orderby('updated_at', 'desc')
-            ->select('jobs.*', 'companies.address as address', 'fields.name as field')
+            ->select('jobs.*', 'companies.email as email', 'fields.name as field')
             ->take(20)
             ->get();
 
@@ -62,7 +62,7 @@ class OtherController extends Controller
                 ->where('description', 'LIKE', '%' . $search_key . '%')
                 ->whereBetween('salary', [$salary_min, $salary_max])
                 ->orderby('updated_at', 'desc')
-                ->select('jobs.*', 'companies.address as address', 'fields.name as field')
+                ->select('jobs.*', 'companies.email as email', 'fields.name as field')
                 ->skip($offset)
                 ->take(20)
                 ->get();
@@ -75,7 +75,7 @@ class OtherController extends Controller
                 ->where('description', 'LIKE', '%' . $search_key . '%')
                 ->whereBetween('salary', [$salary_min, $salary_max])
                 ->orderby('updated_at', 'desc')
-                ->select('jobs.*', 'companies.address as address', 'fields.name as field')
+                ->select('jobs.*', 'companies.email as email', 'fields.name as field')
                 ->skip($offset)
                 ->take(20)
                 ->get();
@@ -93,9 +93,12 @@ class OtherController extends Controller
         $job = Job::where([
             'url' => $url,
         ])->join('companies', 'jobs.company_id', '=', 'companies.id')
-            ->join('fields', 'jobs.field_id', '=', 'fields.id')
-            ->select('jobs.*', 'fields.name as field', 'companies.address as address', 'companies.website as website')
+            ->leftJoin('fields', 'jobs.field_id', '=', 'fields.id')
+            ->select('jobs.*', 'fields.name as field', 'companies.email as email', 'companies.website as website')
             ->first();
+        if(empty($job)){
+            return redirect()->route("getJobList");
+        }
         return view('jobDetail', compact('job'));
     }
 

@@ -126,7 +126,7 @@ class HomeController extends Controller
                 ->where('status', '!=', 'init');
         }else if($period == 'today'){
             $today = Carbon::now()->format('Y-m-d');
-            $str_yes = Carbon::now()->subDay()->format('m-d');
+            $str_today = Carbon::now()->format('m-d');
             $candidates = Candidate::where('user_id', $user->id)
                 ->whereDate('created_at', $today)->get();
             
@@ -135,13 +135,13 @@ class HomeController extends Controller
             return response()->json([
                 'response_data' => [
                     [
-                        'date' => $str_yes,
+                        'date' => $str_today,
                         'count' => count($responses),
                     ]
                 ],
                 'candidates_data' => [
                     [
-                        'date' => $str_yes,
+                        'date' => $str_today,
                         'count' => count($candidates),
                     ]
                 ],

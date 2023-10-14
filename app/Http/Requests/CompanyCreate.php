@@ -24,7 +24,7 @@ class CompanyCreate extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'address' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255',
             'website' => 'nullable|url|max:255',
             'logo' => 'nullable|mimes:jpeg,png,jpg,ico,PNG,JPG,ICO|max:4000000',
             'header_color' => 'nullable|string',

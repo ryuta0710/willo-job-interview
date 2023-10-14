@@ -10,7 +10,7 @@ use App\Models\Job;
 class Company extends Model
 {
     protected $fillable = [
-        'id', 'name', 'address', 'website', 
+        'id', 'name', 'email', 'website', 
         'header_color', 'button_color', 'logo',
          'field', 'owner', 'default'
     ];
