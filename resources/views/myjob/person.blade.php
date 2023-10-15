@@ -771,19 +771,7 @@
                                 <ul class="dropdown-menu">
                                   <li><a class="dropdown-item" target="blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{$date1}}/{{$date2}}&location=&text={{$job->company_name}}, {{$job->title}}- {{$candidate->name}}&details=&add={{$candidate->email}}.com">Google</a></li>
                                   <li><a class="dropdown-item" href='{{route('myjob.create_ics', ['candidate_id' => $candidate->id])}}'>iCal</a></li>
-                                  <li><a class="dropdown-item" href='begin:VCALENDAR VERSION:2.0
-                                    BEGIN:VEVENT
-                                    URL:{{ url()->current() }}
-                                    METHOD:PUBLISH
-                                    DTSTART:{{$date1}}
-                                    DTEND:{{$date2}}
-                                    SUMMARY:{{$job->company_name}}, {{$job->title}}- {{$candidate->name}}
-                                    DESCRIPTION:
-                                    LOCATION:
-                                    ATTENDEE;MEMBER="MAILTO":MAILTO:{{$candidate->email}}.com
-                                    END:VEVENT
-                                    END:VCALENDAR
-                                    ATTENDEE;MEMBER="MAILTO:DEV-GROUP@host2.com":MAILTO:joecool@host2.com'>Outlook</a></li>
+                                  <li><a class="dropdown-item" href='{{route('myjob.create_ics', ['candidate_id' => $candidate->id])}}'>Outlook</a></li>
                                   <li><a target="blank" class="dropdown-item" href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{$job->company_name}}, {{$job->title}}- {{$candidate->name}}&st={{$date1}}&dur=0005&desc=&in_loc=&inv_list={{$candidate->email}}'>Yahoo</a></li>
                                 </ul>
                               </div>

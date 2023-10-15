@@ -399,8 +399,8 @@ class MyJobController extends Controller
         $count = count($questions);
         //activity history
         $activities = Activity::where('candidate_id', $candidate->id)
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
         $date1 = Carbon::now()->format('Ymd\THis\Z');
         $date2 = Carbon::now()->addHour(1)->format('Ymd\THis\Z');
 
@@ -421,30 +421,31 @@ class MyJobController extends Controller
         ));
     }
 
-    public function create_ics(string $candidate_id){
+    public function create_ics(string $candidate_id)
+    {
         $user = Auth::user();
-        
+
         $candidate = Candidate::find($candidate_id);
-        if(empty($candidate)){
+        if (empty($candidate)) {
             return response()->json(['status' => 'failed', 'message' => "failed"], Response::HTTP_BAD_REQUEST);
         }
+        $company = Company::find($candidate->company_id);
+        $job = Job::find($candidate->job_id);
         $calendar = Calendar::create()
-        ->event(Event::create()
-            ->name('Meeting')
-            ->organizer($user->email, $user->name)
-            ->attendee($candidate->email)
-            ->description('Discussion about the project')
-            ->address('Office')
-            ->startsAt(now()->addHours(1))
-            ->endsAt(now()->addHours(2))
-            ->status(EventStatus::confirmed()            )
-        );
+            ->event(
+                Event::create()
+                    ->name($company->name.",".$job->title."-".$candidate->name)
+                    ->organizer($user->email, $user->name)
+                    ->attendee($candidate->email)
+                    ->description('Interview for the job')
+                    ->startsAt(now()->addHours(1))
+                    ->endsAt(now()->addHours(2))
+                    ->status(EventStatus::confirmed())
+            );
 
-    $icsContent = $calendar->get();
-
-    // Save the .ics file or return it as a response
-    // For example, to save it locally:
-    file_put_contents('event.ics', $icsContent);
+        $icsContent = $calendar->get();
+        file_put_contents('download/event.ics', $icsContent);
+        return redirect(asset('download/event.ics'));
     }
 
     public function create_questions(string $myjob)
@@ -735,7 +736,7 @@ class MyJobController extends Controller
             $candidate->save();
             $activity = [
                 'candidate_id' => $candidate->id,
-                'content' => '候補者が'.$user->name.'によって受け入れられました',
+                'content' => '候補者が' . $user->name . 'によって受け入れられました',
                 'type' => 'accept',
                 'name' => $user->name,
             ];
@@ -747,7 +748,7 @@ class MyJobController extends Controller
             $candidate->save();
             $activity = [
                 'candidate_id' => $candidate->id,
-                'content' => '候補者が'.$user->name.'によって拒否されました',
+                'content' => '候補者が' . $user->name . 'によって拒否されました',
                 'type' => 'reject',
                 'name' => $user->name,
             ];
@@ -775,7 +776,7 @@ class MyJobController extends Controller
 
         $activity = [
             'candidate_id' => $candidate->id,
-            'content' => $user->name.'は '.$review.' つ星に投票しました',
+            'content' => $user->name . 'は ' . $review . ' つ星に投票しました',
             'type' => 'vote',
             'name' => $user->name,
         ];
