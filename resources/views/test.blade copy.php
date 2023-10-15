@@ -963,20 +963,6 @@
                     <button class="btn  rounded-5" id="go_interview">面接に行く</button>
                 </div>
                 <div class="content">
-                    <!-- <p>
-                        Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get to know you better with a short one-way video interview.
-                        <br><br>
-                        Your interview will consist of a set of questions for you to answer using your camera and microphone. If you don't have access to a computer you can also complete your interview using any smartphone or tablet.
-                        <br><br>
-                        How it works: If you're unfamiliar with one-way interviews, they are simply interviews with pre-written questions where you record a video response, at your convenience. Each question should be answered before
-                        you move on to the next one.
-                        <br><br>
-                        Completing this interview will allow us to get to know you more quickly than a phone or video call, and you can complete it anywhere, any time.
-                        <br><br>
-                        Please read this guide to your interview before starting: 5 Easy steps to a great interview
-                        <br><br>
-                        Thanks, {interview_owner_name}
-                    </p> -->
                     <p>
                          {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
                          <br><br>

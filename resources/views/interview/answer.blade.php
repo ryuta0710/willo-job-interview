@@ -246,8 +246,10 @@
                                 <span class="d-block">答え</span>
                                 <span class="d-block">
                                     @if ($question->limit_type == 'characters')
-                                    文字@else
-                                    文章@endif数制限: {{ $question->max }}
+                                        文字
+                                    @else
+                                        文章
+                                    @endif数制限: {{ $question->max }}
                                 </span>
                             </div>
                             {{-- <div class="card card-custom"> --}}
@@ -1054,7 +1056,7 @@
                             "");
                         return;
                     }
-                    if(limit_type == "characters" && len - 1 > max){
+                    if (limit_type == "characters" && len - 1 > max) {
                         $("#save_continue").removeClass("active");
                         $("#save_continue").attr("disabled", " ");
                         $("#save_continue").removeClass("active").attr("disabled",
@@ -1063,7 +1065,7 @@
                     }
                     if (limit_type == "sentences") {
                         let arr = text.split("\n");
-                        if (arr.length -1 > max) {
+                        if (arr.length - 1 > max) {
                             $("#save_continue").removeClass("active");
                             $("#save_continue").attr("disabled", " ");
                             $("#save_continue").removeClass("active").attr("disabled",
@@ -1102,11 +1104,11 @@
             $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
         }
         let recording = false;
-
-        async function video_record(question_no) {
             const videoLive = document.querySelector('#videoLive' + question_no)
             const videoRecorded = document.querySelector('#videoRecorded' + question_no)
             let stream;
+
+        async function video_record(question_no) {
 
 
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -1162,6 +1164,35 @@
             }
 
 
+        }
+
+        function makeLink() {
+            let blob = new Blob(stream, {
+                    type: media.type
+                }),
+                url = URL.createObjectURL(blob),
+                li = document.createElement('li'),
+                mt = document.createElement(media.tag),
+                hf = document.createElement('a');
+            mt.controls = true;
+            mt.src = url;
+            hf.href = url;
+            hf.download = `${counter++}${media.ext}`;
+            hf.innerHTML = `donwload ${hf.download}`;
+            li.appendChild(mt);
+            li.appendChild(hf);
+            ul.appendChild(li);
+            const formData = new FormData();
+            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+            formData.append('video', blob);
+            fetch('/save', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {});
         }
         let flag = true;
         let interval = 0;
@@ -1243,9 +1274,9 @@
         // Handle file drop event
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            const file = e.dataTransfer.files[0];
             $('#fileupload')[0].files = e.dataTransfer.files;
-            console.log($('#fileupload')[0].files[0]);
+            $(".file_preview").html(e.target.value);
+            $("#fileupload").change();
         });
 
         function save_file() {
@@ -1254,6 +1285,7 @@
             let file_name = $("#fileupload").val();
             if (!file_name) {
                 alert("ファイルを選択してください。");
+                return;
             }
             var formData = new FormData();
             var file = $('#fileupload')[0].files[0];
@@ -1316,52 +1348,52 @@
             $(".file_preview").html(e.target.value);
             $("#save_continue").removeAttr("disabled").addClass("active").removeClass(" bg-secondary");
         })
-        //     var header = document.querySelector(".header");
-        //     var chatRoom = document.querySelector(".chat-room");
-        //     var typeArea = document.querySelector(".type-area");
-        //     var btnAdd = document.querySelector(".button-add");
-        //     var others = document.querySelector(".others");
-        //     var emojiBox = document.querySelector(".emoji-button .emoji-box");
-        //     var emojiButton = document.querySelector(".others .emoji-button");
-        //     var emojis = document.querySelectorAll(".emoji-box span");
-        //     var inputText = document.querySelector("#inputText");
-        //     var btnSend = document.querySelector(".button-send");
-        //     var messageArea = document.querySelector(".message.message-right");
-        //     //Header onclick event
-        //     header.addEventListener("click", function (e)  {
-        //         if (typeArea.classList.contains("d-none")) {
-        //             header.style.borderRadius = "20px 20px 0 0";
-        //         } else {
-        //             header.style.borderRadius = "20px";
-        //         }
-        //         typeArea.classList.toggle("d-none");
-        //         chatRoom.classList.toggle("d-none");
-        //     });
-        //     //Button Add onclick event
-        //     btnAdd.addEventListener("click", function (e)  {
-        //         others.classList.add("others-show");
-        //     });
-        //     //Emoji onclick event
-        //     emojiButton.addEventListener("click", function (e)  {
-        //         emojiBox.classList.add("emoji-show");
-        //     });
-        //     //Button Send onclick event
-        //     btnSend.addEventListener("click", function (e)  {
-        //         var mess = inputText.value;
-        //         var bubble = document.createElement('div');
-        //         bubble.className += " bubble bubble-dark";
-        //         bubble.textContent = mess;
-        //         messageArea.appendChild(bubble);
-        //         inputText.value = "";
-        //     });
-        //     for (var emoji of emojis) {
-        //         emoji.addEventListener("click", function (e)  {
-        //             e.stopPropagation();
-        //             emojiBox.classList.remove("emoji-show");
-        //             others.classList.remove("others-show");
-        //             inputText.value += e.target.textContent;
-        //         });
-        //     }
+        var header = document.querySelector(".header");
+        var chatRoom = document.querySelector(".chat-room");
+        var typeArea = document.querySelector(".type-area");
+        var btnAdd = document.querySelector(".button-add");
+        var others = document.querySelector(".others");
+        var emojiBox = document.querySelector(".emoji-button .emoji-box");
+        var emojiButton = document.querySelector(".others .emoji-button");
+        var emojis = document.querySelectorAll(".emoji-box span");
+        var inputText = document.querySelector("#inputText");
+        var btnSend = document.querySelector(".button-send");
+        var messageArea = document.querySelector(".message.message-right");
+        //Header onclick event
+        header.addEventListener("click", function(e) {
+            if (typeArea.classList.contains("d-none")) {
+                header.style.borderRadius = "20px 20px 0 0";
+            } else {
+                header.style.borderRadius = "20px";
+            }
+            typeArea.classList.toggle("d-none");
+            chatRoom.classList.toggle("d-none");
+        });
+        //Button Add onclick event
+        btnAdd.addEventListener("click", function(e) {
+            others.classList.add("others-show");
+        });
+        //Emoji onclick event
+        emojiButton.addEventListener("click", function(e) {
+            emojiBox.classList.add("emoji-show");
+        });
+        //Button Send onclick event
+        btnSend.addEventListener("click", function(e) {
+            var mess = inputText.value;
+            var bubble = document.createElement('div');
+            bubble.className += " bubble bubble-dark";
+            bubble.textContent = mess;
+            messageArea.appendChild(bubble);
+            inputText.value = "";
+        });
+        for (var emoji of emojis) {
+            emoji.addEventListener("click", function(e) {
+                e.stopPropagation();
+                emojiBox.classList.remove("emoji-show");
+                others.classList.remove("others-show");
+                inputText.value += e.target.textContent;
+            });
+        }
         start_time();
     </script>
 

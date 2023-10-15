@@ -65,6 +65,8 @@ Route::controller(MyJobController::class)->group(function(){
 
     Route::delete('myjob/{myjob}', 'destroy')->name('myjob.destroy');
 
+    Route::get('myjob/{candidate_id}/create_ics', 'create_ics')->name('myjob.create_ics');
+
     Route::get('myjob/{myjob}/edit', 'edit')->name('myjob.edit');
 
     Route::get('myjob/{myjob}/{candidate_id}/edit', 'person')->name('myjob.person');

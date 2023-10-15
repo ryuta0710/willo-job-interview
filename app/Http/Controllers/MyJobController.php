@@ -15,6 +15,10 @@ use App\Models\Answer;
 use App\Models\Activity;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Spatie\IcalendarGenerator\Components\Calendar;
+use Spatie\IcalendarGenerator\Components\Event;
+use Spatie\IcalendarGenerator\Enums\EventStatus;
 
 class MyJobController extends Controller
 {
@@ -397,6 +401,8 @@ class MyJobController extends Controller
         $activities = Activity::where('candidate_id', $candidate->id)
         ->orderBy('created_at', 'desc')
         ->get();
+        $date1 = Carbon::now()->format('Ymd\THis\Z');
+        $date2 = Carbon::now()->addHour(1)->format('Ymd\THis\Z');
 
         $bookings = Booking::where('candidate_id', $candidate_id)->get();
         return view('myjob.person', compact(
@@ -410,7 +416,35 @@ class MyJobController extends Controller
             'prev',
             'activities',
             'bookings',
+            'date1',
+            'date2',
         ));
+    }
+
+    public function create_ics(string $candidate_id){
+        $user = Auth::user();
+        
+        $candidate = Candidate::find($candidate_id);
+        if(empty($candidate)){
+            return response()->json(['status' => 'failed', 'message' => "failed"], Response::HTTP_BAD_REQUEST);
+        }
+        $calendar = Calendar::create()
+        ->event(Event::create()
+            ->name('Meeting')
+            ->organizer($user->email, $user->name)
+            ->attendee($candidate->email)
+            ->description('Discussion about the project')
+            ->address('Office')
+            ->startsAt(now()->addHours(1))
+            ->endsAt(now()->addHours(2))
+            ->status(EventStatus::confirmed()            )
+        );
+
+    $icsContent = $calendar->get();
+
+    // Save the .ics file or return it as a response
+    // For example, to save it locally:
+    file_put_contents('event.ics', $icsContent);
     }
 
     public function create_questions(string $myjob)
