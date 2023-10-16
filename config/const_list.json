@@ -1,3 +1,3 @@
 {
-    "activity_types": ["visit_interview_page", "reponse", "note", "vote", "email", "email_failed", ""]
+    "activity_types": ["visit_interview_page", "response", "note", "vote", "email", "email_failed", ""]
 }

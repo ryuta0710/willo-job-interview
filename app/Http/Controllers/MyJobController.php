@@ -421,7 +421,7 @@ class MyJobController extends Controller
         ));
     }
 
-    public function create_ics(string $candidate_id)
+    public function create_ics(string $candidate_id, string $date1, string $date2)
     {
         $user = Auth::user();
 
@@ -429,6 +429,8 @@ class MyJobController extends Controller
         if (empty($candidate)) {
             return response()->json(['status' => 'failed', 'message' => "failed"], Response::HTTP_BAD_REQUEST);
         }
+        $date1 = new Carbon($date1);
+        $date2 = new Carbon($date2);
         $company = Company::find($candidate->company_id);
         $job = Job::find($candidate->job_id);
         $calendar = Calendar::create()
@@ -438,9 +440,10 @@ class MyJobController extends Controller
                     ->organizer($user->email, $user->name)
                     ->attendee($candidate->email)
                     ->description('Interview for the job')
-                    ->startsAt(now()->addHours(1))
-                    ->endsAt(now()->addHours(2))
+                    ->startsAt($date1)
+                    ->endsAt($date2)
                     ->status(EventStatus::confirmed())
+                    ->address('Japan')
             );
 
         $icsContent = $calendar->get();

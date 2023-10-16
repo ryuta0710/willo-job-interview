@@ -32,7 +32,7 @@ class CompanyController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $list = Company::where("owner", $user->id)->get();
+        $list = Company::where("owner", $user->id)->withCount("candidates")->get()->sortBy("id")->sortByDesc("default");
 
         return view('company.index', compact("list"));
     }

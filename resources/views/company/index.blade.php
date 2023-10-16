@@ -17,7 +17,7 @@
                                 @endif
                             </div>
                             <div class="col-12 px-2 d-flex justify-content-between align-items-center">
-                                <p class="m-0">求人 0</p>
+                                <p class="m-0">求人 {{$item->candidates_count}}</p>
                                 <div class="">
                                     <a href="{{ route('company.edit', ['id' => $item->id]) }}" class="me-2"><i
                                             class="fa fa-edit"></i></a>

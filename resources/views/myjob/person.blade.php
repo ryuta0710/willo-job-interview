@@ -29,7 +29,7 @@
             border-bottom: 3px solid #4cadee;
         }
 
-        #booking_table td:not(.active, :first-child) span {
+        #booking_table td:not(.active, :first-child) * {
             visibility: hidden;
         }
 
@@ -394,16 +394,16 @@
                                                                         fill="#fff" stroke="#fff" stroke-width="1">
                                                                         <rect width="11" height="2" rx="1"
                                                                             stroke="none" />
-                                                                        <rect x="0.5" y="0.5" width="10"
-                                                                            height="1" rx="0.5" fill="none" />
+                                                                        <rect x="0.5" y="0.5" width="10" height="1"
+                                                                            rx="0.5" fill="none" />
                                                                     </g>
                                                                     <g id="Rectangle_360" data-name="Rectangle 360"
                                                                         transform="translate(20.433 2.91) rotate(45)"
                                                                         fill="#fff" stroke="#fff" stroke-width="1">
                                                                         <rect width="2" height="11" rx="1"
                                                                             stroke="none" />
-                                                                        <rect x="0.5" y="0.5" width="1"
-                                                                            height="10" rx="0.5" fill="none" />
+                                                                        <rect x="0.5" y="0.5" width="1" height="10"
+                                                                            rx="0.5" fill="none" />
                                                                     </g>
                                                                 </svg>
                                                             @break
@@ -474,14 +474,44 @@
                                     <thead>
                                         <tr class="text-white">
                                             <th class="p-0"><i class="fa-solid fa-clock text-white"></i></th>
-                                            <th class="text-white">木曜日{{ $bookings[0]['123'] }}</th>
+                                            {{-- <th class="text-white">木曜日</th>
                                             <th class="text-white">金曜日</th>
                                             <th class="text-white">月曜日</th>
                                             <th class="text-white">火曜日</th>
-                                            <th class="text-white">水曜日</th>
+                                            <th class="text-white">水曜日</th> --}}
+                                            @php
+                                                use Carbon\Carbon;
+
+                                                $currentDate = Carbon::createFromTimestamp(strtotime($candidate->response_at));
+                                                $weekdaysCount = 0;
+                                            @endphp
+
+                                            @while ($weekdaysCount < 5)
+                                                @if ($currentDate->isWeekday())
+                                                    <th class="text-white">
+                                                        @if ($currentDate->format('D') == 'Mon')
+                                                            月曜日<br>{{ $currentDate->format('d') }}
+                                                        @endif
+                                                        @if ($currentDate->format('D') == 'Tue')
+                                                            火曜日<br>{{ $currentDate->format('d') }}
+                                                        @endif
+                                                        @if ($currentDate->format('D') == 'Wed')
+                                                            水曜日<br>{{ $currentDate->format('d') }}
+                                                        @endif
+                                                        @if ($currentDate->format('D') == 'Thu')
+                                                            木曜日<br>{{ $currentDate->format('d') }}
+                                                        @endif
+                                                        @if ($currentDate->format('D') == 'Fri')
+                                                            金曜日<br>{{ $currentDate->format('d') }}
+                                                        @endif
+                                                    </th>
+                                                    @php $weekdaysCount++; @endphp
+                                                @endif
+                                                @php $currentDate->addDay(); @endphp
+                                            @endwhile
                                         </tr>
                                     </thead>
-                                    <tbody class="text-white">
+                                    {{-- <tbody class="text-white">
                                         <tr>
                                             <td>午前8:00</td>
                                             @for ($i = 1; $i <= 5; $i++)
@@ -490,8 +520,31 @@
                                                         return $item->day == $i && $item->time == '8:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 8:00"))->format('Ymd\THis\Z');   
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 8:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -503,8 +556,31 @@
                                                         return $item->day == $i && $item->time == '8:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 8:30"))->format('Ymd\THis\Z');   
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 9:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -516,8 +592,31 @@
                                                         return $item->day == $i && $item->time == '9:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 9:00"))->format('Ymd\THis\Z');   
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 9:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -529,8 +628,31 @@
                                                         return $item->day == $i && $item->time == '9:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 9:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 10:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -542,8 +664,31 @@
                                                         return $item->day == $i && $item->time == '10:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 10:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 10:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -555,8 +700,31 @@
                                                         return $item->day == $i && $item->time == '10:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 10:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 11:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -568,8 +736,31 @@
                                                         return $item->day == $i && $item->time == '11:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 11:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 11:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -581,8 +772,31 @@
                                                         return $item->day == $i && $item->time == '11:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 11:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 12:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -594,8 +808,31 @@
                                                         return $item->day == $i && $item->time == '12:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 12:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 12:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -607,8 +844,31 @@
                                                         return $item->day == $i && $item->time == '12:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 12:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 13:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -620,8 +880,31 @@
                                                         return $item->day == $i && $item->time == '13:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 13:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 13:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -633,8 +916,31 @@
                                                         return $item->day == $i && $item->time == '13:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 13:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 14:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -646,8 +952,31 @@
                                                         return $item->day == $i && $item->time == '14:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 14:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 14:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -659,8 +988,31 @@
                                                         return $item->day == $i && $item->time == '14:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 14:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 15:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -672,8 +1024,31 @@
                                                         return $item->day == $i && $item->time == '15:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 15:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 15:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -685,8 +1060,31 @@
                                                         return $item->day == $i && $item->time == '15:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 15:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 16:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -698,8 +1096,31 @@
                                                         return $item->day == $i && $item->time == '16:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 16:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 16:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -711,8 +1132,31 @@
                                                         return $item->day == $i && $item->time == '16:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 16:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 17:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -724,8 +1168,31 @@
                                                         return $item->day == $i && $item->time == '17:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 17:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 17:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -734,11 +1201,34 @@
                                             @for ($i = 1; $i <= 5; $i++)
                                                 @php
                                                     $filteredBookings = $bookings->filter(function ($item) use ($i) {
-                                                        return $item->day == $i && $item->time == '17:40';
+                                                        return $item->day == $i && $item->time == '17:30';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 17:30"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 18:00"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
@@ -750,31 +1240,120 @@
                                                         return $item->day == $i && $item->time == '18:00';
                                                     });
                                                 @endphp
-                                                <td @if (count($filteredBookings)) class="active" @endif>
-                                                    <span>会議のスケジュールを設定する</span>
+                                                <td @if (count($filteredBookings)) class="active" @endif style="position: relative;">
+                                                    <div class="dropdown position-absolute" style="width: 100%;padding-right: 8px;">
+                                                        <a class="dropdown-toggle text-white d-block text-wrap" href="#"
+                                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            会議のスケジュールを設定する
+                                                        </a>
+                                                        @php
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 18:00"))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(strtotime($candidate->response_at." 18:30"))->format('Ymd\THis\Z');  
+                                                        @endphp
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" target="blank"
+                                                                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                            </li>
+                                                            <li><a target="blank" class="dropdown-item"
+                                                                    href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </td>
                                             @endfor
                                         </tr>
 
+                                    </tbody> --}}
+                                    <tbody class="text-white">
+                                        @php
+                                            $timeslots = ['8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '17:30', '17:30', '18:00'];
+                                        @endphp
+
+                                        @foreach ($timeslots as $timeslot)
+                                            <tr>
+                                                <td>@php
+                                                    $time = Carbon::createFromFormat('H:i', $timeslot);
+                                                    $str= $time->format('a') === 'am' ? '午前' : '午後';
+                                                @endphp
+                                                {{ $time->format('g:i')." ".$str }}</td>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @php
+                                                        $filteredBookings = $bookings->filter(function ($item) use ($i, $timeslot) {
+                                                            return $item->day == $i && $item->time == $timeslot;
+                                                        });
+                                                        $val1 = Carbon::createFromTimestamp(strtotime($candidate->response_at . ' ' . $timeslot))->format('Ymd\THis\Z');
+                                                        $val2 = Carbon::createFromTimestamp(
+                                                            strtotime(
+                                                                $candidate->response_at .
+                                                                    ' ' .
+                                                                    Carbon::createFromFormat('H:i', $timeslot)
+                                                                        ->addMinutes(30)
+                                                                        ->format('H:i'),
+                                                            ),
+                                                        )->format('Ymd\THis\Z');
+                                                    @endphp
+                                                    <td @if (count($filteredBookings)) class="active" @endif
+                                                        style="position: relative;">
+                                                        <div class="dropdown position-absolute"
+                                                            style="width: 100%;padding-right: 8px;">
+                                                            <a class="dropdown-toggle text-white d-block text-wrap"
+                                                                href="#" role="button" data-bs-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                会議のスケジュールを設定する
+                                                            </a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" target="blank"
+                                                                        href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $val1 }}/{{ $val2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>iCal</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $val1, 'date2' => $val2]) }}'>Outlook</a>
+                                                                </li>
+                                                                <li><a target="blank" class="dropdown-item"
+                                                                        href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $val1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                @endfor
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="w-100 text-end">
                                 <span>上記の時間帯のどれも当てはまりませんか？&nbsp;&nbsp;&nbsp;;&nbsp;</span>
-                                <button class="text-white rounded-5 mb-5 " id="meeting_book_ok">会議を作成する</button>
+                                <div class="dropdown d-inline-block">
+                                    <a class="btn dropdown-toggle text-white rounded-5 btn-primary p-3" href="#"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                        id="meeting_book_ok">
+                                        会議を作成する
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" target="blank"
+                                                href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{ $date1 }}/{{ $date2 }}&location=&text={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&details=&add={{ $candidate->email }}.com">Google</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $date1, 'date2' => $date2]) }}'>iCal</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href='{{ route('myjob.create_ics', ['candidate_id' => $candidate->id, 'date1' => $date1, 'date2' => $date2]) }}'>Outlook</a>
+                                        </li>
+                                        <li><a target="blank" class="dropdown-item"
+                                                href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{ $job->company_name }}, {{ $job->title }}- {{ $candidate->name }}&st={{ $date1 }}&dur=0005&desc=&in_loc=&inv_list={{ $candidate->email }}'>Yahoo</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    会議を作成する
-                                </a>
-                              
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" target="blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{$date1}}/{{$date2}}&location=&text={{$job->company_name}}, {{$job->title}}- {{$candidate->name}}&details=&add={{$candidate->email}}.com">Google</a></li>
-                                  <li><a class="dropdown-item" href='{{route('myjob.create_ics', ['candidate_id' => $candidate->id])}}'>iCal</a></li>
-                                  <li><a class="dropdown-item" href='{{route('myjob.create_ics', ['candidate_id' => $candidate->id])}}'>Outlook</a></li>
-                                  <li><a target="blank" class="dropdown-item" href='https://calendar.yahoo.com/?v=60&view=d&type=20&title={{$job->company_name}}, {{$job->title}}- {{$candidate->name}}&st={{$date1}}&dur=0005&desc=&in_loc=&inv_list={{$candidate->email}}'>Yahoo</a></li>
-                                </ul>
-                              </div>
                         </div>
                         <!-- END MEETING BOOKING -->
                     </div>

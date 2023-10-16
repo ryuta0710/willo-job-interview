@@ -65,11 +65,6 @@
                                     @endif
                                     @php $currentDate->addDay(); @endphp
                                 @endwhile
-                                {{-- <th class="text-white">木曜日</th>
-                                <th class="text-white">金曜日</th>
-                                <th class="text-white">月曜日</th>
-                                <th class="text-white">火曜日</th>
-                                <th class="text-white">水曜日</th> --}}
                             </tr>
                         </thead>
                         <tbody>

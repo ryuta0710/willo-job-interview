@@ -171,7 +171,7 @@ class InterviewController extends Controller
         $activity = [
             'candidate_id' => $candidate->id,
             'content' => '応答を受信しました',
-            'type' => 'reponse',
+            'type' => 'response',
         ];
         Activity::create($activity);
 
