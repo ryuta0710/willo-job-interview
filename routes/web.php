@@ -200,6 +200,8 @@ Route::controller(InterviewController::class)->group(function(){
     Route::post('interview/{url}/text', 'save_text')->name('interview.save_text');
 
     Route::post('interview/{url}/file', 'save_file')->name('interview.save_file');
+
+    Route::post('interview/{url}/ai', 'save_ai')->name('interview.save_ai');
     // Route::post('interview', 'store')->name('interview.store');
 
     // Route::get('interview/create', 'create')->name('interview.create');

@@ -15,9 +15,6 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -468,7 +465,7 @@
                         <!-- FINISH BUTTON -->
                         <div class="w-100 d-flex align-items-center justify-content-center">
                             <button class="btn rounded-5 text-white align-self-center mb-5"
-                                id="test_finish"><span>テスト完了</span></button>
+                                id="test_finish" onclick="save_ai()"><span>テスト完了</span></button>
                         </div>
                     </div>
                 @endif
@@ -879,7 +876,13 @@
             $("#save_continue").removeAttr("disabled").addClass("active").removeClass(" bg-secondary");
         })
         @if ($question->type == 'ai')
-            let messages = [{sender: "bot", "message": "こんにちは。"}];
+            let messages = [{
+                sender: "bot",
+                "message": "こんにちは。"
+            }, {
+                sender: "man",
+                "message": "お世話になっております。"
+            }];
             var header = document.querySelector(".header");
             var chatRoom = document.querySelector(".chat-room");
             var typeArea = document.querySelector(".type-area");
@@ -915,6 +918,11 @@
                 if (mess == "") {
                     return;
                 }
+                const res = {
+                    sender: "person",
+                    message: mess
+                };
+                messages.push(res);
                 var bubble = document.createElement('div');
                 bubble.className += " bubble bubble-dark";
                 bubble.textContent = mess;
@@ -928,6 +936,41 @@
                     emojiBox.classList.remove("emoji-show");
                     others.classList.remove("others-show");
                     inputText.value += e.target.textContent;
+                });
+            }
+
+            function save_ai() {
+
+                let token = $("meta[name=csrf-token]").attr("content");
+                if(messages.length < 3){
+                    alert("答えを入力してください。");
+                    return;
+                }
+                let postData = {
+                    _token: token,
+                    messages: messages,
+                    count: count,
+                    q_no: {{ $question->question_no }},
+                };
+
+                $.ajax({
+                    url: "{{ route('interview.save_ai', ['url' => $answer_url]) }}",
+                    type: 'POST',
+                    data: postData,
+                    success: function(response) {
+                        @if ($is_last)
+                            location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
+                        @else
+                            create();
+                        @endif
+
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON.message == "Unauthenticated") {
+                            window.location.reload();
+                        }
+                        alert(xhr.responseJSON.message);
+                    }
                 });
             }
         @endif

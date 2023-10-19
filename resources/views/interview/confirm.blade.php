@@ -20,6 +20,9 @@
             height: 350px !important;
             max-width: 600px;
         }
+        .chat-box img{
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -78,23 +81,83 @@
                                     </div>
                                 @endif
                                 @if ($answers[0]->question_type == 'file')
-                                <div class="file-upload-contain">
-                                    <div class="file-drop-zone clickable" tabindex="-1">
-                                        <div class="file-drop-zone-title">
-                                            <div class="upload-area text-center">
-                                                <p class="file_preview">{{$answers[0]->content}}</p>
-                                                <div> ダウンロードするには<a class="btn_upload" download href="{{ $answers[0]->rc_url }}">こちら</a>をクリック。
+                                    <div class="file-upload-contain">
+                                        <div class="file-drop-zone clickable" tabindex="-1">
+                                            <div class="file-drop-zone-title">
+                                                <div class="upload-area text-center">
+                                                    <p class="file_preview">{{ $answers[0]->content }}</p>
+                                                    <div> ダウンロードするには<a class="btn_upload" download
+                                                            href="{{ $answers[0]->rc_url }}">こちら</a>をクリック。
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
+                                @if ($answers[0]->question_type == 'ai')
+                                    <div class="chat-box w-100 w-lg-50">
+                                        <div class="header">
+                                            <div class="avatar-wrapper avatar-big">
+                                                <img src="{{ asset('/assets/img/avatar/bot.png') }}" alt="avatar" />
+                                            </div>
+                                            <span class="name">AIチャット</span>
+                                            <span class="options">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                            </span>
+                                        </div>
+                                        <div class="chat-room">
+                                            <div class="message message-left">
+                                                <div class="avatar-wrapper avatar-small">
+                                                    <img src="{{ asset('/assets/img/avatar/bot.png') }}"
+                                                        alt="avatar" />
+                                                </div>
+                                                <div class="bubble bubble-light">
+                                                    こんにちは。
+                                                </div>
+                                            </div>
+                                            <div class="message message-right">
+                                                <div class="avatar-wrapper avatar-small">
+                                                    <img src="{{ asset('/assets/img/avatar/01.png') }}"
+                                                        alt="avatar" />
+                                                </div>
+                                                <div class="bubble bubble-dark">
+                                                    お世話になっております。
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="type-area">
+                                            <div class="input-wrapper">
+                                                <input type="text" id="inputText"
+                                                    placeholder="ここにメッセージを入力してください..." />
+                                            </div>
+                                            <span class="button-add">
+                                                <i class="fas fa-plus-circle"></i>
+                                                <div class="others">
+                                                    <span class="emoji-button">
+                                                        <i class="far fa-laugh"></i>
+                                                        <div class="emoji-box">
+                                                            <span>&#x1f604;</span>
+                                                            <span>😀</span>
+                                                            <span>😂</span>
+                                                            <span>😭</span>
+                                                            <span>😍</span>
+                                                            <span>🤮</span>
+                                                            <span>🤑</span>
+                                                            <span>😖</span>
+                                                            <span>😷</span>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </span>
+                                            <button class="button-send">送信</button>
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                         </div>
                         <div class="w-100 text-center mb-4">
                             <a href="{{ route('interview.index', ['url' => $url]) }}" id="restart_test"
-                                class="bg-white rounded-5 bg-red text-hover-white" >
+                                class="bg-white rounded-5 bg-red text-hover-white">
                                 <svg id="Group_2290" data-name="Group 2290" xmlns="http://www.w3.org/2000/svg"
                                     width="18.5" height="18.5" viewBox="0 0 18.5 18.5">
                                     <g id="Group_2289" data-name="Group 2289" opacity="0">
@@ -104,7 +167,8 @@
                                     <path id="Path_133" data-name="Path 133"
                                         d="M6.571,14.005a.768.768,0,0,1,.964.5,5.561,5.561,0,0,0,10.83-1.6,5.471,5.471,0,0,0-5.535-5.4A5.578,5.578,0,0,0,9.246,8.795l1.673-.278a.773.773,0,0,1,.578.135.762.762,0,0,1,.308.5.773.773,0,0,1-.135.578.762.762,0,0,1-.5.308l-3.268.54H7.766a.767.767,0,0,1-.262-.046.315.315,0,0,1-.077-.046.6.6,0,0,1-.154-.085L7.2,10.321c0-.039-.069-.069-.1-.116s0-.077-.039-.108a1.03,1.03,0,0,1-.054-.139L6.432,6.875a.785.785,0,0,1,1.542-.293L8.182,7.7A7.1,7.1,0,0,1,12.83,5.966,7.012,7.012,0,0,1,19.906,12.9a7.012,7.012,0,0,1-7.076,6.938,7.033,7.033,0,0,1-6.8-4.872.788.788,0,0,1,.066-.6A.779.779,0,0,1,6.571,14.005Z"
                                         transform="translate(-3.719 -3.653)" fill="#4ca7ee" />
-                                    <path id="Path_134" data-name="Path 134" d="M18.5,0H0V18.5H18.5Z" fill="none" />
+                                    <path id="Path_134" data-name="Path 134" d="M18.5,0H0V18.5H18.5Z"
+                                        fill="none" />
                                 </svg>
                                 再受験
                             </a>
@@ -120,7 +184,7 @@
                                 @if ($answers[$i]->question_type == 'video')
                                     <!-- VIDEO BOX -->
                                     <div class="answer-item p-1 rounded-3 d-flex gap-4 active" data-type="video"
-                                        data-content="{{ $answers[$i]->rc_url }}" data-no="{{$i}}">
+                                        data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
                                             <video class="rounded-4 w-100 h-100" crossorigin=""
@@ -145,7 +209,7 @@
                                 @if ($answers[$i]->question_type == 'audio')
                                     <!-- VOICE BOX -->
                                     <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="voice"
-                                        data-content="{{ $answers[$i]->rc_url }}" data-no="{{$i}}">
+                                        data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
                                             <img src="{{ asset('/assets/img/application/answer-voice.png') }}"
@@ -166,7 +230,8 @@
                                 @endif
                                 @if ($answers[$i]->question_type == 'text')
                                     <!--WRITING BOX -->
-                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="writing" data-no="{{$i}}">
+                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="writing"
+                                        data-no="{{ $i }}">
                                         <input type="hidden" name="" value="{!! $answers[$i]->content !!}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center rounded-2 d-none d-sm-block">
@@ -183,7 +248,7 @@
                                                     alt="chat">
                                                 &nbsp;&nbsp;&nbsp;質問{{ $i }}
                                             </div>
-                                            <div>{!!$answers[$i]->question_content!!}</div>
+                                            <div>{!! $answers[$i]->question_content !!}</div>
                                         </div>
                                         <!-- END CONTENT -->
                                     </div>
@@ -192,12 +257,35 @@
                                 @if ($answers[$i]->question_type == 'file')
                                     <!-- FILE UPLOAD BOX -->
                                     <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="file"
-                                    data-no="{{$i}}">
+                                        data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center rounded-2 d-none d-sm-block">
                                             <i class="fa-solid fa-cloud-arrow-up"></i>
                                             <div class="mt-3">
                                                 <span>{{ $answers[$i]->content }}</span>
+                                            </div>
+                                        </div>
+                                        <!-- CONTENT -->
+                                        <div class="answer-content text-start flex-grow-1 overflow-hidden">
+                                            <div class="w-100 pt-3 pb-2">
+                                                <img src="{{ asset('/assets/img/application/chat-right.png') }}"
+                                                    alt="chat">
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                            </div>
+                                            {{ $answers[$i]->question_content }}
+                                        </div>
+                                    </div>
+                                    <!-- END BOX -->
+                                @endif
+                                @if ($answers[$i]->question_type == 'ai')
+                                    <!-- FILE UPLOAD BOX -->
+                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="ai"
+                                        data-no="{{ $i }}">
+                                        <!-- HEADER -->
+                                        <div class="answer-type text-center rounded-2 d-none d-sm-block">
+                                            <i class="fa-solid fa-bot"></i>
+                                            <div class="mt-3">
+                                                <span>AIチャット</span>
                                             </div>
                                         </div>
                                         <!-- CONTENT -->
@@ -220,7 +308,8 @@
                     </div>
                 </div>
                 <div class="w-100 text-center" style="padding: 30px;">
-                    <a href="{{route('interview.booking', ['url' => $url])}}" class="text-white rounded-5 mb-5" id="answer_confirm">次に</a>
+                    <a href="{{ route('interview.booking', ['url' => $url]) }}" class="text-white rounded-5 mb-5"
+                        id="answer_confirm">次に</a>
                 </div>
 
             </div>
@@ -274,7 +363,7 @@
             $(".answer-item").removeClass("active");
             $(this).addClass("active");
             let q_no = parseInt($(this).attr("data-no"));
-            if(isNaN(q_no) ){
+            if (isNaN(q_no)) {
                 return;
             }
             let privewEle = document.getElementById("test-preview")

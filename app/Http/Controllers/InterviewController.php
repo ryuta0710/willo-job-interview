@@ -231,6 +231,34 @@ class InterviewController extends Controller
         return response()->json([], Response::HTTP_OK);
     }
 
+
+    public function save_ai(Request $request, string $url)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'messages' => 'required',
+            'count' => 'required',
+            'q_no' => 'required|integer',
+        ]);
+        $validator->validate();
+
+        $answer = Answer::where([
+            'url' => $url,
+        ])->first();
+        if (empty($answer)) {
+            return response([
+                'status' => 'failed',
+                'message' => 'Failed save',
+            ]);
+        }
+        // return $request['content'];  
+        $answer['content'] = $request['messages'];
+        $answer['count'] = intval($request['count']);
+        $answer->save();
+
+        return response()->json([], Response::HTTP_OK);
+    }
+
     public function save_file(Request $request, string $url)
     {
 
