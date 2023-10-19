@@ -145,7 +145,7 @@
                 @endforeach
             ];
 
-            new Chart("chart", {
+            const chart = new Chart("chart", {
                 type: "line",
                 data: {
                     labels: xValues,
@@ -234,55 +234,19 @@
                             return item.count;
                         });
 
-                        new Chart("chart", {
-                            type: "line",
-                            data: {
-                                labels: xValues,
-                                datasets: [{
-                                    data: all_count,
-                                    borderColor: "#FF33FF",
-                                    borderWidth: 1,
-                                    fill: false
-                                }, {
-                                    data: response_count,
-                                    borderColor: "#15D1F8",
-                                    borderWidth: 1,
-                                    fill: false
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    display: false
-                                },
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true,
-                                            callback: function(value) {
-                                                if (Number.isInteger(
-                                                        value)) {
-                                                    return value;
-                                                }
-                                            },
-                                            stepSize: 1
-                                        },
-                                        gridLines: {
-                                            display: true,
-                                        }
-                                    }, ],
-                                    xAxes: [{
-                                        gridLines: {
-                                            display: false,
-                                            lineWidth: 1,
-                                            // color: red,
-                                        }
-                                    }],
-                                }
+                        chart.config.data.labels = xValues;
+                        chart.config.data.datasets[0].data = all_count;
+                        chart.config.data.datasets[1].data = response_count;
 
-                            }
-                        });
+                        chart.options.scales.xAxes[0].scaleLabel.labelString =
+                            ' '; 
+                        chart.options.scales.xAxes[0].ticks.callback = function(value, index,
+                            values) {
+                            return xValues[
+                            index];
+                        };
+
+                        chart.update();
                     },
                     error: function(xhr, status, error) {
                         if (xhr.responseJSON.message == "Unauthenticated") {

@@ -357,5 +357,34 @@
         // quill.setContents("{{ old('description') }}");
         // quill.root.innerHTML = "{{ old('description') }}"
         // .setContents()
+        
+        function makeLink() {
+            let blob = new Blob(stream, {
+                    type: media.type
+                }),
+                url = URL.createObjectURL(blob),
+                li = document.createElement('li'),
+                mt = document.createElement(media.tag),
+                hf = document.createElement('a');
+            mt.controls = true;
+            mt.src = url;
+            hf.href = url;
+            hf.download = `${counter++}${media.ext}`;
+            hf.innerHTML = `donwload ${hf.download}`;
+            li.appendChild(mt);
+            li.appendChild(hf);
+            ul.appendChild(li);
+            const formData = new FormData();
+            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+            formData.append('video', blob);
+            fetch('/save', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {});
+        }
     </script>
 @endsection
