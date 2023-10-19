@@ -14,40 +14,41 @@
             <div class="card rounded p-4 border-0 shadow mb-5">
                 <div class="row mb-5">
                     <video controls crossorigin playsinline>
-                        <source src="./assets/video/interview01.mp4" type="video/mp4" size="576">
-                        <a>Video Oynatılamıyor</a>
+                        <source src="{{$job->video_url}}" type="video/mp4" size="576">
+                        <a>Video</a>
                     </video>
                 </div>
                 <div class="row px-0 px-md-4">
-                    <h1 class="mb-4">面接タイトル</h1>
-                    <p>私たちはつなげる立場なので、広告主さまに対する営業とメディアさまに対する営業の2種類があります。</p>
-                    <p>Circuit Xの広告を多くのメディアに掲載してもらうため、メディア（比較サイト、ランキングサイト、ブログなど）をリストアップし、リクルーティング。広告主さまが期待する効果を出す為に、広告を掲載後、効果が得られているか、改善できることなどを提案までいたします。</p>
+                    <h1 class="mb-4">{{$job->title}}</h1>
+                    <div>
+                        {!!$job->description!!}
+                    </div>
                     <hr class="my-4 bg-active">
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
                         <i class="fa fa-solid fa-user"></i>
                         <strong>業界：</strong>
-                        <p class="m-0">IT</p>
+                        <p class="m-0">{{$job->field}}</p>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
                         <i class="fa fa-solid fa-yen"></i>
                         <strong>給料：</strong>
-                        <p class="m-0">250000円</p>
+                        <p class="m-0">{{$job->salary}}円</p>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
                         <i class="fa fa-solid fa-map"></i>
-                        <strong>住所：</strong>
-                        <p class="m-0">Japan</p>
+                        <strong>メールアドレス：</strong>
+                        <p class="m-0">{{$job->email}}</p>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4">
                         <i class="fa fa-solid fa-earth"></i>
                         <strong>WebサイトURL：</strong>
-                        <a href="https://abcd.com" target="_blank" class="text-active">https://abcd.com</a>
+                        <a href="{{$job->website}}" target="_blank" class="text-active">{{$job->website}}</a>
                     </div>
                     <hr class="my-4 bg-active">
                 </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
-                        <a href="{{ route('test') }}" class="btn btn-primary px-5">応募する</a>
+                        <a href="{{route('redirect-interview', ['url' => $job->url ])}}" class="btn btn-primary px-5">応募する</a>
                     </div>
                 </div>
             </div>

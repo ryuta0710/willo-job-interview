@@ -8,11 +8,11 @@ $(document).ready(function() {
         } else if (source == 'user') {
             let content = new String(quill.getContents().ops[0].insert);
             if (content == '\n') {
-                $("#save").removeClass("bg-primary").attr("disabled", "");
+                $("#submit").removeClass("btn-primary").attr("disabled", "");
                 $("#content").val("");
     
             } else {
-                $("#save").addClass("bg-primary").removeAttr("disabled");
+                $("#submit").addClass("btn-primary").removeAttr("disabled");
                 $("#content").val(quill.root.innerHTML);
             }
         }
@@ -28,14 +28,16 @@ $(document).ready(function() {
         let type = $("#type").val().trim();
         let trigger = $("#trigger").val().trim();
         let content = $("#content").val().trim();
-        let token = $("meta[name=csrf-token]").attr("content");
+
         if(title == "" || type == "" || trigger == "" || content == ""){
             alert("内容を正確に入力してください。");
             return;
         }
-        if( type = "sms"){
+        if( type == "sms"){
             content = new String(quill.getContents().ops[0].insert);
         }
+
+        let token = $("meta[name=csrf-token]").attr("content");
     
         let postData = {
             _token: token,

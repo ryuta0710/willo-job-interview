@@ -258,3 +258,15 @@ footer {
         margin-top: 50px;
     }
 }
+
+.pe-130 {
+    padding-right: 145px !important;        
+}
+
+@media(max-width: 991px) {
+
+    .pe-130 {
+        padding-right: 205px !important;
+        right: -5px;     
+    }
+}

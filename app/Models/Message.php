@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'id', 'title', 'type', 'trigger', 'content', 'writer', 'memo'
+        'id', 'title', 'type', 'trigger', 'content', 'writer', 'memo', 'user_id'
     ];
     
     use HasFactory;

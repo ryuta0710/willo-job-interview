@@ -15,233 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
 
     <style>
-        .test-ai .bg-active {
-            background-color: #4cadee;
-        }
-
-        .test-ai i:hover {
-            color: #be79df;
-        }
-
-        .test-ai .d-none {
-            display: none !important;
-        }
-
-        .test-ai .others-show {
-            top: -55px !important;
-            z-index: 10 !important;
-        }
-
-        .test-ai .emoji-show {
-            display: flex !important;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            width: 150px !important;
-            height: 100px !important;
-            padding: 10px;
-            top: -135px !important;
-            right: 10px !important;
-            background-color: #fff;
-            box-shadow: 0 0 25px -5px lightgray;
-            border-radius: 5px 5px 0 5px;
-        }
-
-        .test-ai button {
-            border: 0;
-            outline: none;
-        }
-
-        .test-ai img {
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .test-ai .avatar-wrapper {
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .test-ai .chat-box {
-            width: 350px;
-            margin: auto;
-        }
-
-        .test-ai .chat-box .header {
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-            border-radius: 20px 20px 0 0;
-            padding: 15px;
-        }
-
-        .chat-box .header .avatar-big {
-            width: 35px;
-            height: 35px;
-        }
-
-        .chat-box .header .name {
-            margin-left: 20px;
-            font-size: 20px;
-            font-weight: 500;
-        }
-
-        .chat-box .header .options {
-            font-size: 20px;
-            color: lightgrey;
-            margin-left: auto;
-            cursor: pointer;
-        }
-
-        .chat-box .chat-room {
-            min-height: 300px;
-            background-color: #f7f9fb;
-            padding: 15px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .chat-box .chat-room .avatar-small {
-            width: 25px;
-            height: 25px;
-        }
-
-        .chat-box .chat-room .message {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-box .chat-room .message-left {
-            align-items: flex-start;
-        }
-
-        .chat-box .chat-room .message-left .bubble {
-            border-radius: 0 5px 5px 5px;
-        }
-
-        .chat-box .chat-room .message-right {
-            align-items: flex-end;
-        }
-
-        .chat-box .chat-room .message-right .bubble {
-            border-radius: 5px 0 5px 5px;
-        }
-
-        .chat-box .chat-room .bubble {
-            padding: 10px;
-            font-size: 14px;
-            margin-top: 5px;
-            display: inline-block;
-        }
-
-        .chat-box .chat-room .bubble-light {
-            background-color: #4cadee79;
-        }
-
-        .chat-box .chat-room .bubble-dark {
-            color: #fff;
-            background-color: #4cadee;
-        }
-
-        .chat-box .type-area {
-            display: flex;
-            height: 65px;
-            background-color: #fff;
-            border-radius: 0 0 20px 20px;
-        }
-
-        .chat-box .type-area .input-wrapper {
-            overflow: hidden;
-            border-radius: 0 0 0 20px;
-            width: 90%;
-        }
-
-        .chat-box .type-area .input-wrapper input {
-            outline: none;
-            border: none;
-            padding-left: 20px;
-            height: 100%;
-            width: 100%;
-            font-size: 14px;
-        }
-
-        .chat-box .type-area .button-add {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .chat-box .type-area .button-add i {
-            font-size: 30px;
-            color: lightgrey;
-            cursor: pointer;
-        }
-
-        .chat-box .type-area .button-add i:hover {
-            color: #be79df;
-        }
-
-        .chat-box .type-area .button-add .others {
-            display: flex;
-            padding: 10px 15px;
-            background-color: #fff;
-            position: absolute;
-            top: 5px;
-            z-index: -1;
-            right: -52px;
-            border-radius: 999px;
-            box-shadow: 0 0 25px -5px lightgray;
-            transition: 0.3s all ease-out;
-        }
-
-        .chat-box .type-area .button-add .others span i {
-            font-size: 20px;
-            color: #be79df;
-        }
-
-        .chat-box .type-area .button-add .others span.image-button {
-            margin: 0 25px;
-        }
-
-        .chat-box .type-area .button-add .others .emoji-button {
-            position: relative;
-        }
-
-        .chat-box .type-area .button-add .others .emoji-button .emoji-box {
-            display: none;
-            position: absolute;
-            width: 0px;
-            height: 0px;
-            top: 0px;
-            right: 0px;
-            transition: 0.3s all ease-out;
-        }
-
-        .chat-box .type-area .button-add .others .emoji-button .emoji-box span {
-            user-select: none;
-            cursor: pointer;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            width: 20px;
-            height: 20px;
-        }
-
-        .chat-box .type-area .button-send {
-            background-color: #fff;
-            margin-left: auto;
-            width: 65px;
-            color: #4cadee;
-            font-weight: bold;
-            border-left: 2px solid #f7f9fb;
-            border-radius: 0 0 20px 0;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .chat-box .type-area .button-send:hover {
-            background-color: #4cadee;
-            color: #fff;
-            transition: background-color 0.3s ease-in-out;
-        }
+        
     </style>
 </head>
 
@@ -488,7 +262,9 @@
                                             <div class="file-drop-zone clickable" tabindex="-1">
                                                 <div class="file-drop-zone-title">
                                                     <div class="upload-area">
-                                                        <p class="file_preview">ここにファイルをドラッグ アンド ドロップしますまた</p>
+                                                        <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
+または<br>
+ブラウズ</p>
                                                         <div> <button class="btn_upload">ブラウズ</button> </div>
                                                     </div>
                                                 </div>
@@ -1182,69 +958,24 @@
                 </div>
                 <div class="content">
 
-                    <p>Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get to
-                        know you
-                        better with a short one-way video interview.
-                        <br><br>
-                        Your interview will consist of a set of questions for you to answer using your camera and
-                        microphone. If you
-                        don't have access to a computer you can also complete your interview using any smartphone or
-                        tablet.
-                        <br><br>
-                        How it works:
-                        If you're unfamiliar with one-way interviews, they are simply interviews with pre-written
-                        questions where
-                        you record a video response, at your convenience. Each question should be answered before
-                        you
-                        move on to the
-                        next one.
-                        <br><br>
-                        Completing this interview will allow us to get to know you more quickly than a phone or
-                        video
-                        call, and you
-                        can complete it anywhere, any time.
-                        <br><br>
-                        Please read this guide to your interview before starting:
-                        5 Easy steps to a great interview
-                        <br><br>
-                        Thanks,
-                        {interview_owner_name}
-                    </p>
                 </div>
                 <div class="button-group">
-                    <button class="btn  rounded-5" id="go_interview">Go to interview</button>
+                    <button class="btn  rounded-5" id="go_interview">面接に行く</button>
                 </div>
                 <div class="content">
                     <p>
-                        Thanks for your interest in the {interview_name}, {company_name} position. I'd like to get
-                        to
-                        know you
-                        better with a short one-way video interview.
-                        <br><br>
-                        Your interview will consist of a set of questions for you to answer using your camera and
-                        microphone. If you
-                        don't have access to a computer you can also complete your interview using any smartphone or
-                        tablet.
-                        <br><br>
-                        How it works:
-                        If you're unfamiliar with one-way interviews, they are simply interviews with pre-written
-                        questions where
-                        you record a video response, at your convenience. Each question should be answered before
-                        you
-                        move on to the
-                        next one.
-                        <br><br>
-                        Completing this interview will allow us to get to know you more quickly than a phone or
-                        video
-                        call, and you
-                        can complete it anywhere, any time.
-                        <br><br>
-                        Please read this guide to your interview before starting:
-                        5 Easy steps to a great interview
-                        <br><br>
-                        Thanks,
-                        {interview_owner_name}
-                    </p>
+                         {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
+                         <br><br>
+                         面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
+                         <br><br>
+                         仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
+                         <br><br>
+                         このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
+                         <br><br>
+                         開始する前に、面接ガイドをお読みください: 素晴らしい面接への 5 つの簡単なステップ
+                         <br><br>
+                         ありがとう、{interview_owner_name}
+                     </p>
                 </div>
 
             </div>

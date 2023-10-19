@@ -64,3 +64,8 @@ function replaceText(thefield) {
         thefield.value = thefield.defaultValue
     }
 }
+function select_field(obj, id){
+    $("#fields button").removeClass("bg-primary");
+    $(obj).addClass("bg-primary");
+    $("#field_id").val(id);
+}

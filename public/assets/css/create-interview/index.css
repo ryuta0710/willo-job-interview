@@ -243,7 +243,18 @@ select {
 .question-ai .input-time {
     display: none;
 }
-
+@media (max-width: 1199px) {
+    .input-retake > div:nth-child(1) > label,
+    .input-time > label,
+    .input-limit > label,
+    .input-max > label,
+    .input-thinking-time > label {
+        margin-top: 12px!important;
+    }
+    .input-type {
+        margin: 0px!important;
+    }
+}
 #add_questioin:hover{
     background-color: #e4e4e4;
 }
@@ -310,3 +321,19 @@ select {
 .up, .down, .copy, .delete{
     cursor: pointer;
 }
+
+form .text-danger {
+    padding-left: 28px;
+    font-size: 14px;
+}
+
+.camera_not_connected {
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-weight: 700;
+    font-size: 20px!important;
+    background-color: rgba(255, 255, 255, 0.5);
+  }

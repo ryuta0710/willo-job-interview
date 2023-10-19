@@ -22,7 +22,7 @@
     <nav id="header" class="navbar navbar-expand-md fixed-top">
         <div class="container">
             <a href="">
-                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="logo">
             </a>
 
             <button class="navbar-toggler" type="button" id="show-toggle-menu">
@@ -34,8 +34,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" id="active1" href="{{ route('home') }}">トップ</a></li>
-                    <li class="nav-item"><a class="nav-link" id="active2" href="">導入する</a></li>
-                    <li class="nav-item"><a class="nav-link" id="active3" href="">お問い合わせ</a></li>
+                    <li class="nav-item"><a class="nav-link" id="active2" href="{{ route('getJobList') }}">導入する</a></li>
+                    <li class="nav-item"><a class="nav-link" id="active3" href="{{ route('contact') }}">お問い合わせ</a></li>
                     @if (Route::has('login'))
                     <li class="nav-item"><a class="nav-link" id="active3" href="{{ route('register') }}">登録</a></li>
                     @if (Route::has('register'))

@@ -7,35 +7,35 @@ use Illuminate\HTTP\Response;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use SebastianBergmann\Template\Template;
 
 class TemplateController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $messages = Message::all();
-        // $messages->transform(function ($message) {
-        //     $message->content = strip_tags($message->content);
-        //     return $message;
-        // });
-        // return view('template.index', compact('messages'));
-
 
         $user = Auth::user();
-        if ($user) {
-            $messages = Message::where("writer", $user->email)
-                ->orWhere('editable', 0)->orderBy('id', 'desc')->get();
-            $messages->transform(function ($message) {
-                $message->content = strip_tags($message->content);
-                return $message;
-            });
-            return view('template.index', compact('messages'));
-        }
-        redirect("home");
+        $messages = Message::where("user_id", $user->id)
+            ->orWhere('editable', 0)
+            ->orderBy('id', 'desc')
+            ->get();
+        $messages->transform(function ($message) {
+            $message->content = strip_tags($message->content);
+            return $message;
+        });
+        return view('template.index', compact('messages'));
     }
 
     /**
@@ -52,7 +52,7 @@ class TemplateController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if ($user) {
+        if (Auth::check()) {
             $request->validate([
                 'title' => 'required',
                 'type' => 'required',
@@ -60,6 +60,7 @@ class TemplateController extends Controller
                 'content' => 'required'
             ]);
             $request['writer'] = $user->email;
+            $request['user_id'] = $user->id;
 
             $save_data = Message::create($request->all());
 
@@ -77,7 +78,7 @@ class TemplateController extends Controller
     public function copy($id)
     {
         $user = Auth::user();
-        if ($user) {
+        if (Auth::check()) {
             $message = Message::find($id);
             $new_message = [
                 'title' => $message->title,
@@ -90,7 +91,7 @@ class TemplateController extends Controller
             $save_data = Message::create($new_message);
             Log::info($message);
 
-            if ($save_data) {
+            if (!empty($save_data)) {
                 return response()->json([
                     'status' => 'success',
                     'data' => $save_data,
@@ -111,7 +112,7 @@ class TemplateController extends Controller
     public function show(string $id)
     {
         $message = Message::find($id);
-        if (!$message) {
+        if (empty($message)) {
             return redirect()->back();
         }
         return response()->json($message);
@@ -131,7 +132,29 @@ class TemplateController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Auth::user();
+        if (!empty($user)) {
+            $request->validate([
+                'title' => 'required',
+                'type' => 'required',
+                'trigger' => 'required',
+                'content' => 'required'
+            ]);
+            $request['writer'] = $user->email;
+
+            $save_data = Message::find($id);
+            $save_data['title'] = $request['title'];
+            $save_data['type'] = $request['type'];
+            $save_data['trigger'] = $request['trigger'];
+            $save_data['content'] = $request['content'];
+            $save_data->save();
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $save_data,
+            ], Response::HTTP_OK);
+        }
+        redirect("home");
     }
 
     /**
@@ -141,7 +164,7 @@ class TemplateController extends Controller
     {
         $message = Message::find($id);
         $email = Auth::user()->email;
-        if ($message) {
+        if (!empty($message)) {
             if ($email == $message->writer) {
                 if ($message->editable == 1) {
                     $message->delete();
@@ -167,5 +190,34 @@ class TemplateController extends Controller
             'message' => '削除操作が失敗しました。',
             'data' => $message,
         ], Response::HTTP_BAD_REQUEST);
+    }
+
+    public function search(Request $request)
+    {
+        $user = Auth::user();
+        $keyword = $request->input('keyword');
+        $type = $request->input('type');
+
+        $messages = Message::where('user_id', $user->id)
+            ->when($keyword, function ($query) use ($keyword) {
+                return $query->where('title', 'LIKE', '%'.$keyword.'%');
+            })
+            ->when($type, function ($query) use ($type) {
+                return $query->where(['type' => $type]);
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+        $defaultMessage = Message::where('editable', 0)
+        ->when($keyword, function ($query) use ($keyword) {
+            return $query->where('title', 'LIKE', '%'.$keyword.'%');
+        })
+        ->when($type, function ($query) use ($type) {
+            return $query->where(['type' => $type]);
+        })
+        ->get();
+
+        $messages = $defaultMessage->merge($messages);
+
+        return response()->json($messages);
     }
 }

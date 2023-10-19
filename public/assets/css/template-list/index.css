@@ -46,7 +46,7 @@ main {
 
 #messages_table {
     box-sizing: border-box;
-    max-width: 1200px;
+    /* max-width: 1200px; */
     width: 100%;
 }
 
@@ -56,7 +56,7 @@ main {
 
 #messages_table tr td:nth-child(3) {
     text-wrap: nowrap;
-    text-overflow: clip;
+    text-overflow: ellipsis;;
     overflow: hidden;
     max-width: 300px;
 }
