@@ -334,8 +334,7 @@
                                                         <div class="file-drop-zone-title">
                                                             <div class="upload-area">
                                                                 <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
-                                                                    または<br>
-                                                                    ブラウズ</p>
+                                                                    または</p>
                                                                 <div> <button class="btn_upload"
                                                                         onclick="select_file({{ $question->question_no }})">ブラウズ</button>
                                                                 </div>

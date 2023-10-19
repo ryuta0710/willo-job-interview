@@ -23,15 +23,16 @@
 <body>
     <header>
         <div class="container max-1200">
-            <a href="/" class="fs-1 text-black">会社ロゴ</a>
+            <a class="navbar-brand pe-5" href="/">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+            </a>
         </div>
     </header>
     <main class="message">
         <div class="container max-1200" id="test">
             <div class="test-flow">
                 <div class="no-group">
-                    <a class="no active d-flex justify-content-center align-items-center" data-tab="tab-1"
-                        href="#tab-1">
+                    <a class="no active d-flex justify-content-center align-items-center" href="javascript:;">
                         1
                     </a>
                     @for ($i = 1; $i < $count; $i++)
@@ -46,7 +47,7 @@
 
                 @if ($question->type == 'video')
                     <!-- VIDEO -->
-                    <div class="test-video" id="tab-{{ $question->question_no }}">
+                    <div class="test-video">
                         <div class="row">
 
                             <div class="col-sm-12 col-md-12 col-lg-6">
@@ -84,8 +85,7 @@
                                     {{ $question->content }}
                                 </div>
                                 <div class="test-button">
-                                    <button class="video-recoding" id="videoRecord{{ $question->question_no }}"
-                                        onclick="video_record({{ $question->question_no }})">
+                                    <button class="video-recoding" id="videoRecord" onclick="video_record()">
                                         <i class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;
                                         今すぐ録音する</button>
                                 </div>
@@ -110,13 +110,12 @@
 
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6 position-relative">
-                                <video id="videoLive{{ $question->question_no }}" class="w-100 videoLive" autoplay
-                                    muted style="background-color: #a2aab7;"></video>
+                                <video id="videoLive" class="w-100 videoLive" autoplay muted
+                                    style="background-color: #a2aab7;"></video>
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
-                                <video id="videoRecorded{{ $question->question_no }}"
-                                    class="w-100 videoRecorded d-none" controls>
+                                <video id="videoRecorded" class="w-100 videoRecorded d-none" controls>
                                 </video>
                                 <!-- <img class="w-100" src="./assets/img/application/camera-screen.svg" alt="camera_screen"> -->
                             </div>
@@ -125,7 +124,7 @@
                 @endif
                 @if ($question->type == 'audio')
                     <!-- VOICE -->
-                    <div class="test-voice" id="tab-{{ $question->question_no }}">
+                    <div class="test-voice" id="tab">
                         <div class="row">
 
                             <div class="col-sm-12 col-md-12 col-lg-6">
@@ -165,8 +164,7 @@
                                     {{ $question->content }}
                                 </div>
                                 <div class="test-button">
-                                    <button class="video-recoding" id="videoRecord{{ $question->question_no }}"
-                                        onclick="video_record({{ $question->question_no }})"><i
+                                    <button class="video-recoding" id="videoRecord" onclick="video_record()"><i
                                             class="fa-solid fa-microphone"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
                                 </div>
                                 <div class="test-state d-flex justify-content-between">
@@ -190,21 +188,20 @@
 
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6 position-relative">
-                                <video id="videoLive{{ $question->question_no }}" class="w-100 videoLive" autoplay
-                                    muted style="background-color: #a2aab7;"></video>
+                                <video id="videoLive" class="w-100 videoLive" autoplay muted
+                                    style="background-color: #a2aab7;"></video>
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。
                                 </div>
-                                <video id="videoRecorded{{ $question->question_no }}"
-                                    class="w-100 videoRecorded d-none" controls>
+                                <video id="videoRecorded" class="w-100 videoRecorded d-none" controls>
                             </div>
                         </div>
                     </div>
                 @endif
                 @if ($question->type == 'text')
                     <!-- WRITE -->
-                    <div class="test-writing w-100" id="tab-{{ $question->question_no }}">
+                    <div class="test-writing w-100">
                         <!-- NO -->
                         <div class="test-title">
                             <div>
@@ -269,7 +266,7 @@
                 @endif
                 @if ($question->type == 'file')
                     <!-- FILE -->
-                    <div class="test-file " id="tab-{{ $question->question_no }}">
+                    <div class="test-file">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="test-title">
@@ -337,8 +334,7 @@
                                                     <div class="file-drop-zone-title">
                                                         <div class="upload-area" id="uploadArea">
                                                             <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
-                                                                または<br>
-                                                                ブラウズ</p>
+                                                                または</p>
                                                             <div> <button class="btn_upload"
                                                                     onclick="select_file()">ブラウズ</button>
                                                             </div>
@@ -359,7 +355,7 @@
                 @endif
                 @if ($question->type == 'ai')
                     <!-- AI -->
-                    <div class="test-ai " id="tab-{{ $question->question_no }}">
+                    <div class="test-ai ">
                         <div class="w-100">
                             <div class="m-auto">
                                 <div class="test-title">
@@ -397,17 +393,17 @@
                                     {{ $question->content }}
                                 </div>
 
-                                <div class="test-state d-flex justify-content-between mb-3">
-                                    <div>
-                                        @if ($question->answer_time)
+                                @if ($question->answer_time)
+                                    <div class="test-state d-flex justify-content-between mb-3">
+                                        <div>
                                             <span>
                                                 <i class="fa-solid fa-stopwatch"></i>
                                                 &nbsp;
                                                 応答時間 {{ $question->answer_time }}:00
                                             </span>
-                                        @endif
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="chat-box w-100 w-lg-50">
                                     <div class="header">
@@ -459,12 +455,6 @@
                                                         <span>😖</span>
                                                         <span>😷</span>
                                                     </div>
-                                                </span>
-                                                <span class="image-button">
-                                                    <i class="far fa-image"></i>
-                                                </span>
-                                                <span>
-                                                    <i class="fas fa-paperclip"></i>
                                                 </span>
                                             </div>
                                         </span>
@@ -620,127 +610,128 @@
                 }
             });
         @endif
-        try {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function(devices) {
-                    var hasCamera = devices.some(function(device) {
-                        return device.kind === 'videoinput';
-                    });
+        @if ($question->type == 'video')
+            try {
+                navigator.mediaDevices.enumerateDevices()
+                    .then(function(devices) {
+                        var hasCamera = devices.some(function(device) {
+                            return device.kind === 'videoinput';
+                        });
 
-                    if (hasCamera) {
-                        console.log('Camera is connected.');
-                    } else {
+                        if (hasCamera) {
+                            console.log('Camera is connected.');
+                        } else {
+                            $(".camera_not_connected").removeClass("d-none");
+                            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                        }
+                    })
+                    .catch(function(err) {
+                        console.error('Error accessing media devices: ', err);
                         $(".camera_not_connected").removeClass("d-none");
                         $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
-                    }
-                })
-                .catch(function(err) {
-                    console.error('Error accessing media devices: ', err);
-                    $(".camera_not_connected").removeClass("d-none");
-                    $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
-                });
-        } catch (error) {
-            $(".camera_not_connected").removeClass("d-none");
-            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
-        }
-        let recording = false;
-            const videoLive = document.querySelector('#videoLive' + question_no)
-            const videoRecorded = document.querySelector('#videoRecorded' + question_no)
+                    });
+            } catch (error) {
+                $(".camera_not_connected").removeClass("d-none");
+                $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+            }
+            let recording = false;
+            const videoLive = document.querySelector('#videoLive')
+            const videoRecorded = document.querySelector('#videoRecorded')
             let stream;
 
-        async function video_record(question_no) {
+            async function video_record() {
 
 
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                await navigator.mediaDevices.getUserMedia({ // <1>
-                    video: true,
-                    audio: true,
-                }).then(function(sss) {
-                    stream = sss;
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    await navigator.mediaDevices.getUserMedia({ // <1>
+                        video: true,
+                        audio: true,
+                    }).then(function(sss) {
+                        stream = sss;
 
-                    videoLive.srcObject = stream
+                        videoLive.srcObject = stream
 
-                    if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
-                        console.warn('video/webm is not supported')
-                    }
-
-                    const mediaRecorder = new MediaRecorder(stream, { // <3>
-                        mimeType: 'video/webm',
-                    })
-
-                    mediaRecorder.start()
-                    recording = true;
-                    $("#record").html('録音を停止')
-
-
-                    $("#record").click(function() {
-
-                        if (!recording) {
-                            mediaRecorder.start() // <4>
-                            $("#record").html('録音を停止')
-                            $(videoLive).toggleClass("d-none");
-                            $(videoRecorded).toggleClass("d-none");
-
-                        } else {
-                            mediaRecorder.stop()
-                            $("#record").html('録音を閧始')
-                            $(videoLive).toggleClass("d-none");
-                            $(videoRecorded).toggleClass("d-none");
-
+                        if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
+                            console.warn('video/webm is not supported')
                         }
-                        recording = !recording;
-                    })
+
+                        const mediaRecorder = new MediaRecorder(stream, { // <3>
+                            mimeType: 'video/webm',
+                        })
+
+                        mediaRecorder.start()
+                        recording = true;
+                        $("#record").html('録音を停止')
 
 
-                    mediaRecorder.addEventListener('dataavailable', event => {
-                        videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                        $("#record").click(function() {
+
+                            if (!recording) {
+                                mediaRecorder.start() // <4>
+                                $("#record").html('録音を停止')
+                                $(videoLive).toggleClass("d-none");
+                                $(videoRecorded).toggleClass("d-none");
+
+                            } else {
+                                mediaRecorder.stop()
+                                $("#record").html('録音を閧始')
+                                $(videoLive).toggleClass("d-none");
+                                $(videoRecorded).toggleClass("d-none");
+
+                            }
+                            recording = !recording;
+                        })
+
+
+                        mediaRecorder.addEventListener('dataavailable', event => {
+                            videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                        })
+                    }).catch(function(res) {
+                        console.log(res);
+                        // alert("カメラを接続してください。")
                     })
-                }).catch(function(res) {
-                    console.log(res);
-                    // alert("カメラを接続してください。")
-                })
-            } else {
-                console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
+                } else {
+                    console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
+                }
+
+
             }
 
-
-        }
-
-        function makeLink() {
-            let blob = new Blob(stream, {
-                    type: media.type
-                }),
-                url = URL.createObjectURL(blob),
-                li = document.createElement('li'),
-                mt = document.createElement(media.tag),
-                hf = document.createElement('a');
-            mt.controls = true;
-            mt.src = url;
-            hf.href = url;
-            hf.download = `${counter++}${media.ext}`;
-            hf.innerHTML = `donwload ${hf.download}`;
-            li.appendChild(mt);
-            li.appendChild(hf);
-            ul.appendChild(li);
-            const formData = new FormData();
-            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-            formData.append('video', blob);
-            fetch('/save', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {});
-        }
+            function makeLink() {
+                let blob = new Blob(stream, {
+                        type: media.type
+                    }),
+                    url = URL.createObjectURL(blob),
+                    li = document.createElement('li'),
+                    mt = document.createElement(media.tag),
+                    hf = document.createElement('a');
+                mt.controls = true;
+                mt.src = url;
+                hf.href = url;
+                hf.download = `${counter++}${media.ext}`;
+                hf.innerHTML = `donwload ${hf.download}`;
+                li.appendChild(mt);
+                li.appendChild(hf);
+                ul.appendChild(li);
+                const formData = new FormData();
+                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                formData.append('video', blob);
+                fetch('/save', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {});
+            }
+        @endif
         let flag = true;
         let interval = 0;
+        const q_no = parseInt({{ $question->question_no }});
 
 
         function start_time() {
-
-            q_no = parseInt({{ $question->question_no }});
 
             interval = setInterval(function(e) {
                 let minute = parseInt(count / 60);
@@ -763,7 +754,6 @@
         }
 
         function save_text() {
-            q_no = {{ $question->question_no }};
             let token = $("meta[name=csrf-token]").attr("content");
             let content = $("#text_content").val().trim();
             if (content == "")
@@ -794,32 +784,33 @@
                 }
             });
         }
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileupload');
+        @if ($question->type == 'file')
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileupload');
 
-        // Prevent default behavior for drag events
-        uploadArea.addEventListener('dragenter', (e) => {
-            e.preventDefault();
-        });
+            // Prevent default behavior for drag events
+            uploadArea.addEventListener('dragenter', (e) => {
+                e.preventDefault();
+            });
 
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
 
-        uploadArea.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-        });
+            uploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+            });
 
-        // Handle file drop event
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            $('#fileupload')[0].files = e.dataTransfer.files;
-            $(".file_preview").html(e.target.value);
-            $("#fileupload").change();
-        });
+            // Handle file drop event
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                $('#fileupload')[0].files = e.dataTransfer.files;
+                $(".file_preview").html(e.target.value);
+                $("#fileupload").change();
+            });
+        @endif
 
         function save_file() {
-            q_no = {{ $question->question_no }};
             let token = $("meta[name=csrf-token]").attr("content");
             let file_name = $("#fileupload").val();
             if (!file_name) {
@@ -831,7 +822,7 @@
             formData.append('file', file);
             formData.append('_token', token);
             formData.append('count', count);
-            formData.append('q_no', {{ $question->question_no }});
+            formData.append('q_no', q_no);
 
             $.ajax({
                 url: "{{ route('interview.save_file', ['url' => $answer_url]) }}",
@@ -887,52 +878,59 @@
             $(".file_preview").html(e.target.value);
             $("#save_continue").removeAttr("disabled").addClass("active").removeClass(" bg-secondary");
         })
-        var header = document.querySelector(".header");
-        var chatRoom = document.querySelector(".chat-room");
-        var typeArea = document.querySelector(".type-area");
-        var btnAdd = document.querySelector(".button-add");
-        var others = document.querySelector(".others");
-        var emojiBox = document.querySelector(".emoji-button .emoji-box");
-        var emojiButton = document.querySelector(".others .emoji-button");
-        var emojis = document.querySelectorAll(".emoji-box span");
-        var inputText = document.querySelector("#inputText");
-        var btnSend = document.querySelector(".button-send");
-        var messageArea = document.querySelector(".message.message-right");
-        //Header onclick event
-        header.addEventListener("click", function(e) {
-            if (typeArea.classList.contains("d-none")) {
-                header.style.borderRadius = "20px 20px 0 0";
-            } else {
-                header.style.borderRadius = "20px";
-            }
-            typeArea.classList.toggle("d-none");
-            chatRoom.classList.toggle("d-none");
-        });
-        //Button Add onclick event
-        btnAdd.addEventListener("click", function(e) {
-            others.classList.add("others-show");
-        });
-        //Emoji onclick event
-        emojiButton.addEventListener("click", function(e) {
-            emojiBox.classList.add("emoji-show");
-        });
-        //Button Send onclick event
-        btnSend.addEventListener("click", function(e) {
-            var mess = inputText.value;
-            var bubble = document.createElement('div');
-            bubble.className += " bubble bubble-dark";
-            bubble.textContent = mess;
-            messageArea.appendChild(bubble);
-            inputText.value = "";
-        });
-        for (var emoji of emojis) {
-            emoji.addEventListener("click", function(e) {
-                e.stopPropagation();
-                emojiBox.classList.remove("emoji-show");
-                others.classList.remove("others-show");
-                inputText.value += e.target.textContent;
+        @if ($question->type == 'ai')
+            let messages = [{sender: "bot", "message": "こんにちは。"}];
+            var header = document.querySelector(".header");
+            var chatRoom = document.querySelector(".chat-room");
+            var typeArea = document.querySelector(".type-area");
+            var btnAdd = document.querySelector(".button-add");
+            var others = document.querySelector(".others");
+            var emojiBox = document.querySelector(".emoji-button .emoji-box");
+            var emojiButton = document.querySelector(".others .emoji-button");
+            var emojis = document.querySelectorAll(".emoji-box span");
+            var inputText = document.querySelector("#inputText");
+            var btnSend = document.querySelector(".button-send");
+            var messageArea = document.querySelector(".message.message-right");
+            //Header onclick event
+            header.addEventListener("click", function(e) {
+                if (typeArea.classList.contains("d-none")) {
+                    header.style.borderRadius = "20px 20px 0 0";
+                } else {
+                    header.style.borderRadius = "20px";
+                }
+                typeArea.classList.toggle("d-none");
+                chatRoom.classList.toggle("d-none");
             });
-        }
+            //Button Add onclick event
+            btnAdd.addEventListener("click", function(e) {
+                others.classList.add("others-show");
+            });
+            //Emoji onclick event
+            emojiButton.addEventListener("click", function(e) {
+                emojiBox.classList.add("emoji-show");
+            });
+            //Button Send onclick event
+            btnSend.addEventListener("click", function(e) {
+                var mess = inputText.value.trim();
+                if (mess == "") {
+                    return;
+                }
+                var bubble = document.createElement('div');
+                bubble.className += " bubble bubble-dark";
+                bubble.textContent = mess;
+                messageArea.appendChild(bubble);
+                inputText.value = "";
+
+            });
+            for (var emoji of emojis) {
+                emoji.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                    emojiBox.classList.remove("emoji-show");
+                    others.classList.remove("others-show");
+                    inputText.value += e.target.textContent;
+                });
+            }
+        @endif
         start_time();
     </script>
 

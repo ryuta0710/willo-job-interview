@@ -26,7 +26,9 @@
 <body>
     <header>
         <div class="container max-1200">
-            <a href="/" class="fs-1 text-black">会社ロゴ</a>
+            <a class="navbar-brand pe-5" href="/">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+            </a>
         </div>
     </header>
     <main class="message">
@@ -52,37 +54,36 @@
                             </span>
                         </div>
                         <div class="w-100 pl-md-0 pl-lg-73">
-                            <div class="test-title">
+                            <div class="test-title fs-16 mb-3">
                                 {{ $answers[0]->question_content }}
                             </div>
                             <div id="test-preview" class="w-100 mb-4">
-                                @if ($questions[0]->type == 'video')
+                                @if ($answers[0]->question_type == 'video')
                                     <video class="rounded-4 w-100 h-100" crossorigin=""
                                         playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                        <source src="{{ $questions[0]->rc_url }}" type="video/mp4" size="300">
+                                        <source src="{{ $answers[0]->rc_url }}" type="video/mp4" size="300">
                                         <a>Video</a>
                                     </video>
                                 @endif
-                                @if ($questions[0]->type == 'audio')
+                                @if ($answers[0]->question_type == 'audio')
                                     <video class="rounded-4 w-100 h-100" crossorigin=""
                                         playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                        <source src="{{ $questions[0]->rc_url }}" type="video/mp4" size="300">
+                                        <source src="{{ $answers[0]->rc_url }}" type="video/mp4" size="300">
                                         <a>Video</a>
                                     </video>
                                 @endif
-                                @if ($questions[0]->type == 'text')
+                                @if ($answers[0]->question_type == 'text')
                                     <div class="rounded-4 bg-secondary-subtle show-answer-text p-4">
-                                        {{ $questions[0]->content }}
+                                        {!! $answers[0]->content !!}
                                     </div>
                                 @endif
-                                @if ($questions[0]->type == 'file')
+                                @if ($answers[0]->question_type == 'file')
                                 <div class="file-upload-contain">
                                     <div class="file-drop-zone clickable" tabindex="-1">
                                         <div class="file-drop-zone-title">
-                                            <div class="upload-area">
-                                                <p class="file_preview">$questions[0]->content</p>
-                                                <div> ダウンロードするには<a class="btn_upload"
-                                                        href="{{ $questions[0]->re_url }}">こちら</a>をクリック。
+                                            <div class="upload-area text-center">
+                                                <p class="file_preview">{{$answers[0]->content}}</p>
+                                                <div> ダウンロードするには<a class="btn_upload" download href="{{ $answers[0]->rc_url }}">こちら</a>をクリック。
                                                 </div>
                                             </div>
                                         </div>
@@ -182,8 +183,7 @@
                                                     alt="chat">
                                                 &nbsp;&nbsp;&nbsp;質問{{ $i }}
                                             </div>
-                                            <p>{!! $answers[$i]->question_content !!}</p>
-
+                                            <div>{!!$answers[$i]->question_content!!}</div>
                                         </div>
                                         <!-- END CONTENT -->
                                     </div>

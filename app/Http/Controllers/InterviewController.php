@@ -186,7 +186,7 @@ class InterviewController extends Controller
             'candidate_id' => $candidate->id,
         ])->delete();
 
-        if ($request['is_book']) {
+        if ($request['is_book'] == 'true') {
             $schedules = $request['schedules'];
 
             foreach ($schedules as $item) {

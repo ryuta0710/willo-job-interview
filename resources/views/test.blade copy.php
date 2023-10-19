@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
 
     <style>
-        
+
     </style>
 </head>
 
@@ -263,8 +263,7 @@
                                                 <div class="file-drop-zone-title">
                                                     <div class="upload-area">
                                                         <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
-または<br>
-ブラウズ</p>
+                                                            または</p>
                                                         <div> <button class="btn_upload">ブラウズ</button> </div>
                                                     </div>
                                                 </div>
@@ -964,18 +963,18 @@
                 </div>
                 <div class="content">
                     <p>
-                         {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
-                         <br><br>
-                         面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
-                         <br><br>
-                         仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
-                         <br><br>
-                         このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
-                         <br><br>
-                         開始する前に、面接ガイドをお読みください: 素晴らしい面接への 5 つの簡単なステップ
-                         <br><br>
-                         ありがとう、{interview_owner_name}
-                     </p>
+                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。 短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
+                        <br><br>
+                        面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
+                        <br><br>
+                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。 次の質問に進む前に、各質問に回答する必要があります。
+                        <br><br>
+                        このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
+                        <br><br>
+                        開始する前に、面接ガイドをお読みください: 素晴らしい面接への 5 つの簡単なステップ
+                        <br><br>
+                        ありがとう、{interview_owner_name}
+                    </p>
                 </div>
 
             </div>
@@ -1108,78 +1107,77 @@
                 });
             }
         });
-        
-    let recording = false;
 
-    async function record() {
-        const videoLive = document.querySelector('#videoLive')
-        const videoRecorded = document.querySelector('#videoRecorded')
-        let stream;
+        let recording = false;
 
-
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            await navigator.mediaDevices.getUserMedia({ // <1>
-                video: true,
-                audio: true,
-            }).then(function(sss) {
-                stream = sss;
-
-                videoLive.srcObject = stream
-
-                if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
-                    console.warn('video/webm is not supported')
-                }
-
-                const mediaRecorder = new MediaRecorder(stream, { // <3>
-                    mimeType: 'video/webm',
-                })
-
-                mediaRecorder.start()
-                recording = true;
-                $("#record").html('録音を停止')
+        async function record() {
+            const videoLive = document.querySelector('#videoLive')
+            const videoRecorded = document.querySelector('#videoRecorded')
+            let stream;
 
 
-                $("#record").click(function(){
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                await navigator.mediaDevices.getUserMedia({ // <1>
+                    video: true,
+                    audio: true,
+                }).then(function(sss) {
+                    stream = sss;
 
-                    if (!recording) {
-                        mediaRecorder.start() // <4>
-                        $("#record").html('録音を停止')
-                        $("#videoLive").show();
-                        $("#videoRecorded").hide();
+                    videoLive.srcObject = stream
 
-                    } else {
-                        mediaRecorder.stop()
-                        $("#record").html('録音を閧始')
-                        $("#videoLive").hide();
-                        $("#videoRecorded").show();
-
+                    if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
+                        console.warn('video/webm is not supported')
                     }
-                    recording = !recording;
-                })
+
+                    const mediaRecorder = new MediaRecorder(stream, { // <3>
+                        mimeType: 'video/webm',
+                    })
+
+                    mediaRecorder.start()
+                    recording = true;
+                    $("#record").html('録音を停止')
 
 
-                mediaRecorder.addEventListener('dataavailable', event => {
-                    videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                    $("#record").click(function() {
+
+                        if (!recording) {
+                            mediaRecorder.start() // <4>
+                            $("#record").html('録音を停止')
+                            $("#videoLive").show();
+                            $("#videoRecorded").hide();
+
+                        } else {
+                            mediaRecorder.stop()
+                            $("#record").html('録音を閧始')
+                            $("#videoLive").hide();
+                            $("#videoRecorded").show();
+
+                        }
+                        recording = !recording;
+                    })
+
+
+                    mediaRecorder.addEventListener('dataavailable', event => {
+                        videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                    })
+                }).catch(function(res) {
+                    console.log(res);
+                    // alert("カメラを接続してください。")
                 })
-            }).catch(function(res) {
-                console.log(res);
-                // alert("カメラを接続してください。")
-            })
-        } else {
+            } else {
                 console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
+            }
+
+
         }
-        
+        let flag = true;
 
-    }
-    let flag = true;
-
-$("#record").click(function(){
-    if(flag){
-        record();
-        flag = false;
-    }
-})
-
+        $("#record").click(function() {
+            if (flag) {
+                record();
+                flag = false;
+            }
+        })
     </script>
 
 </body>

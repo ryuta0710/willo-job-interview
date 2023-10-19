@@ -86,6 +86,7 @@ class TemplateController extends Controller
                 'trigger' => $message->trigger,
                 'content' => $message->content,
                 'writer' => $user->email,
+                'user_id' => $user->id,
             ];
 
             $save_data = Message::create($new_message);

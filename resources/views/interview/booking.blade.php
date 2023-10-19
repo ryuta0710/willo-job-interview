@@ -22,7 +22,9 @@
 <body>
     <header>
         <div class="container max-1200">
-            <a href="/" class="fs-1 text-black">会社ロゴ</a>
+            <a class="navbar-brand pe-5" href="/">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+            </a>
         </div>
     </header>
     <main class="message">
@@ -252,9 +254,27 @@
             <!-- CONGRATULATION -->
             <div class="congratulation d-none">
                 <div class="container">
-                    <div class="w-100 text-center">
-                        <img src="{{ asset('/assets/img/application/congratulation.png') }}" alt="ok">
+                    <div class="w-100 text-center m-0" style="padding-top: 7.88rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="189.859" height="189.859"
+                            viewBox="0 0 189.859 189.859">
+                            <g id="Icon_ionic-ios-checkmark-circle-outline"
+                                data-name="Icon ionic-ios-checkmark-circle-outline"
+                                transform="translate(-3.375 -3.375)">
+                                <path id="Path_153" data-name="Path 153"
+                                    d="M108.194,21.015l-8.032-8.261a1.727,1.727,0,0,0-1.278-.548h0a1.657,1.657,0,0,0-1.278.548L41.925,68.844,21.662,48.581a1.765,1.765,0,0,0-2.556,0L10.982,56.7a1.818,1.818,0,0,0,0,2.6L36.54,84.864a8.083,8.083,0,0,0,5.34,2.6c2.419,0,4.518-1.78,5.294-2.51h.046l61.02-61.339A1.951,1.951,0,0,0,108.194,21.015Z"
+                                    transform="translate(38.762 48.492)" fill="#4ca7ee" />
+                                <path id="Path_154" data-name="Path 154"
+                                    d="M98.3,16.154A82.164,82.164,0,0,1,156.4,156.4a82.164,82.164,0,0,1-116.2-116.2A81.607,81.607,0,0,1,98.3,16.154m0-12.779a94.93,94.93,0,1,0,94.93,94.93A94.915,94.915,0,0,0,98.3,3.375Z"
+                                    transform="translate(0 0)" fill="#4ca7ee" />
+                            </g>
+                        </svg>
                     </div>
+                    <p class="text-center my-3" style="font-size: 16px">
+                        募集トピック<br>
+                        採用担当名</p>
+                    <h2 class="text-center" style="font-size: 40px;color: #344D64;">すべて完了しました</h2>
+                    <p class="text-center" style="font-size: 20px">今日のインタビューにご参加いただきありがとうございます。<br>
+                        残りの一日をお楽しみください。👋</p>
                     <div class="w-100 text-center mt-5 pb-5">
                         <!-- <button class="bg-white rounded-5">あなたの経験を評価してください</button> -->
                         <button class="bg-white rounded-5" onclick="window.location.href='/'">トップとして</button>

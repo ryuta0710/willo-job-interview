@@ -342,17 +342,17 @@
                         console.log('Camera is connected.');
                     } else {
                         $(".camera_not_connected").removeClass("d-none");
-                        $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                        $("#record").attr("disabled", "").addClass("bg-secondary-subtle");
                     }
                 })
                 .catch(function(err) {
                     console.error('Error accessing media devices: ', err);
                     $(".camera_not_connected").removeClass("d-none");
-                    $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                    $("#record").attr("disabled", "").addClass("bg-secondary-subtle");
                 });
         } catch (error) {
             $(".camera_not_connected").removeClass("d-none");
-            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+            $("#record").attr("disabled", "").removeClass("btn-primary").addClass("bg-secondary-subtle");
         }
         // quill.setContents("{{ old('description') }}");
         // quill.root.innerHTML = "{{ old('description') }}"

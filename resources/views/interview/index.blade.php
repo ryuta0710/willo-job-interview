@@ -24,7 +24,9 @@
 <body>
     <header>
         <div class="container max-1200">
-            <a href="/" class="fs-1 text-black">会社ロゴ</a>
+            <a class="navbar-brand pe-5" href="/">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+            </a>
         </div>
     </header>
     <main class="message">
