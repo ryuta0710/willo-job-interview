@@ -4,6 +4,8 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/css/common/modal-preview.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <main class="pt-5">
         <div class="container mb-5">
@@ -123,8 +125,7 @@
                                             transform="translate(3.634 6.831) rotate(-44.283)" fill="#fff"
                                             stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-miterlimit="10" stroke-width="1" />
-                                        <path id="Path_88" data-name="Path 88"
-                                            d="M945.6,1167a33.32,33.32,0,0,0,5.573,0"
+                                        <path id="Path_88" data-name="Path 88" d="M945.6,1167a33.32,33.32,0,0,0,5.573,0"
                                             transform="translate(-942.64 -1149.517)" fill="none" stroke="#4ca7ee"
                                             stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                             stroke-width="1" />
@@ -430,7 +431,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         });

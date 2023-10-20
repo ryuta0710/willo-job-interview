@@ -154,7 +154,7 @@
         function make_answer(q_no) {
             q_no = parseInt(q_no);
             if (!isNaN(q_no) && q_no <= 0) {
-                alert("The question is incorrect.");
+                toastr.error('エラーが発生しました。');
                 return;
             }
             create(0);
@@ -190,7 +190,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }

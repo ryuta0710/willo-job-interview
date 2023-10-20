@@ -21,7 +21,7 @@ $(document).ready(function () {
                 if (xhr.responseJSON.message == "Unauthenticated") {
                     window.location.reload();
                 }
-                alert(xhr.responseJSON.message);
+                toastr.error(xhr.responseJSON.message);
             }
         });
     });
@@ -41,7 +41,7 @@ function del(id) {
             if (xhr.responseJSON.message == "Unauthenticated") {
                 window.location.reload();
             }
-            alert(xhr.responseJSON.message);
+            toastr.error(xhr.responseJSON.message);
         }
     });
 }
@@ -56,7 +56,7 @@ function copy(id) {
             location.reload();
         },
         error: function (xhr, status, error) {
-            alert(xhr.responseJSON.message);
+            toastr.error(xhr.responseJSON.message);
         }
     });
 }
@@ -120,7 +120,7 @@ function search_job() {
             if (xhr.responseJSON.message == "Unauthenticated") {
                 window.location.reload();
             }
-            alert(xhr.responseJSON.message);
+            toastr.error(xhr.responseJSON.message);
         }
     });
     $("#filter_clear").click(function () {

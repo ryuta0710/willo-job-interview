@@ -341,6 +341,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
@@ -356,7 +357,7 @@
             let tel = $("#info_phone").val().trim();
             if (name == "" || email == "" || tel == "" || !validateEmail(email)) {
                 e.preventDefault();
-                alert("名前、Eメール、電話番号を正確に入力してください。");
+                toastr.error('名前、Eメール、電話番号を正確に入力してください。');
                 return;
             }
             let postData = {
@@ -382,7 +383,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         })

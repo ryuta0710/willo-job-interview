@@ -2,7 +2,9 @@
 
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="{{ asset('/assets/css/top/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('/a
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>ssets/css/top/profile.css') }}">
     <style>
         .display-none,
         .dis_role {
@@ -240,7 +242,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+toastr.error(xhr.responseJSON.message);
                     }
                 });
             }
@@ -261,7 +263,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+toastr.error(xhr.responseJSON.message);
                     }
                 });
             }

@@ -2,6 +2,8 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/collection/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <main>
         <section id="" class="mt-5">
             <div class="container px-3">
@@ -375,7 +377,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         });
@@ -472,7 +474,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+toastr.error(xhr.responseJSON.message);
                 }
             });
         }

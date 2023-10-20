@@ -2,7 +2,8 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/member-list/index.css') }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Select2 CSS -->
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -482,7 +483,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }

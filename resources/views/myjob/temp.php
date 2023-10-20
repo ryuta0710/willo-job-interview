@@ -3,6 +3,7 @@
 @section('content')
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
 <main class="pt-5">
@@ -536,6 +537,7 @@
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ asset('/assets/js/create-interview/index.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     function copy() {
         let doms = document.getElementsByClassName("copy");
@@ -703,14 +705,14 @@
                     })
                 }).catch(function(res) {
                     console.log(res);
-                    alert("カメラを接続してください。")
+                    toastr.error('カメラを接続してください。');
                 })
             } else {
                 console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
             }
 
         } catch (e) {
-            alert("現在、規約ではサポートしていません。httpsで接続してください。")
+            toastr.error('現在、規約ではサポートしていません。httpsで接続してください。');
         }
 
 

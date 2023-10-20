@@ -2,6 +2,7 @@
 
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
@@ -122,8 +123,7 @@
                                             transform="translate(3.634 6.831) rotate(-44.283)" fill="#fff"
                                             stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-miterlimit="10" stroke-width="1" />
-                                        <path id="Path_88" data-name="Path 88"
-                                            d="M945.6,1167a33.32,33.32,0,0,0,5.573,0"
+                                        <path id="Path_88" data-name="Path 88" d="M945.6,1167a33.32,33.32,0,0,0,5.573,0"
                                             transform="translate(-942.64 -1149.517)" fill="none" stroke="#4ca7ee"
                                             stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
                                             stroke-width="1" />
@@ -558,6 +558,7 @@
     </main>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('/assets/js/create-interview/create-questions.js') }}"></script>
     <script>
         $("#next").click(function() {
@@ -640,7 +641,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+toastr.error(xhr.responseJSON.message);
                     }
                 });
             }
@@ -812,14 +813,14 @@
                         })
                     }).catch(function(res) {
                         console.log(res);
-                        alert("カメラを接続してください。")
+                        toastr.error('カメラを接続してください。');
                     })
                 } else {
                     console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
                 }
 
             } catch (e) {
-                alert("現在、規約ではサポートしていません。httpsで接続してください。")
+                toastr.error('現在、規約ではサポートしていません。httpsで接続してください。');
             }
 
 

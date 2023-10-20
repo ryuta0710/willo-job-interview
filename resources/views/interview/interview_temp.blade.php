@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/common/plyr.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -250,7 +251,9 @@
                                     <span class="d-block">
                                         @if ($question->limit_type == 'characters')
                                             文字
-                                        @else 文章@endif数制限: {{ $question->max }}
+                                        @else
+                                            文章
+                                        @endif数制限: {{ $question->max }}
                                     </span>
                                 </div>
                                 {{-- <div class="card card-custom"> --}}
@@ -1058,6 +1061,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
@@ -1165,7 +1169,6 @@
                     })
                 }).catch(function(res) {
                     console.log(res);
-                    // alert("カメラを接続してください。")
                 })
             } else {
                 console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
@@ -1214,7 +1217,7 @@
         function make_answer(q_no) {
             q_no = parseInt(q_no);
             if (!isNaN(q_no)) {
-                alert("The question is incorrect.");
+                toastr.error('エラーが発生しました。');
                 return;
             }
             if () {
@@ -1262,7 +1265,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }

@@ -1,7 +1,8 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" href="{{ asset('/assets/css/top/job-list.css') }}">
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('/assets/css/top/job-list.css') }}">
     <main class="pb-lg-5">
         <section class="main-visual w-100 p-0 vh-100 background-position-top">
             <div class="container d-flex justify-content-center align-items-end flex-column vh-100 pt-4 position-relative">
@@ -150,6 +151,7 @@
         </section>
     </main>
     <script src="{{ asset('/assets/js/top/job-list.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $("#submit").click(function(e) {
             e.preventDefault();
@@ -211,7 +213,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         })

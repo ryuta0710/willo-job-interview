@@ -3,6 +3,7 @@
 @section('content')
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/css/template-list/create.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <main class="pt-5">
     <div class="container">
@@ -69,6 +70,7 @@
     </div>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="{{ asset('/assets/js/template/create.js') }}"></script>
 @endsection

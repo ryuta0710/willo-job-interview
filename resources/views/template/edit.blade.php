@@ -2,6 +2,7 @@
 
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/template-list/create.css') }}">
 
     <main class="pt-5">
@@ -71,6 +72,7 @@
     </main>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -86,7 +88,8 @@
                         $("#save").removeClass("btn-primary").addClass("bg-secondary").attr("disabled", "");
 
                     } else {
-                        $("#save").addClass("btn-primary").removeClass("bg-secondary").removeAttr("disabled");
+                        $("#save").addClass("btn-primary").removeClass("bg-secondary").removeAttr(
+                            "disabled");
                         $("#content").val(content);
                     }
                 }
@@ -112,7 +115,7 @@
                 let content = $("#content").val().trim();
                 let token = $("meta[name=csrf-token]").attr("content");
                 if (title == "" || type == "" || trigger == "" || content == "") {
-                    alert("内容を正確に入力してください。");
+                    toastr.error('内容を正確に入力してください。');
                     return;
                 }
                 if (type = "sms") {

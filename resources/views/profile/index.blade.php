@@ -294,3 +294,13 @@
         })
     </script>
 @endsection
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+
+toastr.error('変更操作が成功しました。');
+toastr.success('変更操作が成功しました。');
+
+toastr.error(xhr.responseJSON.message);

@@ -2,6 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="./assets/css/collection/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <main>
         <!-- CARD BOX -->
         <section id="card-box">
@@ -132,6 +133,7 @@
     </main>
     {{-- {{ $candidates_data }} --}}
     <script src="./assets/js/collection/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
@@ -239,11 +241,11 @@
                         chart.config.data.datasets[1].data = response_count;
 
                         chart.options.scales.xAxes[0].scaleLabel.labelString =
-                            ' '; 
+                            ' ';
                         chart.options.scales.xAxes[0].ticks.callback = function(value, index,
                             values) {
                             return xValues[
-                            index];
+                                index];
                         };
 
                         chart.update();
@@ -252,7 +254,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+                        toastr.error(xhr.responseJSON.message);
                     }
                 });
             })

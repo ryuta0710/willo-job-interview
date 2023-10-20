@@ -77,14 +77,14 @@ async function record() {
 				})
 			}).catch(function (res) {
 				console.log(res);
-				alert("カメラを接続してください。")
+				toastr.error('カメラを接続してください。');
 			})
 		} else {
 			console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
 		}
 
 	} catch (e) {
-		alert("現在、規約ではサポートしていません。httpsで接続してください。")
+		toastr.error('現在、規約ではサポートしていません。httpsで接続してください。');
 	}
 
 

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/collection/applicant.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/collection/timeline.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <style>
         .show-answer-text {
@@ -1025,7 +1027,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         });
@@ -1063,7 +1065,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+                        toastr.error(xhr.responseJSON.message);
                     }
                 });
             })
@@ -1198,7 +1200,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -1222,7 +1224,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         });
@@ -1269,7 +1271,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         })
@@ -1288,7 +1290,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+                        toastr.error(xhr.responseJSON.message);
                     }
                 });
             }

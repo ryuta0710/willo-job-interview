@@ -4,20 +4,24 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/companyMana/list.css') }}">
     <script src="{{ asset('/assets/js/common/jquery.min.js') }}"></script>
     <main class="pt-5">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
         <div class="container">
             <div class="row">
                 @foreach ($list as $item)
                     <div class="col-lg-4 mb-3 company-item">
                         <div class="w-100 bordered rounded shadow-sm py-4 px-3">
                             <div class="col-12 px-2 d-flex justify-content-between align-items-center mb-3">
-                                <a class="m-0" href="{{ route('company.detail', ['id' => $item->id])}}">{{ $item->name }}</a>
+                                <a class="m-0"
+                                    href="{{ route('company.detail', ['id' => $item->id]) }}">{{ $item->name }}</a>
                                 @if ($item->default == 'true')
                                     <p class="text-active m-0 company-default">デフォルト <i
                                             class="fa fa-solid fa-circle-check"></i></p>
                                 @endif
                             </div>
                             <div class="col-12 px-2 d-flex justify-content-between align-items-center">
-                                <p class="m-0">求人 {{$item->candidates_count}}</p>
+                                <p class="m-0">求人 {{ $item->candidates_count }}</p>
                                 <div class="">
                                     <a href="{{ route('company.edit', ['id' => $item->id]) }}" class="me-2"><i
                                             class="fa fa-edit"></i></a>
@@ -60,7 +64,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         })

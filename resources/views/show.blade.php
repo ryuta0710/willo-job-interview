@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <style>
@@ -122,8 +123,7 @@
                                 <!-- CONTENT -->
                                 <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
-                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}"
-                                            alt="chat">
+                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}" alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
                                     </div>
                                     <p>
@@ -569,6 +569,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('/assets/js/common/plyr.min.js') }}"></script>
     <!-- Include the Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -722,7 +723,7 @@
         function make_answer(q_no) {
             q_no = parseInt(q_no);
             if (!isNaN(q_no)) {
-                alert("The question is incorrect.");
+                toastr.error('エラーが発生しました。');
                 return;
             }
             if () {
@@ -770,7 +771,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }

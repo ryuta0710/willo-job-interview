@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/common/plyr.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -465,8 +466,8 @@
 
                         <!-- FINISH BUTTON -->
                         <div class="w-100 d-flex align-items-center justify-content-center">
-                            <button class="btn rounded-5 text-white align-self-center mb-5 mt-4"
-                                id="test_finish" onclick="save_ai()"><span>保存して続行</span></button>
+                            <button class="btn rounded-5 text-white align-self-center mb-5 mt-4" id="test_finish"
+                                onclick="save_ai()"><span>保存して続行</span></button>
                         </div>
                     </div>
                 @endif
@@ -557,6 +558,7 @@
     <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
     <script src="{{ asset('/assets/js/common/plyr.min.js') }}"></script>
     <!-- Include the Quill library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     {{-- <script src="{{ asset('/assets/js/application/application.js') }}"></script> --}}
@@ -686,7 +688,6 @@
                         })
                     }).catch(function(res) {
                         console.log(res);
-                        // alert("カメラを接続してください。")
                     })
                 } else {
                     console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
@@ -778,7 +779,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -812,7 +813,7 @@
             let token = $("meta[name=csrf-token]").attr("content");
             let file_name = $("#fileupload").val();
             if (!file_name) {
-                alert("ファイルを選択してください。");
+                toastr.error('ファイルを選択してください。');
                 return;
             }
             var formData = new FormData();
@@ -839,7 +840,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -863,7 +864,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-                    alert(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -943,8 +944,8 @@
             function save_ai() {
 
                 let token = $("meta[name=csrf-token]").attr("content");
-                if(messages.length < 3){
-                    alert("答えを入力してください。");
+                if (messages.length < 3) {
+                    toastr.error('答えを入力してください。');
                     return;
                 }
                 let postData = {
@@ -970,7 +971,7 @@
                         if (xhr.responseJSON.message == "Unauthenticated") {
                             window.location.reload();
                         }
-                        alert(xhr.responseJSON.message);
+                        toastr.error(xhr.responseJSON.message);
                     }
                 });
             }

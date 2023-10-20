@@ -2,6 +2,7 @@
 
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
 
     <main class="pt-5">
@@ -313,6 +314,7 @@
     </main>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('/assets/js/create-interview/update.js') }}"></script>
     <script>
         var quill = new Quill('#editor', {

@@ -30,7 +30,7 @@ $(document).ready(function() {
         let content = $("#content").val().trim();
 
         if(title == "" || type == "" || trigger == "" || content == ""){
-            alert("内容を正確に入力してください。");
+            toastr.error('内容を正確に入力してください。');
             return;
         }
         if( type == "sms"){
