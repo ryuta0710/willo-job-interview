@@ -430,10 +430,11 @@
                                                 お世話になっております。
                                             </div>
                                         </div>
+
                                     </div>
-                                    <div class="type-area">
+                                    <div class="type-area border border-primary-subtle">
                                         <div class="input-wrapper">
-                                            <input type="text" id="inputText"
+                                            <input type="text" id="inputText" class="form-input "
                                                 placeholder="ここにメッセージを入力してください..." />
                                         </div>
                                         <span class="button-add">
@@ -464,8 +465,8 @@
 
                         <!-- FINISH BUTTON -->
                         <div class="w-100 d-flex align-items-center justify-content-center">
-                            <button class="btn rounded-5 text-white align-self-center mb-5"
-                                id="test_finish" onclick="save_ai()"><span>テスト完了</span></button>
+                            <button class="btn rounded-5 text-white align-self-center mb-5 mt-4"
+                                id="test_finish" onclick="save_ai()"><span>保存して続行</span></button>
                         </div>
                     </div>
                 @endif
@@ -880,7 +881,7 @@
                 sender: "bot",
                 "message": "こんにちは。"
             }, {
-                sender: "man",
+                sender: "person",
                 "message": "お世話になっております。"
             }];
             var header = document.querySelector(".header");

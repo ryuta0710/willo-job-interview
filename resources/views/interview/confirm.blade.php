@@ -20,7 +20,8 @@
             height: 350px !important;
             max-width: 600px;
         }
-        .chat-box img{
+
+        .chat-box img {
             width: 100%;
         }
     </style>
@@ -97,7 +98,7 @@
                                 @if ($answers[0]->question_type == 'ai')
                                     <div class="chat-box w-100 w-lg-50">
                                         <div class="header">
-                                            <div class="avatar-wrapper avatar-big">
+                                            <div class="avatar-wrapper avatar-big d-inline-block">
                                                 <img src="{{ asset('/assets/img/avatar/bot.png') }}" alt="avatar" />
                                             </div>
                                             <span class="name">AIチャット</span>
@@ -106,50 +107,33 @@
                                             </span>
                                         </div>
                                         <div class="chat-room">
-                                            <div class="message message-left">
-                                                <div class="avatar-wrapper avatar-small">
-                                                    <img src="{{ asset('/assets/img/avatar/bot.png') }}"
-                                                        alt="avatar" />
-                                                </div>
-                                                <div class="bubble bubble-light">
-                                                    こんにちは。
-                                                </div>
-                                            </div>
-                                            <div class="message message-right">
-                                                <div class="avatar-wrapper avatar-small">
-                                                    <img src="{{ asset('/assets/img/avatar/01.png') }}"
-                                                        alt="avatar" />
-                                                </div>
-                                                <div class="bubble bubble-dark">
-                                                    お世話になっております。
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="type-area">
-                                            <div class="input-wrapper">
-                                                <input type="text" id="inputText"
-                                                    placeholder="ここにメッセージを入力してください..." />
-                                            </div>
-                                            <span class="button-add">
-                                                <i class="fas fa-plus-circle"></i>
-                                                <div class="others">
-                                                    <span class="emoji-button">
-                                                        <i class="far fa-laugh"></i>
-                                                        <div class="emoji-box">
-                                                            <span>&#x1f604;</span>
-                                                            <span>😀</span>
-                                                            <span>😂</span>
-                                                            <span>😭</span>
-                                                            <span>😍</span>
-                                                            <span>🤮</span>
-                                                            <span>🤑</span>
-                                                            <span>😖</span>
-                                                            <span>😷</span>
+                                            @php
+                                                $messages = json_decode($answers[0]->content, true);
+                                            @endphp
+                                            @foreach ($messages as $item)
+                                                @if ($item['sender'] == 'bot')
+                                                    <div class="message message-left">
+                                                        <div class="avatar-wrapper avatar-small">
+                                                            <img src="{{ asset('/assets/img/avatar/bot.png') }}"
+                                                                alt="avatar" />
                                                         </div>
-                                                    </span>
-                                                </div>
-                                            </span>
-                                            <button class="button-send">送信</button>
+                                                        <div class="bubble bubble-light">
+                                                            {{ $item['message'] }}
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                @if ($item['sender'] == 'person')
+                                                    <div class="message message-right">
+                                                        <div class="avatar-wrapper avatar-small">
+                                                            <img src="{{ asset('/assets/img/avatar/01.png') }}"
+                                                                alt="avatar" />
+                                                        </div>
+                                                        <div class="bubble bubble-dark">
+                                                            {{ $item['message'] }}
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 @endif
@@ -199,7 +183,7 @@
                                             <div class="w-100 pt-3 pb-2">
                                                 <img src="{{ asset('/assets/img/application/chat-right.png') }}"
                                                     alt="chat">
-                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i + 1 }}
                                             </div>
                                             <p>{!! $answers[$i]->question_content !!}</p>
                                         </div>
@@ -220,7 +204,7 @@
                                             <div class="w-  100 pt-3 pb-2">
                                                 <img src="{{ asset('/assets/img/application/chat-right.png') }}"
                                                     alt="chat">
-                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i + 1 }}
                                             </div>
                                             <p>{!! $answers[$i]->question_content !!}</p>
 
@@ -246,7 +230,7 @@
                                             <div class="w-100 pt-3 pb-2">
                                                 <img src="{{ asset('/assets/img/application/chat-right.png') }}"
                                                     alt="chat">
-                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i + 1 }}
                                             </div>
                                             <div>{!! $answers[$i]->question_content !!}</div>
                                         </div>
@@ -270,7 +254,7 @@
                                             <div class="w-100 pt-3 pb-2">
                                                 <img src="{{ asset('/assets/img/application/chat-right.png') }}"
                                                     alt="chat">
-                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i + 1 }}
                                             </div>
                                             {{ $answers[$i]->question_content }}
                                         </div>
@@ -282,9 +266,9 @@
                                     <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="ai"
                                         data-no="{{ $i }}">
                                         <!-- HEADER -->
-                                        <div class="answer-type text-center rounded-2 d-none d-sm-block">
-                                            <i class="fa-solid fa-bot"></i>
-                                            <div class="mt-3">
+                                        <div class="answer-type text-center rounded-2 d-none d-sm-block pt-3">
+                                            <img src="{{asset("/assets/img/avatar/icon-bot.png")}}" alt="" style="width: 60px;">
+                                            <div class="mt-2">
                                                 <span>AIチャット</span>
                                             </div>
                                         </div>
@@ -293,7 +277,7 @@
                                             <div class="w-100 pt-3 pb-2">
                                                 <img src="{{ asset('/assets/img/application/chat-right.png') }}"
                                                     alt="chat">
-                                                &nbsp;&nbsp;&nbsp;質問{{ $i }}
+                                                &nbsp;&nbsp;&nbsp;質問{{ $i + 1 }}
                                             </div>
                                             {{ $answers[$i]->question_content }}
                                         </div>
@@ -410,18 +394,63 @@
                 });
             } else if (type == "file") {
                 privewEle.innerHTML = `
-                                <div class="file-upload-contain">
-                                    <div class="file-drop-zone clickable" tabindex="-1">
-                                        <div class="file-drop-zone-title">
-                                            <div class="upload-area text-center fs-5">
-                                                <p class="file_preview fs-4">${answers[q_no].content}</p>
-                                                <div> ダウンロードするには<a class="btn_upload"
-                                                        href="${ answers[q_no].rc_url }" download>こちら</a>をクリック。
-                                                </div>
-                                            </div>
-                                        </div>
+                    <div class="file-upload-contain">
+                        <div class="file-drop-zone clickable" tabindex="-1">
+                            <div class="file-drop-zone-title">
+                                <div class="upload-area text-center fs-5">
+                                    <p class="file_preview fs-4">${answers[q_no].content}</p>
+                                    <div> ダウンロードするには<a class="btn_upload"
+                                            href="${ answers[q_no].rc_url }" download>こちら</a>をクリック。
                                     </div>
-                                </div>`;
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            } else if (type == "ai") {
+                let messages = JSON.parse(answers[q_no].content);
+                let chatHistory = "";
+                messages.forEach(mes => {
+                    if(mes.sender == "bot"){
+                        chatHistory += `
+                            <div class="message message-left">
+                                <div class="avatar-wrapper avatar-small">
+                                    <img src="{{ asset('/assets/img/avatar/bot.png') }}"
+                                        alt="avatar" />
+                                </div>
+                                <div class="bubble bubble-light">
+                                    ${mes.message}
+                                </div>
+                            </div>`;
+                    }
+                    if(mes.sender == "person"){
+                        chatHistory += `
+                            <div class="message message-right">
+                                <div class="avatar-wrapper avatar-small">
+                                    <img src="{{ asset('/assets/img/avatar/01.png') }}"
+                                        alt="avatar" />
+                                </div>
+                                <div class="bubble bubble-dark">
+                                    ${mes.message}
+                                </div>
+                            </div>`;
+                        
+                    }
+                });
+                privewEle.innerHTML = `
+                <div class="chat-box w-100 w-lg-50">
+                    <div class="header">
+                        <div class="avatar-wrapper avatar-big d-inline-block">
+                            <img src="{{ asset('/assets/img/avatar/bot.png') }}" alt="avatar" />
+                        </div>
+                        <span class="name">AIチャット</span>
+                        <span class="options">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </span>
+                    </div>
+                    <div class="chat-room">
+                        ${chatHistory}
+                    </div>
+                </div>`;
             }
         })
     </script>

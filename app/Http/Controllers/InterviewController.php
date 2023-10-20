@@ -251,7 +251,6 @@ class InterviewController extends Controller
                 'message' => 'Failed save',
             ]);
         }
-        // return $request['content'];  
         $answer['content'] = $request['messages'];
         $answer['count'] = intval($request['count']);
         $answer->save();
