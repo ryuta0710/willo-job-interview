@@ -139,7 +139,6 @@
 
     <script>
         $(document).ready(function() {
-
             $("#chart").width($("#dashboard").width())
             const xValues = [
                 @foreach ($candidates_data as $item)
@@ -258,6 +257,6 @@
                     }
                 });
             })
-        })
+        });
     </script>
 @endsection
