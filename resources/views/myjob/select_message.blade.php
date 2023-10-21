@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'メッセージ選択')
 
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">

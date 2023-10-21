@@ -1,5 +1,7 @@
 @extends('layouts.company')
 
+@section('title', '会社一覧')
+
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/companyMana/list.css') }}">
     <script src="{{ asset('/assets/js/common/jquery.min.js') }}"></script>

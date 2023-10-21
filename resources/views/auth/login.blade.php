@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', 'ログイン')
+
 @section('content')
 <main>
     <section class="main-visual w-100 p-0 vh-100 background-position-top">

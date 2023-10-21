@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'インタビューへの招待')
 
 @section('content')
 <main class="pt-5">

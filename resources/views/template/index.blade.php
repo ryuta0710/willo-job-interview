@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'テンプレート一覧')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/template-list/index.css') }}">

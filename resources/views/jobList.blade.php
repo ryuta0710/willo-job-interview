@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link rel="stylesheet" href="{{ asset('/assets/css/top/job-list.css') }}">
 
+@section('title', 'インタビュー一覧')
 @section('content')
     <main class="pb-lg-5">
         <section class="main-visual w-100 p-0 vh-100 background-position-top">

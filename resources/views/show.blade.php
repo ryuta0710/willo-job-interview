@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会社ロゴ</title>
+    <title>KIRIHARE</title>
 
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/css/common/bootstrap.css') }}">
@@ -24,7 +24,9 @@
 <body>
     <header>
         <div class="container max-1200">
-            <a href="/" class="fs-1 text-black">会社ロゴ</a>
+            <a class="navbar-brand pe-5" href="{{ route('home') }}">
+                <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+            </a>
         </div>
     </header>
     <main class="message">
@@ -123,7 +125,8 @@
                                 <!-- CONTENT -->
                                 <div class="answer-content text-start flex-grow-1 overflow-hidden">
                                     <div class="w-100 pt-3 pb-2">
-                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}" alt="chat">
+                                        <img src="{{ asset('/assets/img/application/chat-right.png') }}"
+                                            alt="chat">
                                         &nbsp;&nbsp;&nbsp;質問1
                                     </div>
                                     <p>

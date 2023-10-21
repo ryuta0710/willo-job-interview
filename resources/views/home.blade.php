@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'ホームページ')
 
 @section('content')
     <link rel="stylesheet" href="./assets/css/collection/style.css">
@@ -7,32 +8,34 @@
         <!-- CARD BOX -->
         <section id="card-box">
             <div class="container">
-                <div class="card position-relativer mt-5">
-                    <a class="close position-absolute fs-4" href="javascript:;"><i
-                            class="fa-regular fa-plus cursor-pointer"></i></a>
-                    <h4 class="mb-3">こんにちは、始めましょう...</h4>
-                    <p class="mb-2">次の手順に従って 3 分以内に面接を開始するか、ビデオをご覧ください
-                    </p>
-                    <p class="mb-2">
-                        <a href="{{ route('company.create') }}"><span class="text-primary fs-4 align-middle"><i
-                                    class="fa-regular fa-circle-check"></i></span>
-                            会社概要を設定しましょう</a>
-                    </p>
-                    <p class="mb-2">
-                        <a href="{{ route('myjob.create') }}"><span
-                                class="@if ($exist_first_interview) text-primary @else text-secondary @endif fs-4 align-middle"><i
-                                    class="fa-regular fa-circle-check"></i></span>
-                            最初のインタビューを作成しましょう</a>
-                    </p>
-                    <p class="mb-2">
-                        <a href="{{ route('user.index') }}"><span
-                                class="@if ($exist_invited_user) text-primary @else text-secondary @endif fs-4 align-middle"><i
-                                    class="fa-regular fa-circle-check"></i></span>
-                            インタビューに人々を招待しましょう</a>
-                        {{-- <a href="{{ route('invite-people') }}"><span class="text-primary fs-4 align-middle"><i class="fa-regular fa-circle-check"></i></span>
-                            インタビューに人々を招待しましょう</a> --}}
-                    </p>
-                </div>
+                @if (!$exist_first_interview || !$exist_invited_user)
+                    <div class="card position-relativer mt-5">
+                        <a class="close position-absolute fs-4" href="javascript:;"><i
+                                class="fa-regular fa-plus cursor-pointer"></i></a>
+                        <h4 class="mb-3">こんにちは、始めましょう...</h4>
+                        <p class="mb-2">次の手順に従って 3 分以内に面接を開始するか、ビデオをご覧ください
+                        </p>
+                        <p class="mb-2">
+                            <a href="{{ route('company.create') }}"><span class="text-primary fs-4 align-middle"><i
+                                        class="fa-regular fa-circle-check"></i></span>
+                                会社概要を設定しましょう</a>
+                        </p>
+                        <p class="mb-2">
+                            <a href="{{ route('myjob.create') }}"><span
+                                    class="@if ($exist_first_interview) text-primary @else text-secondary @endif fs-4 align-middle"><i
+                                        class="fa-regular fa-circle-check"></i></span>
+                                最初のインタビューを作成しましょう</a>
+                        </p>
+                        <p class="mb-2">
+                            <a href="{{ route('user.index') }}"><span
+                                    class="@if ($exist_invited_user) text-primary @else text-secondary @endif fs-4 align-middle"><i
+                                        class="fa-regular fa-circle-check"></i></span>
+                                インタビューに人々を招待しましょう</a>
+                        </p>
+                    </div>
+                @else
+                    <div class="mt-5"></div>
+                @endif
             </div>
 
         </section>

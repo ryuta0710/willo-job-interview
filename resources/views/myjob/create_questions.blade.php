@@ -1,5 +1,7 @@
 @extends('layouts.company')
 
+@section('title', '質問作成')
+
 @section('content')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

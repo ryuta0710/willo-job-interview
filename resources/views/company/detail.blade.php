@@ -1,5 +1,7 @@
 @extends('layouts.company')
 
+@section('title', '会社概要')
+
 @section('content')
     <link rel="stylesheet" href="/assets/css/collection/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

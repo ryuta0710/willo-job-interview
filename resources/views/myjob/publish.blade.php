@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'インタビュー公開')
 
 @section('content')
 

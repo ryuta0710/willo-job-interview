@@ -1,5 +1,7 @@
 @extends('layouts.company')
 
+@section('title', '会社を作る')
+
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/companyMana/create.css') }}">

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/css/companyMana/list.css') }}">
 
-    <title>Document</title>
+    <title>KIRIHARE | プライバシー</title>
 </head>
 <body>
     

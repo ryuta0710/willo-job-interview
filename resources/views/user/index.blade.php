@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', '招待')
 
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'インタビュー詳細')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/collection/style.css') }}">

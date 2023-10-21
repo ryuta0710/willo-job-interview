@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', 'プロフィール')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/top/profile.css') }}">

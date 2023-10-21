@@ -1,5 +1,7 @@
 @extends('layouts.company')
 
+@section('title', '応募者一覧')
+
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/member-list/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

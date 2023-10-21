@@ -1,4 +1,5 @@
 @extends('layouts.company')
+@section('title', '応募者評価')
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('/assets/css/common/plyr.min.css') }}">
