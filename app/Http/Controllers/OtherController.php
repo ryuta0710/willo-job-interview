@@ -13,6 +13,7 @@ use App\Models\Answer;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\HTTP\Response;
+use Config;
 
 class OtherController extends Controller
 {
@@ -210,6 +211,52 @@ class OtherController extends Controller
     public function privacy()
     {
         return view("privacy");
+    }
+
+    public function openai(Request $request)
+    {
+        $apikey =  config('app.OPENAI_API_KEY');
+        $url = "https://api.openai.com/v1/chat/completions";
+    
+        // リクエストヘッダー
+        $headers = array(
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apikey
+        );
+    
+        $prompt = $request["prompt"];
+    
+        // リクエストボディ
+        $data = array(
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            ["role" => "system", "content" => "日本語で返信する"],
+            ['role' => 'user', 'content' => $prompt],
+        ],
+        'max_tokens' => 500,
+        );
+    
+        // cURLを使用してAPIにリクエストを送信
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+        $response = curl_exec($ch);
+        curl_close($ch);
+    
+        // 結果をデコード
+        $result = json_decode($response, true);
+        // $result_message = $result["choices"][0]["message"]["content"];
+    
+        // 結果を出力
+        return response()->json([
+            'status' => 'success', 
+            'message' => $result,
+        ]);
+    
     }
 
 }

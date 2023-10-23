@@ -204,7 +204,7 @@
                                     @if ($answers[0]->thinking_minute)
                                         <div class="me-5">
                                             @if ($answers[0]->thinking_minute < $answers[0]->count / 60)
-                                                <span class="alert alert-danger p-2 rounded-4" role="alert" id="thinking_time">
+                                                <span class="alert alert-danger py-1 px-2 rounded-4" role="alert" id="thinking_time">
                                                     {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count % 60 }}秒
                                                 </span>
                                             @else

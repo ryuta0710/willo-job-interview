@@ -71,8 +71,10 @@
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分
+                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分
+                                                    <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -148,7 +150,10 @@
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分
+                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span
+                                                    class="show_count"><span class="dis_minute">0</span>分 <span
+                                                        class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -219,7 +224,9 @@
                                     <p>この質問には @if ($question->thinking_hour)
                                             <span>{{ $question->thinking_hour }}</span>時
                                         @endif
-                                        <span>{{ $question->thinking_minute }}</span>分秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
+                                        <span>{{ $question->thinking_minute }}</span>分秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム:
+                                        <span class="show_count"><span class="dis_minute">0</span>分 <span
+                                                class="dis_second">0</span>秒</span>
                                     </p>
                                 </div>
                             @endif
@@ -282,7 +289,10 @@
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分
+                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span
+                                                    class="show_count"><span class="dis_minute">0</span>分 <span
+                                                        class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     </div>
@@ -367,7 +377,10 @@
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分
+                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span
+                                                    class="show_count"><span class="dis_minute">0</span>分 <span
+                                                        class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -472,8 +485,8 @@
                     <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
                         <div
                             class="navbar-nav gap-sm-1 align-items-xs-center align-items-center align-items-sm-center justify-content-sm-center gap-md-0">
-                            <a href="{{route('contact')}}" class="text-secondary">サポート</a>
-                            <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
+                            <a href="{{ route('contact') }}" class="text-secondary">サポート</a>
+                            <a href="{{ route('privacy') }}" class="text-secondary">プライバシーポリシー</a>
                         </div>
                     </div>
                 </nav>
@@ -763,9 +776,6 @@
                     @endif
                 },
                 error: function(xhr, status, error) {
-                    if (xhr.responseJSON.message == "Unauthenticated") {
-                        window.location.reload();
-                    }
                     toastr.error(xhr.responseJSON.message);
                 }
             });
@@ -794,43 +804,41 @@
                 $(".file_preview").html(e.target.value);
                 $("#fileupload").change();
             });
+
+            function save_file() {
+                let token = $("meta[name=csrf-token]").attr("content");
+                let file_name = $("#fileupload").val();
+                if (!file_name) {
+                    toastr.error('ファイルを選択してください。');
+                    return;
+                }
+                var formData = new FormData();
+                var file = $('#fileupload')[0].files[0];
+                formData.append('file', file);
+                formData.append('_token', token);
+                formData.append('count', count);
+                formData.append('q_no', q_no);
+
+                $.ajax({
+                    url: "{{ route('interview.save_file', ['url' => $answer_url]) }}",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        @if ($is_last)
+                            location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
+                        @else
+                            // create();
+                        @endif
+                    },
+                    error: function(xhr, status, error) {
+                        toastr.error(xhr.responseJSON.message);
+                    }
+                });
+            }
         @endif
 
-        function save_file() {
-            let token = $("meta[name=csrf-token]").attr("content");
-            let file_name = $("#fileupload").val();
-            if (!file_name) {
-                toastr.error('ファイルを選択してください。');
-                return;
-            }
-            var formData = new FormData();
-            var file = $('#fileupload')[0].files[0];
-            formData.append('file', file);
-            formData.append('_token', token);
-            formData.append('count', count);
-            formData.append('q_no', q_no);
-
-            $.ajax({
-                url: "{{ route('interview.save_file', ['url' => $answer_url]) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    @if ($is_last)
-                        location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
-                    @else
-                        // create();
-                    @endif
-                },
-                error: function(xhr, status, error) {
-                    if (xhr.responseJSON.message == "Unauthenticated") {
-                        window.location.reload();
-                    }
-                    toastr.error(xhr.responseJSON.message);
-                }
-            });
-        }
 
         function create() {
             let token = $("meta[name=csrf-token]").attr("content");
@@ -848,9 +856,6 @@
                     location.href = response.url;
                 },
                 error: function(xhr, status, error) {
-                    if (xhr.responseJSON.message == "Unauthenticated") {
-                        window.location.reload();
-                    }
                     toastr.error(xhr.responseJSON.message);
                 }
             });
@@ -912,6 +917,24 @@
                     message: mess
                 };
                 messages.push(res);
+                //ai
+                let token = $("meta[name=csrf-token]").attr("content");
+                let postData = {
+                    _token: token,
+                    prompt: messages,
+                };
+                $.ajax({
+                    url: "{{ route('openai') }}",
+                    type: 'POST',
+                    data: postData,
+                    success: function(response) {
+                        console.log(response)
+                    },
+                    error: function(xhr, status, error) {
+                        
+                    }
+                });
+
                 var bubble = document.createElement('div');
                 bubble.className += " bubble bubble-dark";
                 bubble.textContent = mess;
@@ -955,13 +978,11 @@
 
                     },
                     error: function(xhr, status, error) {
-                        if (xhr.responseJSON.message == "Unauthenticated") {
-                            window.location.reload();
-                        }
                         toastr.error(xhr.responseJSON.message);
                     }
                 });
             }
+
         @endif
         start_time();
     </script>

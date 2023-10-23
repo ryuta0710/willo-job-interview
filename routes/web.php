@@ -251,4 +251,6 @@ Route::controller(OtherController::class)->group(function(){
     Route::get('contact', 'contact')->name('contact');
 
     Route::get('privacy', 'privacy')->name('privacy');
+
+    Route::post('/openai', 'openai')->name('openai');
 });

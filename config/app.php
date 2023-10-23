@@ -17,6 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'JobSite'),
+    'OPENAI_API_KEY' => env('OPENAI_API_KEY', ''),
 
     /*
     |--------------------------------------------------------------------------
