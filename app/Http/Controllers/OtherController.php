@@ -94,7 +94,7 @@ class OtherController extends Controller
             'url' => $url,
         ])->join('companies', 'jobs.company_id', '=', 'companies.id')
             ->leftJoin('fields', 'jobs.field_id', '=', 'fields.id')
-            ->select('jobs.*', 'fields.name as field', 'companies.email as email', 'companies.website as website')
+            ->select('jobs.*', 'fields.name as field', 'companies.email as email', 'companies.website as website', 'companies.name as company_name')
             ->first();
         if(empty($job)){
             return redirect()->route("getJobList");

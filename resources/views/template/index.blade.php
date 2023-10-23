@@ -100,12 +100,12 @@
             <div class="modal-content rounded-5">
                 <div class="modal-header">
                     <div></div>
-                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <h5 class="modal-title text-center"></h5>
                     <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">
                     <div class="body-header">
-                        <img src="{{ asset('/assets/img/success.jpg') }}" alt="success icon">
+                        <img src="{{ asset('/assets/img/success.jpg') }}" alt="success icon" style="margin-left: 44px;">
                     </div>
                     <div class="message-content">
 
@@ -113,10 +113,10 @@
                     <div class="body-footer mt-5">
                         <hr>
                         <p class="text-center">
-                            We've let {recruiter_name} know you've completed this interview.
+                            この面接を完了したことを {recruiter_name} に知らせました。
                             <br><br>
-                            <span class="text-success">This interview produced 93% fewer emissions than a traditional
-                                face-to-face interview.</span>
+                            <span class="text-success">このインタビューでは、従来のインタビューよりも排出量が 93% 削減されました。
+                                対面インタビュー。</span>
                             <br>👋
                         </p>
                     </div>
@@ -136,7 +136,7 @@
             <div class="modal-content rounded-5">
                 <div class="modal-header">
                     <div></div>
-                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <h5 class="modal-title text-center"></h5>
                     <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">
@@ -145,22 +145,19 @@
                     </div>
                     <div class="body-footer mt-4 text-center">
                         <div class="text-center">
-                            <button type="button" class="btn btn-secondary px-4 py-3 rounded-pill"
-                                data-bs-dismiss="modal">Go to the interview</button>
+                            <button type="button" class="btn btn-secondary px-4 py-3rounded-pill"
+                                data-bs-dismiss="modal">面接に行く</button>
                         </div>
                         <hr class="mb-4 mt-4">
-                        <h6>Before you get started 💡</h6>
-                        <p>Please allow sufficient time to complete the interview. We recommend using the latest version of
-                            Google Chrome or Firefox browser in Incognito mode, on a stable and fast internet connection.
-                            Relax and put your best self forward, you can practice as many times as you like to feel
-                            comfortable.
+                        <h6 class="fw-bold">始める前に 💡</h6>
+                        <p>面接を完了するまでに十分な時間をとってください。 安定した高速インターネット接続上で、シークレット モードで最新バージョンの Google Chrome または Firefox ブラウザを使用することをお勧めします。
+                            リラックスして最高の自分を前面に出して、何度でも練習できます。
+                            快適。
                         </p>
-                        <h6>Technical question or issue?
-                        </h6>
-                        <p>Please visit the 24/7 support portal or email support@willo.video.
+                        <h6 class="fw-bold">技術的な質問または問題がありますか?</h6>
+                        <p>年中無休のサポート ポータルにアクセスするか、support@willo.video にメールでお問い合わせください。
                             <br><br>
-                            We sent you this email on behalf of {interview_owner_name}.
-                            {{-- <a href="/ ">Report abuse here.</a> --}}
+                            このメールは、{interview_owner_name} に代わってお送りしました。
                         </p>
                     </div>
                 </div>
@@ -179,7 +176,7 @@
             <div class="modal-content rounded-5">
                 <div class="modal-header">
                     <div></div>
-                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <h5 class="modal-title text-center"></h5>
                     <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">
@@ -189,11 +186,10 @@
                     <div class="body-footer mt-4 text-center">
                         <div class="text-center">
                             <button type="button" class="btn btn-secondary px-4 py-3 rounded-pill"
-                                data-bs-dismiss="modal">Go to the interview</button>
+                                data-bs-dismiss="modal">面接に行く</button>
                         </div>
                         <hr>
-                        <p class="text-center mt-4">Willo sent you this email on behalf of {recruiter_name}.
-                            {{-- <a href=""> Report abuse.</a> --}}
+                        <p class="text-center mt-4">Willo は {recruiter_name} に代わってこのメールを送信しました。
                         </p>
                     </div>
                 </div>
@@ -212,7 +208,7 @@
             <div class="modal-content rounded-5">
                 <div class="modal-header">
                     <div></div>
-                    <h5 class="modal-title text-center">Default Invite Email</h5>
+                    <h5 class="modal-title text-center"></h5>
                     <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">

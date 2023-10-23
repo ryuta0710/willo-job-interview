@@ -11,6 +11,7 @@ use App\Models\Answer;
 use App\Models\Booking;
 use App\Models\Activity;
 use App\Models\CandidateShare;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\HTTP\Response;
 use Illuminate\Support\Facades\Auth;
@@ -176,6 +177,9 @@ class InterviewController extends Controller
         Booking::where([
             'candidate_id' => $candidate->id,
         ])->delete();
+        $owner = User::find($job->user_id);
+        $owner['interviews_count'] += 1;
+        $owner->save(); 
 
         if ($request['is_book'] == 'true') {
             $schedules = $request['schedules'];

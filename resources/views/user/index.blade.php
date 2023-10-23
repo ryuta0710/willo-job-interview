@@ -18,7 +18,7 @@
     </style>
     <main>
         <section id="users">
-            <div class="container m-1200 fs-14">
+            <div class="container m-1200 fs-14 mt-5 pt-5">
                 <div class="row">
                     <div class="col-md-4 d-flex justify-content-between">
                         <span>Admin</span>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-6 offset-md-2 col-xl-4 offset-md-2 offset-xl-4">
                         <!-- input element -->
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3 position-relative">
                             <input id="email" type="text" class="form-control py-2 rounded-5 "
                                 placeholder="有効なメールアドレスを入力してください">
                             <button id="invite"

@@ -89,25 +89,62 @@
                     <div class="d-flex flex-column align-items-center">
                         <div class="rounded-circle p-3 bg-secondary-white d-flex justify-content-center align-items-center mb-2 bg-active"
                             style="width: 55px; height: 55px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30.063" height="27.422" viewBox="0 0 30.063 27.422">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30.063" height="27.422"
+                                viewBox="0 0 30.063 27.422">
                                 <g id="Layer_1" transform="translate(0.552 0.899)">
-                                  <g id="Group_2213" data-name="Group 2213" transform="translate(0 12.011)">
-                                    <path id="Path_83" data-name="Path 83" d="M482.8,975.862a4.532,4.532,0,0,1,4.391-3.951,3.9,3.9,0,0,1,.849.093,5.141,5.141,0,0,1,.03-.538,5.584,5.584,0,0,1,5.409-4.866,4.268,4.268,0,0,1,4.323,4.866" transform="translate(-482.8 -966.6)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                    <path id="Path_84" data-name="Path 84" d="M1044.819,990.562a3.465,3.465,0,0,0-3.509-3.951,4.168,4.168,0,0,0-.868.093c.038-.177.068-.355.09-.538a4.268,4.268,0,0,0-4.323-4.866,5.584,5.584,0,0,0-5.409,4.866" transform="translate(-1015.836 -980.899)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                  </g>
-                                  <g id="Group_2214" data-name="Group 2214" transform="matrix(0.999, -0.035, 0.035, 0.999, 8.379, 0.03)">
-                                    <path id="Path_85" data-name="Path 85" d="M876.924,546.538a16.522,16.522,0,0,0,1.892-.156c8.3-13.555,1.065-18.636-.582-19.573a.67.67,0,0,0-.65,0c-1.742.934-9.478,6.016-2.537,19.573A15.432,15.432,0,0,0,876.924,546.538Z" transform="translate(-871.25 -526.725)" fill="#fff" stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                    <path id="Path_86" data-name="Path 86" d="M839.256,1098.2h0a4.409,4.409,0,0,0-1.868,4.88l.6,1.884,3.012-2.709Z" transform="translate(-837.203 -1082.595)" fill="#fff" stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                    <path id="Path_87" data-name="Path 87" d="M1117.049,1098.2h0a4.088,4.088,0,0,1,1.382,4.88l-.789,1.884-2.742-2.709Z" transform="translate(-1107.317 -1082.595)" fill="#fff" stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                    <path id="Path_107" data-name="Path 107" d="M1.95,0A1.9,1.9,0,0,1,3.9,1.854,1.9,1.9,0,0,1,1.95,3.708,1.9,1.9,0,0,1,0,1.854,1.9,1.9,0,0,1,1.95,0Z" transform="translate(3.634 6.831) rotate(-44.283)" fill="none" stroke="#4ca7ee" stroke-linecap="round" stroke-width="1"/>
-                                    <path id="Path_88" data-name="Path 88" d="M945.6,1167a33.32,33.32,0,0,0,5.573,0" transform="translate(-942.64 -1149.517)" fill="none" stroke="#4ca7ee" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                  </g>
-                                  <line id="Line_25" data-name="Line 25" y1="3.004" x2="1.775" transform="translate(11.701 22.385)" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                  <line id="Line_26" data-name="Line 26" y1="2.935" x2="0.137" transform="translate(15.27 23.065)" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
-                                  <line id="Line_27" data-name="Line 27" x1="1.578" y1="3.02" transform="translate(17.342 22.369)" fill="#fff" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+                                    <g id="Group_2213" data-name="Group 2213" transform="translate(0 12.011)">
+                                        <path id="Path_83" data-name="Path 83"
+                                            d="M482.8,975.862a4.532,4.532,0,0,1,4.391-3.951,3.9,3.9,0,0,1,.849.093,5.141,5.141,0,0,1,.03-.538,5.584,5.584,0,0,1,5.409-4.866,4.268,4.268,0,0,1,4.323,4.866"
+                                            transform="translate(-482.8 -966.6)" fill="none" stroke="#fff"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                        <path id="Path_84" data-name="Path 84"
+                                            d="M1044.819,990.562a3.465,3.465,0,0,0-3.509-3.951,4.168,4.168,0,0,0-.868.093c.038-.177.068-.355.09-.538a4.268,4.268,0,0,0-4.323-4.866,5.584,5.584,0,0,0-5.409,4.866"
+                                            transform="translate(-1015.836 -980.899)" fill="none" stroke="#fff"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                    </g>
+                                    <g id="Group_2214" data-name="Group 2214"
+                                        transform="matrix(0.999, -0.035, 0.035, 0.999, 8.379, 0.03)">
+                                        <path id="Path_85" data-name="Path 85"
+                                            d="M876.924,546.538a16.522,16.522,0,0,0,1.892-.156c8.3-13.555,1.065-18.636-.582-19.573a.67.67,0,0,0-.65,0c-1.742.934-9.478,6.016-2.537,19.573A15.432,15.432,0,0,0,876.924,546.538Z"
+                                            transform="translate(-871.25 -526.725)" fill="#fff" stroke="#4ca7ee"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                        <path id="Path_86" data-name="Path 86"
+                                            d="M839.256,1098.2h0a4.409,4.409,0,0,0-1.868,4.88l.6,1.884,3.012-2.709Z"
+                                            transform="translate(-837.203 -1082.595)" fill="#fff" stroke="#4ca7ee"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                        <path id="Path_87" data-name="Path 87"
+                                            d="M1117.049,1098.2h0a4.088,4.088,0,0,1,1.382,4.88l-.789,1.884-2.742-2.709Z"
+                                            transform="translate(-1107.317 -1082.595)" fill="#fff" stroke="#4ca7ee"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                        <path id="Path_107" data-name="Path 107"
+                                            d="M1.95,0A1.9,1.9,0,0,1,3.9,1.854,1.9,1.9,0,0,1,1.95,3.708,1.9,1.9,0,0,1,0,1.854,1.9,1.9,0,0,1,1.95,0Z"
+                                            transform="translate(3.634 6.831) rotate(-44.283)" fill="none"
+                                            stroke="#4ca7ee" stroke-linecap="round" stroke-width="1" />
+                                        <path id="Path_88" data-name="Path 88" d="M945.6,1167a33.32,33.32,0,0,0,5.573,0"
+                                            transform="translate(-942.64 -1149.517)" fill="none" stroke="#4ca7ee"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                            stroke-width="1" />
+                                    </g>
+                                    <line id="Line_25" data-name="Line 25" y1="3.004" x2="1.775"
+                                        transform="translate(11.701 22.385)" fill="#fff" stroke="#fff"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                        stroke-width="1" />
+                                    <line id="Line_26" data-name="Line 26" y1="2.935" x2="0.137"
+                                        transform="translate(15.27 23.065)" fill="#fff" stroke="#fff"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                        stroke-width="1" />
+                                    <line id="Line_27" data-name="Line 27" x1="1.578" y1="3.02"
+                                        transform="translate(17.342 22.369)" fill="#fff" stroke="#fff"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                                        stroke-width="1" />
                                 </g>
-                              </svg>
-                              
+                            </svg>
+
                         </div>
                         <label>公開する</label>
                     </div>
@@ -115,231 +152,118 @@
             </div>
             <!-- end steps -->
         </div>
-        @if (is_null($job['url']) || strlen($job['url']) < 20)
-            <!-- PUBLIC -->
-            <div class="container max-600 fs-14" id="public">
-                <div class="row">
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                回答提出期限</label>
-                        </div>
-                        <select type="text" class="form-select rounded-5" id="date_limit">
-                            <option value="infinite"> 日付制限なし</option>
-                        </select>
+        <!-- PUBLIC -->
+        <div class="container max-600 fs-14" id="public">
+            <div class="row">
+                <div class="col-12 mb-3 pt-1 ">
+                    <div class="d-flex justify-content-between pb-1 px-4">
+                        <label for="input1" class="form-label">回答提出期限</label>
                     </div>
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                リダイレクトURL</label>
-                        </div>
-                        <input type="text" name="redirect_url" id="redirect_url" class="form-control rounded-5">
+                    <select type="text" class="form-select rounded-5" id="date_limit">
+                        <option value="infinite"> 日付制限なし</option>
+                    </select>
+                </div>
+                <div class="col-12 mb-3 pt-1 ">
+                    <div class="d-flex justify-content-between pb-1 px-4">
+                        <label for="input1" class="form-label">
+                            リダイレクトURL</label>
                     </div>
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                既定の言語</label>
-                        </div>
-                        <select type="text" name="language" id="language" class="form-select rounded-5">
-                            <option value="jp" selected> 日本語</option>
-                            <option value="en">English</option>
-                        </select>
+                    <input type="text" @if (!is_null($job['redirect_url'])) value="{{ $job['url'] }}" @endif
+                        name="redirect_url" id="redirect_url" class="form-control rounded-5">
+                </div>
+                <div class="col-12 mb-3 pt-1 ">
+                    <div class="d-flex justify-content-between pb-1 px-4">
+                        <label for="input1" class="form-label">
+                            既定の言語</label>
                     </div>
-                    <div class="col-12 d-flex justify-content-between">
-                        <span>「表示のヒント」ページ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
-                                viewBox="0 0 11.656 11.656">
-                                <path id="Path_93" data-name="Path 93"
-                                    d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
-                                    transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
-                                    transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_95" data-name="Path 95" d="M18,12h0"
-                                    transform="translate(-12.172 -8.303)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                            </svg>
+                    <select type="text" name="language" id="language" class="form-select rounded-5">
+                        <option value="jp" @if (is_null($job['language']) || $job['language'] == 'jp') selected @endif> 日本語</option>
+                        <option value="en" @if ($job['language'] == 'en') selected @endif>English</option>
+                    </select>
+                </div>
+                <div class="col-12 d-flex justify-content-between">
+                    <span>「表示のヒント」ページ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
+                            viewBox="0 0 11.656 11.656">
+                            <path id="Path_93" data-name="Path 93"
+                                d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
+                                transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1" />
+                            <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
+                                transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                            <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-12.172 -8.303)"
+                                fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1" />
+                        </svg>
 
-                        </span>
-                        <div class="form-check form-switch w-auto">
-                            <input class="form-check-input" data-onstyle="success" id="isTip" type="checkbox"
-                                role="switch" checked>
-                        </div>
+                    </span>
+                    <div class="form-check form-switch w-auto">
+                        <input class="form-check-input" data-onstyle="success" id="isTip" type="checkbox"
+                            role="switch" checked>
                     </div>
-                    <div class="col-12 d-flex justify-content-between mt-3">
-                        <span>フォローアップのための空き状況をリクエストする&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
-                                viewBox="0 0 11.656 11.656">
-                                <path id="Path_93" data-name="Path 93"
-                                    d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
-                                    transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
-                                    transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_95" data-name="Path 95" d="M18,12h0"
-                                    transform="translate(-12.172 -8.303)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                            </svg>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-3">
+                    <span>フォローアップのための空き状況をリクエストする&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
+                            viewBox="0 0 11.656 11.656">
+                            <path id="Path_93" data-name="Path 93"
+                                d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
+                                transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="1" />
+                            <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
+                                transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                            <path id="Path_95" data-name="Path 95" d="M18,12h0" transform="translate(-12.172 -8.303)"
+                                fill="none" stroke="#a1a1a1" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1" />
+                        </svg>
 
-                        </span>
-                        <div class="form-check form-switch w-auto">
-                            <input id="isFollow" class="form-check-input " data-onstyle="success" type="checkbox"
-                                role="switch" checked>
-                        </div>
+                    </span>
+                    <div class="form-check form-switch w-auto">
+                        <input id="isFollow" class="form-check-input " data-onstyle="success" type="checkbox"
+                            role="switch" checked>
                     </div>
-                    <div class="col-12 d-flex justify-content-between mt-2">
-                        <span class="text-active">他の人と共有する
-                        </span>
-                    </div>
-                    <div class="w-100 mt-2 pt-1">
-                        <table class="table" id="public_table">
-                            <thead>
-                                <tr class="bg-secondary-subtle">
-                                    <td class="bg-secondary-subtle">他の人と共有する</td>
-                                    <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-user-group"></i>
-                                    </td>
-                                    <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-bell"></i></td>
+                </div>
+                <div class="col-12 d-flex justify-content-between mt-2">
+                    <span class="text-active">他の人と共有する
+                    </span>
+                </div>
+                <div class="w-100 mt-2 pt-1">
+                    <table class="table" id="public_table">
+                        <thead>
+                            <tr class="bg-secondary-subtle">
+                                <td class="bg-secondary-subtle">他の人と共有する</td>
+                                <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-user-group"></i>
+                                </td>
+                                <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-bell"></i></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($invited_users as $user)
+                                <tr>
+                                    <td class="pt-4"><span>{{ $user->email }}</span></td>
+                                    <td><input type="checkbox" name="owner_{{ $user->email }}" id=""></td>
+                                    <td class="text-center"><input type="checkbox" name="send_{{ $user->email }}"
+                                            id=""></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($invited_users as $user)
-                                    <tr>
-                                        <td class="pt-4"><span>{{ $user->email }}</span></td>
-                                        <td><input type="checkbox" name="owner_{{ $user->email }}" id=""></td>
-                                        <td class="text-center"><input type="checkbox" name="send_{{ $user->email }}"
-                                                id=""></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="w-100 fs-14 text-center">
-                        <p>ほぼ完了しました！ 「公開」をクリックして保存します。</p>
-                        <p>この情報はいつでも編集できます。 次のページで候補者を招待できます。 ご質問がございましたら、お問い合わせください。</p>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                 </div>
-            </div>
-            <!-- END PUBLIC -->
-        @else
-            <!-- PUBLIC -->
-            <div class="container max-600 fs-14" id="public">
-                <div class="row">
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                回答提出期限</label>
-                        </div>
-                        <select type="text" class="form-select rounded-5" id="date_limit">
-                            <option value="infinite"> 日付制限なし</option>
-                        </select>
-                    </div>
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                リダイレクトURL</label>
-                        </div>
-                        <input type="text" @if (!is_null($job['redirect_url'])) value="{{ $job['url'] }}" @endif
-                            name="redirect_url" id="redirect_url" class="form-control rounded-5">
-                    </div>
-                    <div class="col-12 mb-3 pt-1 ">
-                        <div class="d-flex justify-content-between pb-1 px-4">
-                            <label for="input1" class="form-label">
-                                既定の言語</label>
-                        </div>
-                        <select type="text" name="language" id="language" class="form-select rounded-5">
-                            <option value="jp" @if (is_null($job['language']) || $job['language'] == 'jp') selected @endif> 日本語</option>
-                            <option value="en" @if ($job['language'] == 'en') selected @endif>English</option>
-                        </select>
-                    </div>
-                    <div class="col-12 d-flex justify-content-between">
-                        <span>「表示のヒント」ページ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
-                                viewBox="0 0 11.656 11.656">
-                                <path id="Path_93" data-name="Path 93"
-                                    d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
-                                    transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
-                                    transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_95" data-name="Path 95" d="M18,12h0"
-                                    transform="translate(-12.172 -8.303)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                            </svg>
-
-                        </span>
-                        <div class="form-check form-switch w-auto">
-                            <input class="form-check-input" data-onstyle="success" id="isTip" type="checkbox"
-                                role="switch" checked>
-                        </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-between mt-3">
-                        <span>フォローアップのための空き状況をリクエストする&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11.656" height="11.656"
-                                viewBox="0 0 11.656 11.656">
-                                <path id="Path_93" data-name="Path 93"
-                                    d="M13.656,8.328A5.328,5.328,0,1,1,8.328,3,5.328,5.328,0,0,1,13.656,8.328Z"
-                                    transform="translate(-2.5 -2.5)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_94" data-name="Path 94" d="M18,20.131V18"
-                                    transform="translate(-12.172 -12.172)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Path_95" data-name="Path 95" d="M18,12h0"
-                                    transform="translate(-12.172 -8.303)" fill="none" stroke="#a1a1a1"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                            </svg>
-
-                        </span>
-                        <div class="form-check form-switch w-auto">
-                            <input id="isFollow" class="form-check-input " data-onstyle="success" type="checkbox"
-                                role="switch" checked>
-                        </div>
-                    </div>
-                    <div class="col-12 d-flex justify-content-between mt-2">
-                        <span class="text-active">他の人と共有する
-                        </span>
-                    </div>
-                    <div class="w-100 mt-2 pt-1">
-                        <table class="table" id="public_table">
-                            <thead>
-                                <tr class="bg-secondary-subtle">
-                                    <td class="bg-secondary-subtle">他の人と共有する</td>
-                                    <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-user-group"></i>
-                                    </td>
-                                    <td class="bg-secondary-subtle text-center"><i class="fa-solid fa-bell"></i></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($invited_users as $user)
-                                    <tr>
-                                        <td class="pt-4"><span>{{ $user->email }}</span></td>
-                                        <td><input type="checkbox" name="owner_{{ $user->email }}" id=""></td>
-                                        <td class="text-center"><input type="checkbox" name="send_{{ $user->email }}"
-                                                id=""></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="w-100 fs-14 text-center">
-                        <p>ほぼ完了しました！ 「公開」をクリックして保存します。</p>
-                        <p>この情報はいつでも編集できます。 次のページで候補者を招待できます。 ご質問がございましたら、お問い合わせください。</p>
-                    </div>
-
+                <div class="w-100 fs-14 text-center">
+                    <p>ほぼ完了しました！ 「公開」をクリックして保存します。</p>
+                    <p>この情報はいつでも編集できます。 次のページで候補者を招待できます。 ご質問がございましたら、お問い合わせください。</p>
                 </div>
+
             </div>
-            <!-- END PUBLIC -->
-        @endif
+        </div>
         <div class="container">
             <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
                 <a class="btn  btn-normal rounded-5 bg-white border border-primary me-4" id="before"
                     href="{{ route('myjob.select_messages', ['myjob' => $myjob]) }}">戻る</a>
-                <button class="btn  btn-normal rounded-5 active" id="next">次に</button>
+                <button class="btn  btn-normal rounded-5 active" id="next">公開</button>
             </div>
 
         </div>

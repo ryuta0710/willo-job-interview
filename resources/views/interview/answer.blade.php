@@ -66,15 +66,13 @@
                                     <div>
                                         <i class="fa-solid fa-hourglass-start"></i>
                                     </div>
-                                    @if ($question->thinking_hour && $question->thinking_hour)
+                                    @if ($question->thinking_hour || $question->thinking_minute)
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。
-                                                あなたのタイム: <span class="show_count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <span class="dis_minute">0</span>分 <span
-                                                        class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -145,15 +143,12 @@
                                         <i class="fa-solid fa-hourglass-start"></i>
                                     </div>
 
-                                    @if ($question->thinking_hour && $question->thinking_hour)
+                                    @if ($question->thinking_hour || $question->thinking_minute)
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。
-                                                あなたのタイム: <span class="show_count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <span class="dis_minute">0</span>分 <span
-                                                        class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -219,16 +214,12 @@
                             <div>
                                 <i class="fa-solid fa-hourglass-start"></i>
                             </div>
-
-                            @if ($question->thinking_hour && $question->thinking_hour)
+                            @if ($question->thinking_hour || $question->thinking_minute)
                                 <div class="flex-grow-1">
                                     <p>この質問には @if ($question->thinking_hour)
                                             <span>{{ $question->thinking_hour }}</span>時
                                         @endif
-                                        <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。
-                                        あなたのタイム: <span class="show_count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span class="dis_minute">0</span>分 <span
-                                                class="dis_second">0</span>秒</span>
+                                        <span>{{ $question->thinking_minute }}</span>分秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
                                     </p>
                                 </div>
                             @endif
@@ -241,10 +232,10 @@
                                 <span class="d-block">答え</span>
                                 <span class="d-block">
                                     @if ($question->limit_type == 'characters')
-                                        文字
+                                        文字数制限:
                                     @else
-                                        文章
-                                    @endif数制限: {{ $question->max }}
+                                        文章数制限:
+                                    @endif {{ $question->max }}
                                 </span>
                             </div>
                             {{-- <div class="card card-custom"> --}}
@@ -282,7 +273,7 @@
                                     </div>
                                 </div>
 
-                                @if ($question->thinking_hour && $question->thinking_hour)
+                                @if ($question->thinking_hour || $question->thinking_minute)
                                     <div class="test-descrtion">
                                         <div>
                                             <i class="fa-solid fa-hourglass-start"></i>
@@ -291,10 +282,7 @@
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。
-                                                あなたのタイム: <span class="show_count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <span class="dis_minute">0</span>分 <span
-                                                        class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span class="show_count"><span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     </div>
@@ -374,15 +362,12 @@
                                     <div>
                                         <i class="fa-solid fa-hourglass-start"></i>
                                     </div>
-                                    @if ($question->thinking_hour && $question->thinking_hour)
+                                    @if ($question->thinking_hour || $question->thinking_minute)
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
-                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。
-                                                あなたのタイム: <span class="show_count">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <span class="dis_minute">0</span>分 <span
-                                                        class="dis_second">0</span>秒</span>
+                                                <span>{{ $question->thinking_minute }}</span>分 秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分 <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -748,6 +733,8 @@
                 }
                 if (thinking_hour * 60 + thinking_minute < minute) {
                     $(".show_count").addClass("text-danger");
+                    $(".dis_second").addClass("text-danger");
+                    $(".dis_minute").addClass("text-danger");
                 }
             }, 1000);
         }

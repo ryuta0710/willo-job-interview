@@ -35,7 +35,7 @@
         <div class="container py-5 d-flex justify-content-center" id="welcome_message">
             <div class="card rounded-5 shadow text-secondary-subtle">
                 <div class="title">
-                    <h3 class="mb-5">素晴らしいビデオを録画する方法</h3>
+                    <h4 class="mb-4 fw-bold">素晴らしいビデオを録画する方法</h4>
                 </div>
                 <div class="content text-start">
                     <ol>
@@ -55,6 +55,7 @@
                         onclick="make_answer(1)">面接に行く</button>
                 </div>
                 <div class="content text-start">
+                    <h6 class="fw-bold text-center">ビデオ応答を記録するための重要なヒント</h6>
                     <ol style="list-style: 1;">
                         <li>静かで気を散らすものがない場所にいることを確認してください。</li>
                         <li>デバイスに十分な充電があり、データ接続が良好であることを確認します。</li>

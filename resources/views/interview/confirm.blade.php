@@ -45,17 +45,21 @@
                 <div id="test-confirm"
                     class="test-confirm w-100 d-flex flex-wrap flex-lg-nowrap justify-content-center gap-3">
                     <div class="flex-grow-1">
-                        <div class="test-problem-no ms-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                            </svg>
-                            &nbsp;&nbsp;
-                            <span>
-                                質問<span class="question_no">1</span>
-
-                            </span>
+                        <div class="test-problem-no ms-4 d-flex justify-content-between">
+                            <div><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                    </svg>&nbsp;&nbsp;質問
+                                    <span class="question_no">1</span>
+                                </span></div>
+                            @if ($questions[0]->thinking_hour || $questions[0]->thinking_minute)
+                                <div class="me-5">
+                                    <span class="alert alert-success p-2 rounded-4" role="alert">
+                                        {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count }}秒
+                                    </span>
+                                </div>
+                            @endif
                         </div>
                         <div class="w-100 pl-md-0 pl-lg-73">
                             <div class="test-title fs-16 mb-3">
@@ -267,7 +271,8 @@
                                         data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center rounded-2 d-none d-sm-block pt-3">
-                                            <img src="{{asset("/assets/img/avatar/icon-bot.png")}}" alt="" style="width: 60px;">
+                                            <img src="{{ asset('/assets/img/avatar/icon-bot.png') }}" alt=""
+                                                style="width: 60px;">
                                             <div class="mt-2">
                                                 <span>AIチャット</span>
                                             </div>
@@ -313,8 +318,8 @@
                     <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
                         <div
                             class="navbar-nav gap-sm-1 align-items-xs-center align-items-center align-items-sm-center justify-content-sm-center gap-md-0">
-                            <a href="{{route('contact')}}" class="text-secondary">サポート</a>
-                            <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
+                            <a href="{{ route('contact') }}" class="text-secondary">サポート</a>
+                            <a href="{{ route('privacy') }}" class="text-secondary">プライバシーポリシー</a>
                         </div>
                     </div>
                 </nav>
@@ -410,7 +415,7 @@
                 let messages = JSON.parse(answers[q_no].content);
                 let chatHistory = "";
                 messages.forEach(mes => {
-                    if(mes.sender == "bot"){
+                    if (mes.sender == "bot") {
                         chatHistory += `
                             <div class="message message-left">
                                 <div class="avatar-wrapper avatar-small">
@@ -422,7 +427,7 @@
                                 </div>
                             </div>`;
                     }
-                    if(mes.sender == "person"){
+                    if (mes.sender == "person") {
                         chatHistory += `
                             <div class="message message-right">
                                 <div class="avatar-wrapper avatar-small">
@@ -433,7 +438,7 @@
                                     ${mes.message}
                                 </div>
                             </div>`;
-                        
+
                     }
                 });
                 privewEle.innerHTML = `

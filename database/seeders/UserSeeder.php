@@ -24,10 +24,10 @@ class UserSeeder extends Seeder
             'period_start' => '2023-09-01',
             'period_end' => '2023-10-05',
             'users_count' => '1',
-            'interviews_count' => '300',
-            'total_interviews' => '100',
+            'interviews_count' => '0',
+            'total_interviews' => '1000',
             'total_sms' => '100',
-            'sms_count' => '70',
+            'sms_count' => '0',
         ]);
     }
 }

@@ -10,7 +10,7 @@
                 <div class="company-logo mb-4" style="width: 150px;">
                     <img src="./assets/img/logos/01.png" alt="">
                 </div>
-                <h1 class="company-name">会社名</h1>
+                <h1 class="company-name">{{$job->company_name}}</h1>
             </div>
             <div class="card rounded p-4 border-0 shadow mb-5">
                 <div class="row mb-5">
@@ -26,7 +26,7 @@
                     </div>
                     <hr class="my-4 bg-active">
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
-                        <i class="fa fa-solid fa-user"></i>
+                        <i class="fa fa-solid fa-gear"></i>
                         <strong>業界：</strong>
                         <p class="m-0">{{$job->field}}</p>
                     </div>
@@ -36,7 +36,7 @@
                         <p class="m-0">{{$job->salary}}円</p>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-2 gap-lg-4 mb-3">
-                        <i class="fa fa-solid fa-map"></i>
+                        <i class="fa-solid fa-envelope"></i>
                         <strong>メールアドレス：</strong>
                         <p class="m-0">{{$job->email}}</p>
                     </div>
