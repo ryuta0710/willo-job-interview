@@ -326,12 +326,15 @@ class InterviewController extends Controller
         ])->first();
         if (empty($answer)) {
             $ran_url = $this->randomUrl();
+            $minute=intval($question->thinking_hour) * 60 + intval($question->thinking_minute);
+
             $new_answer = Answer::create([
                 'job_id' => $job->id,
                 'candidate_id' => $candidate->id,
                 'question_type' => $question->type,
                 'question_id' => $question->id,
                 'question_content' => $question->content,
+                'thinking_minute' => $minute,
                 'url' => $ran_url,
             ]);
             return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $new_answer->url])]);

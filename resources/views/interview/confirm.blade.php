@@ -53,11 +53,17 @@
                                     </svg>&nbsp;&nbsp;質問
                                     <span class="question_no">1</span>
                                 </span></div>
-                            @if ($questions[0]->thinking_hour || $questions[0]->thinking_minute)
+                            @if ($answers[0]->thinking_minute)
                                 <div class="me-5">
-                                    <span class="alert alert-success p-2 rounded-4" role="alert">
-                                        {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count }}秒
-                                    </span>
+                                    @if ($answers[0]->thinking_minute < $answers[0]->count / 60)
+                                        <span class="alert alert-danger p-2 rounded-4" role="alert" id="thinking_time">
+                                            {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count % 60 }}秒
+                                        </span>
+                                    @else
+                                        <span class="alert alert-success p-2 rounded-4" role="alert">
+                                            {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count }}秒
+                                        </span>
+                                    @endif
                                 </div>
                             @endif
                         </div>
@@ -354,6 +360,17 @@
             let q_no = parseInt($(this).attr("data-no"));
             if (isNaN(q_no)) {
                 return;
+            }
+            let thinking_time = answers[q_no].thinking_minute;
+            if(thinking_time){
+                let val = answers[q_no].count/60;
+                if(thinking_time > val){
+                    $("#thinking_time").addClass("alert-success").removeClass("alert-danger");
+                }else{
+                    $("#thinking_time").removeClass("alert-success").addClass("alert-danger");
+                }
+                let str = `${parseInt(val)}分${answers[q_no].count % 60}秒`;
+                $("#thinking_time").html(str);
             }
             let privewEle = document.getElementById("test-preview")
 

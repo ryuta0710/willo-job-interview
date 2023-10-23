@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('question_content');
             $table->string('count')->nullable();
+            $table->integer('thinking_minute')->nullable();
         });
     }
 

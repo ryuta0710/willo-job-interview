@@ -193,24 +193,42 @@
                         <div id="test-confirm"
                             class="test-confirm w-100 d-flex flex-wrap flex-lg-nowrap justify-content-center gap-3">
                             <div class="flex-grow-1">
-                                <div class="test-problem-no ms-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                                    </svg>
-                                    &nbsp;&nbsp;
-                                    <span>
-                                        質問<span class="question_no">1</span>
-
-                                    </span>
+                                <div class="test-problem-no ms-4 d-flex justify-content-between">
+                                    <div><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                            </svg>&nbsp;&nbsp;質問
+                                            <span class="question_no">1</span>
+                                        </span></div>
+                                    @if ($answers[0]->thinking_minute)
+                                        <div class="me-5">
+                                            @if ($answers[0]->thinking_minute < $answers[0]->count / 60)
+                                                <span class="alert alert-danger p-2 rounded-4" role="alert" id="thinking_time">
+                                                    {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count % 60 }}秒
+                                                </span>
+                                            @else
+                                                <span class="alert alert-success p-2 rounded-4" role="alert">
+                                                    {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count }}秒
+                                                </span>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="w-100 pl-md-0 pl-lg-73">
                                     <div class="test-title ms-4 fs-4">
                                         {{ $answers[0]->question_content }}
                                     </div>
                                     <div id="test-preview" class="w-100 mb-4" style="min-height: 350px;">
-                                        @if ($questions[0]->type == 'video')
+                                        @if ($answers[0]->question_type == 'video')
+                                            <video class="rounded-4 w-100 h-100" crossorigin=""
+                                                playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+                                                <source src="{{ $answers[0]->rc_url }}" type="video/mp4"
+                                                    size="300">
+                                                <a>Video</a>
+                                            </video>
+                                        @endif
+                                        @if ($answers[0]->question_type == 'audio')
                                             <video class="rounded-4 w-100 h-100" crossorigin=""
                                                 playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
                                                 <source src="{{ $questions[0]->rc_url }}" type="video/mp4"
@@ -218,25 +236,17 @@
                                                 <a>Video</a>
                                             </video>
                                         @endif
-                                        @if ($questions[0]->type == 'audio')
-                                            <video class="rounded-4 w-100 h-100" crossorigin=""
-                                                playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                                <source src="{{ $questions[0]->rc_url }}" type="video/mp4"
-                                                    size="300">
-                                                <a>Video</a>
-                                            </video>
-                                        @endif
-                                        @if ($questions[0]->type == 'text')
+                                        @if ($answers[0]->question_type == 'text')
                                             <div class="rounded-4 bg-secondary-subtle show-answer-text p-4">
-                                                {{ $questions[0]->content }}
+                                                {!! $answers[0]->content !!}
                                             </div>
                                         @endif
-                                        @if ($questions[0]->type == 'file')
+                                        @if ($answers[0]->question_type == 'file')
                                             <div class="file-upload-contain" style="min-height: 350px;max-width: 600px;">
                                                 <div class="file-drop-zone clickable" style="min-height: 350px;">
                                                     <div class="file-drop-zone-title">
                                                         <div class="upload-area">
-                                                            <p class="file_preview">$questions[0]->content</p>
+                                                            <p class="file_preview">$answers[0]->content</p>
                                                             <div> ダウンロードするには<a class="btn_upload"
                                                                     href="{{ $questions[0]->re_url }}">こちら</a>をクリック。
                                                             </div>
@@ -1080,6 +1090,17 @@
             let q_no = parseInt($(this).attr("data-no"));
             if (isNaN(q_no)) {
                 return;
+            }
+            let thinking_time = answers[q_no].thinking_minute;
+            if(thinking_time){
+                let val = answers[q_no].count/60;
+                if(thinking_time > val){
+                    $("#thinking_time").addClass("alert-success").removeClass("alert-danger");
+                }else{
+                    $("#thinking_time").removeClass("alert-success").addClass("alert-danger");
+                }
+                let str = `${parseInt(val)}分${answers[q_no].count % 60}秒`;
+                $("#thinking_time").html(str);
             }
             $(".question_no").html(q_no + 1);
             let privewEle = document.getElementById("test-preview")
