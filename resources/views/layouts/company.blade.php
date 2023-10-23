@@ -84,8 +84,8 @@
                     </a>
                 </div>
                 <div class="d-flex gap-3">
-                    <a href="{{route('contact')}}">サポート</a>
-                    <a href="{{route('privacy')}}">プライバシーポリシー</a>
+                    <a href="{{route('contact')}}" class="text-secondary">サポート</a>
+                    <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
                 </div>
             </div>
         </div>

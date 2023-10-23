@@ -41,8 +41,8 @@
                     <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
                         <div
                             class="navbar-nav gap-sm-1 align-items-xs-center align-items-center align-items-sm-center justify-content-sm-center gap-md-0">
-                            <a class="nav-link" aria-current="page" href="#">サポート</a>
-                            <a class="nav-link" href="#">プライバシーポリシー</a>
+                            <a href="{{route('contact')}}" class="text-secondary">サポート</a>
+                            <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
                         </div>
                     </div>
                 </nav>

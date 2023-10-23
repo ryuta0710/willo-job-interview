@@ -36,17 +36,8 @@ class InterviewController extends Controller
         if (empty($job)) {
             return redirect("/");
         }
-
-        $message = Message::where([
-            'id' => $job->mail_invite_id
-        ])->first();
-
-        $questions = Questions::where([
-            'job_id' => $job->id,
-        ])->get();
-        $count = count($questions);
         // return response()->json($job);
-        return view('interview.index', compact("job", "questions", 'count', 'message', 'url'));
+        return view('interview.index', compact("job", 'url'));
     }
     //answer show
     public function answer(Request $request, string $candidate_url, string $answer_url)

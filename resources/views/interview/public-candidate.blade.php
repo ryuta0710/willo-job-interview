@@ -233,15 +233,14 @@
         <div class="container-fluid">
             <div
                 class="container  max-1200 d-flex flex-column flex-sm-column flex-md-column flex-lg-row align-items-center align-items-sm-center align-items-md-center align-items-xs-center justify-content-lg-between">
-                <a href="/">
+                <a href="{{route('home')}}">
                     <img src="{{ asset('/assets/img/logo01.png') }}" class="display-block w-auto" alt="logo">
                 </a>
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
-                        <div
-                            class="navbar-nav gap-sm-1 align-items-xs-center align-items-center align-items-sm-center justify-content-sm-center gap-md-0">
-                            <a class="nav-link" aria-current="page" href="#">サポート</a>
-                            <a class="nav-link" href="#">プライバシーポリシー</a>
+                        <div class="d-flex gap-3">
+                            <a href="{{route('contact')}}" class="text-secondary">サポート</a>
+                            <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
                         </div>
                     </div>
                 </nav>

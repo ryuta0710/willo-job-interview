@@ -17,7 +17,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
-
+        #go_interview:hover {
+            background-color: #1c91df !important;
+        }
     </style>
 </head>
 
@@ -31,11 +33,11 @@
     </header>
     <main class="message">
         <div class="container py-5 d-flex justify-content-center" id="welcome_message">
-            <div class="card rounded-5 shadow ">
+            <div class="card rounded-5 shadow text-secondary-subtle">
                 <div class="title">
                     <h3 class="mb-5">素晴らしいビデオを録画する方法</h3>
                 </div>
-                <div class="content text-left">
+                <div class="content text-start">
                     <ol>
                         <li>デバイスに高品質のカメラまたは Web カメラが接続されていることを確認します。</li>
                         <li>照明が十分にあり、明るい場所を見つけます。通常、自然光が最良の選択肢です。</li>
@@ -45,12 +47,14 @@
                         <li>ビデオ内で言いたいことややりたいことを準備します。プレゼンテーション、デモンストレーション、またはその他の紹介したいものであれば何でも構いません。</li>
                         <li>いくつかの練習ショットを撮り、すべての見た目とサウンドが適切であることを確認します。</li>
                         <li>準備ができたら、録画ボタンを押してビデオの録画を開始します。</li>
-                    </ul>
+                        </ul>
                 </div>
-                <div class="button-group">
-                    <button class="btn rounded-5 bg-secondary" id="go_interview" onclick="make_answer(1)">面接に行く</button>
+                <div class="button-group mt-3 mb-4">
+                    <button class="btn rounded-5 bg-hover-primary"
+                        style="background-color: var(--bs-primary);color:white;" id="go_interview"
+                        onclick="make_answer(1)">面接に行く</button>
                 </div>
-                <div class="content text-left">
+                <div class="content text-start">
                     <ol style="list-style: 1;">
                         <li>静かで気を散らすものがない場所にいることを確認してください。</li>
                         <li>デバイスに十分な充電があり、データ接続が良好であることを確認します。</li>
@@ -58,7 +62,7 @@
                         <li>可能な限りカメラと目を合わせてください。</li>
                         <li>プロセスの最後に、送信する前にすべての回答を確認する機会が与えられます。</li>
                         <li>要求された場合は、カメラとマイクへのアクセスを忘れずに許可してください。</li>
-                    </ul>
+                        </ul>
                 </div>
 
             </div>
@@ -67,20 +71,16 @@
     </main>
     <footer>
         <div class="container-fluid">
-            <div
-                class="container  max-1200 d-flex flex-column flex-sm-column flex-md-column flex-lg-row align-items-center align-items-sm-center align-items-md-center align-items-xs-center justify-content-lg-between">
-                <a href="/">
-                    <img src="{{ asset('/assets/img/logo01.png') }}" class="display-block w-auto" alt="logo">
-                </a>
-                <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                    <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
-                        <div
-                            class="navbar-nav gap-sm-1 align-items-xs-center align-items-center align-items-sm-center justify-content-sm-center gap-md-0">
-                            <a class="nav-link" aria-current="page" href="#">サポート</a>
-                            <a class="nav-link" href="#">プライバシーポリシー</a>
-                        </div>
-                    </div>
-                </nav>
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="">
+                    <a href="/">
+                        <img src="{{ asset('/assets/img/logo01.png') }}" alt="">
+                    </a>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="{{route('contact')}}" class="text-secondary">サポート</a>
+                    <a href="{{route('privacy')}}" class="text-secondary">プライバシーポリシー</a>
+                </div>
             </div>
 
         </div>
@@ -88,14 +88,9 @@
             <span>Copyright © PROS Co., Ltd. All Rights Reserved.</span>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
-    <script src="{{ asset('/assets/js/common/plyr.min.js') }}"></script>
     <!-- Include the Quill library -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-    <script src="{{ asset('/assets/js/application/application.js') }}"></script>
 
     <script>
         function make_answer(q_no) {
