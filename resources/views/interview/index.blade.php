@@ -33,32 +33,32 @@
         <div class="container py-5 d-flex justify-content-center" id="welcome_message">
             <div class="card rounded-5 shadow ">
                 <div class="title">
-                    <h3>{!! $message->title !!}</h3>
+                    <h3 class="mb-5">素晴らしいビデオを録画する方法</h3>
                 </div>
-                <div class="content">
-                    {!! $message->content !!}
-
+                <div class="content text-left">
+                    <ol>
+                        <li>デバイスに高品質のカメラまたは Web カメラが接続されていることを確認します。</li>
+                        <li>照明が十分にあり、明るい場所を見つけます。通常、自然光が最良の選択肢です。</li>
+                        <li>カメラの前に位置し、適切にフレームに収めます。</li>
+                        <li>自分の背景に注意を払います。清潔で気を散らすものがないことを確認してください。</li>
+                        <li>オーディオ設定を確認し、マイクが適切に機能していることを確認します。</li>
+                        <li>ビデオ内で言いたいことややりたいことを準備します。プレゼンテーション、デモンストレーション、またはその他の紹介したいものであれば何でも構いません。</li>
+                        <li>いくつかの練習ショットを撮り、すべての見た目とサウンドが適切であることを確認します。</li>
+                        <li>準備ができたら、録画ボタンを押してビデオの録画を開始します。</li>
+                    </ul>
                 </div>
                 <div class="button-group">
-                    <button class="btn  rounded-5 bg-secondary" id="go_interview"
-                        onclick="make_answer(1)">面接に行く</button>
+                    <button class="btn rounded-5 bg-secondary" id="go_interview" onclick="make_answer(1)">面接に行く</button>
                 </div>
-                <div class="content">
-                    <p>
-                        {interview_name}、{company_name} のポジションにご興味をお持ちいただきありがとうございます。
-                        短い一方通行のビデオインタビューであなたのことをもっと知りたいと思っています。
-                        <br><br>
-                        面接は、カメラとマイクを使用して答える一連の質問で構成されます。 パソコンにアクセスできない場合は、スマートフォンやタブレットを使用して面接を完了することもできます。
-                        <br><br>
-                        仕組み: 一方通行の面接に慣れていない方のために説明すると、一方通行の面接は、事前に作成された質問による単純な面接であり、都合の良いときにビデオ回答を録画します。
-                        次の質問に進む前に、各質問に回答する必要があります。
-                        <br><br>
-                        このインタビューを完了すると、電話やビデオ通話よりも早くあなたのことを知ることができ、いつでもどこでも完了できます。
-                        <br><br>
-                        開始する前に、面接ガイドをお読みください: 素晴らしい面接への 5 つの簡単なステップ
-                        <br><br>
-                        ありがとう、{interview_owner_name}
-                    </p>
+                <div class="content text-left">
+                    <ol style="list-style: 1;">
+                        <li>静かで気を散らすものがない場所にいることを確認してください。</li>
+                        <li>デバイスに十分な充電があり、データ接続が良好であることを確認します。</li>
+                        <li>プロセスを快適に行えるように練習します。</li>
+                        <li>可能な限りカメラと目を合わせてください。</li>
+                        <li>プロセスの最後に、送信する前にすべての回答を確認する機会が与えられます。</li>
+                        <li>要求された場合は、カメラとマイクへのアクセスを忘れずに許可してください。</li>
+                    </ul>
                 </div>
 
             </div>
@@ -88,59 +88,6 @@
             <span>Copyright © PROS Co., Ltd. All Rights Reserved.</span>
         </div>
     </footer>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">試験再起動</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    テストを再開しますか？
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        onclick="window.location.href='/test'">確認</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="form_info" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="staticBackdropLabel">入力</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" method="post">
-                        <div class="mb-3">
-                            <label for="info_name" class="form-label ms-3">名前</label>
-                            <input type="text" class="form-control rounded-pill" id="info_name" placeholder="名前入力">
-                        </div>
-                        <div class="mb-3">
-                            <label for="info_mail" class="form-label ms-3">メールアドレス</label>
-                            <input type="email" class="form-control rounded-pill" id="info_mail"
-                                placeholder="メールアドレス入力">
-                        </div>
-                        <div class="mb-3">
-                            <label for="info_phone" class="form-label ms-3">電話番号</label>
-                            <input type="text" class="form-control rounded-pill" id="info_phone"
-                                placeholder="電話番号入力">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        id="meeting_book_ok">確認</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('/assets/js/application/fileupload.js') }}"></script>
@@ -158,17 +105,6 @@
                 return;
             }
             create(0);
-        }
-
-        function show_next(q_no) {
-            if (q_no == 0) {
-                $(".test-content .tab-content:first-child").addClass("active");
-            }
-
-            if (last_no >= q_no) {
-                $("#tab-" + q_no).
-                return;
-            }
         }
 
         function create(q_no) {

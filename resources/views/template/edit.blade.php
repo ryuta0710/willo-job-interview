@@ -23,7 +23,7 @@
                 </ul>
             </div>
             <div class="row mt-5">
-                <form action="" method="post" class="col-lg-10 mx-auto">
+                <form class="col-lg-10 mx-auto">
                     <div class="row">
                         <div class="col-lg-6 mb-3">
                             <label for="title" class="form-label px-3">テンプレートのタイトル</label>
@@ -91,7 +91,7 @@
                     } else {
                         $("#save").addClass("btn-primary").removeClass("bg-secondary").removeAttr(
                             "disabled");
-                        $("#content").val(content);
+                        $("#content").val(quill.root.innerHTML);
                     }
                 }
             });
@@ -101,10 +101,11 @@
                     $preprocessedContent = str_replace("'", '\'', $content);
                     $preprocessedContent = str_replace('"', '\"', $preprocessedContent);
                 @endphp
-                quill.setText("{!! $preprocessedContent !!}");
+                quill.root.innerHTML = `{!!$message->content!!}`;
+                $("#content").val(`{!! $preprocessedContent !!}`);
             @endif
 
-            $("form").submit(function(e) {
+            $("#save").click(function(e) {
                 e.preventDefault();
                 message_add();
             })
@@ -119,7 +120,7 @@
                     toastr.error('内容を正確に入力してください。');
                     return;
                 }
-                if (type = "sms") {
+                if (type == "sms") {
                     content = new String(quill.getContents().ops[0].insert);
                 }
 
@@ -130,16 +131,27 @@
                     trigger,
                     content,
                 }
-                $.post(
-                    "/template",
-                    postData,
-                    function(data, status) {
-                        console.log(data, status);
-                        if (status = 'success') {
-                            window.location.href = "/template"
-                        }
+                // $.post(
+                //     "{{ route('template.update', ['template' => $message->id]) }}",
+                //     postData,
+                //     function(data, status) {
+                //         console.log(data, status);
+                //         if (status == 'success') {
+                //             window.location.href = "{{ route('template.index') }}";
+                //         }
+                //     }
+                // )
+                $.ajax({
+                    url: "{{ route('template.update', ['template' => $message->id]) }}",
+                    type: 'put',
+                    data: postData,
+                    success: function(response) {
+                        location.href = "{{route('template.index')}}";
+                    },
+                    error: function(xhr, status, error) {
+                        alert(xhr.responseJSON.message);
                     }
-                )
+                });
             }
 
             $("#type").change(function(e) {

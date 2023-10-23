@@ -51,7 +51,7 @@ $(document).ready(function() {
             postData,
             function(data, status) {    
                 if(status = 'success'){
-                    window.location.href = "/template"
+                    window.location.href = "/template";
                 }
             }
         )

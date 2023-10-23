@@ -90,7 +90,6 @@ class TemplateController extends Controller
             ];
 
             $save_data = Message::create($new_message);
-            Log::info($message);
 
             if (!empty($save_data)) {
                 return response()->json([

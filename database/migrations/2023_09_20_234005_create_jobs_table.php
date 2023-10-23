@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('company_id');
             $table->string('video_url')->nullable();
             $table->string('video_rc_url')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('record')->default("false");
             $table->integer('user_id');
             $table->integer('mail_invite_id')->nullable();
