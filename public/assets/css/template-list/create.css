@@ -81,14 +81,14 @@ main {
 .ql-toolbar {
     background-color: #D6DBDF;
 }
-
-.ql-formats:last-child {
-    display: none;
+.ql-align.ql-picker.ql-icon-picker .ql-picker-label svg{
+    margin-bottom: -6px;;
+    margin-left: -6px;
 }
-/* .ck.ck-editor__main {
-    min-height: 300px;
+#insert_var.ql-picker{
+    display: none !important;
 }
 
-.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
-    min-height: 300px;
-} */
+#successModal img{
+    width: 200px;
+}

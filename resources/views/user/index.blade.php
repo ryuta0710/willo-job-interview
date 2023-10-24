@@ -15,6 +15,12 @@
         .display-none+.dis_role {
             display: block;
         }
+        #invite {
+            opacity: 1;
+            right: 4px;
+            top: 4px;
+            z-index: 1000;
+        }
     </style>
     <main>
         <section id="users">
@@ -218,6 +224,7 @@
                             </tr>`;
 
                                 $("#tbody").append(code);
+                                $("#email").val("");
                                 handlers();
                             };
                         }
