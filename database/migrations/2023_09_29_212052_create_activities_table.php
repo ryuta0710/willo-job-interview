@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->string("type");
             $table->string("content");
+            $table
+                ->foreign('candidate_id')
+                ->references('id')
+                ->on('candidates')
+                ->onDelete('cascade');
         });
     }
 

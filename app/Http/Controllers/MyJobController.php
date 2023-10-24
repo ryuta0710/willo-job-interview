@@ -43,23 +43,25 @@ class MyJobController extends Controller
             ->orderBy('jobs.created_at', 'desc')
             ->select('jobs.*', 'companies.name as company_name', 'users.name as user_name', 'users.email as email')
             ->get();
-        $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
+        $companies = Company::where(['owner' => $user->id])
+            ->select("companies.*")
+            ->get();
         $owners = InvitedUsers::join('users', 'invited_users.inviter', '=', 'users.email')
             ->where(['invited_users.inviter' => $user->email])
             ->where('invited_users.user_id', '!=', 0)
             ->select("users.name as name", "invited_users.*")
             ->get();
-        $name = $user->name;
-        return view('myjob.index', compact("jobs", 'companies', 'owners', 'name'));
+        $name = $user;
+        return view('myjob.index', compact("jobs", 'companies', 'owners', 'user'));
     }
 
     public function search(Request $request)
     {
         $user = Auth::user();
         $title = $request->input('title');
-        $company = $request->input('company');
-        $owner = $request->input('owner');
-        $status = $request->input('status');
+        $companies = $request->input('companies');
+        $owners = $request->input('owners');
+        $statuses = $request->input('statuses');
 
         $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
             ->join('users', 'jobs.user_id', '=', 'users.id')
@@ -67,14 +69,14 @@ class MyJobController extends Controller
             ->when($title, function ($query) use ($title) {
                 return $query->where('jobs.title', 'LIKE', '%' . $title . '%');
             })
-            ->when($company, function ($query) use ($company) {
-                return $query->where('companies.name', 'LIKE', '%' . $company . '%');
+            ->when($companies, function ($query) use ($companies) {
+                return $query->whereIn('companies.id', $companies);
             })
-            ->when($owner, function ($query) use ($owner) {
-                return $query->where('users.name', 'LIKE', '%' . $owner . '%');
+            ->when($owners, function ($query) use ($owners) {
+                return $query->whereIn('companies.owner', $owners);
             })
-            ->when($status, function ($query) use ($status) {
-                return $query->where('jobs.status', $status);
+            ->when($statuses, function ($query) use ($statuses) {
+                return $query->whereIn('jobs.status', $statuses);
             })
             ->orderBy('jobs.created_at', 'desc')
             ->select('jobs.*', 'companies.name as company_name', 'users.name as user_name', 'users.email as email')
@@ -436,7 +438,7 @@ class MyJobController extends Controller
         $calendar = Calendar::create()
             ->event(
                 Event::create()
-                    ->name($company->name.",".$job->title."-".$candidate->name)
+                    ->name($company->name . "," . $job->title . "-" . $candidate->name)
                     ->organizer($user->email, $user->name)
                     ->attendee($candidate->email)
                     ->description('Interview for the job')

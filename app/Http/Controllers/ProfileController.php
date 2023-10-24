@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\HTTP\Response;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\InvitedUsers;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfileController extends Controller
 {
@@ -23,8 +23,9 @@ class ProfileController extends Controller
             return response('Bad Request', 400);
             $org = "";
         }
+        $inviter_count = InvitedUsers::where("inviter", "=", $user->email)->count() + 1;
 
-        return view('profile.index', compact("user", "org"));
+        return view('profile.index', compact("user", "org", "inviter_count"));
     }
 
     /**

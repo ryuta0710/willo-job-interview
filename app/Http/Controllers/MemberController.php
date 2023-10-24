@@ -37,19 +37,18 @@ class MemberController extends Controller
             ->where('invited_users.user_id', '!=', 0)
             ->select("users.name as name", "invited_users.*")
             ->get();
-        $name = $user->name;
-        return view('member.index', compact('candidates', 'companies', 'owners', 'jobs', 'name'));
+        return view('member.index', compact('candidates', 'companies', 'owners', 'jobs', 'user'));
     }
 
     public function search(Request $request)
     {
         $user = Auth::user();
         $name = $request->input('name');
-        $company = $request->input('company');
-        $owner = $request->input('owner');
-        $status = $request->input('status');
-        $job = $request->input('job');
-        $rate = $request->input('rate');
+        $companies = $request->input('companies');
+        $owners = $request->input('owners');
+        $statuses = $request->input('statuses');
+        $jobs = $request->input('jobs');
+        $rates = $request->input('rates');
 
         $candidates = Candidate::join('companies', 'candidates.company_id', '=', 'companies.id')
             ->join('users', 'candidates.user_id', '=', 'users.id')
@@ -59,20 +58,20 @@ class MemberController extends Controller
             ->when($name, function ($query) use ($name) {
                 return $query->where('candidates.name', 'LIKE', '%' . $name . '%');
             })
-            ->when($company, function ($query) use ($company) {
-                return $query->where('companies.name', 'LIKE', '%' . $company . '%');
+            ->when($companies, function ($query) use ($companies) {
+                return $query->whereIn('companies.id', $companies);
             })
-            ->when($owner, function ($query) use ($owner) {
-                return $query->where('users.name', 'LIKE', '%' . $owner . '%');
+            ->when($owners, function ($query) use ($owners) {
+                return $query->whereIn('companies.owner', $owners);
             })
-            ->when($status, function ($query) use ($status) {
-                return $query->where('candidates.status', $status);
+            ->when($statuses, function ($query) use ($statuses) {
+                return $query->whereIn('candidates.status', $statuses);
             })
-            ->when($job, function ($query) use ($job) {
-                return $query->where('jobs.title', 'LIKE', '%' . $job . '%');
+            ->when($jobs, function ($query) use ($jobs) {
+                return $query->whereIn('jobs.id', $jobs);
             })
-            ->when($rate, function ($query) use ($rate) {
-                return $query->where('candidates.review', $rate);
+            ->when($rates, function ($query) use ($rates) {
+                return $query->whereIn('candidates.status', $rates);
             })
             ->orderBy('candidates.created_at', 'desc')
             ->select('candidates.*', 'companies.name as company_name', 'jobs.title as job_title', 'users.name as user_name', 'users.email as email')

@@ -60,6 +60,10 @@
         .cus-option:hover {
             background-color: #f2f2f2;
         }
+
+        .cus-option input[type=checkbox] {
+            min-width: 24px !important;
+        }
     </style>
 
     <main class="pt-5">
@@ -81,12 +85,15 @@
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
                             @foreach ($companies as $item)
-                                <div class="cus-option"><span>{{ $item->name }}</span></div>
+                                <div class="cus-option"><input type="checkbox" name="company_name"
+                                        value="{{ $item->id }}" id="{{ $item->id }}"><label
+                                        for="{{ $item->id }}"><span>{{ $item->name }}</span></label></div>
                             @endforeach
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                            <button class="btn btn-primary rounded-2 ok" data-for="company">申し込み</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="company">リセット
+                            </button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -102,14 +109,16 @@
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
-                            <div class="cus-option"><span>{{ $name }}</span></div>
                             @foreach ($jobs as $item)
-                                <div class="cus-option"><span>{{ $item->title }}</span></div>
+                                <div class="cus-option"><input type="checkbox" name="company_name"
+                                        value="{{ $item->id }}" id="company_{{ $item->id }}"><label
+                                        for="company_{{ $item->id }}"><span>{{ $item->title }}</span></label></div>
                             @endforeach
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                            <button class="btn btn-primary rounded-2 ok" data-for="job">申し込み</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="job">リセット
+                            </button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -125,14 +134,19 @@
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
-                            <div class="cus-option"><span>{{ $name }}</span></div>
+                            <div class="cus-option"><input type="checkbox" name="owner" value="{{ $user->id }}"
+                                    id="user_{{ $user->id }}"><label
+                                    for="user_{{ $user->id }}"><span>{{ $user->name }}</span></label></div>
                             @foreach ($owners as $item)
-                                <div class="cus-option"><span>{{ $item->name }}</span></div>
+                                <div class="cus-option"><input type="checkbox" name="owner" value="{{ $item->id }}"
+                                        id="user_{{ $item->id }}"><label
+                                        for="user_{{ $item->id }}"><span>{{ $item->name }}</span></label></div>
                             @endforeach
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                            <button class="btn btn-primary rounded-2 ok" data-for="owner">申し込み</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="owner">リセット
+                            </button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -150,13 +164,17 @@
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
-                            <div class="cus-option"><span>レビューする</span></div>
-                            <div class="cus-option"><span>承諾しました</span></div>
-                            <div class="cus-option"><span>拒否されました</span></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="responsed"
+                                    id="responsed"><label for="responsed"><span>レビュー中</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="accepted"
+                                    id="accepted"><label for="accepted"><span>承認済み</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="rejected"
+                                    id="rejected"><label for="rejected"><span>却下</span></label></div>
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                            <button class="btn btn-primary rounded-2 ok" data-for="status">申し込み</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="status">リセット
+                            </button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -173,15 +191,21 @@
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
-                            <div class="cus-option"><span>5</span></div>
-                            <div class="cus-option"><span>4</span></div>
-                            <div class="cus-option"><span>3</span></div>
-                            <div class="cus-option"><span>2</span></div>
-                            <div class="cus-option"><span>1</span></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="5"
+                                    id="rate_5"><label for="rate_5"><span>5</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="4"
+                                    id="rate_4"><label for="rate_4"><span>4</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="3"
+                                    id="rate_3"><label for="rate_3"><span>3</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="2"
+                                    id="rate_2"><label for="rate_2"><span>2</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="status" value="1"
+                                    id="rate_1"><label for="rate_1"><span>1</span></label></div>
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                            <button class="btn btn-primary rounded-2 ok" data-for="rate">申し込み</button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="rate">リセット
+                            </button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -295,22 +319,84 @@
             $(this).blur();
             $(".cus-bg").show();
         })
-
-        $(".select-cus .cus-option").click(function(e) {
-            $(this).parent().parent().hide();
-            $(this).parent().parent().prev().val(this.textContent);
-            search_job();
-        })
+        let companies = [];
+        let owners = [];
+        let statuses = [];
+        let jobs = [];
+        let rates = [];
 
         $(".select-cus .ok").click(function(e) {
             $(this).parent().parent().hide();
-            $(this).parent().parent().prev().val($(this).parent().parent().find('input').val());
+            const type = $(this).attr('data-for');
+            if (type === "company") {
+                companies = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    companies.push($(this).val());
+                });
+                if (companies.length) $(this).parent().parent().parent().find('input.select2').val(companies
+                    .length + " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "owner") {
+                owners = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    owners.push($(this).val());
+                });
+                if (owners.length) $(this).parent().parent().parent().find('input.select2').val(owners.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "job") {
+                jobs = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    jobs.push($(this).val());
+                });
+                if (jobs.length) $(this).parent().parent().parent().find('input.select2').val(jobs.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "rate") {
+                rates = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    rates.push($(this).val());
+                });
+                if (rates.length) $(this).parent().parent().parent().find('input.select2').val(rates.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "status") {
+                statuses = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    statuses.push($(this).val());
+                });
+                if (statuses.length) $(this).parent().parent().parent().find('input.select2').val(statuses.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            }
             search_job();
         })
 
         $(".select-cus .cancel").click(function(e) {
             $(this).parent().parent().hide();
             $(this).parent().parent().prev().val("");
+            const type = $(this).attr('data-for');
+            $(this).parent().parent().find('input:checked').each(function(ele) {
+                $(this).prop("checked", false);
+            });
+            switch (type) {
+                case "company":
+                    companies = [];
+                    break;
+                case "owner":
+                    owners = [];
+                    break;
+                case "status":
+                    statuses = [];
+                    break;
+                case "rate":
+                    rates = [];
+                    break;
+                case "job":
+                    jobs = [];
+                    break;
+            }
+            search_job();
         })
 
         $(".cus-bg").click(function(e) {
@@ -319,7 +405,7 @@
 
         $(".select-search").keyup(function(e) {
 
-            let listDom = e.target.parentElement.nextElementSibling.getElementsByTagName("DIV");
+            let listDom = e.target.parentElement.nextElementSibling.getElementsByTagName("div");
             let val = e.target.value.trim();
             let listData = [];
             let len = listDom.length;
@@ -340,10 +426,6 @@
                 }
             }
 
-        });
-
-        $("#search_name, #search_company, #search_job, #search_owner, #search_status, #search_rate").change(function() {
-            search_job();
         });
 
         function search_job() {
@@ -374,30 +456,17 @@
             }
 
             $(".filter_count").html(filter_count);
-            switch (status) {
-                case 'レビューする':
-                    status = 'responsed';
-                    break;
-                case '承諾しました':
-                    status = 'accepted';
-                    break;
-                case '拒否されました':
-                    status = 'rejected';
-                    break;
-                default:
-                    status = '';
-            }
             $.ajax({
                 url: '/member/search',
                 type: 'POST',
                 data: {
                     _token: $("meta[name=csrf-token]").attr("content"),
                     name,
-                    company,
-                    job,
-                    owner,
-                    status,
-                    rate,
+                    companies,
+                    jobs,
+                    owners,
+                    statuses,
+                    rates,
                 },
                 success: function(response) {
                     let dis = "";
@@ -445,7 +514,7 @@
                                                 <div class="col-auto">
                                                     <a class="m-0"
                                                         href="/myjob/${ele.job_id}/${ele.id}/edit">${ele.name}</a><br>
-                                                    <a class="text-secondary" href="/myjob/${ele.job_id}/${ele.id}/edit">${ele.name}</a>${ele.email}</a>
+                                                    <a class="text-secondary" href="/myjob/${ele.job_id}/${ele.id}/edit">${ele.email}</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -493,5 +562,9 @@
         $("#filter_clear").click(function() {
             window.location.reload();
         });
+
+        $("#search_name").keyup(function() {
+            search_job();
+        })
     </script>
 @endsection

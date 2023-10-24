@@ -172,7 +172,7 @@
                         </div>
                         <p class="mt-3 fs-20 text-main">
                             <i class="fa-solid fa-person me-2"></i>
-                            <a href="/users">{{ $user->users_count }}</a>
+                            <a href="/users">{{ $inviter_count }}</a>
                         </p>
                         <p class=" fs-14">
                             プランは 2023 年 8 月 13 日に更新されます<br>今月の追加インタビュー: $0.00

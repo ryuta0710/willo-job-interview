@@ -12,6 +12,11 @@
     <!-- Select2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+    <style>
+        .cus-option input[type=checkbox] {
+            min-width: 24px !important;
+        }
+    </style>
 
     <main style="min-height: calc(100vh - 251px);">
         <section id="sec_condistions">
@@ -31,12 +36,15 @@
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
                                 @foreach ($companies as $item)
-                                    <div class="cus-option"><span>{{ $item->name }}</span></div>
+                                    <div class="cus-option"><input type="checkbox" name="company_name"
+                                            value="{{ $item->id }}" id="{{ $item->id }}"><label
+                                            for="{{ $item->id }}"><span>{{ $item->name }}</span></label></div>
                                 @endforeach
                             </div>
                             <div class="btn-group">
-                                <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                                <button class="btn btn-primary rounded-2 ok" data-for="company">申し込み</button>
+                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="company">リセット
+                                </button>
                             </div>
                             <div class="cus-bg position-fixed">
 
@@ -52,14 +60,18 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>{{ $name }}</span></div>
+                                <div class="cus-option"><input type="checkbox" name="owner" value="{{ $user->id }}"
+                                        id="admin"><label for="admin"><span>{{ $user->name }}</span></label></div>
                                 @foreach ($owners as $item)
-                                    <div class="cus-option"><span>{{ $item->name }}</span></div>
+                                    <div class="cus-option"><input type="checkbox" name="owner"
+                                            value="{{ $item->user_id }}" id="{{ $item->id }}"><label
+                                            for="{{ $item->id }}"><span>{{ $item->name }}</span></label></div>
                                 @endforeach
                             </div>
                             <div class="btn-group">
-                                <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                                <button class="btn btn-primary rounded-2 ok" data-for="owner">申し込み</button>
+                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="owner">リセット
+                                </button>
                             </div>
                             <div class="cus-bg position-fixed">
 
@@ -75,16 +87,22 @@
                             </div>
                             <div class="cus-options py-2">
                                 <div class="cus-notfound"><span>見つかりません</span></div>
-                                <div class="cus-option"><span>草案</span></div>
-                                <div class="cus-option"><span>募集中</span></div>
-                                <div class="cus-option"><span>募集完了</span></div>
-                                <div class="cus-option"><span>クローズド</span></div>
+                                <div class="cus-option"><input type="checkbox" name="status" value="draft"
+                                        id="draft"><label for="draft"><span>草案</span></label></div>
+                                <div class="cus-option"><input type="checkbox" name="status" value="live"
+                                        id="live"><label for="live"><span>募集中</span></label></div>
+                                <div class="cus-option"><input type="checkbox" name="status" value="finish"
+                                        id="finish"><label for="finish"><span>募集完了</span></label></div>
+                                <div class="cus-option"><input type="checkbox" name="status" value="closed"
+                                        id="closed"><label for="closed"><span>クローズド</span></label></div>
                             </div>
                             <div class="btn-group">
-                                <button class="btn btn-primary rounded-2 ok">申し込み</button>
-                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel">リセット </button>
+                                <button class="btn btn-primary rounded-2 ok" data-for="status">申し込み</button>
+                                <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="status">リセット
+                                </button>
                             </div>
-                            <div class="cus-bg position-fixed">
+                            <div class="cus-bg
+                                    position-fixed">
 
                             </div>
                         </div>
@@ -194,7 +212,7 @@
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-toastr.error(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -222,7 +240,7 @@ toastr.error(xhr.responseJSON.message);
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-toastr.error(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }
@@ -236,21 +254,65 @@ toastr.error(xhr.responseJSON.message);
             $(".cus-bg").show();
         })
 
-        $(".select-cus .cus-option").click(function(e) {
-            $(this).parent().parent().hide();
-            $(this).parent().parent().prev().val(e.target.textContent);
-            search_job();
-        })
+        // $(".select-cus .cus-option").click(function(e) {
+        //     $(this).parent().parent().hide();
+        //     $(this).parent().parent().prev().val(e.target.textContent);
+        //     search_job();
+        // })
+        let companies = [];
+        let owners = [];
+        let statuses = [];
 
         $(".select-cus .ok").click(function(e) {
             $(this).parent().parent().hide();
-            $(this).parent().parent().prev().val($(e.target).parent().parent().find('input').val());
+            const type = $(this).attr('data-for');
+            if (type === "company") {
+                companies = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    companies.push($(this).val());
+                });
+                if (companies.length) $(this).parent().parent().parent().find('input.select2').val(companies
+                    .length + " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "owner") {
+                owners = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    owners.push($(this).val());
+                });
+                if (owners.length) $(this).parent().parent().parent().find('input.select2').val(owners.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            } else if (type === "status") {
+                statuses = [];
+                $(this).parent().parent().find('input:checked').each(function(ele) {
+                    statuses.push($(this).val());
+                });
+                if (statuses.length) $(this).parent().parent().parent().find('input.select2').val(statuses.length +
+                    " 件が選択");
+                else $(this).parent().parent().parent().find('input.select2').val("0 件が選択");
+            }
             search_job();
         })
 
         $(".select-cus .cancel").click(function(e) {
             $(this).parent().parent().hide();
             $(this).parent().parent().prev().val("");
+            const type = $(this).attr('data-for');
+            $(this).parent().parent().find('input:checked').each(function(ele) {
+                $(this).prop("checked", false);
+            });
+            switch (type) {
+                case "company":
+                    companies = [];
+                    break;
+                case "owner":
+                    owners = [];
+                    break;
+                case "status":
+                    statuses = [];
+                    break;
+            }
+            search_job();
         })
 
         $(".cus-bg").click(function(e) {
@@ -281,39 +343,22 @@ toastr.error(xhr.responseJSON.message);
             }
 
         });
-        $("#search_title, #search_company, #search_owner, #search_status").change(function() {
+
+        $("#search_title").keyup(function(){
             search_job();
-        });
+        })
 
         function search_job() {
             const title = $("#search_title").val().trim();
-            const company = $("#search_company").val().trim();
-            const owner = $("#search_owner").val().trim();
-            let status = $("#search_status").val().trim();
-            switch (status) {
-                case '草案':
-                    status = 'draft';
-                    break;
-                case '募集中':
-                    status = 'live';
-                    break;
-                case '募集完了':
-                    status = 'finish';
-                case 'クローズド':
-                    status = 'closed';
-                    break;
-                default:
-                    status = '';
-            }
             $.ajax({
-                url: '{{route("myjob.search")}}',
+                url: '{{ route('myjob.search') }}',
                 type: 'POST',
                 data: {
                     _token: $("meta[name=csrf-token]").attr("content"),
                     title,
-                    company,
-                    owner,
-                    status,
+                    companies,
+                    owners,
+                    statuses,
                 },
                 success: function(response) {
                     let dis = "";
@@ -335,7 +380,8 @@ toastr.error(xhr.responseJSON.message);
                                 status = `<div class="cs-state bg-red-subscribe text-black">募集終了</div>`;
                                 break;
                             case 'closed':
-                                status = `<div class="cs-state bg-warning-subtle text-black">クローズド</div>`;
+                                status =
+                                    `<div class="cs-state bg-warning-subtle text-black">クローズド</div>`;
                                 break;
                         }
                         let limit_date = "";
@@ -380,7 +426,7 @@ toastr.error(xhr.responseJSON.message);
                     if (xhr.responseJSON.message == "Unauthenticated") {
                         window.location.reload();
                     }
-toastr.error(xhr.responseJSON.message);
+                    toastr.error(xhr.responseJSON.message);
                 }
             });
         }

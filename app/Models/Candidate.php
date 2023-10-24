@@ -42,4 +42,7 @@ class Candidate extends Model
     {
         return $this->belongsTo(Job::class);
     }
+    public function candidate_remove(){
+        
+    }
 }
