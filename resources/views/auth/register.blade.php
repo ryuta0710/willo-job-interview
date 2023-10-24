@@ -18,6 +18,15 @@
                     @enderror
                 </div>
                 <div class="row mb-4">
+                    <label for="" class="p-md-0">名前</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                    @error('name')
+                    <span class="text-danger">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="row mb-4">
                     <label for="" class="p-md-0">パスワード</label>
                     <input type="password" name="password" id="password" class="form-control">
                     @error('password')

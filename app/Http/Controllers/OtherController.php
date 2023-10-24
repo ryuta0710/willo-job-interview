@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
 use App\Models\Field;
 use App\Models\Candidate;
@@ -12,8 +11,6 @@ use App\Models\Questions;
 use App\Models\Answer;
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\HTTP\Response;
-use Config;
 
 class OtherController extends Controller
 {
@@ -21,7 +18,7 @@ class OtherController extends Controller
     public function getJobList(Request $request)
     {
         $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
-            ->join('fields', 'jobs.field_id', '=', 'fields.id')
+            ->leftjoin('fields', 'jobs.field_id', '=', 'fields.id')
             ->where([
                 'status' => 'live',
             ])
@@ -30,11 +27,12 @@ class OtherController extends Controller
             ->take(20)
             ->get();
 
-        $fields = Field::query()->orderby('name', 'asc')->get()->toArray();
+        $ex_fields = Field::query()->orderby('name', 'asc')->get()->toArray();
 
-        $fields = array_slice($fields, 0, 6);
+        $fields = array_slice($ex_fields, 0, 6);
+        $ex_fields = array_slice($ex_fields, 6, count($ex_fields) -1 );
 
-        return view('jobList', compact('fields', 'jobs'));
+        return view('jobList', compact('fields', 'ex_fields', 'jobs'));
     }
 
     public function fetchJobs(Request $request)
@@ -53,34 +51,21 @@ class OtherController extends Controller
         $search_key = $request['search_key'];
 
         $jobs = [];
-        if ($field_id > 0) {
-            $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
-                ->join('fields', 'jobs.field_id', '=', 'fields.id')
-                ->where([
-                    'status' => 'live',
-                    'field_id' => $field_id,
-                ])
-                ->where('description', 'LIKE', '%' . $search_key . '%')
-                ->whereBetween('salary', [$salary_min, $salary_max])
-                ->orderby('updated_at', 'desc')
-                ->select('jobs.*', 'companies.email as email', 'fields.name as field')
-                ->skip($offset)
-                ->take(20)
-                ->get();
-        } else {
-            $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
-                ->join('fields', 'jobs.field_id', '=', 'fields.id')
-                ->where([
-                    'status' => 'live',
-                ])
-                ->where('description', 'LIKE', '%' . $search_key . '%')
-                ->whereBetween('salary', [$salary_min, $salary_max])
-                ->orderby('updated_at', 'desc')
-                ->select('jobs.*', 'companies.email as email', 'fields.name as field')
-                ->skip($offset)
-                ->take(20)
-                ->get();
-        }
+        $jobs = Job::join('companies', 'jobs.company_id', '=', 'companies.id')
+            ->leftjoin('fields', 'jobs.field_id', '=', 'fields.id')
+            ->where([
+                'status' => 'live',
+            ])
+            ->when($field_id, function ($query) use ($field_id) {
+                return $query->where('field_id', $field_id);
+            })
+            ->where('description', 'LIKE', '%' . $search_key . '%')
+            ->whereBetween('salary', [$salary_min, $salary_max])
+            ->orderby('updated_at', 'desc')
+            ->select('jobs.*', 'companies.email as email', 'fields.name as field')
+            ->skip($offset)
+            ->take(20)
+            ->get();
 
         return response()->json([
             'status' => 'success',
@@ -97,7 +82,7 @@ class OtherController extends Controller
             ->leftJoin('fields', 'jobs.field_id', '=', 'fields.id')
             ->select('jobs.*', 'fields.name as field', 'companies.email as email', 'companies.website as website', 'companies.name as company_name')
             ->first();
-        if(empty($job)){
+        if (empty($job)) {
             return redirect()->route("getJobList");
         }
         return view('jobDetail', compact('job'));
@@ -124,13 +109,13 @@ class OtherController extends Controller
         if (empty($job)) {
             return redirect()->back();
         }
-        if($job->status == "closed"){
+        if ($job->status == "closed") {
             return redirect()->route('interview.interview_closed');
         }
-        if($job->limit_date){
+        if ($job->limit_date) {
             $limit_date = date("Y/m/d", strtotime($job->limit_date));
             $now = date('Y/m/d');
-            if($now > $limit_date){
+            if ($now > $limit_date) {
                 return redirect()->route('interview.interview_closed');
             }
         }
@@ -167,7 +152,7 @@ class OtherController extends Controller
         if (empty($candidate)) {
             return redirect()->route('welcome');
         }
-        if(!$candidate->share_allow){
+        if (!$candidate->share_allow) {
             $questions = [];
             $answers = [];
             $count = 0;
@@ -217,25 +202,25 @@ class OtherController extends Controller
     {
         $apikey =  config('app.OPENAI_API_KEY');
         $url = "https://api.openai.com/v1/chat/completions";
-    
+
         // リクエストヘッダー
         $headers = array(
             'Content-Type: application/json',
             'Authorization: Bearer ' . $apikey
         );
-    
+
         $prompt = $request["prompt"];
-    
+
         // リクエストボディ
         $data = array(
-        'model' => 'gpt-3.5-turbo',
-        'messages' => [
-            ["role" => "system", "content" => "日本語で返信する"],
-            ['role' => 'user', 'content' => $prompt],
-        ],
-        'max_tokens' => 500,
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ["role" => "system", "content" => "日本語で返信する"],
+                ['role' => 'user', 'content' => $prompt],
+            ],
+            'max_tokens' => 500,
         );
-    
+
         // cURLを使用してAPIにリクエストを送信
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -243,20 +228,18 @@ class OtherController extends Controller
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    
+
         $response = curl_exec($ch);
         curl_close($ch);
-    
+
         // 結果をデコード
         $result = json_decode($response, true);
         // $result_message = $result["choices"][0]["message"]["content"];
-    
+
         // 結果を出力
         return response()->json([
-            'status' => 'success', 
+            'status' => 'success',
             'message' => $result,
         ]);
-    
     }
-
 }

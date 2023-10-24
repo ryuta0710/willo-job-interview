@@ -244,7 +244,7 @@ Route::controller(OtherController::class)->group(function(){
 
     Route::get('public-candidate/{candidate_id}', 'publicCandidate')->name('publicCandidate');
 
-    Route::get('fetchJobs', 'fetchJobs')->name('fetchJobs');
+    Route::post('fetchJobs', 'fetchJobs')->name('fetchJobs');
 
     Route::get('getJobDetail/{url}', 'getJobDetail')->name('getJobDetail');
 

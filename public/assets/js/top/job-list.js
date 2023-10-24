@@ -10,6 +10,15 @@ for (let i = 0; i < videoElements.length; i++) {
         controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen']
     });
 }
+function select_field(obj, id){
+    $("#fields button, .dropdown-item, #other .dropdown-toggle").removeClass("bg-active");
+    $(obj).addClass("bg-active");
+    if($(obj).hasClass("dropdown-item")){
+        $("#other .dropdown-toggle").addClass("bg-active");
+    }
+    $("#field_id").val(id);
+    search();
+}
 
 $(window).scroll(function () {
     var scroll = $(window).scrollTop();
@@ -39,33 +48,3 @@ $('.main-btn').click(function () {
 $('#main-submit-mobile').click(function () {
     $('#main-submit').trigger('click');
 });
-$(window).resize(function () {
-    replaceMatches();
-});
-
-function replaceMatches() {
-    var width = $(window).width();
-    if (width < 516) {
-        $('.main-location').attr('value', 'City or postal code');
-    } else {
-        $('.main-location').attr('value', 'Search by city or postal code');
-    }
-};
-replaceMatches();
-
-function clearText(thefield) {
-    if (thefield.defaultValue == thefield.value) {
-        thefield.value = ""
-    }
-}
-
-function replaceText(thefield) {
-    if (thefield.value == "") {
-        thefield.value = thefield.defaultValue
-    }
-}
-function select_field(obj, id){
-    $("#fields button").removeClass("bg-primary");
-    $(obj).addClass("bg-primary");
-    $("#field_id").val(id);
-}

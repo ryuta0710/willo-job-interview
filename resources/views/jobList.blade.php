@@ -1,9 +1,15 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<link rel="stylesheet" href="{{ asset('/assets/css/top/job-list.css') }}">
 
 @section('title', 'インタビュー一覧')
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset('/assets/css/common/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/top/job-list.css') }}">
+    <style>
+        .dropdown-item.bg-active {
+            color: white !important;
+        }
+    </style>
     <main class="pb-lg-5">
         <section class="main-visual w-100 p-0 vh-100 background-position-top">
             <div class="container d-flex justify-content-center align-items-end flex-column vh-100 pt-4 position-relative">
@@ -87,6 +93,22 @@
                                 </button>
                             </div>
                         @endforeach
+                        <div class="col-auto rounded-pill" id="other">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle rounded-pill"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    もっと見る
+                                </button>
+                                <ul class="dropdown-menu">
+                                    @foreach ($ex_fields as $item)
+                                        <a href="#" class="dropdown-item" data-id="{{ $item['id'] }}"
+                                            onclick="select_field(this, {{ $item['id'] }})">
+                                            {{ $item['name'] }}
+                                        </a>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +116,7 @@
 
         <section>
             <div class="container pb-5">
-                <h3 class="mb-5">{{ count($jobs) }}件の職業が検索されました。</h3>
+                <h3 class="mb-5"><span id="jobs_count">{{ count($jobs) }}</span>件の職業が検索されました。</h3>
                 <div id="job_list">
                     @foreach ($jobs as $item)
                         <div class="row border-top pt-4 mb-5">
@@ -151,11 +173,21 @@
             </div>
         </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"
+        integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
     <script src="{{ asset('/assets/js/top/job-list.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
         $("#submit").click(function(e) {
             e.preventDefault();
+            search();
+        })
+
+        function search() {
             let search_key = $("#search_key").val();
             let salary_min = $("#salary_min").val();
             let salary_max = $("#salary_max").val();
@@ -207,16 +239,18 @@
                         </div>
                     </div>
                 </div>`;
-                        $("#job_list").html(dis_html);
                     });
+                    $("#job_list").html(dis_html);
+                    $("#jobs_count").html(length);
                 },
                 error: function(xhr, status, error) {
-                    if (xhr.responseJSON.message == "Unauthenticated") {
+                    if (xhr.responseJSON.message == "Unauthenticated" || xhr.responseJSON.message ==
+                        "CSRF token mismatch.") {
                         window.location.reload();
                     }
                     toastr.error(xhr.responseJSON.message);
                 }
             });
-        })
+        }
     </script>
 @endsection
