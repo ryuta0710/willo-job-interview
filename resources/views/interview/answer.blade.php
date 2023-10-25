@@ -82,10 +82,13 @@
                                 <div class="test-problem">
                                     {{ $question->content }}
                                 </div>
-                                <div class="test-button">
-                                    <button class="video-recoding" id="videoRecord" onclick="video_record()">
-                                        <i class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;
-                                        今すぐ録音する</button>
+                                <div class="test-button d-flex gap-4">
+                                    <button class="video-recoding" id="videoRecord" onclick="record_start()"><i
+                                            class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
+                                    <button class="video-recoding bg-white text-secondary  border border-primary d-none" id="videoSave" onclick="video_save()"><i
+                                            class="fa-solid fa-upload"></i>&nbsp;&nbsp;&nbsp;保存して続行</button>
+                                    <button class="video-recoding d-none" id="videoRecordAgain" onclick="record_start()"><i
+                                            class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音</button>
                                 </div>
                                 <div class="test-state d-flex justify-content-between">
                                     <div>
@@ -115,6 +118,10 @@
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
                                 <video id="videoRecorded" class="w-100 videoRecorded d-none" controls>
                                 </video>
+                                <div class="position-absolute counter bg-secondary-subtle d-flex justify-content-center align-items-center d-none"
+                                    id="counter">
+                                    <div class="counter-no rounded-pill text-center">1</div>
+                                </div>
                                 <!-- <img class="w-100" src="./assets/img/application/camera-screen.svg" alt="camera_screen"> -->
                             </div>
                         </div>
@@ -619,27 +626,55 @@
                         if (hasCamera) {
                             console.log('Camera is connected.');
                         } else {
-                            $(".camera_not_connected").removeClass("d-none");
-                            $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                            screen_disable();
                         }
                     })
                     .catch(function(err) {
                         console.error('Error accessing media devices: ', err);
-                        $(".camera_not_connected").removeClass("d-none");
-                        $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
+                        screen_disable();
                     });
             } catch (error) {
+                screen_disable();
+            }
+            const q_retake = {{ $question->retake }};
+            let retake = q_retake;
+
+            function screen_disable() {
                 $(".camera_not_connected").removeClass("d-none");
                 $(".video-recoding").attr("disabled", "").addClass("bg-secondary-subtle");
             }
             let recording = false;
+            let recorded = false;
             const videoLive = document.querySelector('#videoLive')
             const videoRecorded = document.querySelector('#videoRecorded')
             let stream;
 
+            function record_start() {
+                if (!recording) {
+                    if (!retake) {
+                        toastr.error("再録音できません。 最大録音回数を超えました。");
+                        return;
+                    }
+                    $("#videoRecord").html('<i class="fa-solid fa-stop text-white"></i>&nbsp;&nbsp;&nbsp;録音を停止');
+                    $(videoLive).toggleClass("d-none");
+                    $(videoRecorded).toggleClass("d-none");
+                    counter();
+                    setTimeout(video_record, 4000);
+                    recording = true;
+                    if (q_retake) {
+                        retake--;
+                        $(".dis_retake").html(retake);
+                    }
+                } else {
+                    $("#videoRecord").html('<i class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音')
+                    $(videoLive).toggleClass("d-none");
+                    $(videoRecorded).toggleClass("d-none");
+                    recording = false;
+                }
+            }
+
             async function video_record() {
-
-
+                setTimeout(() => {}, 10000);
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     await navigator.mediaDevices.getUserMedia({ // <1>
                         video: true,
@@ -649,40 +684,29 @@
 
                         videoLive.srcObject = stream
 
-                        if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
+                        if (!MediaRecorder.isTypeSupported('video/webm')) {
                             console.warn('video/webm is not supported')
                         }
 
-                        const mediaRecorder = new MediaRecorder(stream, { // <3>
+                        const mediaRecorder = new MediaRecorder(stream, {
                             mimeType: 'video/webm',
                         })
 
                         mediaRecorder.start()
                         recording = true;
-                        $("#record").html('録音を停止')
-
-
-                        $("#record").click(function() {
+                        recorded = true;
+                        $("#videoRecord").click(function() {
 
                             if (!recording) {
-                                mediaRecorder.start() // <4>
-                                $("#record").html('録音を停止')
-                                $(videoLive).toggleClass("d-none");
-                                $(videoRecorded).toggleClass("d-none");
-
+                                mediaRecorder.start();
                             } else {
-                                mediaRecorder.stop()
-                                $("#record").html('録音を閧始')
-                                $(videoLive).toggleClass("d-none");
-                                $(videoRecorded).toggleClass("d-none");
-
+                                mediaRecorder.stop();
                             }
-                            recording = !recording;
                         })
 
-
                         mediaRecorder.addEventListener('dataavailable', event => {
-                            videoRecorded.src = URL.createObjectURL(event.data) // <6>
+                            videoRecorded.src = URL.createObjectURL(event.data)
+                            if (MediaRecorder.state == 'inactive') makeLink();
                         })
                     }).catch(function(res) {
                         console.log(res);
@@ -690,8 +714,22 @@
                 } else {
                     console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
                 }
+            }
 
-
+            function counter() {
+                let s = 3;
+                $("#videoRecord").attr("disabled", "").addClass("bg-secondary-subtle");
+                $("#counter").removeClass("d-none");
+                $("#counter .counter-no").html(3);
+                const timer = setInterval(() => {
+                    s--;
+                    $("#counter .counter-no").html(s);
+                    if (s == -1) {
+                        clearInterval(timer);
+                        $("#counter").addClass("d-none");
+                        $("#videoRecord").removeAttr("disabled").removeClass("bg-secondary-subtle");;
+                    }
+                }, 1000);
             }
 
             function makeLink() {
@@ -931,7 +969,7 @@
                         console.log(response)
                     },
                     error: function(xhr, status, error) {
-                        
+
                     }
                 });
 
@@ -982,7 +1020,6 @@
                     }
                 });
             }
-
         @endif
         start_time();
     </script>

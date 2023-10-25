@@ -90,6 +90,7 @@
         </div>
     </footer>
     <script src="{{ asset('/assets/js/common/jquery-3.7.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Include the Quill library -->
 
 

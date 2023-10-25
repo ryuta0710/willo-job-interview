@@ -336,6 +336,7 @@ class InterviewController extends Controller
                 'question_content' => $question->content,
                 'thinking_minute' => $minute,
                 'url' => $ran_url,
+                'question_retake' => $question->retake,
             ]);
             return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $new_answer->url])]);
         } else {

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('url');
             $table->string('question_content');
             $table->string('count')->nullable();
+            $table->integer('question_retake')->nullable();
+            $table->integer('retake')->nullable();
             $table->integer('thinking_minute')->nullable();
             $table
                 ->foreign('job_id')

@@ -49,14 +49,18 @@
                                 style="width: 55px; height: 55px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <g id="Group_2215" data-name="Group 2215" transform="translate(-872 -254)">
-                                      <path id="Path_91" data-name="Path 91" d="M3,0H21a3,3,0,0,1,3,3V16a3,3,0,0,1-3,3H11.867L6.433,22.8V19H3a3,3,0,0,1-3-3V3A3,3,0,0,1,3,0Z" transform="translate(872 254)" fill="#fff"/>
-                                      <g id="Group_2212" data-name="Group 2212" transform="translate(872 254)">
-                                        <path id="Path_81" data-name="Path 81" d="M5.6,18.39h.8v-.8H5.6Zm0,4.8H4.8a.8.8,0,0,0,.44.715.809.809,0,0,0,.84-.075Zm6.4-4.8v-.8h-.265l-.215.16ZM7.2,6.395H6.4v1.6h.8Zm9.6,1.6h.8v-1.6h-.8Zm-9.6,3.2H6.4v1.6h.8Zm6.4,1.6h.8v-1.6h-.8ZM4.8,18.39v4.8H6.4v-4.8Zm1.28,5.435,6.4-4.8-.96-1.28-6.4,4.8ZM12,19.19h9.6v-1.6H12Zm9.6,0a2.4,2.4,0,0,0,2.4-2.4H22.4a.8.8,0,0,1-.8.8Zm2.4-2.4V2.4H22.4V16.79ZM24,2.4A2.4,2.4,0,0,0,21.6,0V1.6a.8.8,0,0,1,.8.8ZM21.6,0H2.4V1.6H21.6ZM2.4,0A2.4,2.4,0,0,0,0,2.4H1.6a.8.8,0,0,1,.8-.8ZM0,2.4V16.79H1.6V2.4ZM0,16.79a2.4,2.4,0,0,0,2.4,2.4v-1.6a.8.8,0,0,1-.8-.8Zm2.4,2.4H5.6v-1.6H2.4Zm4.8-11.2h9.6v-1.6H7.2Zm0,4.8h6.4v-1.6H7.2Z" fill="#4ca7ee"/>
-                                        <path id="Path_82" data-name="Path 82" d="M0,0H24V24H0Z" fill="none"/>
-                                      </g>
+                                        <path id="Path_91" data-name="Path 91"
+                                            d="M3,0H21a3,3,0,0,1,3,3V16a3,3,0,0,1-3,3H11.867L6.433,22.8V19H3a3,3,0,0,1-3-3V3A3,3,0,0,1,3,0Z"
+                                            transform="translate(872 254)" fill="#fff" />
+                                        <g id="Group_2212" data-name="Group 2212" transform="translate(872 254)">
+                                            <path id="Path_81" data-name="Path 81"
+                                                d="M5.6,18.39h.8v-.8H5.6Zm0,4.8H4.8a.8.8,0,0,0,.44.715.809.809,0,0,0,.84-.075Zm6.4-4.8v-.8h-.265l-.215.16ZM7.2,6.395H6.4v1.6h.8Zm9.6,1.6h.8v-1.6h-.8Zm-9.6,3.2H6.4v1.6h.8Zm6.4,1.6h.8v-1.6h-.8ZM4.8,18.39v4.8H6.4v-4.8Zm1.28,5.435,6.4-4.8-.96-1.28-6.4,4.8ZM12,19.19h9.6v-1.6H12Zm9.6,0a2.4,2.4,0,0,0,2.4-2.4H22.4a.8.8,0,0,1-.8.8Zm2.4-2.4V2.4H22.4V16.79ZM24,2.4A2.4,2.4,0,0,0,21.6,0V1.6a.8.8,0,0,1,.8.8ZM21.6,0H2.4V1.6H21.6ZM2.4,0A2.4,2.4,0,0,0,0,2.4H1.6a.8.8,0,0,1,.8-.8ZM0,2.4V16.79H1.6V2.4ZM0,16.79a2.4,2.4,0,0,0,2.4,2.4v-1.6a.8.8,0,0,1-.8-.8Zm2.4,2.4H5.6v-1.6H2.4Zm4.8-11.2h9.6v-1.6H7.2Zm0,4.8h6.4v-1.6H7.2Z"
+                                                fill="#4ca7ee" />
+                                            <path id="Path_82" data-name="Path 82" d="M0,0H24V24H0Z" fill="none" />
+                                        </g>
                                     </g>
-                                  </svg>
-                                  
+                                </svg>
+
                             </div>
                             <label>質問</label>
                         </div>
@@ -82,7 +86,7 @@
                                 </svg>
                             </div>
                             <label>テンプレート</label>
-                        </di    v>
+                        </div>
                         <div class="mb-5 fs-2 ms-1 me-3">
                             <span>------</span>
                         </div>
@@ -259,8 +263,9 @@
                                 <input type="file" name="video" accept="video/*" class="d-none" id="file_upload">
                                 <video class="w-100" autoplay muted playsinline id="videoLive"
                                     style="background-color: #747474;"></video>
-                                    <div class="camera_not_connected text-danger d-none rounded-3 p-4">カメラまたはマイクへのアクセスは現在ブロックされています。
-                                        ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
+                                <div class="camera_not_connected text-danger d-none rounded-3 p-4">
+                                    カメラまたはマイクへのアクセスは現在ブロックされています。
+                                    ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
                                 <video class="none w-100" controls playsinline id="videoRecorded"></video>
                             </div>
                             <div class="col-12 col-xl-5 text-center">
@@ -304,7 +309,7 @@
             <div class="container">
                 <div class="w-100 d-flex justify-content-center align-items-baseline text-center mt-4 mb-5">
                     <button class="btn bg-secondary-subtle btn-normal rounded-5" disabled id="next">次に</button>
-                    
+
                 </div>
 
             </div>
@@ -333,7 +338,6 @@
                 }
             }
         });
-        
         try {
             navigator.mediaDevices.enumerateDevices()
                 .then(function(devices) {
@@ -344,23 +348,25 @@
                     if (hasCamera) {
                         console.log('Camera is connected.');
                     } else {
-                        $(".camera_not_connected").removeClass("d-none");
-                        $("#record").attr("disabled", "").addClass("bg-secondary-subtle");
+                        screen_disable();
                     }
                 })
                 .catch(function(err) {
                     console.error('Error accessing media devices: ', err);
-                    $(".camera_not_connected").removeClass("d-none");
-                    $("#record").attr("disabled", "").addClass("bg-secondary-subtle");
+                    screen_disable();
                 });
         } catch (error) {
+            screen_disable();
+        }
+
+        function screen_disable() {
             $(".camera_not_connected").removeClass("d-none");
             $("#record").attr("disabled", "").removeClass("btn-primary").addClass("bg-secondary-subtle");
         }
         // quill.setContents("{{ old('description') }}");
         // quill.root.innerHTML = "{{ old('description') }}"
         // .setContents()
-        
+
         function makeLink() {
             let blob = new Blob(stream, {
                     type: media.type

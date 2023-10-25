@@ -18,6 +18,8 @@ class Answer extends Model
         'url',
         'question_content',
         'count',
+        'question_retake',
+        'retake',
     ];
     use HasFactory;
 }
