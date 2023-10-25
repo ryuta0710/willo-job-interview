@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->integer('responses_count')->default(0);
             $table->string('status')->default('draft');
-            $table->integer('field_id');
+            $table->integer('field_id')->nullable();
             $table->integer('started_count')->default(0);
             $table->timestamps();
         });

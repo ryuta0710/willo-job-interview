@@ -14,11 +14,20 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/fileupload.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/common/loader.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
 </head>
 
 <body>
+    <div class="loading d-none">
+        <div class="snippet" data-title="dot-pulse">
+            <div class="stage">
+                <div class="dot-pulse"></div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="container max-1200">
             <a class="navbar-brand pe-5" href="/">
@@ -960,21 +969,21 @@
                         conservation += "候補者: " + msg.message + "\n";
                     }
                 });
-//                 const prompt = `面接官として返信してください。面接官は候補者に、次のことに適しているかどうかを尋ねる必要があります。全体の質問数は10個は超えてはならない。 10個は超えたら完了してください。
+                //                 const prompt = `面接官として返信してください。面接官は候補者に、次のことに適しているかどうかを尋ねる必要があります。全体の質問数は10個は超えてはならない。 10個は超えたら完了してください。
 
-// {{ $job->description }}
+            // {{ $job->description }}
 
-// 知っておきたい基本的な事項は次のとおりです。
+            // 知っておきたい基本的な事項は次のとおりです。
 
-// {{ $question->content }}
+            // {{ $question->content }}
 
-// #1つの質問だけを提示してください。1つの質問!!!。
-// 以下は会話です。
+            // #1つの質問だけを提示してください。1つの質問!!!。
+            // 以下は会話です。
 
-// 会話:
-// ${conservation}
-// 面接官:
-// `;
+            // 会話:
+            // ${conservation}
+            // 面接官:
+            // `;
                 const prompt = `これからあなたが面接官だと思ってユーザーに質問をしなければなりません。
 まず、職業説明に関する最初の質問をしてください。
 その後、ユーザーは答えます。
@@ -1002,6 +1011,7 @@ ${conservation}
                     _token: token,
                     prompt: prompt,
                 };
+                loading(true);
                 $.ajax({
                     url: "{{ route('openai') }}",
                     type: 'POST',
@@ -1017,9 +1027,11 @@ ${conservation}
                         $(inputText).removeAttr("disabled");
                         $(btnSend).removeAttr("disabled");
                         show_bot(mes);
+                        loading(false);
                     },
                     error: function(xhr, status, error) {
 
+                        loading(false);
                     }
                 });
             }
@@ -1094,11 +1106,19 @@ ${conservation}
                 });
             }
 
-            function finish_ai(){
+            function finish_ai() {
 
             }
         @endif
         start_time();
+
+        function loading(is_loading) {
+            if (is_loading) {
+                $(".loading").removeClass("d-none");
+            } else {
+                $(".loading").addClass("d-none");
+            }
+        }
     </script>
 
 </body>
