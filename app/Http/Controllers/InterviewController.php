@@ -66,6 +66,7 @@ class InterviewController extends Controller
         if (empty($question)) {
             return redirect()->back();
         }
+        
         //check if the questions is last
         $count = Questions::where([
             'job_id' => $question->job_id,
@@ -75,11 +76,15 @@ class InterviewController extends Controller
         if ($count == $question->question_no) {
             $is_last = true;
         }
+        $job = Job::find($question->job_id);
+        if (empty($job)) {
+            return redirect()->back();
+        }
         //generate a new answer
         $next_no = $question->question_no + 1;
 
         // return response()->json($question);
-        return view('interview.answer', compact("question", "is_last", "count", "candidate_url", "next_no", "answer_url"));
+        return view('interview.answer', compact("question", "is_last", "count", "candidate_url", "next_no", "answer_url", 'job'));
     }
     //show all answer
     public function confirm(Request $request, string $url)
@@ -243,7 +248,7 @@ class InterviewController extends Controller
         if (empty($answer)) {
             return response([
                 'status' => 'failed',
-                'message' => 'Failed save',
+                'message' => '操作が失敗しました。',
             ]);
         }
         $answer['content'] = $request['messages'];
@@ -338,9 +343,9 @@ class InterviewController extends Controller
                 'url' => $ran_url,
                 'question_retake' => $question->retake,
             ]);
-            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $new_answer->url])]);
+            return response(['status' => 'success', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $new_answer->url])]);
         } else {
-            return response(['status' => 'succes', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $answer->url])]);
+            return response(['status' => 'success', 'url' => route('interview.answer', ['candidate_url' => $url, 'answer_url' => $answer->url])]);
         }
 
         return response(['message' => 'Failed creating answer.'], Response::HTTP_BAD_REQUEST);

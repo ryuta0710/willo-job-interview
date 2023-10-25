@@ -30,7 +30,7 @@ class OtherController extends Controller
         $ex_fields = Field::query()->orderby('name', 'asc')->get()->toArray();
 
         $fields = array_slice($ex_fields, 0, 6);
-        $ex_fields = array_slice($ex_fields, 6, count($ex_fields) -1 );
+        $ex_fields = array_slice($ex_fields, 6, count($ex_fields) - 1);
 
         return view('jobList', compact('fields', 'ex_fields', 'jobs'));
     }
@@ -239,7 +239,7 @@ class OtherController extends Controller
         // 結果を出力
         return response()->json([
             'status' => 'success',
-            'message' => $result,
+            'result' => $result,
         ]);
     }
 }

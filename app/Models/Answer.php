@@ -20,6 +20,7 @@ class Answer extends Model
         'count',
         'question_retake',
         'retake',
+        'thinking_minute',
     ];
     use HasFactory;
 }

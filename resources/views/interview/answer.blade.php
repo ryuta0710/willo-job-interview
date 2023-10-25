@@ -85,9 +85,11 @@
                                 <div class="test-button d-flex gap-4">
                                     <button class="video-recoding" id="videoRecord" onclick="record_start()"><i
                                             class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
-                                    <button class="video-recoding bg-white text-secondary  border border-primary d-none" id="videoSave" onclick="video_save()"><i
+                                    <button class="video-recoding bg-white text-secondary  border border-primary d-none"
+                                        id="videoSave" onclick="video_save()"><i
                                             class="fa-solid fa-upload"></i>&nbsp;&nbsp;&nbsp;保存して続行</button>
-                                    <button class="video-recoding d-none" id="videoRecordAgain" onclick="record_start()"><i
+                                    <button class="video-recoding d-none" id="videoRecordAgain"
+                                        onclick="record_start()"><i
                                             class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音</button>
                                 </div>
                                 <div class="test-state d-flex justify-content-between">
@@ -418,22 +420,14 @@
                                             <i class="fas fa-ellipsis-h"></i>
                                         </span>
                                     </div>
-                                    <div class="chat-room">
+                                    <div class="chat-room" id="chat_room">
                                         <div class="message message-left">
                                             <div class="avatar-wrapper avatar-small">
                                                 <img src="{{ asset('/assets/img/avatar/bot.png') }}"
                                                     alt="avatar" />
                                             </div>
                                             <div class="bubble bubble-light">
-                                                こんにちは。
-                                            </div>
-                                        </div>
-                                        <div class="message message-right">
-                                            <div class="avatar-wrapper avatar-small">
-                                                <img src="{{ asset('/assets/img/avatar/01.png') }}" alt="avatar" />
-                                            </div>
-                                            <div class="bubble bubble-dark">
-                                                お世話になっております。
+                                                こんにちは。面接にお越しいただき、ありがとうございます。
                                             </div>
                                         </div>
 
@@ -910,10 +904,7 @@
         @if ($question->type == 'ai')
             let messages = [{
                 sender: "bot",
-                "message": "こんにちは。"
-            }, {
-                sender: "person",
-                "message": "お世話になっております。"
+                "message": "こんにちは。面接にお越しいただき、ありがとうございます。"
             }];
             var header = document.querySelector(".header");
             var chatRoom = document.querySelector(".chat-room");
@@ -926,17 +917,7 @@
             var inputText = document.querySelector("#inputText");
             var btnSend = document.querySelector(".button-send");
             var messageArea = document.querySelector(".message.message-right");
-            //Header onclick event
-            header.addEventListener("click", function(e) {
-                if (typeArea.classList.contains("d-none")) {
-                    header.style.borderRadius = "20px 20px 0 0";
-                } else {
-                    header.style.borderRadius = "20px";
-                }
-                typeArea.classList.toggle("d-none");
-                chatRoom.classList.toggle("d-none");
-            });
-            //Button Add onclick event
+
             btnAdd.addEventListener("click", function(e) {
                 others.classList.add("others-show");
             });
@@ -944,8 +925,15 @@
             emojiButton.addEventListener("click", function(e) {
                 emojiBox.classList.add("emoji-show");
             });
+            $("#inputText").keyup(function() {
+                if (event.key === "Enter") {
+                    send_message();
+                }
+            });
             //Button Send onclick event
-            btnSend.addEventListener("click", function(e) {
+            btnSend.addEventListener("click", send_message);
+
+            function send_message() {
                 var mess = inputText.value.trim();
                 if (mess == "") {
                     return;
@@ -954,32 +942,88 @@
                     sender: "person",
                     message: mess
                 };
+                if (messages.length > 20) {
+                    finish_ai();
+                    return;
+                }
+                $(inputText).val("");
                 messages.push(res);
+                show_man(mess);
+                $(inputText).attr("disabled", "");
+                $(btnSend).attr("disabled", "");
+
+                let conservation = "";
+                messages.forEach(msg => {
+                    if (msg.sender == "bot") {
+                        conservation += "面接官: " + msg.message + "\n";
+                    } else {
+                        conservation += "候補者: " + msg.message + "\n";
+                    }
+                });
+//                 const prompt = `面接官として返信してください。面接官は候補者に、次のことに適しているかどうかを尋ねる必要があります。全体の質問数は10個は超えてはならない。 10個は超えたら完了してください。
+
+// {{ $job->description }}
+
+// 知っておきたい基本的な事項は次のとおりです。
+
+// {{ $question->content }}
+
+// #1つの質問だけを提示してください。1つの質問!!!。
+// 以下は会話です。
+
+// 会話:
+// ${conservation}
+// 面接官:
+// `;
+                const prompt = `これからあなたが面接官だと思ってユーザーに質問をしなければなりません。
+まず、職業説明に関する最初の質問をしてください。
+その後、ユーザーは答えます。
+ユーザーから答えを受けた後は、他の質問をもう一度してください。
+これらの順序で10の質問をしてください。
+10以上にしてはいけません。
+10個以上の場合は面接を終了してください。
+
+{{ $job->description }}
+
+知っておきたい基本的な事項は次のとおりです。
+
+{{ $question->content }}
+
+#1つの質問だけを提示してください。1つの質問!!!。
+以下は会話です。
+
+会話:
+${conservation}
+面接官:
+`;
                 //ai
                 let token = $("meta[name=csrf-token]").attr("content");
                 let postData = {
                     _token: token,
-                    prompt: messages,
+                    prompt: prompt,
                 };
                 $.ajax({
                     url: "{{ route('openai') }}",
                     type: 'POST',
                     data: postData,
                     success: function(response) {
-                        console.log(response)
+                        const mes = response.result.choices[0].message.content
+
+                        const res = {
+                            sender: "bot",
+                            message: mes,
+                        };
+                        messages.push(res);
+                        $(inputText).removeAttr("disabled");
+                        $(btnSend).removeAttr("disabled");
+                        show_bot(mes);
                     },
                     error: function(xhr, status, error) {
 
                     }
                 });
+            }
 
-                var bubble = document.createElement('div');
-                bubble.className += " bubble bubble-dark";
-                bubble.textContent = mess;
-                messageArea.appendChild(bubble);
-                inputText.value = "";
-
-            });
             for (var emoji of emojis) {
                 emoji.addEventListener("click", function(e) {
                     e.stopPropagation();
@@ -987,6 +1031,35 @@
                     others.classList.remove("others-show");
                     inputText.value += e.target.textContent;
                 });
+            }
+
+            function show_man(mess) {
+                let man_mes = `<div class="message message-right">
+        <div class="avatar-wrapper avatar-small">
+            <img src="{{ asset('/assets/img/avatar/01.png') }}"
+                alt="avatar" />
+        </div>
+        <div class="bubble bubble-dark">
+            ${mess}
+        </div>
+    </div>`;
+                $("#chat_room").append(man_mes);
+                chatRoom.scrollTop = chatRoom.scrollHeight;
+            }
+
+            function show_bot(mes) {
+                let bot_mes = `
+                <div class="message message-left">
+                    <div class="avatar-wrapper avatar-small">
+                        <img src="{{ asset('/assets/img/avatar/bot.png') }}"
+                            alt="avatar" />
+                    </div>
+                    <div class="bubble bubble-light">
+                        ${mes}
+                    </div>
+                </div>`;
+                $("#chat_room").append(bot_mes);
+                chatRoom.scrollTop = chatRoom.scrollHeight;
             }
 
             function save_ai() {
@@ -1019,6 +1092,10 @@
                         toastr.error(xhr.responseJSON.message);
                     }
                 });
+            }
+
+            function finish_ai(){
+
             }
         @endif
         start_time();
