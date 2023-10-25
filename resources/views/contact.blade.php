@@ -20,7 +20,7 @@
 <body>
     <nav id="header" class="navbar navbar-expand-md fixed-top">
         <div class="container">
-            <a href="">
+            <a href="/">
                 <img src="./assets/img/logo01.png" alt="">
             </a>
 
