@@ -17,11 +17,6 @@ return new class extends Migration
             $table->integer('candidate_id');
             $table->integer('q_no');
             $table->integer('allow')->default(1);
-            $table
-                ->foreign('candidate_id')
-                ->references('id')
-                ->on('candidates')
-                ->onDelete('cascade');
         });
     }
 

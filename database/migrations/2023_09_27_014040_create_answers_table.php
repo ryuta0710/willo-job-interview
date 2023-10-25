@@ -26,11 +26,6 @@ return new class extends Migration
             $table->integer('question_retake')->nullable();
             $table->integer('retake')->nullable();
             $table->integer('thinking_minute')->nullable();
-            $table
-                ->foreign('job_id')
-                ->references('id')
-                ->on('jobs')
-                ->onDelete('cascade');
         });
     }
 

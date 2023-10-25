@@ -25,11 +25,6 @@ return new class extends Migration
             $table->integer('question_no');
             $table->integer('job_id');
             $table->integer('user_id');
-            $table
-                ->foreign('job_id')
-                ->references('id')
-                ->on('jobs')
-                ->onDelete('cascade');
         });
     }
 

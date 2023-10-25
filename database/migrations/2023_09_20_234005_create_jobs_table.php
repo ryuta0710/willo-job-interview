@@ -37,11 +37,6 @@ return new class extends Migration
             $table->integer('field_id');
             $table->integer('started_count')->default(0);
             $table->timestamps();
-            $table
-                ->foreign('company_id')
-                ->references('id')
-                ->on('companies')
-                ->onDelete('cascade');
         });
     }
 

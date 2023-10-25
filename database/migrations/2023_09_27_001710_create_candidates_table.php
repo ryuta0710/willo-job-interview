@@ -36,11 +36,6 @@ return new class extends Migration
             $table->string('share_link')->nullable();
             $table->integer('share_allow')->nullable();
             $table->integer('share_visit')->default(0);
-            $table
-                ->foreign('job_id')
-                ->references('id')
-                ->on('jobs')
-                ->onDelete('cascade');
         });
     }
 

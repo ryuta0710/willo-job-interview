@@ -17,11 +17,6 @@ return new class extends Migration
             $table->integer('candidate_id');
             $table->string('day');
             $table->string('time');
-            $table
-                ->foreign('candidate_id')
-                ->references('id')
-                ->on('candidates')
-                ->onDelete('cascade');
         });
     }
 
