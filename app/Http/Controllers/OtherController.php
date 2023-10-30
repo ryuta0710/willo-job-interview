@@ -79,7 +79,7 @@ class OtherController extends Controller
         $job = Job::where([
             'url' => $url,
         ])->join('companies', 'jobs.company_id', '=', 'companies.id')
-            ->leftJoin('fields', 'jobs.field_id', '=', 'fields.id')
+            ->leftJoin('fields', 'companies.field', '=', 'fields.id')
             ->select('jobs.*', 'fields.name as field', 'companies.email as email', 'companies.website as website', 'companies.name as company_name')
             ->first();
         if (empty($job)) {
@@ -213,9 +213,18 @@ class OtherController extends Controller
 
         // リクエストボディ
         $data = array(
-            'model' => 'gpt-3.5-turbo',
+            'model' => 'gpt-4',
             'messages' => [
-                ["role" => "system", "content" => "日本語で返信する"],
+                ["role" => "system", "content" => "日本語で返信する。
+                これからは面接官だと思い、ユーザーに質問をしなければなりません。
+                日本語で質問をする面接官になりましょう。
+                絶対に答えないでください。 質問だけを提示してください。
+＃制約は次のとおりです。
+・まず職業説明についての最初の質問をしてください。
+・その後、ユーザーは答えます。
+・ユーザーから回答を受けた後、別の質問をもう一度お試しください。
+・10個以上の場合は面接を終了してください。
+・質問だけを提示してください"],
                 ['role' => 'user', 'content' => $prompt],
             ],
             'max_tokens' => 500,

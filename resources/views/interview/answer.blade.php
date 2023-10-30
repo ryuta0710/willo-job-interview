@@ -16,6 +16,19 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/application/application.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/common/loader.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        #videoSave {
+            color: #4cadee !important;
+            border: 1px solid #4cadee !important;
+        }
+
+        #videoSave:hover,
+        #videoRecordAgain:hover {
+            color: white !important;
+            border: 1px solid #4cadee !important;
+            background-color: #3aa8f1 !important;
+        }
+    </style>
 
 
 </head>
@@ -94,9 +107,9 @@
                                 <div class="test-button d-flex gap-4">
                                     <button class="video-recoding" id="videoRecord" onclick="record_start()"><i
                                             class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
-                                    <button class="video-recoding bg-white text-secondary  border border-primary d-none"
-                                        id="videoSave" onclick="video_save()"><i
-                                            class="fa-solid fa-upload"></i>&nbsp;&nbsp;&nbsp;保存して続行</button>
+                                    <button class="video-recoding bg-white d-none" id="videoSave"
+                                        onclick="makeLink()"><i
+                                            class="fa-solid fa-save"></i>&nbsp;&nbsp;&nbsp;保存して続行</button>
                                     <button class="video-recoding d-none" id="videoRecordAgain"
                                         onclick="record_start()"><i
                                             class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音</button>
@@ -573,6 +586,7 @@
 
     <script>
         let count = 0;
+        let counterTimer = 0;
         @if ($question->type == 'text')
             quill = new Quill('#editor', {
                 theme: 'snow'
@@ -651,33 +665,42 @@
             const videoLive = document.querySelector('#videoLive')
             const videoRecorded = document.querySelector('#videoRecorded')
             let stream;
+			let chunks=[];
+            let blob
 
             function record_start() {
                 if (!recording) {
-                    if (!retake) {
+                    if (!retake && q_retake) {
                         toastr.error("再録音できません。 最大録音回数を超えました。");
                         return;
                     }
                     $("#videoRecord").html('<i class="fa-solid fa-stop text-white"></i>&nbsp;&nbsp;&nbsp;録音を停止');
-                    $(videoLive).toggleClass("d-none");
-                    $(videoRecorded).toggleClass("d-none");
+                    $(videoLive).removeClass("d-none");
+                    $(videoRecorded).addClass("d-none");
                     counter();
-                    setTimeout(video_record, 4000);
+                    setTimeout(video_record, 3000);
                     recording = true;
                     if (q_retake) {
                         retake--;
                         $(".dis_retake").html(retake);
                     }
+                    $("#videoRecord").removeClass("d-none");
+                    $("#videoRecordAgain").addClass("d-none");
+                    $("#videoSave").addClass("d-none");
                 } else {
-                    $("#videoRecord").html('<i class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音')
-                    $(videoLive).toggleClass("d-none");
-                    $(videoRecorded).toggleClass("d-none");
+                    // $("#videoRecord").html('<i class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音')
+                    $(videoLive).addClass("d-none");
+                    $(videoRecorded).removeClass("d-none");
                     recording = false;
+                    $("#videoRecord").addClass("d-none");
+                    $("#videoRecordAgain").removeClass("d-none");
+                    $("#videoSave").removeClass("d-none");
                 }
             }
 
             async function video_record() {
-                setTimeout(() => {}, 10000);
+				chunks = [];
+                
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     await navigator.mediaDevices.getUserMedia({ // <1>
                         video: true,
@@ -699,17 +722,12 @@
                         recording = true;
                         recorded = true;
                         $("#videoRecord").click(function() {
-
-                            if (!recording) {
-                                mediaRecorder.start();
-                            } else {
-                                mediaRecorder.stop();
-                            }
+							mediaRecorder.stop();
                         })
 
                         mediaRecorder.addEventListener('dataavailable', event => {
+							chunks.push(event.data);
                             videoRecorded.src = URL.createObjectURL(event.data)
-                            if (MediaRecorder.state == 'inactive') makeLink();
                         })
                     }).catch(function(res) {
                         console.log(res);
@@ -727,7 +745,7 @@
                 const timer = setInterval(() => {
                     s--;
                     $("#counter .counter-no").html(s);
-                    if (s == -1) {
+                    if (s == 0) {
                         clearInterval(timer);
                         $("#counter").addClass("d-none");
                         $("#videoRecord").removeAttr("disabled").removeClass("bg-secondary-subtle");;
@@ -736,56 +754,56 @@
             }
 
             function makeLink() {
-                let blob = new Blob(stream, {
-                        type: media.type
-                    }),
-                    url = URL.createObjectURL(blob),
-                    li = document.createElement('li'),
-                    mt = document.createElement(media.tag),
-                    hf = document.createElement('a');
-                mt.controls = true;
-                mt.src = url;
-                hf.href = url;
-                hf.download = `${counter++}${media.ext}`;
-                hf.innerHTML = `donwload ${hf.download}`;
-                li.appendChild(mt);
-                li.appendChild(hf);
-                ul.appendChild(li);
-                const formData = new FormData();
-                formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+				console.log(chunks);
+                blob = new Blob(chunks,{"type":"video/webm"});
+                var formData = new FormData();
+                let token = $("meta[name=csrf-token]").attr("content");
+                formData.append('_token', token);
+                formData.append('count', count);
+                formData.append('q_no', q_no);
                 formData.append('video', blob);
-                fetch('/save', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {});
+
+                $.ajax({
+                    url: "{{ route('interview.save_video', ['url' => $answer_url]) }}",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        @if ($is_last)
+                            location.href = "{{ route('interview.confirm', ['url' => $candidate_url]) }}";
+                        @else
+                            create();
+                        @endif
+                    },
+                    error: function(xhr, status, error) {
+                        toastr.error(xhr.responseJSON.message);
+                    }
+                });
             }
         @endif
         let flag = true;
-        let interval = 0;
         const q_no = parseInt({{ $question->question_no }});
+        let thinking_hour = parseInt({{ $question->thinking_hour }});
+        let thinking_minute = parseInt({{ $question->thinking_minute }});
+        if (isNaN(thinking_hour)) {
+            thinking_hour = 0;
+        }
+        if (isNaN(thinking_minute)) {
+            thinking_minute = 0;
+        }
+        const thinking_time = thinking_hour * 60 + thinking_minute;
 
 
         function start_time() {
 
-            interval = setInterval(function(e) {
+            counterTimer = setInterval(function(e) {
                 let minute = parseInt(count / 60);
                 let second = parseInt(count % 60);
                 count++;
                 $(".dis_minute").html(minute);
                 $(".dis_second").html(second);
-                let thinking_hour = parseInt({{ $question->thinking_hour }});
-                let thinking_minute = parseInt({{ $question->thinking_hour }});
-                if (isNaN(thinking_hour)) {
-                    thinking_hour = 0;
-                }
-                if (isNaN(thinking_minute)) {
-                    thinking_minute = 0;
-                }
-                if (thinking_hour * 60 + thinking_minute < minute) {
+                if (thinking_time < minute) {
                     $(".show_count").addClass("text-danger");
                     $(".dis_second").addClass("text-danger");
                     $(".dis_minute").addClass("text-danger");
@@ -964,46 +982,23 @@
                 let conservation = "";
                 messages.forEach(msg => {
                     if (msg.sender == "bot") {
-                        conservation += "面接官: " + msg.message + "\n";
+                        conservation += "#面接官: " + msg.message + "\n";
                     } else {
-                        conservation += "候補者: " + msg.message + "\n";
+                        conservation += "#候補者: " + msg.message + "\n";
                     }
                 });
-                //                 const prompt = `面接官として返信してください。面接官は候補者に、次のことに適しているかどうかを尋ねる必要があります。全体の質問数は10個は超えてはならない。 10個は超えたら完了してください。
-
-            // {{ $job->description }}
-
-            // 知っておきたい基本的な事項は次のとおりです。
-
-            // {{ $question->content }}
-
-            // #1つの質問だけを提示してください。1つの質問!!!。
-            // 以下は会話です。
-
-            // 会話:
-            // ${conservation}
-            // 面接官:
-            // `;
-                const prompt = `これからあなたが面接官だと思ってユーザーに質問をしなければなりません。
-まず、職業説明に関する最初の質問をしてください。
-その後、ユーザーは答えます。
-ユーザーから答えを受けた後は、他の質問をもう一度してください。
-これらの順序で10の質問をしてください。
-10以上にしてはいけません。
-10個以上の場合は面接を終了してください。
+                const prompt = `
+＃次は職業説明です。
 
 {{ $job->description }}
 
-知っておきたい基本的な事項は次のとおりです。
+＃知っておきたい基本的なことは次のとおりです。
 
 {{ $question->content }}
 
-#1つの質問だけを提示してください。1つの質問!!!。
-以下は会話です。
-
-会話:
+#以下は会話です。
 ${conservation}
-面接官:
+#面接官:
 `;
                 //ai
                 let token = $("meta[name=csrf-token]").attr("content");

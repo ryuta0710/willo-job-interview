@@ -169,7 +169,7 @@ class MyJobController extends Controller
                 $fileName = time() . '.' . $video->getClientOriginalExtension();
 
                 $video->move(public_path('/assets/upload/job_intro_video/'), $fileName);
-                $data['video_url'] = asset('/assets/upload/job_intro_video/' . $fileName);;
+                $data['video_url'] = asset('/assets/upload/job_intro_video/' . $fileName);
             }
 
             $data['user_id'] = $user->id;
@@ -285,9 +285,20 @@ class MyJobController extends Controller
                 'description' => 'required',
             ]);
             $validator->validate();
+
+            $company = Company::where([
+                'id' => intval($request['company_id']),
+            ])->first();
+
             $job['title'] = $request['title'];
             $job['salary'] = intval($request['salary']);
             $job['company_id'] = $request['company_id'];
+            if (!empty($company)) {
+                $job['field_id'] = $company->field;
+            }else{
+                $job['field_id'] = null;
+            }
+            $job['field_id'] = $company->field;
             $job['video_url'] = $request['video_url'];
             $job['description'] = $request['description'];
 
@@ -305,10 +316,17 @@ class MyJobController extends Controller
             ]);
             $validator->validate();
 
-            $validator->validate();
+            $company = Company::where([
+                'id' => intval($request['company_id']),
+            ])->first();
             $job['title'] = $request['title'];
             $job['salary'] = intval($request['salary']);
             $job['company_id'] = $request['company_id'];
+            if (!empty($company)) {
+                $job['field_id'] = $company->field;
+            }else{
+                $job['field_id'] = null;
+            }
             $job['description'] = $request['description'];
 
 

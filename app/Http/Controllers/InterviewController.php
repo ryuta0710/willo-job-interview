@@ -204,6 +204,38 @@ class InterviewController extends Controller
         ]);
     }
 
+    public function save_video(Request $request, string $url)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'video' => 'required',
+            'q_no' => 'required|integer',
+        ]);
+        $validator->validate();
+
+        $answer = Answer::where([
+            'url' => $url,
+        ])->first();
+        if (empty($answer)) {
+            return response([
+                'status' => 'failed',
+                'message' => 'Failed save. The url is incorrect',
+            ]);
+        }
+        $file = $request->file('video');
+        $originalfilename = $file->getClientOriginalName();
+        $fileName = time() . '.mp4';
+
+        $file->move(public_path('/assets/upload/answer/'), $fileName);
+        $file_url = asset('/assets/upload/answer/' . $fileName);
+        $answer['count'] = intval($request['count']);
+        $answer['rc_url'] = $file_url;
+        $answer['content'] = $originalfilename;
+        $answer->save();
+
+        return response()->json([], Response::HTTP_OK);
+    }
+
     public function save_text(Request $request, string $url)
     {
 

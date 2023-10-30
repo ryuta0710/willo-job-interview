@@ -183,9 +183,8 @@
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
                                             <video class="rounded-4 w-100 h-100" crossorigin=""
                                                 playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                                <source src="{{ asset('./assets/video/interview01.mp4') }}"
-                                                    type="video/mp4" size="300">
-                                                <a>Video Oynatılamıyor</a>
+                                                <source src="{{ $answers[$i]->rc_url }}"
+                                                    type="video/webm" size="300">
                                             </video>
                                         </div>
                                         <!-- CONTENT -->
