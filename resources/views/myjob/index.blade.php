@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <!-- Select2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
@@ -188,6 +192,18 @@
     </main>
 
     <script>
+        $('table').DataTable({
+            ordering: true, // Enable sorting
+            searching: false, // Disable searching
+            paging: false, // Disable pagination
+            info: false, // Disable information display
+            columnDefs: [{
+                    targets: -1,
+                    orderable: false
+                } // -1 represents the last column
+            ],
+        });
+
         function copy() {
             let doms = document.getElementsByClassName("fa-copy");
             let len = doms.length;
@@ -344,7 +360,7 @@
 
         });
 
-        $("#search_title").keyup(function(){
+        $("#search_title").keyup(function() {
             search_job();
         })
 

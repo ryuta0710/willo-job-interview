@@ -969,10 +969,6 @@
                     sender: "person",
                     message: mess
                 };
-                if (messages.length > 20) {
-                    finish_ai();
-                    return;
-                }
                 $(inputText).val("");
                 messages.push(res);
                 show_man(mess);

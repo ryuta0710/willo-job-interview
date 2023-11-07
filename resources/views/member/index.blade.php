@@ -8,6 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Select2 CSS -->
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <style>
         .select2 {
@@ -77,7 +80,7 @@
             <div class="row justify-content-between align-items-center mb-5">
                 <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
                     <input name="" id="search_company" class="form-select select2 w-100 rounded-pill"
-                        placeholder="会社名">
+                        placeholder="募集した会社">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
                             <input type="text" name="search" class="form-control select-search" placeholder="検索...">
@@ -102,7 +105,7 @@
                 </div>
                 <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
                     <input name="" id="search_job" class="form-select select2 w-100 rounded-pill"
-                        placeholder="募集タイトル">
+                        placeholder="募集のタイトル">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
                             <input type="text" name="search" class="form-control select-search" placeholder="検索...">
@@ -127,7 +130,7 @@
                 </div>
                 <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
                     <input name="" id="search_owner" class="form-select select2 w-100 rounded-pill"
-                        placeholder="所有者名">
+                        placeholder="応募先">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
                             <input type="text" name="search" class="form-control select-search" placeholder="検索...">
@@ -145,8 +148,7 @@
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-primary rounded-2 ok" data-for="owner">申し込み</button>
-                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="owner">リセット
-                            </button>
+                            <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="owner">リセット</button>
                         </div>
                         <div class="cus-bg position-fixed">
 
@@ -156,7 +158,7 @@
                 </div>
                 <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
                     <input name="" id="search_status" class="form-select rounded-pill select2" data-no="4"
-                        placeholder="現在のステータス">
+                        placeholder="現時点の評価">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
                             <input type="text" name="search-company" class="form-control select-search"
@@ -183,7 +185,7 @@
                 </div>
                 <div class="col-lg-2 mb-3 mb-lg-0 position-relative">
                     <input name="" id="search_rate" class="form-select rounded-pill select2" data-no="5"
-                        placeholder="評価">
+                        placeholder="評価点">
                     <div class="select-cus position-absolute card p-3 shadow rounded-4">
                         <div class="cus-search">
                             <input type="text" name="search-compayny" class="form-control select-search"
@@ -220,7 +222,7 @@
                 </div>
                 <div class="col-12">
                     <div class="table-responsive border rounded" style="min-height: 500px; overflow-y: auto;">
-                        <table class="table" style="min-width: 992px; overflow-x: auto;">
+                        <table class="table m-0" style="min-width: 992px; overflow-x: auto; margin: 0px !important;">
                             <thead>
                                 <tr class="bg-secondary-grey">
                                     <th class="py-4 text-center">名前</th>
@@ -313,6 +315,13 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
+        $('table').DataTable({
+            ordering: true, // Enable sorting
+            searching: false, // Disable searching
+            paging: false, // Disable pagination
+            info: false, // Disable information display
+            // ... other options
+        });
         $(".select2").focus(function(e) {
             $(".select2 + .select-cus").hide();
             $(this).next().show();
