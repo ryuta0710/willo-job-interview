@@ -194,17 +194,17 @@
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
                             <div class="cus-option"><input type="checkbox" name="rate_5" value="5"
-                                    id="rate_5"><label for="rate_5"><span>5</span></label></div>
+                                    id="rate_5"><label style="width: 150px;" for="rate_5"><span>5</span></label></div>
                             <div class="cus-option"><input type="checkbox" name="rate_4" value="4"
-                                    id="rate_4"><label for="rate_4"><span>4</span></label></div>
+                                    id="rate_4"><label style="width: 150px;" for="rate_4"><span>4</span></label></div>
                             <div class="cus-option"><input type="checkbox" name="rate_3" value="3"
-                                    id="rate_3"><label for="rate_3"><span>3</span></label></div>
+                                    id="rate_3"><label style="width: 150px;" for="rate_3"><span>3</span></label></div>
                             <div class="cus-option"><input type="checkbox" name="rate_2" value="2"
-                                    id="rate_2"><label for="rate_2"><span>2</span></label></div>
+                                    id="rate_2"><label style="width: 150px;" for="rate_2"><span>2</span></label></div>
                             <div class="cus-option"><input type="checkbox" name="rate_1" value="1"
-                                    id="rate_1"><label for="rate_1"><span>1</span></label></div>
+                                    id="rate_1"><label style="width: 150px;" for="rate_1"><span>1</span></label></div>
                             <div class="cus-option"><input type="checkbox" name="rate_0" value="0"
-                                    id="rate_0"><label for="rate_0"><span>0</span></label></div>
+                                    id="rate_0"><label style="width: 150px;" for="rate_0"><span>0</span></label></div>
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-primary rounded-2 ok" data-for="rate">申し込み</button>
