@@ -486,7 +486,7 @@
                         switch (ele.status) {
                             case 'responsed':
                                 status =
-                                    `<span class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビューする</span>`;
+                                    `<span class="badge rounded-pill bg-warning text-dark bg-light-warning py-1 px-3">レビュー中</span>`;
                                 break;
                             case 'accepted':
                                 status =
