@@ -20,6 +20,12 @@
         .cus-option input[type=checkbox] {
             min-width: 24px !important;
         }
+        td{
+            border-collapse: collapse;
+        }
+        th {
+            border-color: inherit;
+        }
     </style>
 
     <main style="min-height: calc(100vh - 251px);">
@@ -105,8 +111,7 @@
                                 <button class="btn btn-outline-primary ms-3 rounded-2 cancel" data-for="status">リセット
                                 </button>
                             </div>
-                            <div class="cus-bg
-                                    position-fixed">
+                            <div class="cus-bg position-fixed">
 
                             </div>
                         </div>
@@ -125,12 +130,12 @@
                 <table class="table table-bordered mt-3 mt-xl-5">
                     <thead>
                         <tr class="border-top-0">
-                            <th class="rounded-top-4 rounded-end-0">募集項目名</th>
-                            <th>所有者名</th>
-                            <th>募集終了日</th>
-                            <th>現在の応募者数</th>
-                            <th>募集中/募集終了</th>
-                            <th class="rounded-top-4 rounded-start-0"></th>
+                            <th class="border text-center border-2 fw-bold">募集項目名</th>
+                            <th class="py-2 text-center border-2">所有者名</th>
+                            <th class="py-2 text-center border-2">募集終了日</th>
+                            <th class="py-2 text-center border-2">現在の応募者数</th>
+                            <th class="py-2 text-center border-2">募集中/募集終了</th>
+                            <th class=""></th>
                         </tr>
                     </thead>
                     <tbody id="tbody">

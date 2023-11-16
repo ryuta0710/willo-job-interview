@@ -51,7 +51,7 @@
                     <div class="row mt-4">
                         <div class="col-12 d-flex justify-content-between align-items-center px-3">
                             <p class="m-0">テンプレートの内容</p>
-                            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <a href="javascript:;" id="showModal">
                                 <i class="fa fa-solid fa-eye"></i> プレビュー
                             </a>
                         </div>

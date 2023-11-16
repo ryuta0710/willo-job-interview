@@ -162,6 +162,11 @@ footer .container-fluid:last-child {
 	background-color: #F4F4F4 !important;
 }
 
+#sec_jobs_table td {
+	border-left-width: 0px !important;
+	border-right-width: 0px !important;
+}
+
 #sec_jobs_table td:first-child,
 #sec_jobs_table th:first-child {
 	padding-left: 3.25rem;
@@ -180,9 +185,16 @@ footer .container-fluid:last-child {
 }
 
 
-#sec_jobs_table td,
+#sec_jobs_table td{
+	/* border: none !important; */
+	border-collapse: collapse;
+}
+
 #sec_jobs_table th {
-	border: none !important;
+    border-color: var(--bs-table-border-color);
+	border-collapse: collapse !important;
+	/* border-right-width: 0px !important; */
+	/* border-left-width: 0px !important; */
 }
 
 #sec_jobs_table td:first-child {

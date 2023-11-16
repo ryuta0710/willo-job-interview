@@ -71,7 +71,7 @@ class MemberController extends Controller
                 return $query->whereIn('jobs.id', $jobs);
             })
             ->when($rates, function ($query) use ($rates) {
-                return $query->whereIn('candidates.status', $rates);
+                return $query->whereIn('candidates.review', $rates);
             })
             ->orderBy('candidates.created_at', 'desc')
             ->select('candidates.*', 'companies.name as company_name', 'jobs.title as job_title', 'users.name as user_name', 'users.email as email')

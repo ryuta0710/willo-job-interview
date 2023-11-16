@@ -193,16 +193,18 @@
                         </div>
                         <div class="cus-options py-2">
                             <div class="cus-notfound"><span>見つかりません</span></div>
-                            <div class="cus-option"><input type="checkbox" name="status" value="5"
+                            <div class="cus-option"><input type="checkbox" name="rate_5" value="5"
                                     id="rate_5"><label for="rate_5"><span>5</span></label></div>
-                            <div class="cus-option"><input type="checkbox" name="status" value="4"
+                            <div class="cus-option"><input type="checkbox" name="rate_4" value="4"
                                     id="rate_4"><label for="rate_4"><span>4</span></label></div>
-                            <div class="cus-option"><input type="checkbox" name="status" value="3"
+                            <div class="cus-option"><input type="checkbox" name="rate_3" value="3"
                                     id="rate_3"><label for="rate_3"><span>3</span></label></div>
-                            <div class="cus-option"><input type="checkbox" name="status" value="2"
+                            <div class="cus-option"><input type="checkbox" name="rate_2" value="2"
                                     id="rate_2"><label for="rate_2"><span>2</span></label></div>
-                            <div class="cus-option"><input type="checkbox" name="status" value="1"
+                            <div class="cus-option"><input type="checkbox" name="rate_1" value="1"
                                     id="rate_1"><label for="rate_1"><span>1</span></label></div>
+                            <div class="cus-option"><input type="checkbox" name="rate_0" value="0"
+                                    id="rate_0"><label for="rate_0"><span>0</span></label></div>
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-primary rounded-2 ok" data-for="rate">申し込み</button>
@@ -225,11 +227,11 @@
                         <table class="table m-0" style="min-width: 992px; overflow-x: auto; margin: 0px !important;">
                             <thead>
                                 <tr class="bg-secondary-grey">
-                                    <th class="py-4 text-center">名前</th>
-                                    <th class="py-4">募集タイトル</th>
-                                    <th class="py-4">提出日</th>
-                                    <th class="py-4">ステータス</th>
-                                    <th class="py-4">評価点</th>
+                                    <th class="py-2 text-center border-2">名前</th>
+                                    <th class="py-2 text-center border-2">募集タイトル</th>
+                                    <th class="py-2 text-center border-2">提出日</th>
+                                    <th class="py-2 text-center border-2">ステータス</th>
+                                    <th class="py-2 text-center border-2">評価点</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody">

@@ -978,23 +978,23 @@
                 let conservation = "";
                 messages.forEach(msg => {
                     if (msg.sender == "bot") {
-                        conservation += "#面接官: " + msg.message + "\n";
+                        conservation += "面接官: " + msg.message + "\n";
                     } else {
-                        conservation += "#候補者: " + msg.message + "\n";
+                        conservation += "候補者: " + msg.message + "\n";
                     }
                 });
                 const prompt = `
-＃次は職業説明です。
+###次は職業説明です。
 
 {{ $job->description }}
 
-＃知っておきたい基本的なことは次のとおりです。
+###知っておきたい基本的なことは次のとおりです。
 
 {{ $question->content }}
 
-#以下は会話です。
+###以下は会話です。
 ${conservation}
-#面接官:
+面接官:
 `;
                 //ai
                 let token = $("meta[name=csrf-token]").attr("content");
