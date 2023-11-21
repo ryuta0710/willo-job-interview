@@ -142,7 +142,7 @@
                                 @endif
                                 @if ($answers[$i]->question_type == 'audio')
                                     <!-- VOICE BOX -->
-                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="voice"
+                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="audio"
                                         data-content="{{ $answers[$i]->rc_url }}" data-no="{{$i}}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
@@ -305,7 +305,7 @@
                         'fullscreen'
                     ],
                 });
-            } else if (type == "voice") {
+            } else if (type == "audio") {
                 let data = $(this).attr("data-content");
                 let ele =
                     '<video controls class="rounded-4 w-100 h-100" crossorigin >' +

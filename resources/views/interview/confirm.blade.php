@@ -24,6 +24,12 @@
         .chat-box img {
             width: 100%;
         }
+
+        audio {
+            height: 100px !important;
+            width: 100% !important;
+            max-width: 500px;
+        }
     </style>
 </head>
 
@@ -56,7 +62,8 @@
                             @if ($answers[0]->thinking_minute)
                                 <div class="me-5">
                                     @if ($answers[0]->thinking_minute < $answers[0]->count / 60)
-                                        <span class="alert alert-danger p-2 rounded-4" role="alert" id="thinking_time">
+                                        <span class="alert alert-danger p-2 rounded-4" role="alert"
+                                            id="thinking_time">
                                             {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count % 60 }}秒
                                         </span>
                                     @else
@@ -73,18 +80,13 @@
                             </div>
                             <div id="test-preview" class="w-100 mb-4">
                                 @if ($answers[0]->question_type == 'video')
-                                    <video class="rounded-4 w-100 h-100" crossorigin=""
-                                        playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+                                    <video class="rounded-4 w-100 h-100">
                                         <source src="{{ $answers[0]->rc_url }}" type="video/mp4" size="300">
                                         <a>Video</a>
                                     </video>
                                 @endif
                                 @if ($answers[0]->question_type == 'audio')
-                                    <video class="rounded-4 w-100 h-100" crossorigin=""
-                                        playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                        <source src="{{ $answers[0]->rc_url }}" type="video/mp4" size="300">
-                                        <a>Video</a>
-                                    </video>
+                                    <audio src="{{ $answers[0]->rc_url }}" controls class="m-auto d-block"></audio>
                                 @endif
                                 @if ($answers[0]->question_type == 'text')
                                     <div class="rounded-4 bg-secondary-subtle show-answer-text p-4">
@@ -181,10 +183,9 @@
                                         data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
-                                            <video class="rounded-4 w-100 h-100" crossorigin=""
-                                                playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                                <source src="{{ $answers[$i]->rc_url }}"
-                                                    type="video/webm" size="300">
+                                            <video class="rounded-4 w-100 h-100" muted="true" loop=""
+                                                playsinline="true">
+                                                <source src="{{ $answers[$i]->rc_url }}">
                                             </video>
                                         </div>
                                         <!-- CONTENT -->
@@ -201,7 +202,7 @@
                                 @endif
                                 @if ($answers[$i]->question_type == 'audio')
                                     <!-- VOICE BOX -->
-                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="voice"
+                                    <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="audio"
                                         data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
                                         <!-- HEADER -->
                                         <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
@@ -352,6 +353,26 @@
                 'fullscreen'
             ],
         });
+
+        let privewEle = document.getElementById("test-preview");
+
+        function insert_video(src) {
+            const video = document.createElement('video');
+            video.setAttribute('muted', true);
+            video.setAttribute('autoplay', true);
+            video.setAttribute('loop', true);
+            video.setAttribute('playsinline', true);
+
+            const source = document.createElement('source');
+            source.setAttribute('src',
+                src
+            );
+
+            video.appendChild(source);
+            privewEle.innerHTML = "";
+            privewEle.appendChild(video);
+            console.log("video")
+        }
         let answers = {!! $answers !!};
         $(".answer-item").click(function() {
             $(".answer-item").removeClass("active");
@@ -361,11 +382,11 @@
                 return;
             }
             let thinking_time = answers[q_no].thinking_minute;
-            if(thinking_time){
-                let val = answers[q_no].count/60;
-                if(thinking_time > val){
+            if (thinking_time) {
+                let val = answers[q_no].count / 60;
+                if (thinking_time > val) {
                     $("#thinking_time").addClass("alert-success").removeClass("alert-danger");
-                }else{
+                } else {
                     $("#thinking_time").removeClass("alert-success").addClass("alert-danger");
                 }
                 let str = `${parseInt(val)}分${answers[q_no].count % 60}秒`;
@@ -383,13 +404,7 @@
                 privewEle.innerHTML = data;
             } else if (type == "video") {
                 let data = $(this).attr("data-content");
-                let ele =
-                    '<video controls class="rounded-4 w-100 h-100" crossorigin >' +
-                    '<source src="' + answers[q_no].rc_url + '" type="video/mp4" size="300">' +
-                    '<a>Video</a>' +
-                    '</video>';
-
-                privewEle.innerHTML = ele;
+                insert_video(data);
                 var plaryer = new Plyr('video', {
                     muted: false,
                     volume: 1,
@@ -397,22 +412,14 @@
                         'fullscreen'
                     ],
                 });
-            } else if (type == "voice") {
+            } else if (type == "audio") {
                 let data = $(this).attr("data-content");
-                let ele =
-                    '<video controls class="rounded-4 w-100 h-100" crossorigin >' +
-                    '<source src="' + answers[q_no].rc_url + '" type="video/mp4" size="300">' +
-                    '<a>Video</a>' +
-                    '</video>';
-
-                privewEle.innerHTML = ele;
-                var plaryer = new Plyr('video', {
-                    muted: false,
-                    volume: 1,
-                    controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
-                        'fullscreen'
-                    ],
-                });
+                const audio = document.createElement('audio src');
+                audio.setAttribute('src',
+                    data
+                );
+                privewEle.innerHTML = "";
+                privewEle.appendChild(audio);
             } else if (type == "file") {
                 privewEle.innerHTML = `
                     <div class="file-upload-contain">

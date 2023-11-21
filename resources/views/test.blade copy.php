@@ -613,7 +613,7 @@
                             </div>
                             <!-- END BOX -->
                             <!-- VOICE BOX -->
-                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="voice" data-content="./assets/video/voice.wav">
+                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="audio" data-content="./assets/video/voice.wav">
                                 <!-- HEADER -->
                                 <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
                                     <img src="./assets/img/application/answer-voice.png" alt="">

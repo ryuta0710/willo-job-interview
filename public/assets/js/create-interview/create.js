@@ -14,10 +14,6 @@ $(document).ready(function () {
 		}
 	});
 
-	$(".step").click(function () {
-
-	});
-
 	$("#btn_upload").click(function (e) {
 		e.preventDefault();
 		$("#file_upload").click();
@@ -25,63 +21,41 @@ $(document).ready(function () {
 });
 
 
+const videoLive = document.querySelector('#videoLive')
+const videoRecorded = document.querySelector('#videoRecorded')
+let stream;
+let recording = false;
+let mediaRecorder;
+let chunks = [];
 async function record() {
-	const videoLive = document.querySelector('#videoLive')
-	const videoRecorded = document.querySelector('#videoRecorded')
-	let stream;
+	chunks = [];
+	$("#record").removeAttr("disabled");
+	$("#record").html('録音を停止')
+	$("#videoLive").show();
+	$("#videoRecorded").hide();
+	recording = true;
 
 	try {
-		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-			await navigator.mediaDevices.getUserMedia({
-				video: true,
-				audio: true,
-			}).then(function (sss) {
-				stream = sss;
+		await navigator.mediaDevices.getUserMedia({
+			video: true,
+			audio: true,
+		}).then(function (sss) {
+			recording = true;
+			stream = sss;
+			videoLive.srcObject = stream;
 
-				videoLive.srcObject = stream
-
-				if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
-					console.warn('video/webm is not supported')
-				}
-
-				const mediaRecorder = new MediaRecorder(stream, { // <3>
-					mimeType: 'video/webm',
-				})
-
-				mediaRecorder.start()
-				recording = true;
-				$("#record").html('録音を停止')
-
-				$("#record").click(function (e) {
-					e.preventDefault();
-
-					if (!recording) {
-						mediaRecorder.start() // <4>
-						$("#record").html('録音を停止')
-						$("#videoLive").show();
-						$("#videoRecorded").hide();
-
-					} else {
-						mediaRecorder.stop()
-						$("#record").html('録音を閧始')
-						$("#videoLive").hide();
-						$("#videoRecorded").show();
-
-					}
-					recording = !recording;
-				})
-
-
-				mediaRecorder.addEventListener('dataavailable', event => {
-					videoRecorded.src = URL.createObjectURL(event.data) // <6>
-				})
-			}).catch(function (res) {
-				console.log(res);
-				toastr.error('カメラを接続してください。');
-			})
-		} else {
-			console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
-		}
+			mediaRecorder = new MediaRecorder(stream, { // <3>
+				mimeType: 'video/webm',
+			});
+			mediaRecorder.start();
+			mediaRecorder.addEventListener('dataavailable', event => {
+				chunks.push(event.data);
+				videoRecorded.src = URL.createObjectURL(event.data) // <6>
+			});
+		}).catch(function (res) {
+			console.log(res);
+			toastr.error('カメラを接続してください。');
+		})
 
 	} catch (e) {
 		toastr.error('現在、規約ではサポートしていません。httpsで接続してください。');
@@ -89,12 +63,45 @@ async function record() {
 
 
 }
-let flag = true;
 
 $("#record").click(function (e) {
 	e.preventDefault();
-	if (flag) {
-		record();
-		flag = false;
+	if (recording) {
+		mediaRecorder?.stop();
+		$("#record").html('録音を閧始');
+		$("#videoLive").hide();
+		$("#videoRecorded").show();
+		makeLink();
+		recording = false;
+	} else {
+		counter();
+		$("#record").attr("disabled", "");
+		setTimeout(record, 3000);
 	}
 })
+
+function counter() {
+	let s = 3;
+	$("#videoRecord").attr("disabled", "").addClass("bg-secondary-subtle");
+	$("#counter").removeClass("d-none");
+	$("#counter .counter-no").html(3);
+	const timer = setInterval(() => {
+		s--;
+		$("#counter .counter-no").html(s);
+		if (s == 0) {
+			clearInterval(timer);
+			$("#counter").addClass("d-none");
+			$("#videoRecord").removeAttr("disabled").removeClass("bg-secondary-subtle");;
+		}
+	}, 1000);
+}
+
+function makeLink() {
+	let blob = new Blob(chunks, { "type": "video/webm" });
+	var input = document.querySelector('#file_upload'); //the file input
+	var file = new File(blob, 'video_file.mp4'); // create new file
+	
+	var datTran = new ClipboardEvent('').clipboardData || new DataTransfer(); 
+	datTran.items.add(file);  // Add the file to the DT object
+	input.files = datTran.files;
+}

@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event;
 use Spatie\IcalendarGenerator\Enums\EventStatus;
+use Illuminate\Support\Facades\Storage;
 
 class MyJobController extends Controller
 {
@@ -93,7 +94,9 @@ class MyJobController extends Controller
         $user = Auth::user();
         $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
 
-        return view('myjob.create', compact('companies'));
+        $status = "init";
+
+        return view('myjob.create', compact('companies', 'status'));
     }
 
     /**
@@ -162,16 +165,19 @@ class MyJobController extends Controller
                 'user_id' =>  $user->id,
             ];
 
+            $file = $request->file('video');
+            $name = 2 * time() . $file->getClientOriginalName();
+            $filePath = 'job_introduce/' . $name;
+            $filePath = Storage::disk('s3')->put($filePath, file_get_contents($file));
 
-            if ($request->hasFile('video')) {
-
-                $video = $request->file('video');
-                $fileName = time() . '.' . $video->getClientOriginalExtension();
-
-                $video->move(public_path('/assets/upload/job_intro_video/'), $fileName);
-                $data['video_url'] = asset('/assets/upload/job_intro_video/' . $fileName);
+            if(!$filePath){
+                $status = 'upload failed';
+                $user = Auth::user();
+                $companies = Company::where(['owner' => $user->id])->orderBy('name', 'asc')->get();
+                return view('myjob.create', compact('status', 'companies'));
             }
-
+            $data['video_url'] = $filePath;
+            $data['video_rc_url'] = $filePath;
             $data['user_id'] = $user->id;
 
             $job_id = Job::create($data)->id;
@@ -373,6 +379,9 @@ class MyJobController extends Controller
         $candidate = Candidate::where([
             'id' => $candidate_id,
         ])->first();
+        if(empty($candidate)){
+            return redirect()->back();
+        }
 
         $status = $candidate->status;
         $candidates_for = Candidate::where([

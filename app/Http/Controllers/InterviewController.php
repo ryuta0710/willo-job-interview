@@ -224,7 +224,11 @@ class InterviewController extends Controller
         }
         $file = $request->file('video');
         $originalfilename = $file->getClientOriginalName();
-        $fileName = time() . '.mp4';
+        $type = '.mp4';
+        if($answer['question_type'] == 'audio'){
+            $type = '.ogg';
+        }
+        $fileName = time() . $type;
 
         $file->move(public_path('/assets/upload/answer/'), $fileName);
         $file_url = asset('/assets/upload/answer/' . $fileName);

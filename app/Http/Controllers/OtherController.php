@@ -210,12 +210,12 @@ class OtherController extends Controller
         );
 
         $prompt = $request["prompt"];
+        $conservation = $request["conservation"];
 
         // リクエストボディ
         $data = array(
             'model' => 'gpt-4',
-            'messages' => [
-                ["role" => "system", "content" => "日本語で返信する。
+            'messages' => array_merge([["role" => "system", "content" => "日本語で返信する。
 これからは面接官だと思い、ユーザーに質問をしなければなりません。
 日本語で質問をする面接官になりましょう。
 絶対に答えないでください。 
@@ -224,11 +224,12 @@ class OtherController extends Controller
 ・まず職業説明についての最初の質問をしてください。
 ・その後、ユーザーは答えます。
 ・ユーザーから回答を受けた後、別の質問をもう一度お試しください。
-・20個の質問をしたら終了します。
+・5個の質問をしたら終了します。
 ・質問だけを提示してください
-・インタビューが完了したら完了したと答えてください。"],
-                ['role' => 'user', 'content' => $prompt],
-            ],
+・・インタビューが完了したら、「面接が完了しました。ありがとうございました。」と答えてください。
+ $prompt"]],
+ $conservation
+        ),
             'max_tokens' => 500,
         );
 
@@ -242,7 +243,6 @@ class OtherController extends Controller
 
         $response = curl_exec($ch);
         curl_close($ch);
-
         // 結果をデコード
         $result = json_decode($response, true);
         // $result_message = $result["choices"][0]["message"]["content"];

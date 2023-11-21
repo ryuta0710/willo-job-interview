@@ -5,6 +5,19 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/assets/css/create-interview/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        #counter {
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            font-size: 100px;
+        }
+
+        #counter div {
+            font-family: sans-serif !important;
+        }
+    </style>
 
     <main class="pt-5">
         <form action="{{ route('myjob.store') }}" enctype="multipart/form-data" method="post">
@@ -266,7 +279,13 @@
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
-                                <video class="none w-100" controls playsinline id="videoRecorded"></video>
+                                <video class="none w-100" controls playsinline id="videoRecorded">
+                                    <source>
+                                </video>
+                                <div class="position-absolute counter bg-secondary-subtle d-flex justify-content-center align-items-center"
+                                    id="counter">
+                                    <div class="counter-no rounded-pill text-center"></div>
+                                </div>
                             </div>
                             <div class="col-12 col-xl-5 text-center">
                                 <p class="pt-3">個人的な紹介ビデオをする</p>
@@ -315,11 +334,14 @@
             </div>
         </form>
     </main>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="{{ asset('/assets/js/create-interview/create.js') }}"></script>
     <script>
+        @if ($status == 'upload failed')
+            toastr.error("ファイルのアップロードに失敗しました");
+        @endif
         var quill = new Quill('#editor', {
             theme: 'snow'
         });
@@ -338,62 +360,39 @@
                 }
             }
         });
-        try {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function(devices) {
-                    var hasCamera = devices.some(function(device) {
-                        return device.kind === 'videoinput';
-                    });
+        // try {
+        //     navigator.mediaDevices.enumerateDevices()
+        //         .then(function(devices) {
+        //             var hasCamera = devices.some(function(device) {
+        //                 return device.kind === 'videoinput';
+        //             });
 
-                    if (hasCamera) {
-                        console.log('Camera is connected.');
-                    } else {
-                        screen_disable();
-                    }
-                })
-                .catch(function(err) {
-                    console.error('Error accessing media devices: ', err);
-                    screen_disable();
-                });
-        } catch (error) {
-            screen_disable();
-        }
+        //             if (hasCamera) {
+        //                 console.log('Camera is connected.');
+        //             } else {
+        //                 screen_disable();
+        //             }
+        //         })
+        //         .catch(function(err) {
+        //             console.error('Error accessing media devices: ', err);
+        //             screen_disable();
+        //         });
+        // } catch (error) {
+        //     screen_disable();
+        // }
 
         function screen_disable() {
             $(".camera_not_connected").removeClass("d-none");
             $("#record").attr("disabled", "").removeClass("btn-primary").addClass("bg-secondary-subtle");
         }
-        // quill.setContents("{{ old('description') }}");
-        // quill.root.innerHTML = "{{ old('description') }}"
-        // .setContents()
-
-        function makeLink() {
-            let blob = new Blob(stream, {
-                    type: media.type
-                }),
-                url = URL.createObjectURL(blob),
-                li = document.createElement('li'),
-                mt = document.createElement(media.tag),
-                hf = document.createElement('a');
-            mt.controls = true;
-            mt.src = url;
-            hf.href = url;
-            hf.download = `${counter++}${media.ext}`;
-            hf.innerHTML = `donwload ${hf.download}`;
-            li.appendChild(mt);
-            li.appendChild(hf);
-            ul.appendChild(li);
-            const formData = new FormData();
-            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-            formData.append('video', blob);
-            fetch('/save', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {});
-        }
+        $(document).on("change", "#file_upload", function(evt) {
+            var source = $('#videoRecorded source');
+            source[0].src = URL.createObjectURL(this.files[0]);
+            source.parent()[0].load();
+            $("#record").html('録音を閧始').attr("disabled", "").removeClass("bg-active");
+            $("#videoLive").hide();
+            $("#counter").addClass("d-none");
+            $("#videoRecorded").show();
+        });
     </script>
 @endsection

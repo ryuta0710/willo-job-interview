@@ -153,7 +153,7 @@
                 @endif
                 @if ($question->type == 'audio')
                     <!-- VOICE -->
-                    <div class="test-voice" id="tab">
+                    <div class="test-voice">
                         <div class="row">
 
                             <div class="col-sm-12 col-md-12 col-lg-6">
@@ -165,7 +165,6 @@
                                                 d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                         </svg>
                                     </div>
-
                                     <div class="flex-grow-1">
                                         質問{{ $question->question_no }}
                                     </div>
@@ -175,16 +174,15 @@
                                     <div>
                                         <i class="fa-solid fa-hourglass-start"></i>
                                     </div>
-
                                     @if ($question->thinking_hour || $question->thinking_minute)
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
                                                 @endif
                                                 <span>{{ $question->thinking_minute }}</span>分
-                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;あなたのタイム: <span
-                                                    class="show_count"><span class="dis_minute">0</span>分 <span
-                                                        class="dis_second">0</span>秒</span>
+                                                秒以内に回答することをお勧めします。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                あなたのタイム: <span class="show_count"> <span class="dis_minute">0</span>分
+                                                    <span class="dis_second">0</span>秒</span>
                                             </p>
                                         </div>
                                     @endif
@@ -192,9 +190,15 @@
                                 <div class="test-problem">
                                     {{ $question->content }}
                                 </div>
-                                <div class="test-button">
-                                    <button class="video-recoding" id="videoRecord" onclick="video_record()"><i
-                                            class="fa-solid fa-microphone"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
+                                <div class="test-button d-flex gap-4">
+                                    <button class="video-recoding" id="videoRecord" onclick="record_start()"><i
+                                            class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;今すぐ録音する</button>
+                                    <button class="video-recoding bg-white d-none" id="videoSave"
+                                        onclick="makeLink()"><i
+                                            class="fa-solid fa-save"></i>&nbsp;&nbsp;&nbsp;保存して続行</button>
+                                    <button class="video-recoding d-none" id="videoRecordAgain"
+                                        onclick="record_start()"><i
+                                            class="fa-solid fa-video text-white"></i>&nbsp;&nbsp;&nbsp;再録音</button>
                                 </div>
                                 <div class="test-state d-flex justify-content-between">
                                     <div>
@@ -221,9 +225,14 @@
                                     style="background-color: #a2aab7;"></video>
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
-                                    ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。
-                                </div>
+                                    ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
                                 <video id="videoRecorded" class="w-100 videoRecorded d-none" controls>
+                                </video>
+                                <div class="position-absolute counter bg-secondary-subtle d-flex justify-content-center align-items-center d-none"
+                                    id="counter">
+                                    <div class="counter-no rounded-pill text-center">1</div>
+                                </div>
+                                <!-- <img class="w-100" src="./assets/img/application/camera-screen.svg" alt="camera_screen"> -->
                             </div>
                         </div>
                     </div>
@@ -632,7 +641,7 @@
                 }
             });
         @endif
-        @if ($question->type == 'video')
+        @if ($question->type == 'video' || $question->type == 'audio')
             try {
                 navigator.mediaDevices.enumerateDevices()
                     .then(function(devices) {
@@ -665,7 +674,7 @@
             const videoLive = document.querySelector('#videoLive')
             const videoRecorded = document.querySelector('#videoRecorded')
             let stream;
-			let chunks=[];
+            let chunks = [];
             let blob
 
             function record_start() {
@@ -699,14 +708,15 @@
             }
 
             async function video_record() {
-				chunks = [];
-                
+                chunks = [];
+
                 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     await navigator.mediaDevices.getUserMedia({ // <1>
-                        video: true,
+                        @if ($question->type == 'video')
+                            video: true,
+                        @endif
                         audio: true,
-                    }).then(function(sss) {
-                        stream = sss;
+                    }).then(function(stream) {
 
                         videoLive.srcObject = stream
 
@@ -722,11 +732,11 @@
                         recording = true;
                         recorded = true;
                         $("#videoRecord").click(function() {
-							mediaRecorder.stop();
+                            mediaRecorder.stop();
                         })
 
                         mediaRecorder.addEventListener('dataavailable', event => {
-							chunks.push(event.data);
+                            chunks.push(event.data);
                             videoRecorded.src = URL.createObjectURL(event.data)
                         })
                     }).catch(function(res) {
@@ -748,14 +758,23 @@
                     if (s == 0) {
                         clearInterval(timer);
                         $("#counter").addClass("d-none");
-                        $("#videoRecord").removeAttr("disabled").removeClass("bg-secondary-subtle");;
+                        $("#videoRecord").removeAttr("disabled").removeClass("bg-secondary-subtle");
                     }
                 }, 1000);
             }
 
             function makeLink() {
-				console.log(chunks);
-                blob = new Blob(chunks,{"type":"video/webm"});
+
+                @if ($question->type == 'video')
+                    blob = new Blob(chunks, {
+                        "type": "video/webm"
+                    });
+                @endif
+                @if ($question->type == 'audio')
+                    blob = new Blob(chunks, {
+                        "type": "audio/ogg; codecs=opus"
+                    });
+                @endif
                 var formData = new FormData();
                 let token = $("meta[name=csrf-token]").attr("content");
                 formData.append('_token', token);
@@ -975,32 +994,34 @@
                 $(inputText).attr("disabled", "");
                 $(btnSend).attr("disabled", "");
 
-                let conservation = "";
+                let conservation = [];
                 messages.forEach(msg => {
                     if (msg.sender == "bot") {
-                        conservation += "面接官: " + msg.message + "\n";
+                        conservation.push({
+                            role: 'assistant',
+                            content: msg.message,
+                        })
                     } else {
-                        conservation += "候補者: " + msg.message + "\n";
+                        conservation.push({
+                            role: 'user',
+                            content: msg.message,
+                        })
+                        // conservation += "候補者: " + msg.message + "\n";
                     }
                 });
                 const prompt = `
 ###次は職業説明です。
-
 {{ $job->description }}
 
 ###知っておきたい基本的なことは次のとおりです。
-
 {{ $question->content }}
-
-###以下は会話です。
-${conservation}
-面接官:
 `;
                 //ai
                 let token = $("meta[name=csrf-token]").attr("content");
                 let postData = {
                     _token: token,
                     prompt: prompt,
+                    conservation: conservation,
                 };
                 loading(true);
                 $.ajax({
@@ -1008,6 +1029,11 @@ ${conservation}
                     type: 'POST',
                     data: postData,
                     success: function(response) {
+                        if (!response?.result?.choices?.length) {
+                            toastr.error('操作が失敗しました。');
+                            loading(false);
+                            return;
+                        }
                         const mes = response.result.choices[0].message.content
 
                         const res = {
@@ -1019,6 +1045,11 @@ ${conservation}
                         $(btnSend).removeAttr("disabled");
                         show_bot(mes);
                         loading(false);
+
+                        if (mes.includes("面接が完了")) {
+                            $(inputText).attr("disabled", "");
+                            $(btnSend).attr("disabled", "").addClass("bg-secondary-subtle text-white");
+                        }
                     },
                     error: function(xhr, status, error) {
 

@@ -52,6 +52,21 @@
         .avatar-small img {
             width: 25px !important;
         }
+
+        .audio-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .audio-player canvas {
+            height: 80px;
+        }
+
+        .audio-player canvas,
+        .audio-player audio {
+            width: 500px;
+        }
     </style>
     <main>
         <section id="sec_applicant">
@@ -195,7 +210,8 @@
                             <div class="flex-grow-1">
                                 <div class="test-problem-no ms-4 d-flex justify-content-between">
                                     <div><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+                                                fill="currentColor" class="bi bi-chat-left-dots-fill"
+                                                viewBox="0 0 16 16">
                                                 <path
                                                     d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                             </svg>&nbsp;&nbsp;質問
@@ -204,7 +220,8 @@
                                     @if ($answers[0]->thinking_minute)
                                         <div class="me-5">
                                             @if ($answers[0]->thinking_minute < $answers[0]->count / 60)
-                                                <span class="alert alert-danger py-1 px-2 rounded-4" role="alert" id="thinking_time">
+                                                <span class="alert alert-danger py-1 px-2 rounded-4" role="alert"
+                                                    id="thinking_time">
                                                     {{ intval($answers[0]->count / 60) }}分{{ $answers[0]->count % 60 }}秒
                                                 </span>
                                             @else
@@ -221,20 +238,14 @@
                                     </div>
                                     <div id="test-preview" class="w-100 mb-4" style="min-height: 350px;">
                                         @if ($answers[0]->question_type == 'video')
-                                            <video class="rounded-4 w-100 h-100" crossorigin=""
-                                                playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                                <source src="{{ $answers[0]->rc_url }}" type="video/mp4"
-                                                    size="300">
+                                            <video class="rounded-4 w-100 h-100">
+                                                <source src="{{ $answers[0]->rc_url }}" type="video/mp4" size="300">
                                                 <a>Video</a>
                                             </video>
                                         @endif
                                         @if ($answers[0]->question_type == 'audio')
-                                            <video class="rounded-4 w-100 h-100" crossorigin=""
-                                                playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                                <source src="{{ $questions[0]->rc_url }}" type="video/mp4"
-                                                    size="300">
-                                                <a>Video</a>
-                                            </video>
+                                            <audio src="{{ $answers[0]->rc_url }}" controls
+                                                class="m-auto d-block mt-5"></audio>
                                         @endif
                                         @if ($answers[0]->question_type == 'text')
                                             <div class="rounded-4 bg-secondary-subtle show-answer-text p-4">
@@ -336,7 +347,7 @@
                                         @endif
                                         @if ($answers[$i]->question_type == 'audio')
                                             <!-- VOICE BOX -->
-                                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="voice"
+                                            <div class="answer-item p-1 rounded-3 d-flex gap-4" data-type="audio"
                                                 data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
                                                 <!-- HEADER -->
                                                 <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
@@ -1084,6 +1095,24 @@
         init_rate();
 
         let answers = {!! $answers !!};
+
+        function insert_video(src) {
+            let privewEle = document.getElementById("test-preview");
+            const video = document.createElement('video');
+            video.setAttribute('muted', true);
+            video.setAttribute('autoplay', true);
+            video.setAttribute('loop', true);
+            video.setAttribute('playsinline', true);
+
+            const source = document.createElement('source');
+            source.setAttribute('src',
+                src
+            );
+
+            video.appendChild(source);
+            privewEle.innerHTML = "";
+            privewEle.appendChild(video);
+        }
         $(".answer-item").click(function() {
             $(".answer-item").removeClass("active");
             $(this).addClass("active");
@@ -1092,18 +1121,18 @@
                 return;
             }
             let thinking_time = answers[q_no].thinking_minute;
-            if(thinking_time){
-                let val = answers[q_no].count/60;
-                if(thinking_time > val){
+            if (thinking_time) {
+                let val = answers[q_no].count / 60;
+                if (thinking_time > val) {
                     $("#thinking_time").addClass("alert-success").removeClass("alert-danger");
-                }else{
+                } else {
                     $("#thinking_time").removeClass("alert-success").addClass("alert-danger");
                 }
                 let str = `${parseInt(val)}分${answers[q_no].count % 60}秒`;
                 $("#thinking_time").html(str);
             }
             $(".question_no").html(q_no + 1);
-            let privewEle = document.getElementById("test-preview")
+            let privewEle = document.getElementById("test-preview");
 
             let type = $(this).attr("data-type");
             if (type == "writing") {
@@ -1115,13 +1144,7 @@
                 privewEle.innerHTML = data;
             } else if (type == "video") {
                 let data = $(this).attr("data-content");
-                let ele =
-                    '<video controls class="rounded-4 w-100 h-100" crossorigin >' +
-                    '<source src="' + answers[q_no].rc_url + '" type="video/mp4" size="300">' +
-                    '<a>Video</a>' +
-                    '</video>';
-
-                privewEle.innerHTML = ele;
+                insert_video(data);
                 var plaryer = new Plyr('video', {
                     muted: false,
                     volume: 1,
@@ -1129,22 +1152,10 @@
                         'fullscreen'
                     ],
                 });
-            } else if (type == "voice") {
+            } else if (type == "audio") {
                 let data = $(this).attr("data-content");
-                let ele =
-                    '<video controls class="rounded-4 w-100 h-100" crossorigin >' +
-                    '<source src="' + answers[q_no].rc_url + '" type="video/mp4" size="300">' +
-                    '<a>Video</a>' +
-                    '</video>';
-
-                privewEle.innerHTML = ele;
-                var plaryer = new Plyr('video', {
-                    muted: false,
-                    volume: 1,
-                    controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume',
-                        'fullscreen'
-                    ],
-                });
+                let dis = `<audio src="${data}" controls class="m-auto d-block mt-5"></audio>`;
+                privewEle.innerHTML = dis;
             } else if (type == "file") {
                 privewEle.innerHTML = `
                     <div class="file-upload-contain" style="min-height: 350px;max-width: 600px;margin:0px;">
@@ -1317,5 +1328,65 @@
                 });
             }
         })
+        const audio = document.querySelector("audio");
+        const canvas = document.querySelector("#waveform");
+        const context = canvas.getContext("2d");
+
+        const width = canvas.width;
+        const height = canvas.height;
+
+        const audioCtx = new AudioContext();
+        const source = audioCtx.createMediaElementSource(audio);
+        const analyser = audioCtx.createAnalyser();
+
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+
+        analyser.fftSize = 2048;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        context.clearRect(0, 0, width, height);
+        context.fillStyle = "#fff";
+        context.fillRect(0, 0, width, height);
+
+        let animationFrameID;
+
+        function draw() {
+            requestAnimationFrame(draw);
+
+            analyser.getByteTimeDomainData(dataArray);
+
+            context.clearRect(0, 0, width, height);
+            context.lineWidth = 2;
+            context.strokeStyle = "#ff6600";
+            context.beginPath();
+
+            const sliceWidth = width * 1.0 / bufferLength;
+            let x = 0;
+
+            for (let i = 0; i < bufferLength; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = v * height / 2;
+
+                if (i === 0) {
+                    context.moveTo(x, y);
+                } else {
+                    context.lineTo(x, y);
+                }
+
+                x += sliceWidth;
+            }
+
+            context.stroke();
+        }
+
+        audio.addEventListener('play', () => {
+            draw()
+        });
+
+        audio.addEventListener('ended pause', () => {
+            cancelAnimationFrame(animationFrameID);
+        });
     </script>
 @endsection
