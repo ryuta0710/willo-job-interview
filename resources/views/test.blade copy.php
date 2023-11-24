@@ -546,7 +546,7 @@
                             </div>
                             <div id="test-preview" class="w-100 mb-4">
                                 <video class="rounded-4 w-100 h-100" crossorigin="" playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                    <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>Video Oynatılamıyor</a>
+                                    <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>ダウンロード</a>
                                 </video>
                             </div>
                         </div>
@@ -597,7 +597,7 @@
                                 <!-- HEADER -->
                                 <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
                                     <video class="rounded-4 w-100 h-100" crossorigin="" playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
-                                        <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>Video Oynatılamıyor</a>
+                                        <source src="./assets/video/interview01.mp4" type="video/mp4" size="300"><a>ダウンロード</a>
                                     </video>
                                 </div>
                                 <!-- CONTENT -->

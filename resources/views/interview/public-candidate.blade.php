@@ -125,7 +125,7 @@
                                                 playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
                                                 <source src="{{ asset('./assets/video/interview01.mp4') }}"
                                                     type="video/mp4" size="300">
-                                                <a>Video Oynatılamıyor</a>
+                                                <a>ダウンロード</a>
                                             </video>
                                         </div>
                                         <!-- CONTENT -->

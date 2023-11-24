@@ -322,15 +322,16 @@
                                         @if ($answers[$i]->question_type == 'video')
                                             <!-- VIDEO BOX -->
                                             <div class="answer-item p-1 rounded-3 d-flex gap-4 active" data-type="video"
+                                            data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}">
+                                            {{-- <div class="answer-item p-1 rounded-3 d-flex gap-4 active" data-type="video"
                                                 data-content="{{ $answers[$i]->rc_url }}" data-no="{{ $i }}"
-                                                data-bs-toggle="modal" data-bs-target="#video_preview">
+                                                data-bs-toggle="modal" data-bs-target="#video_preview"> --}}
                                                 <!-- HEADER -->
                                                 <div class="answer-type text-center pt-0 rounded d-none d-sm-block">
-                                                    <video class="rounded-4 w-100 h-100" crossorigin=""
-                                                        playsinlineposter="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+                                                    <video class="rounded-4 w-100 h-100">
                                                         <source src="{{ asset('./assets/video/interview01.mp4') }}"
                                                             type="video/mp4" size="300">
-                                                        <a>Video Oynatılamıyor</a>
+                                                        <a>ダウンロード</a>
                                                     </video>
                                                 </div>
                                                 <!-- CONTENT -->
@@ -936,7 +937,7 @@
                                 <video controls crossorigin playsinline style="width: 100%; height: 100%;">
                                     <source src="{{ asset('/assets/video/interview01.mp4') }}" type="video/mp4"
                                         size="100">
-                                    <a>Video Oynatılamıyor</a>
+                                    <a>ダウンロード</a>
                                 </video>
                             </div>
                         </div>
@@ -1328,58 +1329,58 @@
                 });
             }
         })
-        const audio = document.querySelector("audio");
-        const canvas = document.querySelector("#waveform");
-        const context = canvas.getContext("2d");
+        // const audio = document.querySelector("audio");
+        // const canvas = document.querySelector("#waveform");
+        // const context = canvas.getContext("2d");
 
-        const width = canvas.width;
-        const height = canvas.height;
+        // const width = canvas.width;
+        // const height = canvas.height;
 
-        const audioCtx = new AudioContext();
-        const source = audioCtx.createMediaElementSource(audio);
-        const analyser = audioCtx.createAnalyser();
+        // const audioCtx = new AudioContext();
+        // const source = audioCtx.createMediaElementSource(audio);
+        // const analyser = audioCtx.createAnalyser();
 
-        source.connect(analyser);
-        analyser.connect(audioCtx.destination);
+        // source.connect(analyser);
+        // analyser.connect(audioCtx.destination);
 
-        analyser.fftSize = 2048;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
+        // analyser.fftSize = 2048;
+        // const bufferLength = analyser.frequencyBinCount;
+        // const dataArray = new Uint8Array(bufferLength);
 
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = "#fff";
-        context.fillRect(0, 0, width, height);
+        // context.clearRect(0, 0, width, height);
+        // context.fillStyle = "#fff";
+        // context.fillRect(0, 0, width, height);
 
-        let animationFrameID;
+        // let animationFrameID;
 
-        function draw() {
-            requestAnimationFrame(draw);
+        // function draw() {
+        //     requestAnimationFrame(draw);
 
-            analyser.getByteTimeDomainData(dataArray);
+        //     analyser.getByteTimeDomainData(dataArray);
 
-            context.clearRect(0, 0, width, height);
-            context.lineWidth = 2;
-            context.strokeStyle = "#ff6600";
-            context.beginPath();
+        //     context.clearRect(0, 0, width, height);
+        //     context.lineWidth = 2;
+        //     context.strokeStyle = "#ff6600";
+        //     context.beginPath();
 
-            const sliceWidth = width * 1.0 / bufferLength;
-            let x = 0;
+        //     const sliceWidth = width * 1.0 / bufferLength;
+        //     let x = 0;
 
-            for (let i = 0; i < bufferLength; i++) {
-                const v = dataArray[i] / 128.0;
-                const y = v * height / 2;
+        //     for (let i = 0; i < bufferLength; i++) {
+        //         const v = dataArray[i] / 128.0;
+        //         const y = v * height / 2;
 
-                if (i === 0) {
-                    context.moveTo(x, y);
-                } else {
-                    context.lineTo(x, y);
-                }
+        //         if (i === 0) {
+        //             context.moveTo(x, y);
+        //         } else {
+        //             context.lineTo(x, y);
+        //         }
 
-                x += sliceWidth;
-            }
+        //         x += sliceWidth;
+        //     }
 
-            context.stroke();
-        }
+        //     context.stroke();
+        // }
 
         audio.addEventListener('play', () => {
             draw()
