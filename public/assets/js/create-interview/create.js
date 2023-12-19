@@ -30,7 +30,7 @@ let chunks = [];
 async function record() {
 	chunks = [];
 	$("#record").removeAttr("disabled");
-	$("#record").html('録音を停止')
+	$("#record").html('録音を停止');
 	$("#videoLive").show();
 	$("#videoRecorded").hide();
 	recording = true;
@@ -77,6 +77,7 @@ $("#record").click(function (e) {
 		counter();
 		$("#record").attr("disabled", "");
 		setTimeout(record, 3000);
+		recording = true;
 	}
 })
 

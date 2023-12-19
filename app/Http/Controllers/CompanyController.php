@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CompanyCreate;
-use Illuminate\HTTP\Response;
+use Illuminate\Http\Response;
 use App\Models\Company;
 use App\Models\Field;
 use Illuminate\Support\Facades\Auth;

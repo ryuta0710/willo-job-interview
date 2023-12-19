@@ -360,26 +360,26 @@
                 }
             }
         });
-        // try {
-        //     navigator.mediaDevices.enumerateDevices()
-        //         .then(function(devices) {
-        //             var hasCamera = devices.some(function(device) {
-        //                 return device.kind === 'videoinput';
-        //             });
+        try {
+            navigator.mediaDevices.enumerateDevices()
+                .then(function(devices) {
+                    var hasCamera = devices.some(function(device) {
+                        return device.kind === 'videoinput';
+                    });
 
-        //             if (hasCamera) {
-        //                 console.log('Camera is connected.');
-        //             } else {
-        //                 screen_disable();
-        //             }
-        //         })
-        //         .catch(function(err) {
-        //             console.error('Error accessing media devices: ', err);
-        //             screen_disable();
-        //         });
-        // } catch (error) {
-        //     screen_disable();
-        // }
+                    if (hasCamera) {
+                        console.log('Camera is connected.');
+                    } else {
+                        screen_disable();
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Error accessing media devices: ', err);
+                    screen_disable();
+                });
+        } catch (error) {
+            screen_disable();
+        }
 
         function screen_disable() {
             $(".camera_not_connected").removeClass("d-none");

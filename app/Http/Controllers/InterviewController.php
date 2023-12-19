@@ -13,7 +13,7 @@ use App\Models\Activity;
 use App\Models\CandidateShare;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\HTTP\Response;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class InterviewController extends Controller

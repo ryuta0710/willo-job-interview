@@ -19,7 +19,7 @@ a {
 }
 
 main {
-  --width-min: calc(100vh - 256px);
+  --width-min: calc(100vh - 230px);
   min-height: var(--width-min);
 }
 

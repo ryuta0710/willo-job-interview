@@ -85,10 +85,10 @@
                                 </div>
 
                                 <div class="test-descrtion">
-                                    <div>
-                                        <i class="fa-solid fa-hourglass-start"></i>
-                                    </div>
                                     @if ($question->thinking_hour || $question->thinking_minute)
+                                        <div>
+                                            <i class="fa-solid fa-hourglass-start"></i>
+                                        </div>
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
@@ -125,18 +125,21 @@
                                         @endif
                                     </div>
                                     <div>
-                                        <span>
-                                            <i class="fa-solid fa-video text-white"></i>
-                                            &nbsp;
+                                        @if ($question->retake)
                                             <span
                                                 class="dis_retake">{{ $question->retake }}</span>/{{ $question->retake }}をリテイク</span>
+                                        @endif
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6 position-relative">
-                                <video id="videoLive" class="w-100 videoLive" autoplay muted
-                                    style="background-color: #a2aab7;"></video>
+                                <video id="videoLive" class="w-100 videoLive position-relative" autoplay muted
+                                    style="background-color: #a2aab7;">
+                                </video>
+                                <div class="recorded_time position-absolute text-danger"
+                                    style="top: 8px; left: 20px;display:block">00:00
+                                </div>
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
@@ -211,11 +214,10 @@
                                         @endif
                                     </div>
                                     <div>
-                                        <span>
-                                            <i class="fa-solid fa-video text-white"></i>
-                                            &nbsp;
+                                        @if ($question->retake)
                                             <span
-                                                class="dis_retake">{{ $question->retake }}</span>/{{ $question->retake }}をリテイク</span>
+                                                class="dis_retake">{{ $question->retake }}</span>/{{ $question->retake }}をリテイク
+                                        @endif
                                     </div>
                                 </div>
 
@@ -223,6 +225,9 @@
                             <div class="col-sm-12 col-md-12 col-lg-6 position-relative">
                                 <video id="videoLive" class="w-100 videoLive" autoplay muted
                                     style="background-color: #a2aab7;"></video>
+                                <div class="recorded_time position-absolute text-black"
+                                    style="top: 0px; left: 0px;display:block">111
+                                </div>
                                 <div class="camera_not_connected text-danger d-none rounded-3 p-4">
                                     カメラまたはマイクへのアクセスは現在ブロックされています。
                                     ブラウザのアドレスバーにあるカメラがブロックされているアイコンをクリックして、このページを更新してください。</div>
@@ -256,10 +261,10 @@
                         </div>
                         <!-- DESCRIPTION -->
                         <div class="test-descrtion">
-                            <div>
-                                <i class="fa-solid fa-hourglass-start"></i>
-                            </div>
                             @if ($question->thinking_hour || $question->thinking_minute)
+                                <div>
+                                    <i class="fa-solid fa-hourglass-start"></i>
+                                </div>
                                 <div class="flex-grow-1">
                                     <p>この質問には @if ($question->thinking_hour)
                                             <span>{{ $question->thinking_hour }}</span>時
@@ -343,13 +348,6 @@
 
                                 <div class="test-state d-flex justify-content-between mb-3">
                                     <div>
-                                        @if ($question->answer_time)
-                                            <span>
-                                                <i class="fa-solid fa-stopwatch"></i>
-                                                &nbsp;
-                                                応答時間 {{ $question->answer_time }}:00
-                                            </span>
-                                        @endif
                                     </div>
                                     <div
                                         class="w-100 d-flex justify-content-center align-items-baseline text-center mb-3 save_continue">
@@ -367,8 +365,8 @@
 
                                             <div class="file-upload-contain">
                                                 <div class="file-drop-zone clickable" tabindex="-1">
-                                                    <div class="file-drop-zone-title">
-                                                        <div class="upload-area" id="uploadArea">
+                                                    <div class="file-drop-zone-title" id="uploadArea">
+                                                        <div class="upload-area">
                                                             <p class="file_preview">ここにファイルをドラッグアンドドロップします<br>
                                                                 または</p>
                                                             <div> <button class="btn_upload"
@@ -409,10 +407,10 @@
                                 </div>
 
                                 <div class="test-descrtion">
-                                    <div>
-                                        <i class="fa-solid fa-hourglass-start"></i>
-                                    </div>
                                     @if ($question->thinking_hour || $question->thinking_minute)
+                                        <div>
+                                            <i class="fa-solid fa-hourglass-start"></i>
+                                        </div>
                                         <div class="flex-grow-1">
                                             <p>この質問には @if ($question->thinking_hour)
                                                     <span>{{ $question->thinking_hour }}</span>時
@@ -428,18 +426,6 @@
                                 <div class="test-problem">
                                     {{ $question->content }}
                                 </div>
-
-                                @if ($question->answer_time)
-                                    <div class="test-state d-flex justify-content-between mb-3">
-                                        <div>
-                                            <span>
-                                                <i class="fa-solid fa-stopwatch"></i>
-                                                &nbsp;
-                                                応答時間 {{ $question->answer_time }}:00
-                                            </span>
-                                        </div>
-                                    </div>
-                                @endif
 
                                 <div class="chat-box w-100 w-lg-50">
                                     <div class="header">
@@ -662,7 +648,8 @@
             } catch (error) {
                 screen_disable();
             }
-            const q_retake = {{ $question->retake }};
+            const q_retake = {{ intval($question->retake) }};
+            const answer_time = {{ intval($question->answer_time) }};
             let retake = q_retake;
 
             function screen_disable() {
@@ -675,11 +662,12 @@
             const videoRecorded = document.querySelector('#videoRecorded')
             let stream;
             let chunks = [];
-            let blob
+            let blob;
+            let recorded_second = 0;
 
             function record_start() {
                 if (!recording) {
-                    if (!retake && q_retake) {
+                    if (retake < 1 && q_retake) {
                         toastr.error("再録音できません。 最大録音回数を超えました。");
                         return;
                     }
@@ -706,7 +694,6 @@
                     $("#videoSave").removeClass("d-none");
                 }
             }
-
             async function video_record() {
                 chunks = [];
 
@@ -728,10 +715,35 @@
                             mimeType: 'video/webm',
                         })
 
-                        mediaRecorder.start()
+                        mediaRecorder.start();
                         recording = true;
                         recorded = true;
+                        const recorded_timer = setInterval(() => {
+                            recorded_second++;
+                            let minute = parseInt(recorded_second / 60);
+                            let sec = recorded_second % 60;
+                            let str =
+                                `${minute < 10 ? "0" + minute: minute}:${sec < 10 ? "0" + sec: sec}`;
+                            $(".recorded_time").html(str);
+                        }, 1000);
+                        if (answer_time) {
+                            let recorded_minute = 0;
+                            const timer = setInterval(function() {
+                                recorded_minute++;
+                                if (!recording) {
+                                    clearInterval(timer);
+                                    clearInterval(recorded_timer);
+                                    return;
+                                }
+                                if (recorded_minute >= answer_time) {
+                                    mediaRecorder.stop();
+                                    clearInterval(timer);
+                                    record_start();
+                                }
+                            }, 60000)
+                        }
                         $("#videoRecord").click(function() {
+                            clearInterval(recorded_timer);
                             mediaRecorder.stop();
                         })
 
@@ -916,7 +928,6 @@
                 });
             }
         @endif
-
 
         function create() {
             let token = $("meta[name=csrf-token]").attr("content");

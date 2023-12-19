@@ -433,7 +433,7 @@
                                 <div class="input-group">
                                     <label class="input-group-text w50  rounded-start-5 bg-white border-end-0"
                                         for="input1"><i class="fa-solid fa-stopwatch"></i></label>
-                                    <select name="answer_time" type="text" class="form-select rounded-end-5 time"
+                                    <select name="answer_time" type="text" class="form-select rounded-end-5 time answer_time"
                                         id="input1" placeholder="回答時間">
                                         <option value="1">1分</option>
                                         <option value="2">2分</option>
@@ -761,72 +761,6 @@ toastr.error(xhr.responseJSON.message);
         del();
         up();
         down();
-        let recording = false;
-
-        async function record() {
-            const videoLive = document.querySelector('#videoLive')
-            const videoRecorded = document.querySelector('#videoRecorded')
-            let stream;
-
-            try {
-                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                    await navigator.mediaDevices.getUserMedia({
-                        video: true,
-                        audio: true,
-                    }).then(function(sss) {
-                        stream = sss;
-
-                        videoLive.srcObject = stream
-
-                        if (!MediaRecorder.isTypeSupported('video/webm')) { // <2>
-                            console.warn('video/webm is not supported')
-                        }
-
-                        const mediaRecorder = new MediaRecorder(stream, { // <3>
-                            mimeType: 'video/webm',
-                        })
-
-                        mediaRecorder.start()
-                        recording = true;
-                        $("#record").html('録音を停止')
-
-
-                        $("#record").click(function() {
-
-                            if (!recording) {
-                                mediaRecorder.start() // <4>
-                                $("#record").html('録音を停止')
-                                $("#videoLive").show();
-                                $("#videoRecorded").hide();
-
-                            } else {
-                                mediaRecorder.stop()
-                                $("#record").html('録音を閧始')
-                                $("#videoLive").hide();
-                                $("#videoRecorded").show();
-
-                            }
-                            recording = !recording;
-                        })
-
-
-                        mediaRecorder.addEventListener('dataavailable', event => {
-                            videoRecorded.src = URL.createObjectURL(event.data) // <6>
-                        })
-                    }).catch(function(res) {
-                        console.log(res);
-                        toastr.error('カメラを接続してください。');
-                    })
-                } else {
-                    console.error('getUserMedia()はサポートされていません。\n httpsで接続してください。');
-                }
-
-            } catch (e) {
-                toastr.error('現在、規約ではサポートしていません。httpsで接続してください。');
-            }
-
-
-        }
         let flag = true;
         @if (count($questions) > 0)
             // func();

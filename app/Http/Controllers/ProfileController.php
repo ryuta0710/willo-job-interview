@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\HTTP\Response;
+use Illuminate\Http\Response;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\InvitedUsers;

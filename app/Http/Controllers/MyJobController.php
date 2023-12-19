@@ -8,7 +8,7 @@ use App\Models\Questions;
 use App\Models\InvitedUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\HTTP\Response;
+use Illuminate\Http\Response;
 use App\Models\Message;
 use App\Models\Candidate;
 use App\Models\Answer;

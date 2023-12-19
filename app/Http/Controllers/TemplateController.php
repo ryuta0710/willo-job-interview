@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\HTTP\Response;
+use Illuminate\Http\Response;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use SebastianBergmann\Template\Template;
 
 class TemplateController extends Controller
 {
